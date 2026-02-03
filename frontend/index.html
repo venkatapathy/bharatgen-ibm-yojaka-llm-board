@@ -1808,10 +1808,19 @@
             cursor = 0;
             renderQ();
         }
-
+        function updateSidebar(q) {
+            const sidebar = document.getElementById('sidebarContent');
+            if (q.source_text) {
+                const text = q.source_text.topic_chunk || q.source_text.theme_chunk || "No text available";
+                sidebar.innerText = text; // ++ Use innerText for full content instead of a summary
+            } else {
+                sidebar.innerText = "Select a theme to see the reference context.";
+            }
+        }
         function renderQ() {
             if(filteredQuestions.length === 0) return;
             const q = filteredQuestions[cursor];
+            updateSidebar(q);
             document.getElementById('qTypeLabel').innerText = q.category || "General Question";
             document.getElementById('qContent').innerHTML = q.question;
             document.getElementById('aContent').innerHTML = q.answer;

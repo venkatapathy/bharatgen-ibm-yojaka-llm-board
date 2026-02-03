@@ -1,132 +1,76 @@
 import os
 import faiss
 import pickle
+import json
 from sentence_transformers import SentenceTransformer
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-PROJECT_ROOT = os.path.dirname(os.path.dirname(BASE_DIR))  # Go up two levels: ncert_rag_pipe -> backend -> root
+# Use the directory where the script is located
+FILE_PATH = os.path.abspath(__file__)
 
-# Build absolute paths to the database files (in indexes folder at project root)
-INDEXES_DIR = os.path.join(PROJECT_ROOT, "indexes")
+# 2. This is the folder the script is in (e.g., .../backend/ncert_rag_pipe)
+BASE_DIR = os.path.dirname(FILE_PATH)
 
-MODEL_NAME = "all-MiniLM-L6-v2"
-DEFAULT_K = 1
+# 3. Climb up to get to the project root
+# Go up 1 level to 'backend'
+BACKEND_DIR = os.path.dirname(BASE_DIR)
+# Go up another level to the root (where 'indexes' lives)
+BOOKS_DIR = os.path.join(BASE_DIR, "NCERT_Books")
 
-def _index_paths(language: str) -> tuple[str, str]:
-    """
-    Language-aware index paths.
-    Expects:
-      indexes/<language>/vector_db.index
-      indexes/<language>/chunks_metadata.pkl
-    """
-    lang_dir = os.path.join(INDEXES_DIR, language)
-    return (
-        os.path.join(lang_dir, "vector_db.index"),
-        os.path.join(lang_dir, "chunks_metadata.pkl"),
-    )
+INDEXES_DIR = os.path.join(BASE_DIR, "indexes")
 
+class NCERTServer:
+    def __init__(self):
+        self.model = SentenceTransformer("all-MiniLM-L6-v2")
+        # Load the chapter map created by ingest.py
+        map_path = os.path.join(INDEXES_DIR, "chapter_map.json")
+        with open(map_path, "r", encoding="utf-8") as f:
+            self.mapping = json.load(f)
 
-def _resolve_index_paths(language: str) -> tuple[str, str]:
-    """
-    Resolve index paths with fallback for legacy flat layout.
-    - Prefer indexes/<lang>/vector_db.index when it exists.
-    - For "en" only: fall back to flat indexes/vector_db.index + chunks_metadata.pkl
-      when indexes/en/ does not exist.
-    - Otherwise raise FileNotFoundError with a clear message.
-    """
-    index_path, chunks_path = _index_paths(language)
-    if os.path.isfile(index_path) and os.path.isfile(chunks_path):
-        return index_path, chunks_path
-    # Legacy flat layout (indexes/vector_db.index, indexes/chunks_metadata.pkl)
-    flat_index = os.path.join(INDEXES_DIR, "vector_db.index")
-    flat_chunks = os.path.join(INDEXES_DIR, "chunks_metadata.pkl")
-    if language == "en" and os.path.isfile(flat_index) and os.path.isfile(flat_chunks):
-        return flat_index, flat_chunks
-    if language == "hi":
-        raise FileNotFoundError(
-            "Hindi RAG index not found at indexes/hi/vector_db.index. "
-            "Add NCERT books under data/Hindi or data/hi, then run: python backend/ncert_rag_pipe/ingest.py"
-        )
-    raise FileNotFoundError(
-        f"RAG index for language '{language}' not found. "
-        f"Expected indexes/{language}/vector_db.index (or, for 'en' only, flat indexes/vector_db.index). "
-        "Run ingestion: python backend/ncert_rag_pipe/ingest.py (see README)."
-    )
+    def _find_location(self, lang, chapter_input):
+        """Locates the Std and Subject for a given chapter title."""
+        lang_data = self.mapping.get(lang, {})
+        for std, subjects in lang_data.items():
+            for sub, chapters in subjects.items():
+                if str(chapter_input) in chapters:
+                    return std, sub
+        return None, None
 
-# Global RAG retrievers (cached per language)
-_rag_retrievers: dict[str, "RAGRetriever"] = {}
+    def get_context(self, lang, chapter_input, query):
+        std, sub = self._find_location(lang, chapter_input)
+        if not std: return None
 
-class RAGRetriever:
-    def __init__(self, language: str):
-        self.language = language
-        index_path, chunks_path = _resolve_index_paths(language)
-        print(f"Loading RAG retriever for language='{language}' (this happens once)...")
-        self.model = SentenceTransformer(MODEL_NAME)
-        self.index = faiss.read_index(index_path)
-        with open(chunks_path, "rb") as f:
-            self.chunks = pickle.load(f)
-        print(f"RAG retriever loaded successfully for language='{language}'!")
+        # Resolve "Real Numbers" -> "1"
+        lookup = self.mapping[lang][std][sub]
+        val = lookup.get(str(chapter_input))
+        idx = val if (val and val.isdigit()) else str(chapter_input)
 
-    def _chunk_text(self, chunk):
-        """Extract text from chunk; chunk may be dict or legacy str."""
-        if isinstance(chunk, dict):
-            return chunk.get("text", "")
-        return chunk if isinstance(chunk, str) else ""
+        chapter_path = os.path.join(INDEXES_DIR, lang, std, sub, idx)
+        
+        # Load specific chapter DB created by ingest.py
+        index = faiss.read_index(os.path.join(chapter_path, "vector_db.index"))
+        with open(os.path.join(chapter_path, "data.pkl"), "rb") as f:
+            data = pickle.load(f)
 
-    def _chunk_meta(self, chunk):
-        """Extract metadata from chunk; chunk may be dict or legacy str."""
-        if isinstance(chunk, dict):
-            return {"source_path": chunk.get("source_path"), "page": chunk.get("page")}
-        return {}
-
-    def get_context(self, query, k=DEFAULT_K):
-        """
-        Retrieves the top K most similar chunks.
-        Returns (combined_text, best_score, metadata_list).
-        metadata_list[i] = {source_path, page} for retrieved chunk i (or {} for legacy string chunks).
-        """
+        # Search
         query_vec = self.model.encode([query])
-        distances, indices = self.index.search(query_vec, k)
+        distances, indices = index.search(query_vec, k=3)
         
-        retrieved_texts = []
-        metadata_list = []
-        for i in range(k):
-            idx = indices[0][i]
-            if idx != -1:
-                raw = self.chunks[idx]
-                retrieved_texts.append(self._chunk_text(raw))
-                metadata_list.append(self._chunk_meta(raw))
-        
-        best_score = 1 / (1 + distances[0][0])
-        return "\n\n".join(retrieved_texts), best_score, metadata_list
+        retrieved_chunks = [data["chunks"][i] for i in indices[0] if i != -1]
+        metadata = [{"source_path": f"{lang}_{std}_{sub}/{idx}.pdf", "topic": data["title"]} for _ in retrieved_chunks]
 
-def get_retriever(language: str = "en"):
-    """Get or create the global RAG retriever instance for a given language."""
-    global _rag_retrievers
-    if language not in _rag_retrievers:
-        _rag_retrievers[language] = RAGRetriever(language=language)
-    return _rag_retrievers[language]
+        return retrieved_chunks, metadata, data["full_text"]
 
-def main(topic_input, theme_input, language: str = "en"):
-    retriever = get_retriever(language=language)
+# Global Instance
+_server = None
 
-    # 2. Retrieval (get_context returns text, score, metadata_list)
-    topic_chunk, t_score, topic_meta = retriever.get_context(topic_input)
-    theme_chunk, th_score, theme_meta = retriever.get_context(theme_input)
+def main(chapter, topic, language="en"):
+    global _server
+    if _server is None: _server = NCERTServer()
 
-    # 3. Output Full Results
-    print("\n" + "="*80)
-    print(f"📄 FULL RETRIEVAL DATA")
-    print("="*80)
-
-    print(f"\n🔵 TOPIC CHUNK (Similarity: {t_score:.2%})")
-    print("-" * 40)
-    print(topic_chunk)
-
-    print(f"\n🟢 THEME CHUNK (Similarity: {th_score:.2%})")
-    print("-" * 40)
-    print(theme_chunk)
+    lang_name = "English" if language == "en" else "Hindi"
     
-    print("\n" + "="*80)
-
-    return topic_chunk, theme_chunk, topic_meta, theme_meta
+    # Perform the retrieval
+    chunks, meta, full_text = _server.get_context(lang_name, chapter, topic)
+    
+    # Return in the format your pipeline expects
+    return full_text, "\n\n".join(chunks), meta, meta

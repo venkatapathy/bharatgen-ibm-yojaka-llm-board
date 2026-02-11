@@ -32,6 +32,8 @@ class QuestionDB(Base):
     # searchable field
     model_id = Column(String)
 
+    topic_chunk = Column(Text)
+
     # full blobs
     req_json = Column(Text)
     scores_json = Column(Text)
@@ -43,11 +45,17 @@ def save_question(req, q, scores, alignment):
 
     db = SessionLocal()
 
+    topic_chunk = None
+    if q.get("source_text") and isinstance(q["source_text"], dict):
+        topic_chunk = q["source_text"].get("topic_chunk")
+
     row = QuestionDB(
         question=q.get("question"),
         answer=q.get("answer"),
         alignment_score=alignment,
         model_id=req.model_id,
+
+        topic_chunk=topic_chunk,   
 
         req_json=json.dumps(req.dict()),
         scores_json=json.dumps(scores),
@@ -56,6 +64,7 @@ def save_question(req, q, scores, alignment):
     db.add(row)
     db.commit()
     db.close()
+
 
 
 # Create tables

@@ -1621,8 +1621,8 @@ async def ask_llm(req: QueryRequest, background_tasks: BackgroundTasks):
                         q['is_rag'] = True
                     else:
                         q['source_text']['topic_chunk']='RAG failed.'
-                # run scoring + saving asynchronously
-                background_tasks.add_task(process_scores_and_save, req, questions)
+            # run scoring + saving asynchronously
+            background_tasks.add_task(process_scores_and_save, req, questions)
             # print(questions)
             return questions
         else:

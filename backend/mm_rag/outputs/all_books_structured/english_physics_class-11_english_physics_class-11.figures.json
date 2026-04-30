@@ -1,0 +1,986 @@
+[
+  {
+    "fig_id": "1.1",
+    "label": "Figure_1_1",
+    "page": 7,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.1 Theory and experiment go hand in hand in physics and help each other's progress. The experiments of Rutherford gave the nuclear model of the atom. Ampere and Faraday, and encapsulated by You can now see that the scop Maxwell in his famous set of equations. The truly vast. It covers a tremenc",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p007_Figure_1_1.png"
+  },
+  {
+    "fig_id": "2.1",
+    "label": "Figure_2_1",
+    "page": 21,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.1(a) dQ =dA/r steradian and (b) respectively. The unit for plane angle is radian with the symbol rad and the unit for the (b) solid angle is steradian with the symbol sr. Both Fig. 2.1 Description of (a) plane angle dé and",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p021_Figure_2_1.png"
+  },
+  {
+    "fig_id": "2.2",
+    "label": "Figure_2_2",
+    "page": 23,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.2 Parallax method. Fig. 2.3 Having determined D, we can employ a similar Answer We have, parallax angle @ = 40° method to determine the size or angular diameter _—_—- From Fig. 2.3, AB = AC tan @ of the planet. If dis the diameter of the planet | AC = AB/tan@ = 100 m/tan 40°",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p023_Figure_2_2.png"
+  },
+  {
+    "fig_id": "2.3",
+    "label": "Figure_2_3",
+    "page": 23,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.3 inswer We have, parallax angle @ = 40° ‘rom Fig. 2.3, AB = AC tan @ .C = AB/tan@ = 100 m/tan 40° 100 m/0.8391 = 119m < » Example 2.3",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p023_Figure_2_3.png"
+  },
+  {
+    "fig_id": "3.1",
+    "label": "Figure_3_1",
+    "page": 44,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.1 x-axis, origin and positions of a car at different times.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p044_Figure_3_1.png"
+  },
+  {
+    "fig_id": "3.2",
+    "label": "Figure_3_2",
+    "page": 45,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.2 Position-time graph of (a) stationary object, and (b) an object in uniform motion. 350 t x 300 : O Ze : Z . x ‘ — a “7 0",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p045_Figure_3_2.png"
+  },
+  {
+    "fig_id": "3.3",
+    "label": "Figure_3_3",
+    "page": 45,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.3 Position-time graph of a car.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p045_Figure_3_3.png"
+  },
+  {
+    "fig_id": "3.4",
+    "label": "Figure_3_4",
+    "page": 46,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.4 The average velocity is the slope of line PP,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p046_Figure_3_4.png"
+  },
+  {
+    "fig_id": "3.7",
+    "label": "Figure_3_7",
+    "page": 48,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.7 Velocity-time graph corresponding to motion shown in Fig. 3.3. The graphical method for the determination 1 of the instantaneous velocity is always not a 5 convenient method. For this, we must carefully plot the position-time graph and calculate the e€ value of average velocity as At becomes smaller x and smaller. It is easier to calculate the value d of velocity at different instants if we have data e of positions at different instants or exact expression for the position as a function of time. e Then, we calculate Ax/At from the data for f decreasing the value of At and find",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p048_Figure_3_7.png"
+  },
+  {
+    "fig_id": "3.8",
+    "label": "Figure_3_8",
+    "page": 49,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.8 Acceleration as a function of time for motion ? represented in Fig. 3.3. } Instantaneous acceleration is defined in the same : way as the instantaneous velocity : . Av_ dv .",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p049_Figure_3_8.png"
+  },
+  {
+    "fig_id": "3.10",
+    "label": "Figure_3_10",
+    "page": 50,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.10 Velocity-time graph for motions with constant acceleration. (a) Motion in positive e direction with positive acceleration, _ (b) Motion in positive direction with 1 negative acceleration, (c) Motion in negative direction with negative acceleration, (a) Motion of an object with negative a acceleration that changes direction at time e t,. Between times 0 to t,, its moves in a positive x - direction and between t, and t, it moves in the opposite direction.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p050_Figure_3_10.png"
+  },
+  {
+    "fig_id": "3.9",
+    "label": "Figure_3_9",
+    "page": 50,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.9 Position-time graph for motion with (c) (d) (a) positive acceleration; (b) negative Fig. 3.10 Velocity-time graph for motions with acceleration, and (c) zero acceleration. constant acceleration. (a) Motion in positive Let us see how velocity-time graph looks like direction with positive acceleration, Fo a te (h) Motion in nositine direction iith",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p050_Figure_3_9.png"
+  },
+  {
+    "fig_id": "3.11",
+    "label": "Figure_3_11",
+    "page": 51,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.11 Area under v-t curve equals displacement ; of the object over a given time interval. : The v-t curve isa straight line parallel to the O LD time axis and the area under it between t = 0",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p051_Figure_3_11.png"
+  },
+  {
+    "fig_id": "3.12",
+    "label": "Figure_3_12",
+    "page": 51,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.12 Area under v-t curve for an object with ase T. Therefore, area = ux T= uT which uniform acceleration. displacement in this time interval. How ag explained in the previous section, the area n this case an area is equal to a distance? under v-t curve represents the displacement. ! Note the dimensions of quantities on Therefore, the displacement x of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p051_Figure_3_12.png"
+  },
+  {
+    "fig_id": "3.13",
+    "label": "Figure_3_13",
+    "page": 53,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.13 said to be in free fall. If the height through . which the object falls is small compared to the ‘st METHOD : In the first method, we split earth’s radius, g can be taken to be constant, : path in two parts : the upward motion (A to equal to 9.8 ms”. Free fall is thus a case of and the downward motion (B to C) and motion with uniform acceleration",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p053_Figure_3_13.png"
+  },
+  {
+    "fig_id": "3.14",
+    "label": "Figure_3_14",
+    "page": 53,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.14(a), (b) and (c).",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p053_Figure_3_14.png"
+  },
+  {
+    "fig_id": "3.15",
+    "label": "Figure_3_15",
+    "page": 55,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.15 Measuring the reaction time. object B relative to object Ais v, — v, : Up, = Up ~ Vg (3.14a) Answer The ruler drops under free fall. Therefore, v, = 0, and g = -9.8 m s®. The Similarly, velocity of object A relative to object B distance travelled d and the reaction time { are is: related by Yap = Ug Up (3.14b)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p055_Figure_3_15.png"
+  },
+  {
+    "fig_id": "3.16",
+    "label": "Figure_3_16",
+    "page": 56,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.16 Position-time graphs of two objecte with 0 1 2 3 4 5 6 equal velocities. t(s) ——> This shows: Vp, = — Van (3.14¢) Fig. 3.17 Position-time graphs of two objects wit unequal velocities, showing the time « Now we consider some special cases : meeting. (a) Ifv, =v,, v,-v, =O. Then, from Eq. (3.13), x, 120 A () - x, (0 = x, (0) - x, (0). Therefore, the two 400 objects stay at a constant distance (x, (0) - x, x(m) (0)) apart, and their position-time graphs are 80 straight lines parallel to each other as shown 60 in Fig. 3.16. The relative velocity V4, OF V,, is zero in this case. “ ~",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p056_Figure_3_16.png"
+  },
+  {
+    "fig_id": "3.17",
+    "label": "Figure_3_17",
+    "page": 56,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.17). At this instant they are both at a position x, (t) = x, () = 70 m. Thus, object A overtakes object B at this time. In this case, v,, =10ms'-20ms't=-10ms'=-»,,.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p056_Figure_3_17.png"
+  },
+  {
+    "fig_id": "3.18",
+    "label": "Figure_3_18",
+    "page": 56,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.18). The velocity of B relative to A, and Ug, = [-10 - (20)] ms! =-30 m s\"!= - v,,. In this (c) velocity of a monkey running on the case, the magnitude of v,, or v,, (= 30 ms“) is roof of the train A against its motion greater than the magnitude of velocity of A or (with a velocity os im ht wl h",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p056_Figure_3_18.png"
+  },
+  {
+    "fig_id": "3.20",
+    "label": "Figure_3_20",
+    "page": 61,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.20",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p061_Figure_3_20.png"
+  },
+  {
+    "fig_id": "3.23",
+    "label": "Figure_3_23",
+    "page": 62,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.23 x : gives the x-t plot of a / one-dimensional motion. , nt equal intervals of time j i In which interval is the it 2d greatest, and in which 1 ? Give the sign of average 2ach interval.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p062_Figure_3_23.png"
+  },
+  {
+    "fig_id": "3.27",
+    "label": "Figure_3_27",
+    "page": 64,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.27 graph of a particle moving along a fixed dire n the distance traversed by the particle betweer",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p064_Figure_3_27.png"
+  },
+  {
+    "fig_id": "3.28",
+    "label": "Figure_3_28",
+    "page": 64,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.28 verage speed of the particle over the inter time graph of a particle in one-dimens",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p064_Figure_3_28.png"
+  },
+  {
+    "fig_id": "3.29",
+    "label": "Figure_3_29",
+    "page": 64,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.29 ving formulae are correct for describing the motion of the particle rval ¢, to t: ‘t) (,- t) +04) a (t,-t,P (t,-t,) x(t,)/ (t,— t) v(t ))/(t,- t) veage lab) + (AD Qrerge (ty GP ea under the v-t curve bounded by the t-axis and the dotted line",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p064_Figure_3_29.png"
+  },
+  {
+    "fig_id": "3.30",
+    "label": "Figure_3_30",
+    "page": 65,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.30 Consider the point P on the curve y = (x) whose coordinates are (x, y) and another point Q where coordinates are (x + Ax, y + Ay). The slope of the line joining P and Q is given by: ang = 28 - y+4y)-y tan@ = Te TAK (2) Suppose now that the point Q moves along the curve towards P. In this process, Ay and Ax decrease and approach zero; though their ratio Ay will not necessarily vanish. What happens AX to the line PQ as Ay0, Ax->0. You can see that this line becomes a tangent to the curve at point P as shown in Fig. 3.30(b). This means that tan @ approaches the slope of the tangent at P, denoted by m: m= tim SY = jim Yt Avy (3) Ax30 AX = Ax30 AX",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p065_Figure_3_30.png"
+  },
+  {
+    "fig_id": "3.31",
+    "label": "Figure_3_31",
+    "page": 66,
+    "chapter": "Chapter 3",
+    "caption": "Figure 3.31 shows the variation of Fl) with x. If the area F(b-a) as shown in Fig. 3.31(i). But in the general case, force is varying .",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p066_Figure_3_31.png"
+  },
+  {
+    "fig_id": "4.1",
+    "label": "Figure_4_1",
+    "page": 70,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.1 (a) Position and displacement vectors. (b) Displacement vector PQ and different courses of motion. It is important to note that displacement vector is the straight line joining the initial and",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p070_Figure_4_1.png"
+  },
+  {
+    "fig_id": "4.2",
+    "label": "Figure_4_2",
+    "page": 71,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.2 (a) Two equal vectors A and B. (b) Two vectors A’ and B’ are unequal though they",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p071_Figure_4_2.png"
+  },
+  {
+    "fig_id": "4.3",
+    "label": "Figure_4_3",
+    "page": 71,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.3 (a) Vector A and the resultant vector after multiplying A by a positive number 2. Fig. 4.4 (a) Vectors A and B. (b) Vectors A and B (b) Vector A and resultant vectors after added graphically. (c) Vectors B and A multiplying it by a negative number -1 added graphically. (d) Illustrating the and -1.5. associative law of vector addition.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p071_Figure_4_3.png"
+  },
+  {
+    "fig_id": "4.4",
+    "label": "Figure_4_4",
+    "page": 71,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.4 (a) Vectors A and B. (b) Vectors A and B added graphically. (c) Vectors B and A added graphically. (d) Illustrating the associative law of vector addition.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p071_Figure_4_4.png"
+  },
+  {
+    "fig_id": "4.5",
+    "label": "Figure_4_5",
+    "page": 72,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.5 (a) Two vectors A and B, - B is also shown. (b) Subtracting vector B from vector A — comparison, addition of vectors A and B, i.e. R, is also shown.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p072_Figure_4_5.png"
+  },
+  {
+    "fig_id": "4.6",
+    "label": "Figure_4_6",
+    "page": 73,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.6 (a) Two vectors A and B with their tails brought to a common origin. (b) The sum A + B obtained usinc the parallelogram method. (c) The parallelogram method of vector addition is equivalent to the triangle method.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p073_Figure_4_6.png"
+  },
+  {
+    "fig_id": "4.7",
+    "label": "Figure_4_7",
+    "page": 73,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.7 OQ = Aa, and QP = yb (4.7) her d c 1 bers. wer The velocity of the rain and the wind where / and pare real numbers ‘epresented by the vectors v,andv,in Fig. Therefore, A=Aa+ pb (4.8) and are in the direction specified by the P",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p073_Figure_4_7.png"
+  },
+  {
+    "fig_id": "4.8",
+    "label": "Figure_4_8",
+    "page": 73,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.8 (a) Two non-colinear vectors a and b. r (b) Resolving a vector A in terms of vectors Or, = tan’'(0.343) =19° a and b.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p073_Figure_4_8.png"
+  },
+  {
+    "fig_id": "4.9",
+    "label": "Figure_4_9",
+    "page": 74,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.9 (a) Unit vectors ¢', f and K'lie along the x-, y-, and z-axes. (b) A vector A is resolved into nents A, and A, along x-, and y- axes. (c) A, and A, expressed in terms of f and j.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p074_Figure_4_9.png"
+  },
+  {
+    "fig_id": "4.10",
+    "label": "Figure_4_10",
+    "page": 76,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.10 the water current are shown in Fig. 4.11 in wer Let OP and OQ represent the two vectors directions specified by the problem. Using the nd B making an angle @ (Fig. 4.10). Then, parallelogram method of addition, the resultant ng the parallelogram method of vector R is obtained in the direction shown in the",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p076_Figure_4_10.png"
+  },
+  {
+    "fig_id": "4.11",
+    "label": "Figure_4_11",
+    "page": 76,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.11 ’e can obtain the magnitude of R using the Law Fcosine : R= Jv? + v2 +2v,,v,c0s120° 25? +10? +2x25x10(-1/2) = 22 km/h o obtain the direction, we apply the Law of sines R De ve —__ =—_—_ or, sin ¢ = —sin @ sing sing R 10xsin120~ 10/3 = _ = = 0.397 21.8 2x21.8 o= 23.47 <",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p076_Figure_4_11.png"
+  },
+  {
+    "fig_id": "4.12",
+    "label": "Figure_4_12",
+    "page": 77,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.12 (a) Position vector r. (b) Displacement Ar and times At,,At, and At,. Ar,, Ar,, and Ar, are the average velocity v of a particle. displacements of the object in times At,, At,, and <4 4 % a aN ots aN & y gon. y sok y om y Ss “ec co so oS we, wD Oa 2 P P PAP P 4 Yr r nm T// Xk; r Oo x ° x” O x” O x",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p077_Figure_4_12.png"
+  },
+  {
+    "fig_id": "4.14",
+    "label": "Figure_4_14",
+    "page": 78,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.14 The components v, and v, of velocity v and a the angle 0 it makes with x-axis. Note that v-— v= v cos 6, v, =v sin 8. dt Ax ,, A Or, a=a,ita fj. 4.31b) = tim (sy (4.29) aT yd ¢ ) Ata At At The acceleration (instantaneous acceleration)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p078_Figure_4_14.png"
+  },
+  {
+    "fig_id": "4.16",
+    "label": "Figure_4_16",
+    "page": 81,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.16 makes an angle @ with the vertical. It is given by vp, 12 tan 6 =—— =— = 0.343 bv, 35",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p081_Figure_4_16.png"
+  },
+  {
+    "fig_id": "4.17",
+    "label": "Figure_4_17",
+    "page": 81,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.17, we 3 Y,=0",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p081_Figure_4_17.png"
+  },
+  {
+    "fig_id": "4.18",
+    "label": "Figure_4_18",
+    "page": 82,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.18 The path ofa projectile is a parabola. exceed or fall short of 45° by equal Time of maximum height amounts,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p082_Figure_4_18.png"
+  },
+  {
+    "fig_id": "4.19",
+    "label": "Figure_4_19",
+    "page": 84,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.19 Velocity and acceleration of an object in uniform circular motion. The time interval At decreases from (a) to (c) where it is zero.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p084_Figure_4_19.png"
+  },
+  {
+    "fig_id": "4.20",
+    "label": "Figure_4_20",
+    "page": 90,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.20 dius 1 km, reaches the edge P turns to the centre along QO",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p090_Figure_4_20.png"
+  },
+  {
+    "fig_id": "4.21",
+    "label": "Figure_4_21",
+    "page": 90,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.21 torist follows a track that tu g from a given turn. specify 1 hth turn. Compare the mag",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p090_Figure_4_21.png"
+  },
+  {
+    "fig_id": "5.1",
+    "label": "Figure_5_1",
+    "page": 94,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.1(a)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p094_Figure_5_1.png"
+  },
+  {
+    "fig_id": "5.2",
+    "label": "Figure_5_2",
+    "page": 96,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.2 (a) abook at rest on the table, and (b) a car because the various external forces cancel out moving with uniform velocity. The net force i.e. add up to zero net external force. is zero in each case.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p096_Figure_5_2.png"
+  },
+  {
+    "fig_id": "5.3",
+    "label": "Figure_5_3",
+    "page": 98,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.3 Force not only depends on the change in momentum but also on how fast",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p098_Figure_5_3.png"
+  },
+  {
+    "fig_id": "5.4",
+    "label": "Figure_5_4",
+    "page": 98,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.4 Force is necessary for changing r of momentum, even if its magnitude is a constant. We can feel this while rotating a stone in a horizontal circle with uniform speed f by means of a string. D These qualitative observations lead to the 4 Second Law of motion expressed by Newton as e follows: t The rate of change of momentum of a body is d directly proportional to the applied force and f takes place in the direction in which the force 1 acts. § Thus, if under the action of a force F for time",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p098_Figure_5_4.png"
+  },
+  {
+    "fig_id": "5.5",
+    "label": "Figure_5_5",
+    "page": 99,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.5 Acceleration at an instant is determined by the force at that instant. The moment after a stone is dropped out of an accelerated train, it has no horizontal acceleration or force, if air resistance is neglected. The stone carries no memory of its acceleration with the train a moment ago.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p099_Figure_5_5.png"
+  },
+  {
+    "fig_id": "5.6",
+    "label": "Figure_5_6",
+    "page": 102,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.6 Answer An instinctive answer to (i) might be that the force on the wall in case (a) is normal to",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p102_Figure_5_6.png"
+  },
+  {
+    "fig_id": "5.7",
+    "label": "Figure_5_7",
+    "page": 103,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.7 Equilibrium under concurrent forces. {n other words, the resultant of any two forces say F, and F,, obtained by the parallelograrr law of forces must be equal and opposite to the",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p103_Figure_5_7.png"
+  },
+  {
+    "fig_id": "5.8",
+    "label": "Figure_5_8",
+    "page": 103,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.8 A mass of 6 kg 5.8 EQUILIBRIUM OF A PARTICLE is suspended by a rope of length 2 m from the ceiling. A force of 50 N in the Equilibrium of a particle in mechanics refers to horizontal direction is applied at the mid- the situation when the net external force on the point P of the rope, as shown. What is",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p103_Figure_5_8.png"
+  },
+  {
+    "fig_id": "5.9",
+    "label": "Figure_5_9",
+    "page": 104,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.9 Some examples © We are not considering, for simplicity, charged ai electrical and magnetic non-contact forces.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p104_Figure_5_9.png"
+  },
+  {
+    "fig_id": "5.10",
+    "label": "Figure_5_10",
+    "page": 105,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.10 Static and sliding friction: (a) Impending motion of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p105_Figure_5_10.png"
+  },
+  {
+    "fig_id": "5.11",
+    "label": "Figure_5_11",
+    "page": 106,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.11 A Fig. 5.12",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p106_Figure_5_11.png"
+  },
+  {
+    "fig_id": "5.13",
+    "label": "Figure_5_13",
+    "page": 107,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.13 Some ways of reducing friction. (a) Ball bearings placed between moving parts of a machine. (b) Compressed cushion of air between surfaces in relative motion.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p107_Figure_5_13.png"
+  },
+  {
+    "fig_id": "5.14",
+    "label": "Figure_5_14",
+    "page": 108,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.14 Circular motion of a car on (a) a level road, (b) a banked road. vitational force on the planet due to the sun. Motion of a car on a banked road a the faking a oreular warn fe rae horwon jal We can reduce the contribution of friction to the *he circular motion of a car on a flat an d circular motion of the car if",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p108_Figure_5_14.png"
+  },
+  {
+    "fig_id": "5.15",
+    "label": "Figure_5_15",
+    "page": 110,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.15 the third law, the action of the system on",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p110_Figure_5_15.png"
+  },
+  {
+    "fig_id": "5.18",
+    "label": "Figure_5_18",
+    "page": 115,
+    "chapter": "Chapter 5",
+    "caption": "Figure 5.18 shows a man standing stationary with respect to a horizontal conveyor belt that is accelerating with 1 m s*. What is the net force on the man? If the coefficient of static friction between the man’s shoes and",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p115_Figure_5_18.png"
+  },
+  {
+    "fig_id": "5.19",
+    "label": "Figure_5_19",
+    "page": 116,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.19. What is the action on the floor by the man in the two cases ? If yields to a normal force of 700 N, which mode should the man adopt to lift the block without the floor yielding ? mass m.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p116_Figure_5_19.png"
+  },
+  {
+    "fig_id": "5.22",
+    "label": "Figure_5_22",
+    "page": 117,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.22. The coefficient of friction between the box and the surface below it is 0.15. On a straight road, the truck starts from rest and accelerates with 2 ms. At what distance from the starting point does the box fall off the truck? (Ignore the size of Fig. 5.22 the box).",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p117_Figure_5_22.png"
+  },
+  {
+    "fig_id": "6.1",
+    "label": "Figure_6_1",
+    "page": 119,
+    "chapter": "Chapter 6",
+    "caption": "Fig. 6.1 (a) The scalar product of two vectors A and B is a scalar: A-B = A Bcos @. (b) Bcos @ is of B onto A. (c) A cos 6 is the projection of A onto B.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p119_Figure_6_1.png"
+  },
+  {
+    "fig_id": "6.3",
+    "label": "Figure_6_3",
+    "page": 123,
+    "chapter": "Chapter 6",
+    "caption": "Fig. 6.3 (a) The shaded rectangle represents t work done by the varying force F(x), ov the small displacement Ax, AW = F{x)4 {b) adding the areas of all the rectangl we find that for Ax +0, the area una",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p123_Figure_6_3.png"
+  },
+  {
+    "fig_id": "6.4",
+    "label": "Figure_6_4",
+    "page": 123,
+    "chapter": "Chapter 6",
+    "caption": "Fig. 6.4 Plot of the force Fapplied by the woman and the opposing frictional force f.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p123_Figure_6_4.png"
+  },
+  {
+    "fig_id": "6.5",
+    "label": "Figure_6_5",
+    "page": 125,
+    "chapter": "Chapter 6",
+    "caption": "VD=U; j. 6.5 The conversion of potential energy to} energy for a ball of mass m dropped j height H.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p125_Figure_6_5.png"
+  },
+  {
+    "fig_id": "6.8",
+    "label": "Figure_6_8",
+    "page": 128,
+    "chapter": "Chapter 6",
+    "caption": "Fig. 6.8 Parabolic plots of the potential energy Vand tt kinetic energy K of a block attached to a spring obeying Hooke’s law. The two plots ) are complementary, one decreasing as the other increases. The total mechanical e energy E = K + Vremains constant. s s Answer At maximum compression the kinetic G energy of the car is converted entirely into the y potential energy of the spring. The kinetic energy of the moving car is 1 K=5mw®",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p128_Figure_6_8.png"
+  },
+  {
+    "fig_id": "6.9",
+    "label": "Figure_6_9",
+    "page": 129,
+    "chapter": "Chapter 6",
+    "caption": "Fig. 6.9. the path this assumes We invoke the work-energy theorem, rather E,-E, = W,, than the conservation of mechanical energy. Where W,, is the total work done by the The change in kinetic energy is non-conservative forces over the path. Note that",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p129_Figure_6_9.png"
+  },
+  {
+    "fig_id": "6.10",
+    "label": "Figure_6_10",
+    "page": 133,
+    "chapter": "Chapter 6",
+    "caption": "Fig. 6.10 Collisionofmass m,,withastationary massM,. The masses m, and m, fly-off in different directions. We shall see that there are relationships, which connect the masses, the",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p133_Figure_6_10.png"
+  },
+  {
+    "fig_id": "6.11",
+    "label": "Figure_6_11",
+    "page": 138,
+    "chapter": "Chapter 6",
+    "caption": "Fig. 6.11",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p138_Figure_6_11.png"
+  },
+  {
+    "fig_id": "6.12",
+    "label": "Figure_6_12",
+    "page": 139,
+    "chapter": "Chapter 6",
+    "caption": "Fig. 6.12. Show that a particle of total energy 1 J moving under this : 7 potential must ‘turn back’ when it Fig. 6.12 x reaches x =+ 2m.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p139_Figure_6_12.png"
+  },
+  {
+    "fig_id": "6.13",
+    "label": "Figure_6_13",
+    "page": 139,
+    "chapter": "Chapter 6",
+    "caption": "Fig. 6.13 a) by the gravitational force over every complete orbit che earth in very thin atmosphere loses its energy gainst atmospheric resistance, however small. Why »gressively as it comes closer and closer to the earth ? 2 m carrying a mass of 15 kg on his hands. In Fig. stance pulling the rope behind him. The rope goes kg hangs at its other end. In which case is",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p139_Figure_6_13.png"
+  },
+  {
+    "fig_id": "6.16",
+    "label": "Figure_6_16",
+    "page": 141,
+    "chapter": "Chapter 6",
+    "caption": "Fig. 6.16",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p141_Figure_6_16.png"
+  },
+  {
+    "fig_id": "6.17",
+    "label": "Figure_6_17",
+    "page": 142,
+    "chapter": "Chapter 6",
+    "caption": "Fig. 6.17 3 kg falls from the ceiling of an elevator movii It hits the floor of the elevator (length of the at is the heat produced by the impact ? Would",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p142_Figure_6_17.png"
+  },
+  {
+    "fig_id": "6.18",
+    "label": "Figure_6_18",
+    "page": 142,
+    "chapter": "Chapter 6",
+    "caption": "Fig. 6.18 ecay of a free neutron at rest: n> p+e",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p142_Figure_6_18.png"
+  },
+  {
+    "fig_id": "6.20",
+    "label": "Figure_6_20",
+    "page": 144,
+    "chapter": "Chapter 6",
+    "caption": "Fig. 6.20 An illustration of a single stride in walking. While the first leg is maximally off the round, the second leg",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p144_Figure_6_20.png"
+  },
+  {
+    "fig_id": "7.1",
+    "label": "Figure_7_1",
+    "page": 146,
+    "chapter": "Chapter 7",
+    "caption": "Fig 7.1 Translational (sliding) motion of a block down on (Fig 7.3(a) and (b)). an inclined plane. (Any point like P, or P, of the block moves with the same velocity at any instant of time.) movement.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p146_Figure_7_1.png"
+  },
+  {
+    "fig_id": "7.2",
+    "label": "Figure_7_2",
+    "page": 146,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.2 Rolling motion of a cylinder It is not pure translational motion. Points P,, P,, P, and P, I",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p146_Figure_7_2.png"
+  },
+  {
+    "fig_id": "7.3",
+    "label": "Figure_7_3",
+    "page": 146,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.3 Rotation about a fixed axis ° (Q) A ceiling fan (b) A potter’s wheel. g d Let us try to understand what rotation is, e what characterises rotation. You may notice o that in rotation of a rigid body about a fixed",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p146_Figure_7_3.png"
+  },
+  {
+    "fig_id": "7.4",
+    "label": "Figure_7_4",
+    "page": 147,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.4 A rigid body rotation about the z-axis (Each point of the body such as P, or P, describes a circle with its centre (C, or C,) on the axis. The radius of the circle (r,or r,) is the perpendicular distance of the point (P, or P,) from the axis. A point on the axis like P, remains stationary). axis, every particle of the body moves in a circle, which lies in a plane perpendicular to the axis and has its centre on the axis. Fig. 7.4 shows the rotational motion of a rigid body about a fixed axis (the z-axis of the frame of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p147_Figure_7_4.png"
+  },
+  {
+    "fig_id": "7.5",
+    "label": "Figure_7_5",
+    "page": 147,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.5 (a) A spinning top ep ™ (The point of contact of the top with the g ground, its tip O, is fixed.) Py ru 4 ’ I ( Us ------#-----+/{_ 3 ¢ “0 yu 1 4 y I I x I",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p147_Figure_7_5.png"
+  },
+  {
+    "fig_id": "7.6",
+    "label": "Figure_7_6",
+    "page": 148,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.6(b) Motion of a rigid body which is a combination of translation and rotation. Fig 7.6 (a) and 7.6 (b) illustrate different motions of the same body. Note P is an arbitrary point of the body; O is the centre of mass of the body, which is defined in the next section. Suffice to say here that the trajectories of O are the translational trajectories Tr, and Tr, of the body. The positions O and P at three different instants of time are shown by O,, O,, and O,, and P,, P, and P, respectively in Fig. 7.6 (a) and (b) both. As seen from Fig. 7.6(a), at any instant the velocities of any particles like O and P of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p148_Figure_7_6.png"
+  },
+  {
+    "fig_id": "7.7",
+    "label": "Figure_7_7",
+    "page": 148,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.7 Let the distances of the two particles be x, and x, respectively from some origin O. Let m, and m, be respectively the masses of the two",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p148_Figure_7_7.png"
+  },
+  {
+    "fig_id": "7.8",
+    "label": "Figure_7_8",
+    "page": 150,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.8 Determining the CM of a thin rod.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p150_Figure_7_8.png"
+  },
+  {
+    "fig_id": "7.9",
+    "label": "Figure_7_9",
+    "page": 150,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.9",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p150_Figure_7_9.png"
+  },
+  {
+    "fig_id": "7.10",
+    "label": "Figure_7_10",
+    "page": 151,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.10 ~ (1+1+1)kg -—m By symmetry each strip has its centre of [[1@/2)+10./2)+1(8/2)] ]kgm 5 mass at its midpoint. If we join the midpoint of Y= ~————aadalke em",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p151_Figure_7_10.png"
+  },
+  {
+    "fig_id": "7.11",
+    "label": "Figure_7_11",
+    "page": 151,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.11 Hence x - HO/2) +18 /2)+10/2)}kgm 5 - (1+1+1)kg “6m y [G/2)+10/2)+1(8/2)] ]kgm 5, = SS i im (1+1+1)kg 6 The centre of mass of the L-shape lies on the line OD. We could have guessed this without calculations. Can you tell why? Suppose, the three squares that make up the L shaped lamina",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p151_Figure_7_11.png"
+  },
+  {
+    "fig_id": "7.12",
+    "label": "Figure_7_12",
+    "page": 153,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.12 The centre of mass of of the projectile continues along the same parabolic path which it would",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p153_Figure_7_12.png"
+  },
+  {
+    "fig_id": "7.15",
+    "label": "Figure_7_15",
+    "page": 155,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.15 (a) Rule of the right handed screw for defining the direction of the vector product of two vectors, (b) Rule of the right hand for defining the direction of the vector product.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p155_Figure_7_15.png"
+  },
+  {
+    "fig_id": "7.16",
+    "label": "Figure_7_16",
+    "page": 156,
+    "chapter": "Chapter 7",
+    "caption": ". 7.16 Rotation about a fixed axis. (A particle of the rigid body rotating about the fi (z-) axis moves in a circle with centre on the axis.)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p156_Figure_7_16.png"
+  },
+  {
+    "fig_id": "7.18",
+    "label": "Figure_7_18",
+    "page": 159,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.18 t=rxF,T is perpendicular to the plane containing r and F, and its direction is given by the right handed screw rule.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p159_Figure_7_18.png"
+  },
+  {
+    "fig_id": "7.19",
+    "label": "Figure_7_19",
+    "page": 162,
+    "chapter": "Chapter 7",
+    "caption": "Fig 7.19 The angular momentum is 1 = r x mv. Its gnitude is mur sin@, where @ is the angle ween r and v as shown in Fig. 7.19. Although",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p162_Figure_7_19.png"
+  },
+  {
+    "fig_id": "7.20",
+    "label": "Figure_7_20",
+    "page": 163,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.20 (a) p L “ i A Sy \\ Let C be the midpoint of AB, CA = CB = a. Kf the moment of the forces at A and B will both yw",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p163_Figure_7_20.png"
+  },
+  {
+    "fig_id": "7.21",
+    "label": "Figure_7_21",
+    "page": 163,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.21(a)]. Another known example is a may be in translational equilibrium and notin compass needle in the earth’s magnetic field as rotational equilibrium, or it may be in rotational —_ shown in the Fig. 7.21(b). The earth’s magnetic equilibrium and not in translational field exerts equal forces on the north and south equilibrium. poles. The force on the North Pole is towards Consider a light (i.e. of negligible mass) rod the north, and the force on the South Pole is (AB), at the two ends (A and B) of which two toward the south. Except when the needle points varallel forces both coal in eugeitude are in the north-south direction; the two forces do applied perpendicular to the rod as shown in seouple nelineon Hine of action. “ius there is Fig. 7-20(a). magnetic field. ——— a B a Cc go a ~ S Ky yn \\ *%",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p163_Figure_7_21.png"
+  },
+  {
+    "fig_id": "7.22",
+    "label": "Figure_7_22",
+    "page": 164,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.22 Consider a couple as shown in Fig. 7.22 acting on a rigid body. The forces F and -F act respectively at points B and A. These points have",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p164_Figure_7_22.png"
+  },
+  {
+    "fig_id": "7.23",
+    "label": "Figure_7_23",
+    "page": 164,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.23.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p164_Figure_7_23.png"
+  },
+  {
+    "fig_id": "7.24",
+    "label": "Figure_7_24",
+    "page": 165,
+    "chapter": "Chapter 7",
+    "caption": "Figure 7.24 illustrates a similar experiment that gn you can easily perform. Take an irregular- We notice that in Eq. (7.33), g is the same shaped cardboard and a narrow tipped object for all particles, and hence it comes out of the like a pencil. You can locate by trialanderrora — gymmation. This gives, since g is nonzero, point G on the cardboard where it can be ; balanced on the tip of the pencil. (The cardboard > m,x, = 0. Remember that the position vectors remains horizontal in this position.) This point —_(r) are taken with respect to the CG. Now, in of balance is the centre of gravity (CG) of the accordance with the reasoning given below cardboard. The tip of the pencil provides a Eq. (7.4a) in Sec. 7.2, if the sum is zero, the vertically upward force due to which the _ origin must be the centre of mass of the body. cardboard is in mechanical equilibrium. As Thus, the centre of gravity of the body coincides shown in the Fig. 7.24, the reaction of the tipis | with the centre of mass. We note that this is equal and opposite to Mg, the total weight of true because the body being small, g does not",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p165_Figure_7_24.png"
+  },
+  {
+    "fig_id": "7.25",
+    "label": "Figure_7_25",
+    "page": 165,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.25 Determining the centre of gravity of a body of irregular shape. The centre of gravity G lies on the vertical AA, through the point of suspension of the body A.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p165_Figure_7_25.png"
+  },
+  {
+    "fig_id": "7.26",
+    "label": "Figure_7_26",
+    "page": 166,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.26 bm D 2V2m Figure 7.26 shows the rod AB, the positions of the knife edges K, and K, , the centre of F. gravity of the rod at G and the suspended weight | iW at P. 1 Le . . as — - 1",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p166_Figure_7_26.png"
+  },
+  {
+    "fig_id": "7.27",
+    "label": "Figure_7_27",
+    "page": 166,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.27 The ladder AB is 3 m long, its foot A is at distance AC = 1 m from the wall. From",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p166_Figure_7_27.png"
+  },
+  {
+    "fig_id": "7.29",
+    "label": "Figure_7_29",
+    "page": 170,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.29 Theorem of perpendicular axes Now, xand y axes are along two diameters applicable to a planar body; x and y axes of the disc, and by symmetry the moment of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p170_Figure_7_29.png"
+  },
+  {
+    "fig_id": "7.30",
+    "label": "Figure_7_30",
+    "page": 170,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.30 M.I. of a disc about a diameter, given its axes are two parallel axes separated M.L. about the perpendicular axis through a distance a O is the centre of mas: its centre. the body, OO' = a.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p170_Figure_7_30.png"
+  },
+  {
+    "fig_id": "7.31",
+    "label": "Figure_7_31",
+    "page": 170,
+    "chapter": "Chapter 7",
+    "caption": "'.7.31 The theorem of parallel axes The z anc axes are two parallel axes separated a distance a; O is the centre of mas: the body, OO' = a.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p170_Figure_7_31.png"
+  },
+  {
+    "fig_id": "7.32",
+    "label": "Figure_7_32",
+    "page": 171,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.32 2 aig + MR? - + MR? = SMR’. <4",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p171_Figure_7_32.png"
+  },
+  {
+    "fig_id": "7.17",
+    "label": "Figure_7_17",
+    "page": 174,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.17(b).] Since OC is along the axis, torque resulting from it is excluded from our this expression for power in the case of consideration. The effective torque due to F, is rotational motion about a fixed axis with the t,= CP xF |; itis directed along the axis ofrotation —_ expression for power in the case of linear motion, and has a magnitude 7 ,= r,F, sina. , Therefore, P=Fv",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p174_Figure_7_17.png"
+  },
+  {
+    "fig_id": "7.35",
+    "label": "Figure_7_35",
+    "page": 175,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.35 We first consider the angular momentum of (a) We use 1Q@=T a typical particle of the rotating rigid body. We then sum up the contributions of individual the torque T=FR oe . particles to get L of the whole body.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p175_Figure_7_35.png"
+  },
+  {
+    "fig_id": "7.36",
+    "label": "Figure_7_36",
+    "page": 177,
+    "chapter": "Chapter 7",
+    "caption": "A 36 (b) An acrobat employing the pri: conservation of angular mome her performance.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p177_Figure_7_36.png"
+  },
+  {
+    "fig_id": "7.37",
+    "label": "Figure_7_37",
+    "page": 178,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.37 The rolling motion (without slipping) of a disc on a level surface. Note at any instant, the point of contact P, of the disc with",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p178_Figure_7_37.png"
+  },
+  {
+    "fig_id": "7.38",
+    "label": "Figure_7_38",
+    "page": 179,
+    "chapter": "Chapter 7",
+    "caption": "Fig.7.38) Since start from rest the kinetic energy gained is equal to the final kinetic energy of the bodies. From",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p179_Figure_7_38.png"
+  },
+  {
+    "fig_id": "7.39",
+    "label": "Figure_7_39",
+    "page": 182,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.39 hs 1800 kg. The distance between its front and back ravity is 1.05 m behind the front axle. Determine the fi id on each front wheel and each back wheel.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p182_Figure_7_39.png"
+  },
+  {
+    "fig_id": "8.1",
+    "label": "Figure_8_1",
+    "page": 188,
+    "chapter": "Chapter 8",
+    "caption": "Fig. 8.1(a) An ellipse traced out by a planet around SSS the sun. The closest point is P and the — farthest point is A, P is called the | ye ns perihelion and A the aphelion. The semimajor axis is half the distance AP. y Fig. 8.2 The planet P moves around the i elliptical orbit. The shaded area K PAN AA swept out ina small interval . P A 3. Law of periods : The square of the tii of revolution of a planet is proportior cube of the semi-major axis of the ellig out by the planet. Fig. 8.1(b) Drawing an ellipse. A string has its ends The table below gives",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p188_Figure_8_1.png"
+  },
+  {
+    "fig_id": "8.2",
+    "label": "Figure_8_2",
+    "page": 188,
+    "chapter": "Chapter 8",
+    "caption": "Fig. 8.2 The planet P moves around the sun in an elliptical orbit. The shaded area is the area AA swept out in a small interval of time At. 3. Law of periods : The square of the time period of revolution of a planet is proportional to the cube of the semi-major axis of the ellipse traced out by the planet. 's The table below gives the approximate time 's_ periods of revolution of nine planets around the sun along with values of their semi-major axes.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p188_Figure_8_2.png"
+  },
+  {
+    "fig_id": "8.3",
+    "label": "Figure_8_3",
+    "page": 191,
+    "chapter": "Chapter 8",
+    "caption": "Fig. 8.3. Gravitational force on m, due to m, is along Take AG = BG = CG = 1m (see Fig. 8.5) x where the vector r is ,- ¥,).",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p191_Figure_8_3.png"
+  },
+  {
+    "fig_id": "8.4",
+    "label": "Figure_8_4",
+    "page": 191,
+    "chapter": "Chapter 8",
+    "caption": "Fig. 8.4 Gravitational force on point mass m, is the b vector sum of the gravitational forces exerted 1 by m,, m, and m,. The total force on m, is m mM, ™M, 7m, M, F, = mm $, 0mm $, 0mm & ™m T31 Th > Example 8.2 Three equal masses of m kg each are fixed at the vertices of an equilateral triangle ABC. (a) What is the force acting on a mass 2m placed at the centroid G of the triangle? (b) What is the force if the mass at the",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p191_Figure_8_4.png"
+  },
+  {
+    "fig_id": "8.5",
+    "label": "Figure_8_5",
+    "page": 192,
+    "chapter": "Chapter 8",
+    "caption": "vertices of the A ABC. A mass 2m is placed the same direction. We have to add up these forces at the centroid G. vectorially for all the point masses in the extended object to get the total force. This is easily done using caleuluis. For two snecial cases. a simnle",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p192_Figure_8_5.png"
+  },
+  {
+    "fig_id": "8.6",
+    "label": "Figure_8_6",
+    "page": 193,
+    "chapter": "Chapter 8",
+    "caption": "Fig. 8.6 Schematic drawing of Cavendish’s experiment. S, and S, are large spheres which are kept on either side (shown shades) of the masses at A and B. When the big spheres are taken to the other side",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p193_Figure_8_6.png"
+  },
+  {
+    "fig_id": "8.7",
+    "label": "Figure_8_7",
+    "page": 194,
+    "chapter": "Chapter 8",
+    "caption": "Fig. 8.7 The mass mis ina mine located at a depth why there s a popular statement regarding d below the surface of the Earth of mass avendish : “Cavendish weighed the earth”. M; and radius R,;. We treat the Earth to be spherically symmetric. 8.6 ACCELERATION DUE TO GRAVITY RELOW AND AROVE THE SURFACE OF",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p194_Figure_8_7.png"
+  },
+  {
+    "fig_id": "8.8",
+    "label": "Figure_8_8",
+    "page": 194,
+    "chapter": "Chapter 8",
+    "caption": "Fig. 8.8 (a) g at a height h above the surface of th earth. its distance from the centre of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p194_Figure_8_8.png"
+  },
+  {
+    "fig_id": "8.9",
+    "label": "Figure_8_9",
+    "page": 196,
+    "chapter": "Chapter 8",
+    "caption": "Fig. 8.9. We have four mass pairs at distance land two diagonal pairs at distance /21 Hence,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p196_Figure_8_9.png"
+  },
+  {
+    "fig_id": "8.10",
+    "label": "Figure_8_10",
+    "page": 197,
+    "chapter": "Chapter 8",
+    "caption": "Fig. 8.10 Answer",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p197_Figure_8_10.png"
+  },
+  {
+    "fig_id": "8.11",
+    "label": "Figure_8_11",
+    "page": 201,
+    "chapter": "Chapter 8",
+    "caption": "Fig. 8.11 A Polar satellite. A strip on earth's surface (shown shaded) is visible from the satellite during one cycle. For the next revolution of the satellite,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p201_Figure_8_11.png"
+  },
+  {
+    "fig_id": "8.12",
+    "label": "Figure_8_12",
+    "page": 205,
+    "chapter": "Chapter 8",
+    "caption": "Fig 8.12) (i) a, (ii) b, (iii) c, (iv) 0.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/p205_Figure_8_12.png"
+  }
+]

@@ -1,0 +1,27 @@
+NCERT Class 11 Biology — Extracted Figures
+============================================================
+
+Page   4  Figure_7_1                        p004_Figure_7_1.png
+Page   5  Figure_7_2                        p005_Figure_7_2.png
+Page  16  Figure_7_3                        p016_Figure_7_3.png
+Page  26  Figure_8_1                        p026_Figure_8_1.png
+Page  26  Figure_8_2                        p026_Figure_8_2.png
+Page  44  Figure_8_4                        p044_Figure_8_4.png
+Page  45  Figure_8_5                        p045_Figure_8_5.png
+Page  46  Figure_8_6                        p046_Figure_8_6.png
+Page  46  Figure_8_7                        p046_Figure_8_7.png
+Page  47  Figure_8_8                        p047_Figure_8_8.png
+Page  48  Figure_8_10                       p048_Figure_8_10.png
+Page  49  Figure_8_11                       p049_Figure_8_11.png
+Page  49  Figure_8_12                       p049_Figure_8_12.png
+Page  50  Figure_8_13                       p050_Figure_8_13.png
+Page  53  Figure_8_15                       p053_Figure_8_15.png
+Page  53  Figure_8_16                       p053_Figure_8_16.png
+Page  55  Figure_8_17                       p055_Figure_8_17.png
+Page  62  Figure_9_1                        p062_Figure_9_1.png
+Page  71  Figure_9_2                        p071_Figure_9_2.png
+Page  71  Figure_9_3                        p071_Figure_9_3.png
+Page  72  Figure_9_4                        p072_Figure_9_4.png
+Page  73  Figure_9_5                        p073_Figure_9_5.png
+Page  81  Figure_9_6                        p081_Figure_9_6.png
+Page  87  Figure_9_7                        p087_Figure_9_7.png

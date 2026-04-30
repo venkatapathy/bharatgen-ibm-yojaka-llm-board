@@ -1,0 +1,1602 @@
+[
+  {
+    "fig_id": "1.1",
+    "label": "Figure_1_1",
+    "page": 13,
+    "chapter": "The Living World",
+    "caption": "Figure 1.1 Taxonomic categories showing hierarchial arrangement in ascending order",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p013_Figure_1_1.png"
+  },
+  {
+    "fig_id": "1.2",
+    "label": "Figure_1_2",
+    "page": 15,
+    "chapter": "The Living World",
+    "caption": "Figure 1.2 Herbarium showing stored specimens according to a universally accepted system of classification. These specimens, along with their descriptions on herbarium sheets, become a store house or repository for future use (Figure 1.2). The herbarium sheets also carry a label providing information about date and place of collection, English, local and botanical names, family, collector's name, etc. Herbaria also serve as quick referral systems in taxonomical studies.",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p015_Figure_1_2.png"
+  },
+  {
+    "fig_id": "1.3",
+    "label": "Figure_1_3",
+    "page": 16,
+    "chapter": "The Living World",
+    "caption": "Figure 1.3 Pictures showing animals in different zoological parks of India",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p016_Figure_1_3.png"
+  },
+  {
+    "fig_id": "2.1",
+    "label": "Figure_2_1",
+    "page": 21,
+    "chapter": "Biological Classification",
+    "caption": "Figure 2.1 Bacteria of different shapes",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p021_Figure_2_1.png"
+  },
+  {
+    "fig_id": "2.2",
+    "label": "Figure_2_2",
+    "page": 22,
+    "chapter": "Biological Classification",
+    "caption": "Figure 2.2 A filamentous blue-green x algae — Nostoc le",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p022_Figure_2_2.png"
+  },
+  {
+    "fig_id": "2.3",
+    "label": "Figure_2_3",
+    "page": 23,
+    "chapter": "Biological Classification",
+    "caption": "Figure 2.3 A dividing bacterium completely lack a cell wall. They are the smallest living cells known and can survive without oxygen. Many mycoplasma",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p023_Figure_2_3.png"
+  },
+  {
+    "fig_id": "2.4",
+    "label": "Figure_2_4",
+    "page": 24,
+    "chapter": "Biological Classification",
+    "caption": "Figure 2.4 (a) Euglena (b) Paramoecium",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p024_Figure_2_4.png"
+  },
+  {
+    "fig_id": "2.5",
+    "label": "Figure_2_5",
+    "page": 26,
+    "chapter": "Biological Classification",
+    "caption": "Figure 2.5 Fungi: (a) Mucor am (b) Aspergillus (c) Agaricus",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p026_Figure_2_5.png"
+  },
+  {
+    "fig_id": "2.6",
+    "label": "Figure_2_6",
+    "page": 29,
+    "chapter": "Biological Classification",
+    "caption": "Figure 2.6 (a) Tobacco Mosaic Virus (TMV) (b) Bacteriophage infect a cell they take over the machinery of the host cell to replicate themselves, killing the host. Would you call viruses living or non-living?",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p029_Figure_2_6.png"
+  },
+  {
+    "fig_id": "3.1",
+    "label": "Figure_3_1",
+    "page": 34,
+    "chapter": "Plant Kingdom",
+    "caption": "Figure 3.1 Algae : (a) Green algae (i) Volvox (ii) Chlamydomonas (iii) Chara",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p034_Figure_3_1.png"
+  },
+  {
+    "fig_id": "3.2",
+    "label": "Figure_3_2",
+    "page": 37,
+    "chapter": "Plant Kingdom",
+    "caption": "Figure 3.2 Bryophytes: A liverwort - Marchantia (a) Female thallus (b) Male thallus Mosses ~ (c) Funaria, gametophyte and sporophyte (d) Sphagnum gametophyte",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p037_Figure_3_2.png"
+  },
+  {
+    "fig_id": "3.3",
+    "label": "Figure_3_3",
+    "page": 40,
+    "chapter": "Plant Kingdom",
+    "caption": "Figure 3.3 Pteridophytes : (a) Selaginella (b) Equisetum (c) Fern (d) Salvinia",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p040_Figure_3_3.png"
+  },
+  {
+    "fig_id": "3.4",
+    "label": "Figure_3_4",
+    "page": 42,
+    "chapter": "Plant Kingdom",
+    "caption": "Figure 3.4 Gymnosperms: (a) Cycas (b) Pinus (c) Ginkgo",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p042_Figure_3_4.png"
+  },
+  {
+    "fig_id": "3.5",
+    "label": "Figure_3_5",
+    "page": 43,
+    "chapter": "Plant Kingdom",
+    "caption": "Figure 3.5 Angiosperms : (a) A dicotyledon (b) A monocotyledon",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p043_Figure_3_5.png"
+  },
+  {
+    "fig_id": "3.6",
+    "label": "Figure_3_6",
+    "page": 44,
+    "chapter": "Plant Kingdom",
+    "caption": "Figure 3.6 Life cycle of an angiosperm",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p044_Figure_3_6.png"
+  },
+  {
+    "fig_id": "3.7",
+    "label": "Figure_3_7",
+    "page": 45,
+    "chapter": "Plant Kingdom",
+    "caption": "Figure 3.7 Life cycle patterns : (a) Haplonti (b) Diplontic (c) Haplo-diplontic",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p045_Figure_3_7.png"
+  },
+  {
+    "fig_id": "4.1",
+    "label": "Figure_4_1",
+    "page": 50,
+    "chapter": "Animal Kingdom",
+    "caption": "Figure 4.1 (b) Bilateral symmetry",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p050_Figure_4_1.png"
+  },
+  {
+    "fig_id": "4.2",
+    "label": "Figure_4_2",
+    "page": 50,
+    "chapter": "Animal Kingdom",
+    "caption": "Figure 4.2 Showing germinal layers : srm and the endoderm (Figure 4.2a). (a) Diploblastic (b) Triploblastic",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p050_Figure_4_2.png"
+  },
+  {
+    "fig_id": "4.3",
+    "label": "Figure_4_3",
+    "page": 51,
+    "chapter": "Animal Kingdom",
+    "caption": "Figure 4.3 Diagrammatic sectional view of : Which the body cavity is absent are called (a) Coelomate (b) Pseudocoelomate _ acoelomates, e.g., platyhelminthes (Figure 4.3c). (c) Acoelomate",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p051_Figure_4_3.png"
+  },
+  {
+    "fig_id": "4.4",
+    "label": "Figure_4_4",
+    "page": 52,
+    "chapter": "Animal Kingdom",
+    "caption": "Figure 4.4 Broad classification of Kingdom Animalia based on common fundamental features",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p052_Figure_4_4.png"
+  },
+  {
+    "fig_id": "4.5",
+    "label": "Figure_4_5",
+    "page": 52,
+    "chapter": "Animal Kingdom",
+    "caption": "Figure 4.5). primitive multicellular animals and have cellular eee . es en level of organisation. Sponges have a water |:s.. a sy a a earae transport or canal system. Water enters through |! * vy Gene minute pores (ostia) in the body wallintoacentral \\v: 2 ay foie eo 2 8. 2 cavity, spongocoel, from where it goes out i {| 3/ —@ ( ———— J through the osculum. This pathway of water \\..2. 1G” Dor transport is helpful in food gathering, respiratory 43>. ie (b) exchange and removal of waste. Choanocytes SN 0 or collar cells line the spongocoel and the canals. (a) ¢ y ool) (a 4 0 Digestion is intracellular.",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p052_Figure_4_5.png"
+  },
+  {
+    "fig_id": "4.6",
+    "label": "Figure_4_6",
+    "page": 53,
+    "chapter": "Animal Kingdom",
+    "caption": "Figure 4.6 Examples of Coelenterata indicating outline of their body form :",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p053_Figure_4_6.png"
+  },
+  {
+    "fig_id": "4.7",
+    "label": "Figure_4_7",
+    "page": 53,
+    "chapter": "Animal Kingdom",
+    "caption": "Figure 4.7 umbrella-shaped and free-swimming like Aurelia or jelly fish. Those Diagrammatic view of cnidarians which exist in both forms exhibit alternation of generation",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p053_Figure_4_7.png"
+  },
+  {
+    "fig_id": "4.8",
+    "label": "Figure_4_8",
+    "page": 54,
+    "chapter": "Animal Kingdom",
+    "caption": "Figure 4.8 Example of Ctenophora (Pleurobrachia)",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p054_Figure_4_8.png"
+  },
+  {
+    "fig_id": "4.9",
+    "label": "Figure_4_9",
+    "page": 54,
+    "chapter": "Animal Kingdom",
+    "caption": "Figure 4.9 Examples of Platyhelminthes : (a) Tape worm (b) Liver fluke",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p054_Figure_4_9.png"
+  },
+  {
+    "fig_id": "4.10",
+    "label": "Figure_4_10",
+    "page": 55,
+    "chapter": "Animal Kingdom",
+    "caption": "Figure 4.10 Aschelminthe - Roundworm",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p055_Figure_4_10.png"
+  },
+  {
+    "fig_id": "4.11",
+    "label": "Figure_4_11",
+    "page": 55,
+    "chapter": "Animal Kingdom",
+    "caption": "Figure 4.11 Examples of Annelida : (a) (b) Hirudinaria",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p055_Figure_4_11.png"
+  },
+  {
+    "fig_id": "4.12",
+    "label": "Figure_4_12",
+    "page": 56,
+    "chapter": "Animal Kingdom",
+    "caption": "Figure 4.12 Examples of Arthropoda : (a) Locust (b) Butterfly (c) Scorpion (d) Prawn",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p056_Figure_4_12.png"
+  },
+  {
+    "fig_id": "4.13",
+    "label": "Figure_4_13",
+    "page": 56,
+    "chapter": "Animal Kingdom",
+    "caption": "Figure 4.13 Examples of Mollusca : (a) Pila (b) Octopus",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p056_Figure_4_13.png"
+  },
+  {
+    "fig_id": "4.14",
+    "label": "Figure_4_14",
+    "page": 57,
+    "chapter": "Animal Kingdom",
+    "caption": "Figure 4.14 Examples for Echinodermat",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p057_Figure_4_14.png"
+  },
+  {
+    "fig_id": "4.15",
+    "label": "Figure_4_15",
+    "page": 57,
+    "chapter": "Animal Kingdom",
+    "caption": "Figure 4.15 Balanoglossus",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p057_Figure_4_15.png"
+  },
+  {
+    "fig_id": "4.16",
+    "label": "Figure_4_16",
+    "page": 58,
+    "chapter": "Animal Kingdom",
+    "caption": "Figure 4.16 Chordata characteristics",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p058_Figure_4_16.png"
+  },
+  {
+    "fig_id": "4.17",
+    "label": "Figure_4_17",
+    "page": 58,
+    "chapter": "Animal Kingdom",
+    "caption": "Figure 4.17 Ascidia",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p058_Figure_4_17.png"
+  },
+  {
+    "fig_id": "4.18",
+    "label": "Figure_4_18",
+    "page": 59,
+    "chapter": "Animal Kingdom",
+    "caption": "Figure 4.18 A jawless vertebrate - Petromyzon Cyclostomes are marine but migrate for spawning to fresh water. After spawning, within",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p059_Figure_4_18.png"
+  },
+  {
+    "fig_id": "4.19",
+    "label": "Figure_4_19",
+    "page": 59,
+    "chapter": "Animal Kingdom",
+    "caption": "Figure 4.19 Example of Cartilaginous fishes : predaceous. Due to the absence of air bladder, (a) Scoliodon (b) Pristis they have to swim constantly to avoid sinking.",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p059_Figure_4_19.png"
+  },
+  {
+    "fig_id": "4.20",
+    "label": "Figure_4_20",
+    "page": 60,
+    "chapter": "Animal Kingdom",
+    "caption": "Figure 4.20). They have four pairs 0! ay BY [ee gills which are covered by an operculum on each side. 2 hemes?",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p060_Figure_4_20.png"
+  },
+  {
+    "fig_id": "4.21",
+    "label": "Figure_4_21",
+    "page": 60,
+    "chapter": "Animal Kingdom",
+    "caption": "Figure 4.21 Examples of Amphibia : , (a) Salamandra s (b) Rana",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p060_Figure_4_21.png"
+  },
+  {
+    "fig_id": "4.22",
+    "label": "Figure_4_22",
+    "page": 61,
+    "chapter": "Animal Kingdom",
+    "caption": "Figure 4.22 Reptiles : (a) Chameleon (b) Crocodilus (c) Chelone (d) Naja",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p061_Figure_4_22.png"
+  },
+  {
+    "fig_id": "4.23",
+    "label": "Figure_4_23",
+    "page": 62,
+    "chapter": "Animal Kingdom",
+    "caption": "Figure 4.23 Some birds : (a) Neophron (b) Struthio (c) Psittacula (d) Pavo lungs. Air sacs connected to lungs supplement respiration. Sexes are separate. Fertilisation is internal. They are oviparous and development is direct.",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p062_Figure_4_23.png"
+  },
+  {
+    "fig_id": "4.24",
+    "label": "Figure_4_24",
+    "page": 62,
+    "chapter": "Animal Kingdom",
+    "caption": "Figure 4.24 Some mammals : (a) Ornithorhynchus (b) Macropus (c) Pteropus (d) Balaenoptera",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p062_Figure_4_24.png"
+  },
+  {
+    "fig_id": "5.1",
+    "label": "Figure_5_1",
+    "page": 69,
+    "chapter": "Morphology of Flowering Plants",
+    "caption": "Figure 5.1 Parts of a flowering plant",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p069_Figure_5_1.png"
+  },
+  {
+    "fig_id": "5.2",
+    "label": "Figure_5_2",
+    "page": 69,
+    "chapter": "Morphology of Flowering Plants",
+    "caption": "Figure 5.2 Different types of roots : (a) Tap (b) Fibrous (c) Adventitious",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p069_Figure_5_2.png"
+  },
+  {
+    "fig_id": "5.3",
+    "label": "Figure_5_3",
+    "page": 70,
+    "chapter": "Morphology of Flowering Plants",
+    "caption": "Figure 5.3). It KN protects the tender apex of the root as it makes > its way through the soil. A few millimetres above LAZL Ws Region of the root cap is the region of meristematic “ZS maturation activity. The cells of this region are very small, poot pair FIRS thin-walled and with dense protoplasm. They Bans divide repeatedly. The cells proximal to this {Po region undergo rapid elongation and Region of enlargement and are responsible for the growth elongation of the root in length. This region is called the region of elongation. The cells of the elongation } Region of zone gradually differentiate and mature. Hence, “1 S meristematic this zone, proximal to region of elongation, is Root cap activity",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p070_Figure_5_3.png"
+  },
+  {
+    "fig_id": "5.4",
+    "label": "Figure_5_4",
+    "page": 70,
+    "chapter": "Morphology of Flowering Plants",
+    "caption": "Figure 5.4 and 5.5). Tap roots of y yal Rcied Pi ; cae A carrot, turnips and adventitious roots of sweet wi A ¥EN DN ; ii Xi in Ete potato, get swollen and store food. Can you give 4 ‘ BA i ol oie i se . some more such examples? Have you ever [ cf Lm hey ; | Al ‘ vat ee wondered what those hanging structures are EV as a | fas NaS r that support a banyan tree?",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p070_Figure_5_4.png"
+  },
+  {
+    "fig_id": "5.5",
+    "label": "Figure_5_5",
+    "page": 71,
+    "chapter": "Morphology of Flowering Plants",
+    "caption": "Figure 5.5 Modification of root for : (a) storage (b) respiration: pneumatophore in Rhizophora",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p071_Figure_5_5.png"
+  },
+  {
+    "fig_id": "5.6",
+    "label": "Figure_5_6",
+    "page": 72,
+    "chapter": "Morphology of Flowering Plants",
+    "caption": "Figure 5.6 Modifications of stem for: (a) storage (b) support (c) protection",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p072_Figure_5_6.png"
+  },
+  {
+    "fig_id": "5.7",
+    "label": "Figure_5_7",
+    "page": 73,
+    "chapter": "Morphology of Flowering Plants",
+    "caption": "Figure 5.7 Structure of a leaf : (a) Parts of a leaf (b) Reticulate venation (c) Parallel venation",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p073_Figure_5_7.png"
+  },
+  {
+    "fig_id": "5.8",
+    "label": "Figure_5_8",
+    "page": 73,
+    "chapter": "Morphology of Flowering Plants",
+    "caption": "Figure 5.8 () phmarely, compoun d leaf the rachis, which represents the midrib of (b) palmately compound leaf as in neem.",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p073_Figure_5_8.png"
+  },
+  {
+    "fig_id": "5.10",
+    "label": "Figure_5_10",
+    "page": 74,
+    "chapter": "Morphology of Flowering Plants",
+    "caption": "Figure 5.10 Modifications of leaf for : 'S (a) support: tendril (b) protection: ie spines (c) storage: fleshy leaves",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p074_Figure_5_10.png"
+  },
+  {
+    "fig_id": "5.9",
+    "label": "Figure_5_9",
+    "page": 74,
+    "chapter": "Morphology of Flowering Plants",
+    "caption": "(c) igure 5.9 Different types of phyllotaxy : (a) Alternate (b) Opposite (c) Whorled",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p074_Figure_5_9.png"
+  },
+  {
+    "fig_id": "5.11",
+    "label": "Figure_5_11",
+    "page": 75,
+    "chapter": "Morphology of Flowering Plants",
+    "caption": "Figure 5.11 Racemose inflorescence gynoecium. Calyx and corolla are accessory organs, while androecium and gynoecium are reproductive",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p075_Figure_5_11.png"
+  },
+  {
+    "fig_id": "5.12",
+    "label": "Figure_5_12",
+    "page": 75,
+    "chapter": "Morphology of Flowering Plants",
+    "caption": "Figure 5.12 Cymose inflorescence in one particular vertical plane, it is zygomorphic,",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p075_Figure_5_12.png"
+  },
+  {
+    "fig_id": "5.13",
+    "label": "Figure_5_13",
+    "page": 76,
+    "chapter": "Morphology of Flowering Plants",
+    "caption": "Figure 5.13 Position of floral parts on thalamus : (a) Hypogynous (b) and (c)",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p076_Figure_5_13.png"
+  },
+  {
+    "fig_id": "5.14",
+    "label": "Figure_5_14",
+    "page": 77,
+    "chapter": "Morphology of Flowering Plants",
+    "caption": "Figure 5.14 Parts of a flower",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p077_Figure_5_14.png"
+  },
+  {
+    "fig_id": "5.15",
+    "label": "Figure_5_15",
+    "page": 77,
+    "chapter": "Morphology of Flowering Plants",
+    "caption": "Figure 5.15 Types of aestivation in corolla : (a) Valvate (b) Twisted (c) Imbricate (d) Vexillary",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p077_Figure_5_15.png"
+  },
+  {
+    "fig_id": "5.16",
+    "label": "Figure_5_16",
+    "page": 78,
+    "chapter": "Morphology of Flowering Plants",
+    "caption": "Figure 5.16). In marginal placentation the placenta forms a ridge along the ventral suture of the ovary and",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p078_Figure_5_16.png"
+  },
+  {
+    "fig_id": "5.17",
+    "label": "Figure_5_17",
+    "page": 79,
+    "chapter": "Morphology of Flowering Plants",
+    "caption": "Figure 5.17 Parts of a fruit : (a) Mango (b) Coconut In mango and coconut,",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p079_Figure_5_17.png"
+  },
+  {
+    "fig_id": "5.18",
+    "label": "Figure_5_18",
+    "page": 80,
+    "chapter": "Morphology of Flowering Plants",
+    "caption": "Figure 5.18 Structure of dicotyledonous seed seeds and such seeds are called non- endospermous.",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p080_Figure_5_18.png"
+  },
+  {
+    "fig_id": "5.19",
+    "label": "Figure_5_19",
+    "page": 80,
+    "chapter": "Morphology of Flowering Plants",
+    "caption": "Figure 5.19 Structure of a monocotyledonous seed",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p080_Figure_5_19.png"
+  },
+  {
+    "fig_id": "5.20",
+    "label": "Figure_5_20",
+    "page": 81,
+    "chapter": "Morphology of Flowering Plants",
+    "caption": "Figure 5.20 Floral diagram with 9, for zygomorphic nature of flower. Fusion is indicated floral formula by enclosing the figure within bracket and adhesion by a",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p081_Figure_5_20.png"
+  },
+  {
+    "fig_id": "5.21",
+    "label": "Figure_5_21",
+    "page": 82,
+    "chapter": "Morphology of Flowering Plants",
+    "caption": "Figure 5.21 Pisum sativum (pea) plant : (a) Flowering twig (b) Flower (c) Petals (d) Reproductive parts (e) L.S.carpel (f) Floral diagram",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p082_Figure_5_21.png"
+  },
+  {
+    "fig_id": "5.22",
+    "label": "Figure_5_22",
+    "page": 83,
+    "chapter": "Morphology of Flowering Plants",
+    "caption": "Figure 5.22, Solanum nigrum {makoi) plant :_ (a) Flowering twig. (b) Flower",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p083_Figure_5_22.png"
+  },
+  {
+    "fig_id": "5.23",
+    "label": "Figure_5_23",
+    "page": 84,
+    "chapter": "Morphology of Flowering Plants",
+    "caption": "Figure 5.23 Allium cepa (onion) plant : (a) Plant (b) Inflorescence (c) Flower (d) Floral diagram",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p084_Figure_5_23.png"
+  },
+  {
+    "fig_id": "6.1",
+    "label": "Figure_6_1",
+    "page": 88,
+    "chapter": "Anatomy of Flowering Plants",
+    "caption": "Figure 6.1 Apical meristem: (a) Root (b) Shoot",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p088_Figure_6_1.png"
+  },
+  {
+    "fig_id": "6.2",
+    "label": "Figure_6_2",
+    "page": 89,
+    "chapter": "Anatomy of Flowering Plants",
+    "caption": "Figure 6.2 Simple tissues : structure, origin and development, sclerenchyma fa) Parenchyma may be either fibres or sclereids.",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p089_Figure_6_2.png"
+  },
+  {
+    "fig_id": "6.3",
+    "label": "Figure_6_3",
+    "page": 90,
+    "chapter": "Anatomy of Flowering Plants",
+    "caption": "Figure 6.3 (a) Xylem e (b) Phloem ti a 0 d a",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p090_Figure_6_3.png"
+  },
+  {
+    "fig_id": "6.4",
+    "label": "Figure_6_4",
+    "page": 92,
+    "chapter": "Anatomy of Flowering Plants",
+    "caption": "Figure 6.4 Diagrammatic representation: (a) stomata with bean-shaped guard cells (b) stomata with dumb-bell shaped guard cell",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p092_Figure_6_4.png"
+  },
+  {
+    "fig_id": "6.5",
+    "label": "Figure_6_5",
+    "page": 93,
+    "chapter": "Anatomy of Flowering Plants",
+    "caption": "Figure 6.5 Various types of vascular bu",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p093_Figure_6_5.png"
+  },
+  {
+    "fig_id": "6.6",
+    "label": "Figure_6_6",
+    "page": 94,
+    "chapter": "Anatomy of Flowering Plants",
+    "caption": "Figure 6.6 b). Rae Crete It has epidermis, cortex, endodermis, KY meee) Pith pericycle, vascular bundles and pith. As : : Sr) Metaxylem compared to the dicot root which have fewer _ 3 xylem bundles, there are usually more than (b) six (polyarch) xylem bundles in the monocot Figure 6.6 T.S (a) Dicot root (Primary) : root. Pith is large and well developed. (b) Monocot root Monocotyledonous roots do not undergo any secondary growth. 6.3.3 Dicotyledonous Stem The transverse section of a typical young dicotyledonous stem shows that",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p094_Figure_6_6.png"
+  },
+  {
+    "fig_id": "6.7",
+    "label": "Figure_6_7",
+    "page": 95,
+    "chapter": "Anatomy of Flowering Plants",
+    "caption": "Figure 6.7 T.S. of stem: (a) Dicot (b) Monocot",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p095_Figure_6_7.png"
+  },
+  {
+    "fig_id": "6.8",
+    "label": "Figure_6_8",
+    "page": 97,
+    "chapter": "Anatomy of Flowering Plants",
+    "caption": "Figure 6.8 T.S. of leaf: (a) Dicot (b) Monocot",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p097_Figure_6_8.png"
+  },
+  {
+    "fig_id": "6.9",
+    "label": "Figure_6_9",
+    "page": 98,
+    "chapter": "Anatomy of Flowering Plants",
+    "caption": "Figure 6.9 Secondary growth in a dicot stem (diagrammatic) — stages in transverse view:",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p098_Figure_6_9.png"
+  },
+  {
+    "fig_id": "6.10",
+    "label": "Figure_6_10",
+    "page": 100,
+    "chapter": "Anatomy of Flowering Plants",
+    "caption": "Figure 6.10). : E a ry iy mo i 6.4.3 Secondary Growth in PUN Le e Rt AE sy",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p100_Figure_6_10.png"
+  },
+  {
+    "fig_id": "6.11",
+    "label": "Figure_6_11",
+    "page": 101,
+    "chapter": "Anatomy of Flowering Plants",
+    "caption": "Figure 6.11 Different stages of the secondary growth in a typical dicot root",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p101_Figure_6_11.png"
+  },
+  {
+    "fig_id": "7.1",
+    "label": "Figure_7_1",
+    "page": 104,
+    "chapter": "Structural Organisation in Animals",
+    "caption": "Figure 7.1 Simple epithelium: (a) Squamous (b) Cuboidal (c) Columnar (@) Columnar cells bearing cilia",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p104_Figure_7_1.png"
+  },
+  {
+    "fig_id": "7.2",
+    "label": "Figure_7_2",
+    "page": 105,
+    "chapter": "Structural Organisation in Animals",
+    "caption": "Figure 7.2 Glandular epithelium : (a) Unicellular divided into two categories namely (b) Multicellular exocrine and endocrine glands. Exocrine",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p105_Figure_7_2.png"
+  },
+  {
+    "fig_id": "7.3",
+    "label": "Figure_7_3",
+    "page": 105,
+    "chapter": "Structural Organisation in Animals",
+    "caption": "Figure 7.3 Compound epitl",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p105_Figure_7_3.png"
+  },
+  {
+    "fig_id": "7.4",
+    "label": "Figure_7_4",
+    "page": 106,
+    "chapter": "Structural Organisation in Animals",
+    "caption": "Figure 7.4 Loose connective tissue : (a) Areolar tissue include cartilage, bone, adipose, and blood. In all connective tissues except blood, the cells secrete fibres of structural proteins called collagen or elastin. The fibres provide strength, elasticity and flexibility to the tissue. These cells also secrete modified polysaccharides, which accumulate between cells and fibres and act as matrix (ground substance). Connective tissues are classified into three types: (i) Loose connective tissue, (ii) Dense connective tissue and (iii) Specialised connective tissue.",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p106_Figure_7_4.png"
+  },
+  {
+    "fig_id": "7.5",
+    "label": "Figure_7_5",
+    "page": 106,
+    "chapter": "Structural Organisation in Animals",
+    "caption": "Figure 7.5 Dense connective tissue: bres (mostly collagen) that are oriented differently (a) Dense regular 7.5). This tissue is present in the skin. Cartilage, (b) Dense irregular",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p106_Figure_7_5.png"
+  },
+  {
+    "fig_id": "7.6",
+    "label": "Figure_7_6",
+    "page": 107,
+    "chapter": "Structural Organisation in Animals",
+    "caption": "Figure 7.6 Specialised connective tissues : (a) Cartilage bones and blood are various types of specialised connective tissues.",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p107_Figure_7_6.png"
+  },
+  {
+    "fig_id": "7.7",
+    "label": "Figure_7_7",
+    "page": 108,
+    "chapter": "Structural Organisation in Animals",
+    "caption": "Figure 7.7 Muscle tissue : (a) Skeletal (striated) muscle tissue (b) Smooth muscle tissue (c) Cardiac muscle tissue",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p108_Figure_7_7.png"
+  },
+  {
+    "fig_id": "7.8",
+    "label": "Figure_7_8",
+    "page": 108,
+    "chapter": "Structural Organisation in Animals",
+    "caption": "Figure 7.8). The body a — i i i with Sao = neuroglial cell which constitute the rest of nucleus (esas <= ms 2 ——S— the neural system protect and support D . ? 7 Se — S| neurons. Neuroglia make up more than one- endrite — ieee 5 = = half the volume of neural tissue in our body. : SS ——",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p108_Figure_7_8.png"
+  },
+  {
+    "fig_id": "7.9",
+    "label": "Figure_7_9",
+    "page": 110,
+    "chapter": "Structural Organisation in Animals",
+    "caption": "Figure 7.9 Body of earthworm : (a) dorsal view (b) ventral view (c) lateral view showing mouth opening",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p110_Figure_7_9.png"
+  },
+  {
+    "fig_id": "7.10",
+    "label": "Figure_7_10",
+    "page": 111,
+    "chapter": "Structural Organisation in Animals",
+    "caption": "Figure 7.10 Alimentary canal of earthworm 4*, 5% and 6% segments. They produce blood",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p111_Figure_7_10.png"
+  },
+  {
+    "fig_id": "7.11",
+    "label": "Figure_7_11",
+    "page": 112,
+    "chapter": "Structural Organisation in Animals",
+    "caption": "Figure 7.11 Closed circulatory system",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p112_Figure_7_11.png"
+  },
+  {
+    "fig_id": "7.12",
+    "label": "Figure_7_12",
+    "page": 112,
+    "chapter": "Structural Organisation in Animals",
+    "caption": "Figure 7.12 Nephridial system in earthworm :",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p112_Figure_7_12.png"
+  },
+  {
+    "fig_id": "7.13",
+    "label": "Figure_7_13",
+    "page": 113,
+    "chapter": "Structural Organisation in Animals",
+    "caption": "Figure 7.13 Reproductive system of earthworm Fertilisation and development occur within the cocoons which are deposited in soil. The ova",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p113_Figure_7_13.png"
+  },
+  {
+    "fig_id": "7.14",
+    "label": "Figure_7_14",
+    "page": 114,
+    "chapter": "Structural Organisation in Animals",
+    "caption": "Figure 7.14 External features of cockroach",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p114_Figure_7_14.png"
+  },
+  {
+    "fig_id": "7.15",
+    "label": "Figure_7_15",
+    "page": 115,
+    "chapter": "Structural Organisation in Animals",
+    "caption": "Figure 7.15 Head region of cockroach : (a) parts of head region (b) mouth parts",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p115_Figure_7_15.png"
+  },
+  {
+    "fig_id": "7.16",
+    "label": "Figure_7_16",
+    "page": 116,
+    "chapter": "Structural Organisation in Animals",
+    "caption": "iy Ie Rectu eum Colon igure 7.16 Alimentary canal of cockroach",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p116_Figure_7_16.png"
+  },
+  {
+    "fig_id": "7.17",
+    "label": "Figure_7_17",
+    "page": 116,
+    "chapter": "Structural Organisation in Animals",
+    "caption": "Figure 7.17 Open circulatory system of cockroach",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p116_Figure_7_17.png"
+  },
+  {
+    "fig_id": "7.18",
+    "label": "Figure_7_18",
+    "page": 118,
+    "chapter": "Structural Organisation in Animals",
+    "caption": "Figure 7.18 Reproductive system of cockroach : (a) male (b) female glued to a suitable surface, usually in a crack or crevice of high relative humidity near a food source. On an average, females produce 9-10 oothecae, each containing 14-16 eggs. The development of P. americana",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p118_Figure_7_18.png"
+  },
+  {
+    "fig_id": "7.20",
+    "label": "Figure_7_20",
+    "page": 120,
+    "chapter": "Structural Organisation in Animals",
+    "caption": "Figure 7.20 Diagrammatic representation of internal organs of frog showing complete digestive system that leads to the oesophagus through pharynx. Oesophagus is a short tube that opens into the stomach which in turn continues as the intestine, rectum and finally opens outside by the cloaca. Liver secretes bile that is stored in the gall bladder. Pancreas, a digestive gland produces pancreatic juice containing digestive enzymes. Food is captured by the bilobed tongue. Digestion of food takes place by the action of HCl and gastric juices secreted from the walls of the stomach. Partially digested food called chyme is passed from stomach to the first part of the intestine, the duodenum. The duodenum receives bile from gall bladder and pancreatic juices from the pancreas through a common bile duct. Bile emulsifies fat and pancreatic juices digest carbohydrates and proteins. Final digestion",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p120_Figure_7_20.png"
+  },
+  {
+    "fig_id": "7.21",
+    "label": "Figure_7_21",
+    "page": 122,
+    "chapter": "Structural Organisation in Animals",
+    "caption": "Figure 7.21 Male reproductive system",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p122_Figure_7_21.png"
+  },
+  {
+    "fig_id": "7.22",
+    "label": "Figure_7_22",
+    "page": 122,
+    "chapter": "Structural Organisation in Animals",
+    "caption": "Figure 7.22). near kidneys and there is no functional connection with kidneys. A pair of oviduct arising Figure 7.22 Female reproductive system",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p122_Figure_7_22.png"
+  },
+  {
+    "fig_id": "8.1",
+    "label": "Figure_8_1",
+    "page": 130,
+    "chapter": "Cell: The Unit of Life",
+    "caption": "Figure 8.1 Diagram showing different shapes of could be 3 to 5 um. The largest isolated single cell is the egg of an ostrich. Among multicellular organisms, human red blood cells are about 7.0 uum in diameter. Nerve cells are some of the longest cells. Cells also vary greatly in their shape. They may be disc-like, polygonal, columnar, cuboid, thread like, or even irregular. The shape of",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p130_Figure_8_1.png"
+  },
+  {
+    "fig_id": "8.2",
+    "label": "Figure_8_2",
+    "page": 131,
+    "chapter": "Cell: The Unit of Life",
+    "caption": "Figure 8.2 Diagram showing comparison of No organelles, like the ones in eukaryotes, are eukaryotic cell with other found in prokaryotic cells except for ribosomes.",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p131_Figure_8_2.png"
+  },
+  {
+    "fig_id": "8.3",
+    "label": "Figure_8_3",
+    "page": 133,
+    "chapter": "Cell: The Unit of Life",
+    "caption": "Figure 8.3 Diagram showing : (a) Plant cell (b) Animal cell",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p133_Figure_8_3.png"
+  },
+  {
+    "fig_id": "8.4",
+    "label": "Figure_8_4",
+    "page": 134,
+    "chapter": "Cell: The Unit of Life",
+    "caption": "Figure 8.4 Fluid mosaic model of plasma membrane",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p134_Figure_8_4.png"
+  },
+  {
+    "fig_id": "8.5",
+    "label": "Figure_8_5",
+    "page": 136,
+    "chapter": "Cell: The Unit of Life",
+    "caption": "Figure 8.5 Endoplasmic reticulum",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p136_Figure_8_5.png"
+  },
+  {
+    "fig_id": "8.6",
+    "label": "Figure_8_6",
+    "page": 136,
+    "chapter": "Cell: The Unit of Life",
+    "caption": "Figure 8.6 Golgi apparatus",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p136_Figure_8_6.png"
+  },
+  {
+    "fig_id": "8.7",
+    "label": "Figure_8_7",
+    "page": 138,
+    "chapter": "Cell: The Unit of Life",
+    "caption": "Figure 8.7 Structure of mitochondrion (Longitudinal section) membrane dividing its lumen distinctly into two aqueous compartments, i.e., the outer compartment and the inner compartment. The inner compartment is called the matrix. The outer membrane forms the continuous limiting boundary of the organelle. The inner membrane forms a number of infoldings called the cristae (sing.: crista) towards the matrix (Figure 8.7). The cristae increase the surface area. The two membranes",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p138_Figure_8_7.png"
+  },
+  {
+    "fig_id": "8.8",
+    "label": "Figure_8_8",
+    "page": 139,
+    "chapter": "Cell: The Unit of Life",
+    "caption": "Figure 8.8 Sectional view of chloroplast are also double membrane bound. Of the two, the inner chloroplast membrane is",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p139_Figure_8_8.png"
+  },
+  {
+    "fig_id": "8.9",
+    "label": "Figure_8_9",
+    "page": 140,
+    "chapter": "Cell: The Unit of Life",
+    "caption": "Figure 8.9 Section of cilia/flagella showing different parts : (a) Electron micrograph (b) Diagrammatic representation of internal structure",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p140_Figure_8_9.png"
+  },
+  {
+    "fig_id": "8.10",
+    "label": "Figure_8_10",
+    "page": 141,
+    "chapter": "Cell: The Unit of Life",
+    "caption": "Figure 8.10 Structure of nucleus remains continuous with reticulum and also bears ribosomes on it. At a number of places the nuclear envelope is interrupted by minute pores, which are formed by the fusion of its two membranes. These nuclear pores are the passages through which movement of RNA and protein molecules takes place in both directions between the nucleus and the cytoplasm. Normally, there is only one nucleus per cell, variations in the number of nuclei are also frequently observed. Can you recollect names of organisms that have more than one nucleus per cell? Some mature cells even lack nucleus, e.g., erythrocytes of many mammals and sieve tube cells of vascular plants. Would you consider these cells as ‘living’? The nuclear matrix or the nucleoplasm contains nucleolus and chromatin.",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p141_Figure_8_10.png"
+  },
+  {
+    "fig_id": "8.11",
+    "label": "Figure_8_11",
+    "page": 142,
+    "chapter": "Cell: The Unit of Life",
+    "caption": "Figure 8.11). Based on the position of the centromere, § Bs",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p142_Figure_8_11.png"
+  },
+  {
+    "fig_id": "8.12",
+    "label": "Figure_8_12",
+    "page": 142,
+    "chapter": "Cell: The Unit of Life",
+    "caption": "Figure 8.12 Types of chromosomes based on the position of centromere",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p142_Figure_8_12.png"
+  },
+  {
+    "fig_id": "9.1",
+    "label": "Figure_9_1",
+    "page": 148,
+    "chapter": "Biomolecules",
+    "caption": "Figure 9.1 Diagrammatic representation of small molecular weight organic compounds in living tissues",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p148_Figure_9_1.png"
+  },
+  {
+    "fig_id": "9.2",
+    "label": "Figure_9_2",
+    "page": 150,
+    "chapter": "Biomolecules",
+    "caption": "Figure 9.2.",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p150_Figure_9_2.png"
+  },
+  {
+    "fig_id": "9.3",
+    "label": "Figure_9_3",
+    "page": 153,
+    "chapter": "Biomolecules",
+    "caption": "Figure 9.3 Primary structure of a portion of a hypothetical protein. N and C refer to the two termini of every protein. Single letter codes and three letter abbreviations for amino acids are also indicated. the protein thread are arranged in the form of a helix. In proteins, only right handed helices are observed. Other regions of the protein thread are folded into other forms in what is called the secondary structure. In addition, the long protein chain is also folded upon itself like a hollow wollen ball, giving rise to the tertiary structure (Figure 9.4 a, b). This gives us a 3-dimensional view ofa protein. Tertiary structure is absolutely",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p153_Figure_9_3.png"
+  },
+  {
+    "fig_id": "9.4",
+    "label": "Figure_9_4",
+    "page": 153,
+    "chapter": "Biomolecules",
+    "caption": "Figure 9.4 Cartoon showing : (a) A secondary other in the form of a cube or plate etc.) is structure and (b) A tertiary structure the architecture of a protein otherwise called of proteins the quaternary structure ofa protein. Adult (a) tb) ©",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p153_Figure_9_4.png"
+  },
+  {
+    "fig_id": "9.5",
+    "label": "Figure_9_5",
+    "page": 154,
+    "chapter": "Biomolecules",
+    "caption": "Figure 9.5 Diagram indicating secondary structure of DNA oO I",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p154_Figure_9_5.png"
+  },
+  {
+    "fig_id": "9.6",
+    "label": "Figure_9_6",
+    "page": 159,
+    "chapter": "Biomolecules",
+    "caption": "Figure 9.6 Concept of activation energy the stable substrate and the product. Implicit in this statement is the fact that all other",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p159_Figure_9_6.png"
+  },
+  {
+    "fig_id": "9.7",
+    "label": "Figure_9_7",
+    "page": 160,
+    "chapter": "Biomolecules",
+    "caption": "Figure 9.7 Effect of change in : (a) pH (b) Temperature and (c) Concentration of substrate on enzyme activity",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p160_Figure_9_7.png"
+  },
+  {
+    "fig_id": "10.1",
+    "label": "Figure_10_1",
+    "page": 166,
+    "chapter": "Cell Cycle and Cell Division",
+    "caption": "Figure 10.1 A diagrammatic view of cell cycle that in the 24 hour average duration of cell indleating formation of two cells cycle ofa human cell, cell division proper lasts for only about an hour. The interphase lasts more than 95% of the duration of cell cycle.",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p166_Figure_10_1.png"
+  },
+  {
+    "fig_id": "10.2",
+    "label": "Figure_10_2",
+    "page": 169,
+    "chapter": "Cell Cycle and Cell Division",
+    "caption": "Figure 10.2 c toe : A diagrai",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p169_Figure_10_2.png"
+  },
+  {
+    "fig_id": "10.3",
+    "label": "Figure_10_3",
+    "page": 172,
+    "chapter": "Cell Cycle and Cell Division",
+    "caption": "Figure 10.3 Stages of Meiosis I",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p172_Figure_10_3.png"
+  },
+  {
+    "fig_id": "10.4",
+    "label": "Figure_10_4",
+    "page": 173,
+    "chapter": "Cell Cycle and Cell Division",
+    "caption": "Figure 10.4 Stages of Meiosis II",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p173_Figure_10_4.png"
+  },
+  {
+    "fig_id": "11.1",
+    "label": "Figure_11_1",
+    "page": 180,
+    "chapter": "Transport in Plants",
+    "caption": "Figure 11.1 shows an extrac molecule bound to the transport p the transport protein then rotat« releases the molecule inside the ce",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p180_Figure_11_1.png"
+  },
+  {
+    "fig_id": "11.2",
+    "label": "Figure_11_2",
+    "page": 180,
+    "chapter": "Transport in Plants",
+    "caption": "Figure 11.2 Facilitated diffusion",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p180_Figure_11_2.png"
+  },
+  {
+    "fig_id": "11.3",
+    "label": "Figure_11_3",
+    "page": 183,
+    "chapter": "Transport in Plants",
+    "caption": "Figure 11.3 the chamber that has the higher ¥?",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p183_Figure_11_3.png"
+  },
+  {
+    "fig_id": "11.4",
+    "label": "Figure_11_4",
+    "page": 184,
+    "chapter": "Transport in Plants",
+    "caption": "Figure 11.4 A demonstration of osmosis. A thistle funnel is filled with sucrose solution and kept inverted in a beaker containing water. (a) Water will diffuse across the membrane (as shown by arrows) to raise the level of the solution in the funnel (b) Pressure can be applied as shown to stop the water movement into",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p184_Figure_11_4.png"
+  },
+  {
+    "fig_id": "11.5",
+    "label": "Figure_11_5",
+    "page": 185,
+    "chapter": "Transport in Plants",
+    "caption": "Figure 11.5 Plant cell plasmolysis the cell (or tissue) is placed in a solution that is hypertonic (has more solutes) to the protoplasm. Water moves out; it is first lost from the cytoplasm and then from the vacuole. The water when drawn out of the cell through diffusion into the extracellular (outside cell) fluid causes the protoplast to shrink away from the walls.",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p185_Figure_11_5.png"
+  },
+  {
+    "fig_id": "11.6",
+    "label": "Figure_11_6",
+    "page": 187,
+    "chapter": "Transport in Plants",
+    "caption": "Figure 11.6 Pathway of water movement in",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p187_Figure_11_6.png"
+  },
+  {
+    "fig_id": "11.9",
+    "label": "Figure_11_9",
+    "page": 191,
+    "chapter": "Transport in Plants",
+    "caption": "Figure11.9 Water movement in the leaf. Evaporation from th a pressure gradient between the outside air and the ai",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p191_Figure_11_9.png"
+  },
+  {
+    "fig_id": "11.10",
+    "label": "Figure_11_10",
+    "page": 194,
+    "chapter": "Transport in Plants",
+    "caption": "Figure11.10 Diagrammatic presentation of mechanism of translocatior",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p194_Figure_11_10.png"
+  },
+  {
+    "fig_id": "12.1",
+    "label": "Figure_12_1",
+    "page": 198,
+    "chapter": "Mineral Nutrition",
+    "caption": "Figure 12.1 Diagram of a typical set-up for Most of the minerals present in soil can enter plants nutrient solution culture",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p198_Figure_12_1.png"
+  },
+  {
+    "fig_id": "12.2",
+    "label": "Figure_12_2",
+    "page": 198,
+    "chapter": "Mineral Nutrition",
+    "caption": "Figure 12.2 Hydroponic plant production. duction. Plants are grown in a tube or . trough placed on a slight its do not incline. A pump circulates a ds. nutrient solution from a ae i he elevated end of Xe specific reservoir to t nl I the tube. The solution flows ment. in down the tube and returns to element the reservoir due to gravity. ne other Inset shows a plant whose roots are continuously bathed in aerated nutrient solution.",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p198_Figure_12_2.png"
+  },
+  {
+    "fig_id": "12.3",
+    "label": "Figure_12_3",
+    "page": 204,
+    "chapter": "Mineral Nutrition",
+    "caption": "Figure 12.3 The nitrogen cycle showing it is converted into nitrate by soil relationship between the three bacteria in the following steps: main nitrogen pools — atmospheric soil, and biomass",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p204_Figure_12_3.png"
+  },
+  {
+    "fig_id": "12.4",
+    "label": "Figure_12_4",
+    "page": 206,
+    "chapter": "Mineral Nutrition",
+    "caption": "Figure 12.4 Development of root nodules in soyabean : (a) Rhizobium bacteria contact a susceptible root hair, divide near it, (b) Upon successful infection of the root hair cause it to curl, (c) Infected thread carries the bacteria to the inner cortex. The bacteria get modified into rod-shaped bacteroids and cause inner cortical and pericycle cells to divide. Division and growth of cortical and pericycle cells lead to nodule formation, (d) A mature nodule is complete with vascular tissues continuous with those of",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p206_Figure_12_4.png"
+  },
+  {
+    "fig_id": "12.5",
+    "label": "Figure_12_5",
+    "page": 206,
+    "chapter": "Mineral Nutrition",
+    "caption": "Figure 12.5 Steps of conversion of atmospheric nitrogen to ammonia by nitrogenase enzyme complex found in nitrogen-fixing bacteria",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p206_Figure_12_5.png"
+  },
+  {
+    "fig_id": "13.1",
+    "label": "Figure_13_1",
+    "page": 210,
+    "chapter": "Photosynthesis in Higher Plants",
+    "caption": "Figure 13.1 a, b, c, d). Similarly, a mouse would ( a) soon suffocate in a closed space. He concluded that . . . . . . Figure 13.1 Priestley’s experiment a burning candle or an animal that breathe the air, both somehow, damage the air. But when he placed a mint plant in the same bell jar, he found that the mouse stayed alive and the candle continued to burn. Priestley hypothesised as follows: Plants restore to the air whatever breathing animals and burning candles remove.",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p210_Figure_13_1.png"
+  },
+  {
+    "fig_id": "13.2",
+    "label": "Figure_13_2",
+    "page": 212,
+    "chapter": "Photosynthesis in Higher Plants",
+    "caption": "Figure 13.2 Diagrammatic representation of an electron micrograph of a section of chloroplast",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p212_Figure_13_2.png"
+  },
+  {
+    "fig_id": "13.3",
+    "label": "Figure_13_3",
+    "page": 213,
+    "chapter": "Photosynthesis in Higher Plants",
+    "caption": "Figure 13.3c Graph showing action spectrum of photosynthesis superimposed on absorption spectrum of chlorophyll a",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p213_Figure_13_3.png"
+  },
+  {
+    "fig_id": "13.4",
+    "label": "Figure_13_4",
+    "page": 214,
+    "chapter": "Photosynthesis in Higher Plants",
+    "caption": "Figure 13.4 The light harvesting cor",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p214_Figure_13_4.png"
+  },
+  {
+    "fig_id": "13.5",
+    "label": "Figure_13_5",
+    "page": 215,
+    "chapter": "Photosynthesis in Higher Plants",
+    "caption": "Figure 13.5 Z scheme of light reaction uphill to the accepter, down transport chain to PS I, excitation of electrons, transfer to another accepter, and finally down hill to NADP* causing it to be reduced to NADPH + Ht is called the Z scheme, due to its characterstic shape (Figure 13.5). This shape is formed when all",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p215_Figure_13_5.png"
+  },
+  {
+    "fig_id": "13.6",
+    "label": "Figure_13_6",
+    "page": 216,
+    "chapter": "Photosynthesis in Higher Plants",
+    "caption": "Figure 13.6). A possible location Figure 13.6 Cyclic photophosphorylation where this could be happening is in",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p216_Figure_13_6.png"
+  },
+  {
+    "fig_id": "13.7",
+    "label": "Figure_13_7",
+    "page": 217,
+    "chapter": "Photosynthesis in Higher Plants",
+    "caption": "Figure 13.7 ATP synthesis through chemiosmosis (b) As electrons move through the photosystems, protons are transported across the membrane. This happens because the primary accepter of electron which is located towards the outer side of the membrane transfers its electron not to an electron carrier but to an H carrier. Hence, this molecule removes a proton from the stroma while transporting an electron, When this molecule passes on its electron to the electron carrier on the inner side of the membrane,",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p217_Figure_13_7.png"
+  },
+  {
+    "fig_id": "13.8",
+    "label": "Figure_13_8",
+    "page": 220,
+    "chapter": "Photosynthesis in Higher Plants",
+    "caption": "Figure 13.8 The Calvin cycle proceeds in three stages : (1) carboxylation, during which CO, combines with ribulose-1,5-bisphosphate; (2) reduction, during which carbohydrate is formed at the expense of the photochemically made ATP and NADPH; and (3) regeneration during which the CO, acceptor ribulose- 1,5-bisphosphate is formed again so that the cycle continues",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p220_Figure_13_8.png"
+  },
+  {
+    "fig_id": "13.9",
+    "label": "Figure_13_9",
+    "page": 222,
+    "chapter": "Photosynthesis in Higher Plants",
+    "caption": "Figure 13.9 Diagrammatic representation of the Hatch and Slack Pathway",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p222_Figure_13_9.png"
+  },
+  {
+    "fig_id": "13.10",
+    "label": "Figure_13_10",
+    "page": 225,
+    "chapter": "Photosynthesis in Higher Plants",
+    "caption": "Figure 13.10 Graph of light intensity on the xcept for plants in shade or in dense forests, light rate of photosynthesis",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p225_Figure_13_10.png"
+  },
+  {
+    "fig_id": "14.1",
+    "label": "Figure_14_1",
+    "page": 232,
+    "chapter": "Respiration in Plants",
+    "caption": "Figure 14.1. In glycolysis, a chain of ten Fructosel, oe reactions, under the control of different enzymes, takes place to produce pyruvate from glucose. Tinka a Tiitese pessoa While studying the steps of glycolysis, please note _ (glyceraldehyde-3-phosphate) — — Pihydroxy acetone the steps at which utilisation (ATP energy) or BO) Napt Phowphate) synthesis of ATP or (in this case of) NADH + H* je NADH take place. 2 x Triose bisphosphate ATP is utilised at two steps: first in the {1,3 bisphosphoglyceric acid) conversion of glucose into glucose 6-phosphate ADP oD) and second in the conversion of fructose ATP | 6-phosphate to fructose 1, 6-diphosphate. 2 x Triose phosphate The fructose 1, 6-diphosphate is split | (-phosphoglyceric acid) into dihydroxyacetone phosphate and a",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p232_Figure_14_1.png"
+  },
+  {
+    "fig_id": "14.2",
+    "label": "Figure_14_2",
+    "page": 233,
+    "chapter": "Respiration in Plants",
+    "caption": "Figure 14.2 Majo respi",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p233_Figure_14_2.png"
+  },
+  {
+    "fig_id": "14.3",
+    "label": "Figure_14_3",
+    "page": 235,
+    "chapter": "Respiration in Plants",
+    "caption": "Figure 14.3. The Citric acid cycle",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p235_Figure_14_3.png"
+  },
+  {
+    "fig_id": "14.4",
+    "label": "Figure_14_4",
+    "page": 236,
+    "chapter": "Respiration in Plants",
+    "caption": "Figure 14.4 Electron Transport System (ETS) whole process by removing hydrogen from the system. Oxygen acts as the final hydrogen acceptor. Unlike photophosphorylation where it is the light energy that is utilised for the production of proton gradient required for phosphorylation, in respiration it is the energy of oxidation-reduction utilised for the same process. It is for this reason that",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p236_Figure_14_4.png"
+  },
+  {
+    "fig_id": "14.5",
+    "label": "Figure_14_5",
+    "page": 237,
+    "chapter": "Respiration in Plants",
+    "caption": "Figure 14.5 Diagramatic presentation of AT] synthesis in mitochondria",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p237_Figure_14_5.png"
+  },
+  {
+    "fig_id": "14.6",
+    "label": "Figure_14_6",
+    "page": 239,
+    "chapter": "Respiration in Plants",
+    "caption": "Figure 14.6 Interrelationship among metabolic pathways showing respiration mediated breakdown of different organic molecules to CO, and H,0 as an amphibolic pathway rather than as a catabolic one.",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p239_Figure_14_6.png"
+  },
+  {
+    "fig_id": "15.1",
+    "label": "Figure_15_1",
+    "page": 243,
+    "chapter": "Plant Growth and Development",
+    "caption": "Figure 15.1 Germination and seedling development in bean",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p243_Figure_15_1.png"
+  },
+  {
+    "fig_id": "15.2",
+    "label": "Figure_15_2",
+    "page": 244,
+    "chapter": "Plant Growth and Development",
+    "caption": "Figure 15.2). Ne",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p244_Figure_15_2.png"
+  },
+  {
+    "fig_id": "15.3",
+    "label": "Figure_15_3",
+    "page": 244,
+    "chapter": "Plant Growth and Development",
+    "caption": "Figure 15.3). Let us a E understand this by looking at the root tips. The ° RS D constantly dividing cells, both at the root apex SQ c and the shoot apex, represent the meristematic SO, oS phase of growth. The cells in this region are rich SON, B in protoplasm, possess large conspicuous SN A nuclei. Their cell walls are primary in nature, z thin and cellulosic with abundant Figure 15.3 Detection of zones of elongation by plasmodesmatal connections. The cells the Para tine feenniaue. Zones : . . , B, C, D immediately behind the proximal (just next, away from the tip) to",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p244_Figure_15_3.png"
+  },
+  {
+    "fig_id": "15.4",
+    "label": "Figure_15_4",
+    "page": 245,
+    "chapter": "Plant Growth and Development",
+    "caption": "Figure15.4 Diagrammatic representation of : (a) Arithmetic (b) Geometric growth and (c) Stages during embryo development showing geometric and arithematic phases",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p245_Figure_15_4.png"
+  },
+  {
+    "fig_id": "15.5",
+    "label": "Figure_15_5",
+    "page": 246,
+    "chapter": "Plant Growth and Development",
+    "caption": "Figure 15.5. On plotting the length of the $3 organ against time, a linear curve is obtained. S ia Mathematically, it is expressed as Cs 7 L,=L,+rt x 5 L, = length at time ‘t’ L, = length at time ‘zero’ r = growth rate / elongation per unit time. | Let us now see what happens in geometrical growth. In most systems, the initial growth is slow > (lag phase), and it increases rapidly thereafter - at Time an exponential rate (log or exponential phase). Here, Figure 15.5 Constant linear growth, a plot both the progeny cells following mitotic cell division of length L against time t",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p246_Figure_15_5.png"
+  },
+  {
+    "fig_id": "15.6",
+    "label": "Figure_15_6",
+    "page": 246,
+    "chapter": "Plant Growth and Development",
+    "caption": "Figure 15.6 An idealised sigmoid growth measure of the ability of the plant to produce new curve typical of cells in culture, plant material, referred to as efficiency index. Hence, and many higher plants and the final size of W, depends on the initial size, W,. plant organs",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p246_Figure_15_6.png"
+  },
+  {
+    "fig_id": "15.7",
+    "label": "Figure_15_7",
+    "page": 247,
+    "chapter": "Plant Growth and Development",
+    "caption": "Figure15.7 Diagrammatic comparison of absolute and relative growth rates. Both leaves A and B have increased their area by 5 cm? in a given time to produce A', B! leaves.",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p247_Figure_15_7.png"
+  },
+  {
+    "fig_id": "15.8",
+    "label": "Figure_15_8",
+    "page": 249,
+    "chapter": "Plant Growth and Development",
+    "caption": "Figure 15.8 Sequence of the developmental process in a plant cell",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p249_Figure_15_8.png"
+  },
+  {
+    "fig_id": "15.9",
+    "label": "Figure_15_9",
+    "page": 249,
+    "chapter": "Plant Growth and Development",
+    "caption": "Figure 15.9 Heterophylly in (a) larkspur and (b) buttercup",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p249_Figure_15_9.png"
+  },
+  {
+    "fig_id": "15.10",
+    "label": "Figure_15_10",
+    "page": 250,
+    "chapter": "Plant Growth and Development",
+    "caption": "Figure 15.10 Experiment used to demonstrate by that tip of",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p250_Figure_15_10.png"
+  },
+  {
+    "fig_id": "15.12",
+    "label": "Figure_15_12",
+    "page": 254,
+    "chapter": "Plant Growth and Development",
+    "caption": "Figure 15.12 Photoperiodism : Long day, short day and day neutral plants",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p254_Figure_15_12.png"
+  },
+  {
+    "fig_id": "16.1",
+    "label": "Figure_16_1",
+    "page": 261,
+    "chapter": "Digestion and Absorption",
+    "caption": "Figure 16.1 The human digestive system temporary milk or deciduous teeth replaced by a set of permanent or adult teeth. This type of dentition is called diphyodont. An adult human has 32 permanent teeth which are of four different types (Heterodont dentition), namely, incisors (I), canine (C), premolars (PM) and molars (M). Arrangement of teeth in each half of the upper and lower jaw in the order I, C, PM, M is represented by a dental formula which in human 2123 's 9193 in the mastication of food.",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p261_Figure_16_1.png"
+  },
+  {
+    "fig_id": "16.2",
+    "label": "Figure_16_2",
+    "page": 262,
+    "chapter": "Digestion and Absorption",
+    "caption": "Figure 16.2 Arrangement of different types of . . . . . teeth in the jaws on one side and a pyloric portion which opens into the first the sockets on the other side part of small intestine (Figure 16.3). Small",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p262_Figure_16_2.png"
+  },
+  {
+    "fig_id": "16.3",
+    "label": "Figure_16_3",
+    "page": 262,
+    "chapter": "Digestion and Absorption",
+    "caption": "Figure 16.3 Anatomical regions of human through the anus. stomach The wall of alimentary canal from oesophagus to rectum possesses four layers (Figure 16.4) namely serosa, muscularis, sub-mucosa and mucosa. Serosa is the outermost layer and is made up of a thin mesothelium (epithelium of visceral organs) with some connective tissues. Muscularis is formed by smooth muscles usually arranged into an inner circular and an outer longitudinal layer. An oblique muscle layer may be present in some regions. The sub-",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p262_Figure_16_3.png"
+  },
+  {
+    "fig_id": "16.4",
+    "label": "Figure_16_4",
+    "page": 263,
+    "chapter": "Digestion and Absorption",
+    "caption": "Figure 16.4 Diagrammatic representation of transverse section of gut tissues containing nerves, blood and lymph vessels. In duodenum, glands are also present in sub-mucosa. The innermost layer lining the lumen of the alimentary canal is the mucosa. This layer forms irregular folds (rugae) in the stomach and small finger-like foldings called villi in the small intestine (Figure 16.5). The cells lining the villi produce numerous microscopic projections called microvilli giving a brush border appearance. These modifications increase the surface area enormously. Villi are supplied with a network of capillaries and a large lymph vessel",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p263_Figure_16_4.png"
+  },
+  {
+    "fig_id": "16.5",
+    "label": "Figure_16_5",
+    "page": 263,
+    "chapter": "Digestion and Absorption",
+    "caption": "Figure 16.5 A section of small intestinal Jands) and crypts in bet the bases of villi i mucosa showing villi glands) and crypts in between the bases of villi in the intestine (crypts of Lieberkuhn). All",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p263_Figure_16_5.png"
+  },
+  {
+    "fig_id": "16.6",
+    "label": "Figure_16_6",
+    "page": 264,
+    "chapter": "Digestion and Absorption",
+    "caption": "f <= Pancreatic im <S y duct Hepato-pancreatic duct -6 The duct systems of liver, gall bladder and pancreas",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p264_Figure_16_6.png"
+  },
+  {
+    "fig_id": "17.1",
+    "label": "Figure_17_1",
+    "page": 272,
+    "chapter": "Breathing and Exchange of Gases",
+    "caption": "Figure 17.1 Diagrammatic view of human respiratory system (Sectional view of the left Ing is also shown)",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p272_Figure_17_1.png"
+  },
+  {
+    "fig_id": "17.2",
+    "label": "Figure_17_2",
+    "page": 274,
+    "chapter": "Breathing and Exchange of Gases",
+    "caption": "Figure 17.2 Mechanism of breathing showing : Inspiratory Reserve Volume (IRV): (a) inspiration (b) expiration",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p274_Figure_17_2.png"
+  },
+  {
+    "fig_id": "17.3",
+    "label": "Figure_17_3",
+    "page": 276,
+    "chapter": "Breathing and Exchange of Gases",
+    "caption": "Figure 17.3 Diagrammatic representation of exchange of gases at the alveolus and the body tissues with blood and transport of oxygen and carbon dioxide a gradient is present for CO, in the opposite direction, i-e., from tissues to blood and blood to alveoli. As the solubility of CO, is 20-25 times higher than that of O,, the Air & f amount of CO, that can diffuse through the \\ X hy diffusion membrane per unit difference in ajvegtar wall \\\\ Basement partial pressure is much higher compared _(one-celled thick) \\ substance to that of O,. The diffusion membrane is made up of three major layers (Figure 17.4) namely, the thin squamous epithelium of alveoli, the endothelium of alveolar capillaries",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p276_Figure_17_3.png"
+  },
+  {
+    "fig_id": "17.4",
+    "label": "Figure_17_4",
+    "page": 276,
+    "chapter": "Breathing and Exchange of Gases",
+    "caption": "Figure 17.4) YR i veolan cai } of namely, the thin squamous epithelium of SX J Hol alveoli, the endothelium of alveolar capillaries YOR We and the basement substance in between Blood SOSH blood capillal them",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p276_Figure_17_4.png"
+  },
+  {
+    "fig_id": "17.5",
+    "label": "Figure_17_5",
+    "page": 277,
+    "chapter": "Breathing and Exchange of Gases",
+    "caption": "Figure 17.5 Oxygen dissociation curve O, to the tissues under normal physiological conditions.",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p277_Figure_17_5.png"
+  },
+  {
+    "fig_id": "18.1",
+    "label": "Figure_18_1",
+    "page": 282,
+    "chapter": "Body Fluids and Circulation",
+    "caption": "Figure 18.1 Diagrammatic representation of formed elements in blood",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p282_Figure_18_1.png"
+  },
+  {
+    "fig_id": "18.2",
+    "label": "Figure_18_2",
+    "page": 286,
+    "chapter": "Body Fluids and Circulation",
+    "caption": "Figure 18.2 Section of a human heart",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p286_Figure_18_2.png"
+  },
+  {
+    "fig_id": "18.3",
+    "label": "Figure_18_3",
+    "page": 289,
+    "chapter": "Body Fluids and Circulation",
+    "caption": "Figure 18.3 Diagrammatic presentation of a standard ECG",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p289_Figure_18_3.png"
+  },
+  {
+    "fig_id": "18.4",
+    "label": "Figure_18_4",
+    "page": 290,
+    "chapter": "Body Fluids and Circulation",
+    "caption": "Figure 18.4 Schematic plan of blood circulation in human",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p290_Figure_18_4.png"
+  },
+  {
+    "fig_id": "19.1",
+    "label": "Figure_19_1",
+    "page": 294,
+    "chapter": "Excretory Products and their Elimination",
+    "caption": "Figure 19.1 Human Urinary system",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p294_Figure_19_1.png"
+  },
+  {
+    "fig_id": "19.2",
+    "label": "Figure_19_2",
+    "page": 295,
+    "chapter": "Excretory Products and their Elimination",
+    "caption": "Figure 19.2 Longitudinal section (Diagrammatic) called the malpighian body or renal",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p295_Figure_19_2.png"
+  },
+  {
+    "fig_id": "19.3",
+    "label": "Figure_19_3",
+    "page": 295,
+    "chapter": "Excretory Products and their Elimination",
+    "caption": "Figure 19.3 A diagrammatic representation of a nephron showing blood vessels, duct and tubule",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p295_Figure_19_3.png"
+  },
+  {
+    "fig_id": "19.4",
+    "label": "Figure_19_4",
+    "page": 296,
+    "chapter": "Excretory Products and their Elimination",
+    "caption": "Figure 19.4 Malpighian body (renal corpuscle) very long and runs deep into the medulla. These nephrons are called juxta medullary nephrons.",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p296_Figure_19_4.png"
+  },
+  {
+    "fig_id": "19.5",
+    "label": "Figure_19_5",
+    "page": 298,
+    "chapter": "Excretory Products and their Elimination",
+    "caption": "| Urea <—_ H,O medulla SS 19.5 Reabsorption and secretion of major substances at different pa the nephron (Arrows indicate direction of movement of materials",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p298_Figure_19_5.png"
+  },
+  {
+    "fig_id": "19.6",
+    "label": "Figure_19_6",
+    "page": 299,
+    "chapter": "Excretory Products and their Elimination",
+    "caption": "Figure 19.6 Diagrammatic representation of a nephron and vasa recta showing counter current mechanisms",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p299_Figure_19_6.png"
+  },
+  {
+    "fig_id": "20.1",
+    "label": "Figure_20_1",
+    "page": 307,
+    "chapter": "Locomotion and Movement",
+    "caption": "Figure 20.1 Diagrammatic cross sectional view of a muscle showing muscle bundles and muscle fibres muscle fibre is lined by the plasma membrane called sarcolemma enclosing the sarcoplasm. Muscle fibre is a syncitium as the sarcoplasm contains many nuclei. The endoplasmic reticulum, i.e., sarcoplasmic reticulum of the muscle fibres is the store house of calcium ions. A characteristic feature of the muscle fibre is the presence of a large number of parallelly arranged filaments in the sarcoplasm called myofilaments or myofibrils. Each myofibril has alternate dark and light bands on it. A detailed study of",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p307_Figure_20_1.png"
+  },
+  {
+    "fig_id": "20.2",
+    "label": "Figure_20_2",
+    "page": 308,
+    "chapter": "Locomotion and Movement",
+    "caption": "Figure 20.2 Diagrammatic representation of (a) anatomy of a muscle fibre showing",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p308_Figure_20_2.png"
+  },
+  {
+    "fig_id": "20.3",
+    "label": "Figure_20_3",
+    "page": 309,
+    "chapter": "Locomotion and Movement",
+    "caption": "Figure 20.3 (a) An actin (thin) filament (b) Myosin monomer (Meromyosin)",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p309_Figure_20_3.png"
+  },
+  {
+    "fig_id": "20.4",
+    "label": "Figure_20_4",
+    "page": 310,
+    "chapter": "Locomotion and Movement",
+    "caption": "Figure 20.4 Stages in cross bridge formation, rotation of head and breaking of cross bridge pulls the attached actin filaments towards the centre of ‘A’ band. The ‘Z line attached to these actins are also pulled inwards thereby causing a shortening of the sarcomere, i.e., contraction. It is clear from the above steps, that during shortening of the muscle, i.e., contraction, the ‘T’ bands get reduced, whereas the ‘A’ bands retain the length (Figure 20.5). The myosin, releasing the ADP and P, goes back to its relaxed state. A new ATP binds and the cross-bridge is broken (Figure 20.4). The ATP is again hydrolysed by the myosin head and the cycle of cross bridge formation",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p310_Figure_20_4.png"
+  },
+  {
+    "fig_id": "20.5",
+    "label": "Figure_20_5",
+    "page": 311,
+    "chapter": "Locomotion and Movement",
+    "caption": "Figure 20.5 Sliding-filament theory of muscle contraction (movement of filaments and the relative size of the I band and H zones) and breakage is repeated causing further sliding. The process continues till the Ca** ions are pumped back to the sarcoplasmic cisternae resulting in the masking of actin filaments. This causes the return of ‘Z’ lines back to their original position, i.e., relaxation. The reaction time of",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p311_Figure_20_5.png"
+  },
+  {
+    "fig_id": "20.6",
+    "label": "Figure_20_6",
+    "page": 312,
+    "chapter": "Locomotion and Movement",
+    "caption": "Figure 20.6 Diagrammatic view of human skull cranial and facial, that totals to 22 bones. Cranial bones are 8 in number. They form the hard protective outer covering, cranium for the brain. The facial region is made up of 14 skeletal elements which form the front part of the skull. A single U-shaped bone called hyoid is present at the base of the buccal cavity and it is also included in the skull. Each middle ear contains three tiny bones - Malleus, Incus and Stapes, collectively called Ear Ossicles. The skull region articulates with the superior region of the",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p312_Figure_20_6.png"
+  },
+  {
+    "fig_id": "20.8",
+    "label": "Figure_20_8",
+    "page": 313,
+    "chapter": "Locomotion and Movement",
+    "caption": "Figure 20.8 Ribs and rib cage",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p313_Figure_20_8.png"
+  },
+  {
+    "fig_id": "20.10",
+    "label": "Figure_20_10",
+    "page": 314,
+    "chapter": "Locomotion and Movement",
+    "caption": "Figure 20.10). Each coxal bone is formed by the fusion of three bones - ilium, ischium and pubis. At the point of fusion of the above bones A Patella",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p314_Figure_20_10.png"
+  },
+  {
+    "fig_id": "20.9",
+    "label": "Figure_20_9",
+    "page": 314,
+    "chapter": "Locomotion and Movement",
+    "caption": "Figure 20.9). Scapula is a large Lake J Carpals triangular flat bone situated in the dorsal part oO | i | Metacarpe of the thorax between the second and the {/ rN . : W/H/0| ) | Phalanges seventh ribs. The dorsal, flat, triangular body of of scapula has a slightly elevated ridge called Figure 20.9 Right pectoral girdl the spine which projects as a flat, expanded arm. (frontal view)",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p314_Figure_20_9.png"
+  },
+  {
+    "fig_id": "21.1",
+    "label": "Figure_21_1",
+    "page": 320,
+    "chapter": "Neural Control and Coordination",
+    "caption": "Figure 21.1 Structure of a neuron Neurons are excitable cells because their membranes are in a polarised state. Do you know why the membrane ofa neuron is polarised? Different types of ion channels are present on the neural membrane. These ion channels are selectively permeable to different ions. When a neuron is not conducting any impulse, i.e., resting, the axonal membrane is comparatively more permeable to potassium ions (K*) and nearly impermeable to sodium ions (Na*). Similarly,",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p320_Figure_21_1.png"
+  },
+  {
+    "fig_id": "21.2",
+    "label": "Figure_21_2",
+    "page": 321,
+    "chapter": "Neural Control and Coordination",
+    "caption": "Figure 21.2 Diagrammatic representation of impulse conduction through : (at points A and B)",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p321_Figure_21_2.png"
+  },
+  {
+    "fig_id": "21.3",
+    "label": "Figure_21_3",
+    "page": 322,
+    "chapter": "Neural Control and Coordination",
+    "caption": "Figure 21.3 Diagram showing axon terminal and synapse",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p322_Figure_21_3.png"
+  },
+  {
+    "fig_id": "21.4",
+    "label": "Figure_21_4",
+    "page": 323,
+    "chapter": "Neural Control and Coordination",
+    "caption": "Figure 21.4 Diagram showing sagital section of the human brain",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p323_Figure_21_4.png"
+  },
+  {
+    "fig_id": "21.5",
+    "label": "Figure_21_5",
+    "page": 325,
+    "chapter": "Neural Control and Coordination",
+    "caption": "Figure 21.5 Diagrammatic presentation of reflex action (showing knee jerk reflex)",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p325_Figure_21_5.png"
+  },
+  {
+    "fig_id": "21.6",
+    "label": "Figure_21_6",
+    "page": 326,
+    "chapter": "Neural Control and Coordination",
+    "caption": "Figure 21.6 Diagram showing parts of an eye",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p326_Figure_21_6.png"
+  },
+  {
+    "fig_id": "21.7",
+    "label": "Figure_21_7",
+    "page": 328,
+    "chapter": "Neural Control and Coordination",
+    "caption": "Figure 21.7 Diagrammatic view of ear outer ear consists of the pinna and external auditory meatus (canal). The pinna collects the vibrations in the air which produce sound. The external auditory meatus leads inwards and extends up to the tympanic membrane (ihe ear drum). There are very fine hairs and wax-secreting sebaceous glands in the skin of the pinna and the meatus. The tympanic membrane is composed of connective tissues covered with skin outside and with mucus membrane inside. The middle ear contains three ossicles called malleus, incus and stapes which are attached to one another ina chain-like fashion.",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p328_Figure_21_7.png"
+  },
+  {
+    "fig_id": "21.8",
+    "label": "Figure_21_8",
+    "page": 329,
+    "chapter": "Neural Control and Coordination",
+    "caption": "Figure 21.8 Diagrammatic representation of the sectional view of cochlea",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p329_Figure_21_8.png"
+  },
+  {
+    "fig_id": "22.2",
+    "label": "Figure_22_2",
+    "page": 335,
+    "chapter": "Chemical Coordination and Integration",
+    "caption": "Figure 22.2 Diagrammatic representation of nervosa) also known as posterior pituitary, pituitary and its relationship with stores and releases two hormones called hypothalamus oxytocin and vasopressin, which are actually synthesised by the hypothalamus and are transported axonally to neurohypophysis.",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p335_Figure_22_2.png"
+  },
+  {
+    "fig_id": "22.3",
+    "label": "Figure_22_3",
+    "page": 336,
+    "chapter": "Chemical Coordination and Integration",
+    "caption": "Figure 22.3). Both (a)",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p336_Figure_22_3.png"
+  },
+  {
+    "fig_id": "22.4",
+    "label": "Figure_22_4",
+    "page": 338,
+    "chapter": "Chemical Coordination and Integration",
+    "caption": "Figure 22.4 Diagrammatic representation of : (a) Adrenal gland on kidney (b) Section showing two parts of adrenal gland",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p338_Figure_22_4.png"
+  },
+  {
+    "fig_id": "22.5",
+    "label": "Figure_22_5",
+    "page": 342,
+    "chapter": "Chemical Coordination and Integration",
+    "caption": "Figure 22.5 Diagramatic representation of the mechanism of hormone action : (a) Protein hormone (b) Steroid hormone",
+    "image_path": "backend/mm_rag/outputs/ncert_figures_v6/p342_Figure_22_5.png"
+  }
+]

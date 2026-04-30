@@ -1,0 +1,402 @@
+[
+  {
+    "fig_id": "1.1",
+    "label": "Figure_1_1",
+    "page": 7,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.1: Effect of pressure on the solubility of a gas. The concluded independently that th« concentration of dissolved gas is proportional to the solubility of a gas in a liquic pressure on the gas above the solution. solution is a function of partia pressure of the gas. If we use the mole fraction of a gas ir",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p007_Figure_1_1.png"
+  },
+  {
+    "fig_id": "1.3",
+    "label": "Figure_1_3",
+    "page": 10,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.3: The plot of vapour pressure and mole is Po’, assuming that component 1 is fraction of an ideal solution at constant . . 0 . volatile than component 2, i.e., p, < temperature. The dashed lines I and II ~t represent the partial pressure of the The composition of vapour phas",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p010_Figure_1_3.png"
+  },
+  {
+    "fig_id": "1.4",
+    "label": "Figure_1_4",
+    "page": 12,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.4.(b)], the vay Pure Solvent 1 mol of solvent pressure of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p012_Figure_1_4.png"
+  },
+  {
+    "fig_id": "1.5",
+    "label": "Figure_1_5",
+    "page": 13,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.5 4 3 If a solution obeys 2 Prem 0 Raoult’s law for all 5 and Pp, = X% P, (1.20) concentrations, its 3 The proportionality constant is equal tooled vary linearly o to the vapour pressure of pure solvent, Pp : from zero to the - A plot between the vapour pressure and vapour pressure of O Mole fraction of solvent ! the mole fraction of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p013_Figure_1_5.png"
+  },
+  {
+    "fig_id": "1.7",
+    "label": "Figure_1_7",
+    "page": 17,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.7: The vapour pressure Curve Sor solutions the elevation of boiling point (AT,) is solution lies below the curve for pure . . ~b water. The diagram shows that AT, directly proportional to the molal concentration of denotes the elevation of boiling the solute in a solution. Thus",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p017_Figure_1_7.png"
+  },
+  {
+    "fig_id": "1.8",
+    "label": "Figure_1_8",
+    "page": 18,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.8: Diagram showing AT,, depression ° ; ; | of the freezing point of a solvent in AT, = T; —T; is known as depression in a solution. freezing point. Similar to elevation of boiling point, depression of freezing point (AT)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p018_Figure_1_8.png"
+  },
+  {
+    "fig_id": "1.9",
+    "label": "Figure_1_9",
+    "page": 20,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.9 : Level of solution be continuous sheets or rises in the thistle films, yet they contain a funnel due to Semipermeable Network of submicroscopic osmosis of solvent. membrane holes or pores. Small solvent",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p020_Figure_1_9.png"
+  },
+  {
+    "fig_id": "1.10",
+    "label": "Figure_1_10",
+    "page": 21,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.10: The EXCESS Pressure equal to te Here IT is the osmotic pressure and R is tl osmotic pressure must be applied on the solution side to prevent osmosis. gas constant.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p021_Figure_1_10.png"
+  },
+  {
+    "fig_id": "1.11",
+    "label": "Figure_1_11",
+    "page": 23,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.11: Reverse osmosis occurs when a in sea water. These days many countries ui pressure larger than the osmotic desalination plants to meet their potable wat pressure is applied to the solution. requirements. Intext Questions 1.9 Vapour pressure of pure water at 298 K is 23.8 mm Hg. 50 g of urea (NH,CONH,) is dissolved in 850 g of water. Calculate the vapour pressure of water for this solution and its relative lowering. 1.10 Boiling point of water at 750 mm Hg is 99.63°C. How much sucrose is to be added to 500 g of water such that it boils at 100°C. 1.11 Calculate the mass of ascorbic acid (Vitamin C, C,H,O,) to be dissolved in a= ee tee + toe 8 es wl",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p023_Figure_1_11.png"
+  },
+  {
+    "fig_id": "2.1",
+    "label": "Figure_2_1",
+    "page": 32,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.1: Daniell cell having electrodes of zinc and > . copper dipping in the solutions of their quite pmportaat aud we shall study son respective salts. their salient features in the following pi Ewa< 1.1V Eoy= 1.1V (a) (b) — — anode current |cathode 1-0 Zn (sar Cu Zn cr Cu -ve ]] bridge | 4ve 1 i H | i | When E,,, = 1.1 WSL ob pes U U U U electrons «",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p032_Figure_2_1.png"
+  },
+  {
+    "fig_id": "2.2",
+    "label": "Figure_2_2",
+    "page": 32,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.2 | | (ii) Zine is deposited Functioning of Daniell | | at the zinc cell when external | electrode and voltage E,., opposing the ~ \" copper dissolves at",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p032_Figure_2_2.png"
+  },
+  {
+    "fig_id": "2.3",
+    "label": "Figure_2_3",
+    "page": 34,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.3: Standard Hydrogen Electrode (SHE). solution is one molar. Chemistry pSdes",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p034_Figure_2_3.png"
+  },
+  {
+    "fig_id": "2.4",
+    "label": "Figure_2_4",
+    "page": 43,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.4 electrodes",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p043_Figure_2_4.png"
+  },
+  {
+    "fig_id": "2.5",
+    "label": "Figure_2_5",
+    "page": 44,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.5. * Detector It consists of two resistances R, and R,, a variable resistance R, and the conductivity cell Pe having the unknown resistance R,. The Wheatstone bridge is fed by an oscillator O (a P - source of a.c. power in the audio frequency range 4 . 550 to 5000 cycles per second). P is a suitable detector (a headphone or other electronic device) and",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p044_Figure_2_5.png"
+  },
+  {
+    "fig_id": "2.6",
+    "label": "Figure_2_6",
+    "page": 47,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.6) fo solutions. strong and weak electrolytes.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p047_Figure_2_6.png"
+  },
+  {
+    "fig_id": "2.7",
+    "label": "Figure_2_7",
+    "page": 48,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.7: Variation of Am against c¥2.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p048_Figure_2_7.png"
+  },
+  {
+    "fig_id": "2.8",
+    "label": "Figure_2_8",
+    "page": 54,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.8: A commercial dry cell cathode. consists of a graphite electrode reactions for",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p054_Figure_2_8.png"
+  },
+  {
+    "fig_id": "2.10",
+    "label": "Figure_2_10",
+    "page": 55,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.10: The Lead storage battery. 55 Electrochemistry",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p055_Figure_2_10.png"
+  },
+  {
+    "fig_id": "2.9",
+    "label": "Figure_2_9",
+    "page": 55,
+    "chapter": "Chapter 2",
+    "caption": "concentration can change during its life Z| | y time. Gasket Cell can Separator Cathode",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p055_Figure_2_9.png"
+  },
+  {
+    "fig_id": "2.11",
+    "label": "Figure_2_11",
+    "page": 56,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.11) which has longer life than the lead storage cell but more expensive to manufacture. We shall not go into details of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p056_Figure_2_11.png"
+  },
+  {
+    "fig_id": "2.12",
+    "label": "Figure_2_12",
+    "page": 56,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.12: Fuel cell using H, and O, produces electricity. reactions. Th 8 electrode reactions are given below: Cathode: O,(g) + 2H,O(1) + 4e—-> 40H (aq)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p056_Figure_2_12.png"
+  },
+  {
+    "fig_id": "2.13",
+    "label": "Figure_2_13",
+    "page": 57,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.13: Corrosion of iron in atmosphere behaves as anode and we can writ the reaction Anode: 2 Fe (s) —> 2 Fe\" + 4 Ener = - 0.44 V Electrons released at anodic spot move through the metal and gc",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p057_Figure_2_13.png"
+  },
+  {
+    "fig_id": "3.1",
+    "label": "Figure_3_1",
+    "page": 63,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.1: Instantaneous and average rate of a reaction Units of rate of a reaction From equations (3.1) and (3.2), it is clear that units of rate are concentration time’. For example, if concentration is in mol L! and",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p063_Figure_3_1.png"
+  },
+  {
+    "fig_id": "3.2",
+    "label": "Figure_3_2",
+    "page": 64,
+    "chapter": "Chapter 3",
+    "caption": "Fig 3.2 Instantaneous rate 0 af hydrolysis of butyl 200 400 600 800 1000 chloride(C HC) Time (s) 5",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p064_Figure_3_2.png"
+  },
+  {
+    "fig_id": "3.3",
+    "label": "Figure_3_3",
+    "page": 72,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.3: Variation in the concentration hi : igh pressure. us time plot for a zero order reaction 2NHz (8) gaa — No (8) +3H, (8)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p072_Figure_3_3.png"
+  },
+  {
+    "fig_id": "3.4",
+    "label": "Figure_3_4",
+    "page": 74,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.4: A plot between In/R] and t Fig. 3.5: Plot of log [R],/[R] vs time for a for a first order reaction first order reaction 26Ra > $He+ 22?Rn",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p074_Figure_3_4.png"
+  },
+  {
+    "fig_id": "3.5",
+    "label": "Figure_3_5",
+    "page": 74,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.5: Plot of log [R],/[R] vs time for a first order reaction 2Rn",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p074_Figure_3_5.png"
+  },
+  {
+    "fig_id": "3.7",
+    "label": "Figure_3_7",
+    "page": 79,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.7: Diagram showing plot of potential energy vs reaction coordinate",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p079_Figure_3_7.png"
+  },
+  {
+    "fig_id": "3.8",
+    "label": "Figure_3_8",
+    "page": 79,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.8: Distribution curve showing energies among gaseous molecules 79 Chemical Kinetics",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p079_Figure_3_8.png"
+  },
+  {
+    "fig_id": "3.9",
+    "label": "Figure_3_9",
+    "page": 80,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.9: Distribution curve showing temperature Maxwell Boltzmann distribution curve dependence of rate of a reaction (Fig. 3.9). Increasing the temperature of the substance increases",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p080_Figure_3_9.png"
+  },
+  {
+    "fig_id": "3.11",
+    "label": "Figure_3_11",
+    "page": 82,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.11:Effect of catalyst on activation ® large amount of reactants. A catalyst does energy not alter Gibbs energy, AG of a reaction. It catalyses the spontaneous reactions but does not catalyse non-spontaneous reactions. It is",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p082_Figure_3_11.png"
+  },
+  {
+    "fig_id": "4.1",
+    "label": "Figure_4_1",
+    "page": 92,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.1 depicts the melting points of Nb.\" ms Ru y transition metals belonging to 3d, 4d and 5d He f aR N 7 series. The high melting points of these metals i f \\ are attributed to the involvement of greater g 2, f Cr Rhy, number of electrons from (n-1)d in addition to aap OU \\ ss, the ns electrons in the interatomic metallic Ss Tie \\ Fe__Co pak bonding. In any row the melting points of these \\ 4 TNR. metals rise to a maximum at d° except for Ma a anomalous values of Mn and Tce and fall NCH regularly as the atomic number increases. 1 Ag They have high enthalpies of atomisation which ‘Atomic number are shown in Fig. 4.2. The maxima at about Fi . . . . the middle of each series indicate that one",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p092_Figure_4_1.png"
+  },
+  {
+    "fig_id": "4.2",
+    "label": "Figure_4_2",
+    "page": 93,
+    "chapter": "Chapter 4",
+    "caption": "200 100 0 Atomic number —~>",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p093_Figure_4_2.png"
+  },
+  {
+    "fig_id": "4.3",
+    "label": "Figure_4_3",
+    "page": 94,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.3: Trends in atomic radii of significant increase in transition elements (Table 4.2).",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p094_Figure_4_3.png"
+  },
+  {
+    "fig_id": "4.4",
+    "label": "Figure_4_4",
+    "page": 98,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.4: Observed and calculated values for electrode potentials (M?* + Mp?) of the elements Ti to Zn",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p098_Figure_4_4.png"
+  },
+  {
+    "fig_id": "4.5",
+    "label": "Figure_4_5",
+    "page": 103,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.5. left to right: V**,V**,Mn?*,Fe**,Co”*,Ni?*and Cu’* .",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p103_Figure_4_5.png"
+  },
+  {
+    "fig_id": "4.6",
+    "label": "Figure_4_6",
+    "page": 109,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.6: Trends in ionic radii of lanthanoids _ difficulty faced in their separation. 4.5.3 Oxidation In the lanthanoids, La(I) and Ln(lII) compounds are predominai States species",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p109_Figure_4_6.png"
+  },
+  {
+    "fig_id": "4.7",
+    "label": "Figure_4_7",
+    "page": 111,
+    "chapter": "Chapter 4",
+    "caption": "Fig 4.7: Chemical reactions of the lanthanoids. The best single use of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p111_Figure_4_7.png"
+  },
+  {
+    "fig_id": "5.1",
+    "label": "Figure_5_1",
+    "page": 122,
+    "chapter": "Chapter 5",
+    "caption": "L” | ™~ L Octahedral F",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p122_Figure_5_1.png"
+  },
+  {
+    "fig_id": "5.2",
+    "label": "Figure_5_2",
+    "page": 125,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.2: Geometrical isomers (cis and trans) other in a cis isomer, or opposite to each othe of Pt NH) ,Cl,] in a trans isomer as depicted in Fig. 5.2. cl + cl + Other square planar complex of the tyf MABXL (where A, B, X, L are unidentate: NH. | Ca NH, | NH, . . NI 72 NI] 4 shows three isomers-two cis and one tran. NH Pa NH 4° Nw You may attempt to draw these structure: ° | NH, 8 | * Such isomerism is not possible for a tetrahedr:",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p125_Figure_5_2.png"
+  },
+  {
+    "fig_id": "5.3",
+    "label": "Figure_5_3",
+    "page": 125,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.3: Geometrical isomers (cis and trans) of Co(NH,) ,CL*",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p125_Figure_5_3.png"
+  },
+  {
+    "fig_id": "5.4",
+    "label": "Figure_5_4",
+    "page": 126,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.4: Geometrical isomers (cis and trans) *somerism occurs it octahedral of [CoCL (en), ] coordination entities of the type a? [Masb;] like [Co(NHg)3(NO,)s]. If three donor atoms of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p126_Figure_5_4.png"
+  },
+  {
+    "fig_id": "5.5",
+    "label": "Figure_5_5",
+    "page": 126,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.5 ° ann : Nec py NO, face, we have the facial (fac)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p126_Figure_5_5.png"
+  },
+  {
+    "fig_id": "5.6",
+    "label": "Figure_5_6",
+    "page": 126,
+    "chapter": "Chapter 5",
+    "caption": "Fig.5.6: Optical isomers (d and 1) of [Co(en),] * didentate ligands (Fig. 5.6). In a coordination Q+ 2+ entity of the type | : | [PtCl,(en),]**, only the aa ‘ cl « cis-isomer shows optical LN NI 7 ~ n activity (Fig. 5.7).",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p126_Figure_5_6.png"
+  },
+  {
+    "fig_id": "5.8",
+    "label": "Figure_5_8",
+    "page": 132,
+    "chapter": "Chapter 5",
+    "caption": "Fig.5.8: d orbital splitting in an octahedral crystal field ond coheaten tly result in small splitting of d orbitals. In general, ligands can be arranged in a series in the order of increasing",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p132_Figure_5_8.png"
+  },
+  {
+    "fig_id": "5.9",
+    "label": "Figure_5_9",
+    "page": 133,
+    "chapter": "Chapter 5",
+    "caption": "Fig.5.9: d orbital splitting in a tetrahedral wich ave cone of symmetry. Since crystal field. tetra € Ta comp. exes ack symmetry, ‘g subscript is not used with energy levels. 5.5.5 Colour in In the previous Unit, we learnt that one of the most distinctive",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p133_Figure_5_9.png"
+  },
+  {
+    "fig_id": "5.11",
+    "label": "Figure_5_11",
+    "page": 134,
+    "chapter": "Chapter 5",
+    "caption": "Fig.5.11 Aqueous solutions of complexes of Saas P i nS nickel(I]) with an 2 oe | =| il fil increasing number INi(H,0),]\" (aq) t | [",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p134_Figure_5_11.png"
+  },
+  {
+    "fig_id": "5.12",
+    "label": "Figure_5_12",
+    "page": 135,
+    "chapter": "Chapter 5",
+    "caption": "Fig.5.12: (a) Ruby: this gemstone was found in",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p135_Figure_5_12.png"
+  },
+  {
+    "fig_id": "5.13",
+    "label": "Figure_5_13",
+    "page": 136,
+    "chapter": "Chapter 5",
+    "caption": "Na och — ico [Co,(CO).] co | co co | | co co co ‘r(CO), Octahedral [Mn,(CO),,]",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p136_Figure_5_13.png"
+  },
+  {
+    "fig_id": "5.14",
+    "label": "Figure_5_14",
+    "page": 136,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.14:Example of synergic bonding creates a synergic effect which strengthens the interactions in a carbonyl bond between CO and the metal (Fig.5.14). complex. 5.7 I mportance The coordination compounds are of great importance. These compounds and are widely present in the mineral, plant and animal worlds and are soe known to play many important functions in the area of analytical Appl ications chemistry, metallurgy, biological systems, industry and medicine. These 0 f are described below: Coordination ° Coordination compounds find use in many qualitative and Compounds quantitative chemical analysis. The familiar colour reactions given CO OMpOUNAS by metal ions with a number of ligands (especially chelating ligands),",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/p136_Figure_5_14.png"
+  }
+]

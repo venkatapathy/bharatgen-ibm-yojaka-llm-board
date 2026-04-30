@@ -1,0 +1,1402 @@
+[
+  {
+    "fig_id": "1.2",
+    "label": "Figure_1_2",
+    "page": 8,
+    "chapter": "Chapter 1",
+    "caption": "FIGURE 1.2 Electroscopes: (a) The gold leaf so that you make a mark of fold. Open the strip and electroscope, (b) Schematics of a simple iron it lightly with the mountain fold up, as shown electroscope. in Fig. 1.3. Hold the strip by pinching it at the fold. You would notice that the two halves move apart.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p008_Figure_1_2.png"
+  },
+  {
+    "fig_id": "1.3",
+    "label": "Figure_1_3",
+    "page": 8,
+    "chapter": "Chapter 1",
+    "caption": "FIGURE 1.3 Paper strip ( experiment. ‘",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p008_Figure_1_3.png"
+  },
+  {
+    "fig_id": "1.4",
+    "label": "Figure_1_4",
+    "page": 10,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.4(e). In this process, the metal spheres will each be equal and oppositely (e) charged. This is charging by induction. The positively charged glass rod",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p010_Figure_1_4.png"
+  },
+  {
+    "fig_id": "1.5",
+    "label": "Figure_1_5",
+    "page": 11,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.5(e). i » ot ei at a & & be © Y ae 1 a fa) cron a g m@ ct kB ag SG be",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p011_Figure_1_5.png"
+  },
+  {
+    "fig_id": "1.7",
+    "label": "Figure_1_7",
+    "page": 18,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.7(a). The resulting repulsion of A",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p018_Figure_1_7.png"
+  },
+  {
+    "fig_id": "1.8",
+    "label": "Figure_1_8",
+    "page": 20,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.8(b). The principle of superposition says that in a system of charges q,, p; ++ dy» the force on q, due to q, is the same as given by Coulomb's law, ie., it is unaffected by the presence of the other charges q,, q,, .--, dj, The total force F, on the charge q,, due to all other charges, is then given by the vector sum of the forces F,,,F,,,..., F Le., int",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p020_Figure_1_8.png"
+  },
+  {
+    "fig_id": "1.9",
+    "label": "Figure_1_9",
+    "page": 20,
+    "chapter": "Chapter 1",
+    "caption": "FIGURE 1.9 Sg co | Solution In the given equilateral triangle ABC of sides of length L if el we draw a perpendicular AD to the side BC, F AD = AC cos 30° = (V3 /2) l and the distance AO of the centroid O I from A is (2/3) AD = (1/3) lL By symmatry AO = BO = CO.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p020_Figure_1_9.png"
+  },
+  {
+    "fig_id": "1.10",
+    "label": "Figure_1_10",
+    "page": 21,
+    "chapter": "Chapter 1",
+    "caption": "FIGURE 1.10 Solution The forces acting on charge q at A due to charges q at B and -q at C are F,, along BA and F,, along AC respectively, as shown in Fig. 1.10. By the parallelogram law, the total force F, on the charge q at A is given by F, =F f, where ff, is a unit vector along BC. The force of attraction or repulsion for each pair of charges has the 9 iS itud F-—¢ _ same magnitude ane 5 The total force F, on charge q at B is thus F, =F r,, where rT, isa a unit vector along AC. ) 17",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p021_Figure_1_10.png"
+  },
+  {
+    "fig_id": "1.11",
+    "label": "Figure_1_11",
+    "page": 22,
+    "chapter": "Chapter 1",
+    "caption": "FIGURE 1.11 Electric a charge Q is numerically equal to the force exerted by it. Thus, the field (a) due toa electric field due to a charge Q at a point in space may be defined charge Q, (b) due to a as the force that a unit positive charge would experience if placed charge -Q.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p022_Figure_1_11.png"
+  },
+  {
+    "fig_id": "1.12",
+    "label": "Figure_1_12",
+    "page": 24,
+    "chapter": "Chapter 1",
+    "caption": "FIGURE 1.12 Electric field at a and r,, is the distance between q, and P. Similar point due to a system of charges is | expressions hold good for fields E,, E,, ..., E, due to the vector sum of the electric fields charges qg, Qy, +--+ Une at the point due to individual By the superposition principle, the electric field E at r charges. due to the system of charges is (as shown in Fig. 1.12)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p024_Figure_1_12.png"
+  },
+  {
+    "fig_id": "1.13",
+    "label": "Figure_1_13",
+    "page": 25,
+    "chapter": "Chapter 1",
+    "caption": "FIGURE 1.13 Solution In Fig. 1.13(a)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p025_Figure_1_13.png"
+  },
+  {
+    "fig_id": "1.14",
+    "label": "Figure_1_14",
+    "page": 27,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.14. The resultant of these two vectors is S q Ec, = E,cos =+E,cos == 9x 10° NC? 5 3 3 a E, points towards the right. )",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p027_Figure_1_14.png"
+  },
+  {
+    "fig_id": "1.16",
+    "label": "Figure_1_16",
+    "page": 28,
+    "chapter": "Chapter 1",
+    "caption": "FIGURE 1.16 Dependence of about the direction of electric field at different points in space. electric field strength on the Having drawn a certain set of field lines, the relative density distance and its relation to the (i.e., closeness) of the field lines at different points indicates number of field lines. the relative strength of electric field at those points. The field lines crowd where",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p028_Figure_1_16.png"
+  },
+  {
+    "fig_id": "1.17",
+    "label": "Figure_1_17",
+    "page": 29,
+    "chapter": "Chapter 1",
+    "caption": "FIGURE 1.17 Field lines due to some simple charge configurations. ae)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p029_Figure_1_17.png"
+  },
+  {
+    "fig_id": "1.18",
+    "label": "Figure_1_18",
+    "page": 30,
+    "chapter": "Chapter 1",
+    "caption": "FIGURE 1.18 Dependence of flux on the ome 1 to the flow, maximum water will flow inclination @ between E and a. roug) it than if you hold it with some other orientation. This shows that an area element should be treated as a vector. It has a magnitude and also a direction. How to specify the direction of a planar",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p030_Figure_1_18.png"
+  },
+  {
+    "fig_id": "1.19",
+    "label": "Figure_1_19",
+    "page": 30,
+    "chapter": "Chapter 1",
+    "caption": "FIGURE 1.19 E and the outward normal to the area element. Notice we could Convention for the expression E AS cos@ in two ways: E (AS cos@) i.e., E times the defining normal SSS and AS. * Jt will not be proper to say that the number of field lines is equal to EAS. The",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p030_Figure_1_19.png"
+  },
+  {
+    "fig_id": "1.20",
+    "label": "Figure_1_20",
+    "page": 32,
+    "chapter": "Chapter 1",
+    "caption": "FIGURE 1.20 Electric field of a dipole and are equal. at (a) a point on the axis, (b) a point The directions of E,, and E., are as shown in on the cauatorial plane “ he “ipols Fig. 1.20(b). Clearly, the components normal to the dipole P ona vteete | eee oe amet ° axis cancel away. The components along the dipole axis a ted r on -q to q. add up. The total electric field is opposite to P. We have ne a no Vanca n",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p032_Figure_1_20.png"
+  },
+  {
+    "fig_id": "1.21",
+    "label": "Figure_1_21",
+    "page": 33,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.21(b). ’ A oO B fA <7 ---0—— | #. - --------------0 > ' ' 1 -10 +10 P Ht | ie me it 5 Pil nas Sa oe | @ A oO B 5 -10HC +10KC a & (b) a",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p033_Figure_1_21.png"
+  },
+  {
+    "fig_id": "1.22",
+    "label": "Figure_1_22",
+    "page": 35,
+    "chapter": "Chapter 1",
+    "caption": "FIGURE 1.22 Dipole ina uniform electric field.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p035_Figure_1_22.png"
+  },
+  {
+    "fig_id": "1.23",
+    "label": "Figure_1_23",
+    "page": 35,
+    "chapter": "Chapter 1",
+    "caption": "(b) URE 1.23 Electric dole: (a) E parallel t« antiparallel to",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p035_Figure_1_23.png"
+  },
+  {
+    "fig_id": "1.24",
+    "label": "Figure_1_24",
+    "page": 36,
+    "chapter": "Chapter 1",
+    "caption": "FIGURE 1.24 Definition of linear, surface and volume charge densities. In each case, the element (Al, AS, AV) chosen is small on the macroscopic scale but contains a very large number of microscopic constituents.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p036_Figure_1_24.png"
+  },
+  {
+    "fig_id": "1.25",
+    "label": "Figure_1_25",
+    "page": 37,
+    "chapter": "Chapter 1",
+    "caption": "FIGURE 1.25 Flux )) through a sphere enclosing a point charge q at its centre. x 33",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p037_Figure_1_25.png"
+  },
+  {
+    "fig_id": "1.26",
+    "label": "Figure_1_26",
+    "page": 38,
+    "chapter": "Chapter 1",
+    "caption": "FIGURE 1.26 Calculation of the _ q > AS= q s flux of uniform electric field p= Ane, r2 alls ~ Anéy r2 through the surface of a cylinder. 2",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p038_Figure_1_26.png"
+  },
+  {
+    "fig_id": "1.27",
+    "label": "Figure_1_27",
+    "page": 39,
+    "chapter": "Chapter 1",
+    "caption": "FIGURE 1.27 Solution (a) Since the electric field has only an x component, for faces perpendicular to x direction, the angle between E and AS is",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p039_Figure_1_27.png"
+  },
+  {
+    "fig_id": "1.28",
+    "label": "Figure_1_28",
+    "page": 40,
+    "chapter": "Chapter 1",
+    "caption": "FIGURE 1.28 oH (d) The net charge within",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p040_Figure_1_28.png"
+  },
+  {
+    "fig_id": "1.29",
+    "label": "Figure_1_29",
+    "page": 41,
+    "chapter": "Chapter 1",
+    "caption": "FIGURE 1.29 (a) Electric field due to an infinitely long thin straight wire is radial, (b) The Gaussian surface for a long thin wire of uniform linear charge density. 37",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p041_Figure_1_29.png"
+  },
+  {
+    "fig_id": "1.30",
+    "label": "Figure_1_30",
+    "page": 42,
+    "chapter": "Chapter 1",
+    "caption": "FIGURE 1.30 Gaussian surface for a the net flux through the Gaussian surface is 2 EA. uniformly charged infinite plane sheet. The charge enclosed by the closed surface is oA. 38 Therefore by Gauss’s law,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p042_Figure_1_30.png"
+  },
+  {
+    "fig_id": "1.31",
+    "label": "Figure_1_31",
+    "page": 43,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.31). eld at any point P, outside or inside, can depend only on r (the radial istance from the centre of the shell to the point) and must be radial (i-e., long the radius vector).",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p043_Figure_1_31.png"
+  },
+  {
+    "fig_id": "1.32",
+    "label": "Figure_1_32",
+    "page": 44,
+    "chapter": "Chapter 1",
+    "caption": "FIGURE 1.32 Solution The charge distribution for this model of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p044_Figure_1_32.png"
+  },
+  {
+    "fig_id": "1.34",
+    "label": "Figure_1_34",
+    "page": 51,
+    "chapter": "Chapter 1",
+    "caption": "§ ° y — _ 10cm —",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p051_Figure_1_34.png"
+  },
+  {
+    "fig_id": "1.35",
+    "label": "Figure_1_35",
+    "page": 53,
+    "chapter": "Chapter 1",
+    "caption": "FIGURE 1.35 1.27 In a certain region of space, electric field is along the z-direction throughout. The magnitude of electric field is,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p053_Figure_1_35.png"
+  },
+  {
+    "fig_id": "1.36",
+    "label": "Figure_1_36",
+    "page": 53,
+    "chapter": "Chapter 1",
+    "caption": "FIGURE 1.36 ow charged conductor has a tiny hole cut into chat the electric field in",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p053_Figure_1_36.png"
+  },
+  {
+    "fig_id": "2.1",
+    "label": "Figure_2_1",
+    "page": 56,
+    "chapter": "Chapter 2",
+    "caption": "FIGURE 2.1 A test charge q (> 0) is u moved from the point R to the R point P against the repulsive ce force on it by the charge Q (> 0) Tl",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p056_Figure_2_1.png"
+  },
+  {
+    "fig_id": "2.2",
+    "label": "Figure_2_2",
+    "page": 58,
+    "chapter": "Chapter 2",
+    "caption": "FIGURE 2.2 Work done on a test charge q _ 6q, obtain the work done 6W in bringing it from by the electrostatic field due to any given infinity to the point and determine the ratio charge configuration is independent dW/ 6g. Also, the external force at every point of of the path, and depends only on : . che quate sia",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p058_Figure_2_2.png"
+  },
+  {
+    "fig_id": "2.3",
+    "label": "Figure_2_3",
+    "page": 58,
+    "chapter": "Chapter 2",
+    "caption": "FIGURE 2.3 Work done in bringing a unit positive test charge from infinity to the Qxl , r point P, against the repulsive force of 4ne.r® (2.5) charge Q (Q > 0), is the potential at P due to ° the charge Q. where f’ is the unit vector along OP’. Work done against this force from r’ tor’ +Ar’ is Q , AW = -—2— Ar 4ne,r® (2.6)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p058_Figure_2_3.png"
+  },
+  {
+    "fig_id": "2.4",
+    "label": "Figure_2_4",
+    "page": 59,
+    "chapter": "Chapter 2",
+    "caption": "FIGURE 2.4 Variation of potential V with r [in units of in the same direction.] Finally, we (Q/4ne,) m™] (blue curve) and field with r [in units note that Eq. (2.8) is consistent with of (Q/4xé,) m™] (black curve) for a point charge Q. the choice that potential at infinity be zero. Figure (2.4) shows how the electrostatic potential (« 1/r) and the electrostatic field (« 1/r?) varies with r. Example 2.1 (a) Calculate the potential at a point P due to a charge of 4 x 10°C located 9 cm away. (b) Hence obtain the work done in bringing a charge of 2 x 10°C from infinity to the point P. Does the answer depend on the path along which",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p059_Figure_2_4.png"
+  },
+  {
+    "fig_id": "2.5",
+    "label": "Figure_2_5",
+    "page": 60,
+    "chapter": "Chapter 2",
+    "caption": "FIGURE 2.5 Quantities involved in the calculation 4neo (nh In . of potential due to a dipole. where r, and r, are the distances of the point P from q and —q, respectively. Now, by geometry,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p060_Figure_2_5.png"
+  },
+  {
+    "fig_id": "2.7",
+    "label": "Figure_2_7",
+    "page": 62,
+    "chapter": "Chapter 2",
+    "caption": "FIGURE 2.7 Let P be the required point on the x-axis where",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p062_Figure_2_7.png"
+  },
+  {
+    "fig_id": "2.8",
+    "label": "Figure_2_8",
+    "page": 63,
+    "chapter": "Chapter 2",
+    "caption": "FIGURE 2.8 z = , 2 oe cg (a) Give the signs of the potential difference V,- V9; V, - Va. oF >= (b) Give the sign of the potential energy difference of a small negative ag yo a an = =F",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p063_Figure_2_8.png"
+  },
+  {
+    "fig_id": "2.10",
+    "label": "Figure_2_10",
+    "page": 64,
+    "chapter": "Chapter 2",
+    "caption": "FIGURE 2.10 Equipotential surfaces for a uniform electric field. For a uniform electric field E, say, along the x -axis, the equipotential surfaces are planes normal to the x -axis, i.e., planes parallel to the y-z plane (Fig. 2.10). Equipotential surfaces for (a) a dipole and (b) two identical positive charges are shown in Fig. 2.11. (a) (b)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p064_Figure_2_10.png"
+  },
+  {
+    "fig_id": "2.11",
+    "label": "Figure_2_11",
+    "page": 64,
+    "chapter": "Chapter 2",
+    "caption": "FIGURE 2.11 Some equipotential surfaces for (a) a dipole, (b) two identical positive charges.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p064_Figure_2_11.png"
+  },
+  {
+    "fig_id": "2.9",
+    "label": "Figure_2_9",
+    "page": 64,
+    "chapter": "Chapter 2",
+    "caption": "FIGURE 2.9 For a surface: there is no potential difference between any two points on the single charge q surface and no work is required to move a test charge on the surface. (a) equipotential The electric field must, therefore, be normal to the equipotential surface surfaces are at every point. Equipotential surfaces offer an alternative visual picture spherical surfaces in addition to the picture of electric field lines around a charge centred at the configuration. charge, and (b) electric field ~ lines are radial, : starting from the . E charge if q > 0.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p064_Figure_2_9.png"
+  },
+  {
+    "fig_id": "2.13",
+    "label": "Figure_2_13",
+    "page": 66,
+    "chapter": "Chapter 2",
+    "caption": "FIGURE 2.13 Potential energy of a U= 1 GG system of charges q, and q, is ~ ANE, Tio (2.22) directly proportional to the product of charges and inversely to the Obviously, if q, was brought first to its present location and distance between them. q, brought later, the potential energy Uwould be the same.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p066_Figure_2_13.png"
+  },
+  {
+    "fig_id": "2.14",
+    "label": "Figure_2_14",
+    "page": 66,
+    "chapter": "Chapter 2",
+    "caption": "FIGURE 2.14 Potential energy of a Ame, \\ No Nn Tog system of three charges is given by Again, because of the conservati Eq. (2.26), ve tne Botation given electrostatic force (or equivale1 gure. independence of work done).",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p066_Figure_2_14.png"
+  },
+  {
+    "fig_id": "2.15",
+    "label": "Figure_2_15",
+    "page": 67,
+    "chapter": "Chapter 2",
+    "caption": "FIGURE 2.15 Solution (a) Since the work done depends on the final arrangement of the",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p067_Figure_2_15.png"
+  },
+  {
+    "fig_id": "2.18",
+    "label": "Figure_2_18",
+    "page": 74,
+    "chapter": "Chapter 2",
+    "caption": "FIGURE 2.18 The electric field inside a outside electrical influence. Figure 2.19 gives a cavity of any conductor is zero. All summary of the important electrostatic properties charges reside only on the outer surface of a conductor with cavity. (There are no of a conductor.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p074_Figure_2_18.png"
+  },
+  {
+    "fig_id": "2.19",
+    "label": "Figure_2_19",
+    "page": 74,
+    "chapter": "Chapter 2",
+    "caption": "shicles carrying inflammable materials usually have met ‘pes touching the ground during motion. Why? bird perches on a bare high power line, and nothing hap) the bird. A man standing on the ground touches",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p074_Figure_2_19.png"
+  },
+  {
+    "fig_id": "2.20",
+    "label": "Figure_2_20",
+    "page": 75,
+    "chapter": "Chapter 2",
+    "caption": "FIGURE 2.20 Difference in behaviour of a conductor and a dielectric in an external electric field.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p075_Figure_2_20.png"
+  },
+  {
+    "fig_id": "2.21",
+    "label": "Figure_2_21",
+    "page": 75,
+    "chapter": "Chapter 2",
+    "caption": "FIGURE 2.21 Some examples of polar and non-polar molecules. 71",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p075_Figure_2_21.png"
+  },
+  {
+    "fig_id": "2.22",
+    "label": "Figure_2_22",
+    "page": 76,
+    "chapter": "Chapter 2",
+    "caption": "FIGURE 2.22 A dielectric develops a net dipole In the absence of any external field, the moment in an external electric field. (a) Non-polar different permanent dipoles are oriented molecules, (b) Polar molecules. randomly due to thermal agitation; so thea tatal dinnle mament ic zvarn When",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p076_Figure_2_22.png"
+  },
+  {
+    "fig_id": "2.23",
+    "label": "Figure_2_23",
+    "page": 77,
+    "chapter": "Chapter 2",
+    "caption": "Fig 2.23, the positive ends of the dipoles remain 1 oe) CH unneutralised at the right surface and the negative ends at (— +) +4 CH (— 4+) the left surface. The unbalanced charges are the induced i charges due to the external field. > 4 C+ C +) Thus the polarised dielectric is equivalent to two charged surfaces with induced surface charge densities, say o, <b CH CH co and -o,. Clearly, the field produced by these surface charges ——> P opposes the external field. The total field in the dielectric FIGURE 2.23 A uniformly is, thereby, reduced from the case when no dielectric is polarised dielectric amounts present. We should note that the surface charge density to induced surface charge +o. arises from bound (not free charges) in the dielectric. density, but no volume P charge density. 2.11 CapaciTrors AND CaPACITANCE",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p077_Figure_2_23.png"
+  },
+  {
+    "fig_id": "2.24",
+    "label": "Figure_2_24",
+    "page": 77,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.24). V, and V,. Usually, in practice, the two conductors have charges Q and - Q, with potential difference V = V, — V, between them. We shall consider only this kind of charge configuration of the capacitor. (Even a",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p077_Figure_2_24.png"
+  },
+  {
+    "fig_id": "2.25",
+    "label": "Figure_2_25",
+    "page": 78,
+    "chapter": "Chapter 2",
+    "caption": "Surface I charge density - 7 [GURE 2.25 The parallel plate capacitor. 74",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p078_Figure_2_25.png"
+  },
+  {
+    "fig_id": "2.26",
+    "label": "Figure_2_26",
+    "page": 82,
+    "chapter": "Chapter 2",
+    "caption": "FIGURE 2.26 Combination of two capacitors in series.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p082_Figure_2_26.png"
+  },
+  {
+    "fig_id": "2.27",
+    "label": "Figure_2_27",
+    "page": 82,
+    "chapter": "Chapter 2",
+    "caption": "FIGURE 2.27 Combination of n a capacitors in series. 1 1 + 1 (2.58) 7 nan nTte : Cc Gq G",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p082_Figure_2_27.png"
+  },
+  {
+    "fig_id": "2.28",
+    "label": "Figure_2_28",
+    "page": 83,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.28 (b)] FIGURE 2.28 Parallel combination of slows similarly, (a) two capacitors, (b) n capacitors.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p083_Figure_2_28.png"
+  },
+  {
+    "fig_id": "2.29",
+    "label": "Figure_2_29",
+    "page": 83,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.29. Determine (a) the equivalent capacitance of the network and (b) the charge on each capacitor. (Note, the charge on a capacitor is the charge on the plate with higher potential, equal and opposite to the charge on the plate with lower potential.)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p083_Figure_2_29.png"
+  },
+  {
+    "fig_id": "2.30",
+    "label": "Figure_2_30",
+    "page": 84,
+    "chapter": "Chapter 2",
+    "caption": "FIGURE 2.30 (a) Work done in a small V’ between conductors 1 to 2 is Q’/C, where C is the step of building charge on conductor | capacitance of the system. Next imagine that a small from Q’ to g +6 Q% (b) Total work done charge 6@’is transferred from conductor 2 to 1. Work mm charging",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p084_Figure_2_30.png"
+  },
+  {
+    "fig_id": "2.31",
+    "label": "Figure_2_31",
+    "page": 86,
+    "chapter": "Chapter 2",
+    "caption": "FIGURE 2.31 Solution (a) The charge on",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p086_Figure_2_31.png"
+  },
+  {
+    "fig_id": "2.33",
+    "label": "Figure_2_33",
+    "page": 88,
+    "chapter": "Chapter 2",
+    "caption": "FIGURE 2.33 Principle of construction shell (of few metres radius) is supported at a of Van de Graaff generator. height several meters above the ground on an insulating column. A long narrow endless belt insulating material, like rubber or silk, is wound around two pulleys —",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p088_Figure_2_33.png"
+  },
+  {
+    "fig_id": "2.34",
+    "label": "Figure_2_34",
+    "page": 93,
+    "chapter": "Chapter 2",
+    "caption": "FIGURE 2.34 :ctrical technician requires a capacitance of 2 uF ‘a potential difference of 1 kV. A large number of 1 w vailable to him each of which can withstand",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p093_Figure_2_34.png"
+  },
+  {
+    "fig_id": "2.35",
+    "label": "Figure_2_35",
+    "page": 94,
+    "chapter": "Chapter 2",
+    "caption": "FIGURE 2.35 illel plate capacitor have an area of 90 cm? each y 2.5 mm.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p094_Figure_2_35.png"
+  },
+  {
+    "fig_id": "3.2",
+    "label": "Figure_3_2",
+    "page": 100,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.2(c)]. Seen ee Rae For a given voltage Vacross the slab, if Iis the current conduction of heat: the , electric field is analogous to through the entire slab, then clearly the current flowing the temperature gradient, through each of the two half-slabs is I/2. Since the and the electric current is potential difference across the ends of the half-slabs is V, analogous to the heat flow. i.e., the same as across the full slab, the resistance of each of the half-slabs R, is _ Vv a",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p100_Figure_3_2.png"
+  },
+  {
+    "fig_id": "3.3",
+    "label": "Figure_3_3",
+    "page": 101,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.3) with an acceleration given by Eq. (3.15) fora another point B through repeated time interval t,. The average velocity of the electrons at collisions, and straight line travel time tis the average of all the V/s. The average of v/s is between collisions (full lines). If an zero [Eq. (3.14)] since immediately after any collision, electric field is applied as shown, the",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p101_Figure_3_3.png"
+  },
+  {
+    "fig_id": "3.4",
+    "label": "Figure_3_4",
+    "page": 102,
+    "chapter": "Chapter 3",
+    "caption": "FIGURE 3.4 Current in a metallic the normal to conductor. The magnitude of current — (Fig. 3.4). Then because of the drift, in an infinitesimal density in a metal is the magnitude of | amount of time At, all electrons to the left of the area at charge contained in a cylinder of unit distances upto |v,|At would have crossed the area. If",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p102_Figure_3_4.png"
+  },
+  {
+    "fig_id": "3.5",
+    "label": "Figure_3_5",
+    "page": 105,
+    "chapter": "Chapter 3",
+    "caption": "FIGURE 3.5 The dashed line (a) V ceases to be proportional to I (Fig. 3.5). eens : He Bacay Onms ge (b) The relation between V and I depends on the sign of V. In V versus current I for a good other words, if Iis the current for a certain V, then reversing conductor. the direction of V keeping its magnitude fixed, does not",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p105_Figure_3_5.png"
+  },
+  {
+    "fig_id": "3.6",
+    "label": "Figure_3_6",
+    "page": 105,
+    "chapter": "Chapter 3",
+    "caption": "FIGURE 3.6 Characteristic curve FIGURE 3.7 Variation of current of a diode. Note the different versus voltage for GaAs. scales for negative and positive values of the voltage and current.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p105_Figure_3_6.png"
+  },
+  {
+    "fig_id": "3.8",
+    "label": "Figure_3_8",
+    "page": 107,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.8). For example, if the four ; colours are orange, blue, yellow and gold, the resistance Violet value is 36 x 10* Q, with a tolerence value of 5%. Yellow Gold 3.8 TEMPERATURE DEPENDENCE OF ‘",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p107_Figure_3_8.png"
+  },
+  {
+    "fig_id": "3.10",
+    "label": "Figure_3_10",
+    "page": 108,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.10). Manganin and constantan have similar properties. These materials are thus widely used in wire bound standard resistors since their resistance values would change very little with temperatures.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p108_Figure_3_10.png"
+  },
+  {
+    "fig_id": "3.11",
+    "label": "Figure_3_11",
+    "page": 108,
+    "chapter": "Chapter 3",
+    "caption": "FIGURE 3.11 Temperature dependence of resistivity for a typical semiconductor.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p108_Figure_3_11.png"
+  },
+  {
+    "fig_id": "3.9",
+    "label": "Figure_3_9",
+    "page": 108,
+    "chapter": "Chapter 3",
+    "caption": "FIGURE 3.9 FIGURE 3.10 Resistivity FIGURE 3.11 Resistivity p, of p, of nichrome as a Temperature dependence copper as a function function of absolute of resistivity for a typical of temperature T. temperature T. semiconductor.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p108_Figure_3_9.png"
+  },
+  {
+    "fig_id": "3.12",
+    "label": "Figure_3_12",
+    "page": 110,
+    "chapter": "Chapter 3",
+    "caption": "FIGURE 3.12 Heat is produced in the The expressions for power, Eqs. (3.32) and (3.33), resistor R which is connected across show the dependence of the power dissipated in a the terminals of a cell. The energy resistor R on the current through it and the voltage dissipated in the resistor R comes from across it. the chemical energy of the electrolyte. Equation (3.33) has an important application to maz power transmission. Electrical power is transmitted from power stations to homes and factories, which",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p110_Figure_3_12.png"
+  },
+  {
+    "fig_id": "3.13",
+    "label": "Figure_3_13",
+    "page": 111,
+    "chapter": "Chapter 3",
+    "caption": "FIGURE 3.13 A series combinatic Two resistors are said to be in serie joined (Fig. 3.13). If a third resistor is j« of the two (Fig. 3.14), then all three ar can extend this definition to series comb",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p111_Figure_3_13.png"
+  },
+  {
+    "fig_id": "3.14",
+    "label": "Figure_3_14",
+    "page": 111,
+    "chapter": "Chapter 3",
+    "caption": "FIGURE 3.14 A series combination of three resistors R,, R,, R- Two or more resistors are said to be in parallel if one end of all t stors is joined together and similarly the other ends joined togett",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p111_Figure_3_14.png"
+  },
+  {
+    "fig_id": "3.15",
+    "label": "Figure_3_15",
+    "page": 111,
+    "chapter": "Chapter 3",
+    "caption": "FIGURE 3.15 Two resistors R, and R, connected in parallel.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p111_Figure_3_15.png"
+  },
+  {
+    "fig_id": "3.16",
+    "label": "Figure_3_16",
+    "page": 112,
+    "chapter": "Chapter 3",
+    "caption": "FIGURE 3.16 Parallel combination of three resistors R,, R, and R,.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p112_Figure_3_16.png"
+  },
+  {
+    "fig_id": "3.17",
+    "label": "Figure_3_17",
+    "page": 113,
+    "chapter": "Chapter 3",
+    "caption": "FIGURE 3.17 A combination of three resistors R,, ith R, and R,. R,, R, are in parallel with an Ra = Re +R, (3.53) equivalent resistance Ra . R, and Ra are in the voltage between A and C is V, the series with an equivalent resistance Ri. irrent Tis given by Ie ve_ Vv Re -R+[RR/(R+R)] V(R, +R.)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p113_Figure_3_17.png"
+  },
+  {
+    "fig_id": "3.18",
+    "label": "Figure_3_18",
+    "page": 114,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.18. They are immersed in an electrolytic solution. Dipped in the solution, the electrodes exchange charges with the electrolyte. The cI R Ip positive electrode has a potential difference V, (V, > 0) between itself and the electrolyte solution immediately adjacent to it marked 1 P Nod Ain the figure. Similarly, the negative electrode develops a negative potential - (V_) (V_ > O) relative to the electrolyte adjacent to it, marked as Bin the figure. When there is no current,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p114_Figure_3_18.png"
+  },
+  {
+    "fig_id": "3.19",
+    "label": "Figure_3_19",
+    "page": 116,
+    "chapter": "Chapter 3",
+    "caption": "FIGURE 3.19 simple series and parallel combination of wo 4Q resistors in parallel are equivalent to a +4) Q=2Q. the 12 Q and 6 Q resistors in parallel are stor of =4Q. sistance R of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p116_Figure_3_19.png"
+  },
+  {
+    "fig_id": "3.20",
+    "label": "Figure_3_20",
+    "page": 118,
+    "chapter": "Chapter 3",
+    "caption": "Fig.3.20, we had connected the negative electrode of the first to the positive electrode of the second. If instead we connect the two negatives, Eq. (3.61) would change to V,,,. = —€,-Ir, and we will get oq = & - & (e, > €,) (3.66) The rule for series combination clearly can be extended to any number of cells: @) The equivalent emf of a series combination of n cells is just the sum of their individual emfs, and",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p118_Figure_3_20.png"
+  },
+  {
+    "fig_id": "3.21",
+    "label": "Figure_3_21",
+    "page": 118,
+    "chapter": "Chapter 3",
+    "caption": "FIGURE 3.21 Two cells in parallel. For connections across A and C,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p118_Figure_3_21.png"
+  },
+  {
+    "fig_id": "3.22",
+    "label": "Figure_3_22",
+    "page": 120,
+    "chapter": "Chapter 3",
+    "caption": "FIGURE 3.22 At junction a the current of charges at any junction or at any point in a line. waving st it I and curren’ cnvenins 1s Is Thus, the total current flowing in, (which is the rate h © Junction. Fae Says fs = fF la At pon at which charge flows into the junction), must equal current entering is I,. There is only one . current leaving h and by junction rule the total current flowing out. ee a eras th) Taan rules The alaehraic sium af chanaes in",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p120_Figure_3_22.png"
+  },
+  {
+    "fig_id": "3.23",
+    "label": "Figure_3_23",
+    "page": 120,
+    "chapter": "Chapter 3",
+    "caption": "FIGURE 3.23",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p120_Figure_3_23.png"
+  },
+  {
+    "fig_id": "3.24",
+    "label": "Figure_3_24",
+    "page": 121,
+    "chapter": "Chapter 3",
+    "caption": "FIGURE 3.24 <<) ]",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p121_Figure_3_24.png"
+  },
+  {
+    "fig_id": "3.25",
+    "label": "Figure_3_25",
+    "page": 122,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.25, which is called the Wheatstone bridge. four resistors R,, R,, R, and R,. Across one pair of diagonally opposite points (A and C in the figure) a source is connected. This (i.e., AC) is called the battery arm. Between the other two vertices, B and D, a galvanometer G (which is a device to detect currents) is connected. This line, shown as BD in the figure, is called the galvanometer arm. For simplicity, we assume that",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p122_Figure_3_25.png"
+  },
+  {
+    "fig_id": "3.27",
+    "label": "Figure_3_27",
+    "page": 124,
+    "chapter": "Chapter 3",
+    "caption": "FIGURE 3.27 A meter bridge. Wire AC strip midway between the two gaps. The other end of is 1 m long. R is a resistance to be",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p124_Figure_3_27.png"
+  },
+  {
+    "fig_id": "3.28",
+    "label": "Figure_3_28",
+    "page": 126,
+    "chapter": "Chapter 3",
+    "caption": "FIGURE 3.28 A potentiometer. G is a galvanometer and R a variable resistance (rheostat). 1, 2, 3 are terminals of a two way key",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p126_Figure_3_28.png"
+  },
+  {
+    "fig_id": "3.29",
+    "label": "Figure_3_29",
+    "page": 127,
+    "chapter": "Chapter 3",
+    "caption": "FIGURE 3.29 Solution While",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p127_Figure_3_29.png"
+  },
+  {
+    "fig_id": "3.30",
+    "label": "Figure_3_30",
+    "page": 132,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.30: B",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p132_Figure_3_30.png"
+  },
+  {
+    "fig_id": "3.31",
+    "label": "Figure_3_31",
+    "page": 134,
+    "chapter": "Chapter 3",
+    "caption": "FIGURE 3.31 3.21 Determine the current drawn from a 12V supply with internal resistance 0.5Q by the infinite network shown in Fig. 3.32. Each resistor has 1Q resistance.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p134_Figure_3_31.png"
+  },
+  {
+    "fig_id": "3.32",
+    "label": "Figure_3_32",
+    "page": 134,
+    "chapter": "Chapter 3",
+    "caption": "FIGURE 3.32 re 3.33 shows a potentiometer with a cell of 2.0 tance 0.40 2 maintaining a potential drop acro AB. A standard cell which maintains a constant",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p134_Figure_3_32.png"
+  },
+  {
+    "fig_id": "3.33",
+    "label": "Figure_3_33",
+    "page": 134,
+    "chapter": "Chapter 3",
+    "caption": "Figure 3.33 shows a potentiometer with a cell of 2.0 V and internal resistance 0.40 Q maintaining a potential drop across the resistor wire AB. A standard cell which maintains a constant emf of 1.02 V (for very moderate currents upto a few mA) gives a balance point at 67.3 cm length of the wire. To ensure very low currents drawn from the standard cell, a very high resistance of 600 kQ is put in series with it, which is shorted close to the balance point. The standard cell is then replaced by a cell of unknown emf ¢ and the balance point found similarly, turns out to be at 82.3 cm length of the wire.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p134_Figure_3_33.png"
+  },
+  {
+    "fig_id": "3.34",
+    "label": "Figure_3_34",
+    "page": 135,
+    "chapter": "Chapter 3",
+    "caption": "Figure 3.34 shows a potentiometer circuit for comparison of two resistances. The balance point with a standard resistor R = 10.0 Q",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p135_Figure_3_34.png"
+  },
+  {
+    "fig_id": "3.35",
+    "label": "Figure_3_35",
+    "page": 135,
+    "chapter": "Chapter 3",
+    "caption": "Figure 3.35 shows a 2.0 V potentiometer used for of internal resistance of a 1.5 V cell. The balance point of the cell in open circuit is 76.3 cm. When a resistor of 9.5 Q is used in the external circuit of the cell, the balance point shifts to 64.8 cm length of the potentiometer wire. Determine the internal resistance of the cell.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p135_Figure_3_35.png"
+  },
+  {
+    "fig_id": "4.1",
+    "label": "Figure_4_1",
+    "page": 137,
+    "chapter": "Chapter 4",
+    "caption": "FIGURE 4.1 The magnetic field due to a straight long current-carrying wire.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p137_Figure_4_1.png"
+  },
+  {
+    "fig_id": "4.2",
+    "label": "Figure_4_2",
+    "page": 139,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.2 (a)]. ignitude of magnetic field Bis 1 SI unit, he force acting on a unit charge (1 C), ‘perpendicular to B with a speed 1m/s,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p139_Figure_4_2.png"
+  },
+  {
+    "fig_id": "4.3",
+    "label": "Figure_4_3",
+    "page": 141,
+    "chapter": "Chapter 4",
+    "caption": "FIGURE 4.3 Solution From Eq. (4.4), we find that there is an upward force F, of magnitude IIB,. For mid-air suspension, this must be balanced by",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p141_Figure_4_3.png"
+  },
+  {
+    "fig_id": "4.4",
+    "label": "Figure_4_4",
+    "page": 141,
+    "chapter": "Chapter 4",
+    "caption": "FIGURE 4.4 = B Solution The velocity v of particle is along the x-axis, while B, the 2 magnetic field is along the y-axis, so v x B is along the z-axis (screw 5",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p141_Figure_4_4.png"
+  },
+  {
+    "fig_id": "4.5",
+    "label": "Figure_4_5",
+    "page": 142,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.5). re If velocity has a component along B, this component . remains unchanged as the motion along the magnetic field will not be affected by the magnetic field. The motion y in a plane perpendicular to B is as before a circular one, thereby producing a helical motion (Fig. 4.6). y y You have already learnt in earlier classes (See Class XI, Chapter 4) that if ris the radius of the circular path ofa particle, then a force of mv*/ r, acts perpendicular to the path towards the centre of the circle, and is called the | centripetal force. If the velocity v is",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p142_Figure_4_5.png"
+  },
+  {
+    "fig_id": "4.6",
+    "label": "Figure_4_6",
+    "page": 142,
+    "chapter": "Chapter 4",
+    "caption": "FIGURE 4.6 Helical motion for the radius of the circle described by the charged particle. The larger the momentum,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p142_Figure_4_6.png"
+  },
+  {
+    "fig_id": "4.7",
+    "label": "Figure_4_7",
+    "page": 144,
+    "chapter": "Chapter 4",
+    "caption": "FIGURE 4.7 charge is zero and the charge v This happens when, E qE =qvB or v= R",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p144_Figure_4_7.png"
+  },
+  {
+    "fig_id": "4.8",
+    "label": "Figure_4_8",
+    "page": 144,
+    "chapter": "Chapter 4",
+    "caption": "Figure 4.8 shows a schematic view of the cyclotron. Inside boxes",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p144_Figure_4_8.png"
+  },
+  {
+    "fig_id": "4.9",
+    "label": "Figure_4_9",
+    "page": 147,
+    "chapter": "Chapter 4",
+    "caption": "FIGURE 4.9 Illustration of the Biot-Savart law. The current element I dl produces a field dB ata : distance r. The © sign indicates that",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p147_Figure_4_9.png"
+  },
+  {
+    "fig_id": "4.10",
+    "label": "Figure_4_10",
+    "page": 148,
+    "chapter": "Chapter 4",
+    "caption": "FIGURE 4.10 Solution M, I dl sin 6 dB | = —- —.— i",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p148_Figure_4_10.png"
+  },
+  {
+    "fig_id": "4.12",
+    "label": "Figure_4_12",
+    "page": 150,
+    "chapter": "Chapter 4",
+    "caption": "FIGURE 4.12 The magnetic field lines for a current loop. The direction of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p150_Figure_4_12.png"
+  },
+  {
+    "fig_id": "4.13",
+    "label": "Figure_4_13",
+    "page": 150,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.13(a). Consider the magnetic field B at the centre of the arc. (a) What is the magnetic field due to the straight segments? (b) In what way the contribution to B from the semicircle differs from that of a circular loop and in what way does it resemble? (c) Would your answer be different if",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p150_Figure_4_13.png"
+  },
+  {
+    "fig_id": "4.14",
+    "label": "Figure_4_14",
+    "page": 151,
+    "chapter": "Chapter 4",
+    "caption": "FIGURE 4.14 passing through the surface, i.e., pBedl = pio1 [4.17(a)] where I is the total current through the surface.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p151_Figure_4_14.png"
+  },
+  {
+    "fig_id": "4.15",
+    "label": "Figure_4_15",
+    "page": 153,
+    "chapter": "Chapter 4",
+    "caption": "FIGURE 4.15 Solution (a) Consider the case r > a. The Amperian loop, labelled 2,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p153_Figure_4_15.png"
+  },
+  {
+    "fig_id": "4.16",
+    "label": "Figure_4_16",
+    "page": 154,
+    "chapter": "Chapter 4",
+    "caption": "FIGURE 4.16 Figure (4.16) shows a plot of the magnitude of B with distance r ) from the centre of the wire. The direction of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p154_Figure_4_16.png"
+  },
+  {
+    "fig_id": "4.17",
+    "label": "Figure_4_17",
+    "page": 155,
+    "chapter": "Chapter 4",
+    "caption": "FIGURE 4.17 (a) The magnetic field due to a section of the solenoid which has been stretched out for clarity. Only the exterior semi-circular part is shown. Notice how the circular loops between neighbouring turns tend to cancel. (b) The magnetic field of a finite solenoid. Figure 4.17 displays the magnetic field lines for a finite solenoid. We how a section of this solenoid in an enlarged manner in Fig. 4.17(a). ‘igure 4.17(b) shows the entire finite solenoid with its magnetic field. In ‘ig. 4.17/(a), it is clear from the circular loops that the field between two .eighbouring turns vanishes. In Fig. 4.17(b), we see that the field at the aterior mid-point P is uniform, strong and along the axis of the solenoid. ‘he field at the exterior mid-point Q is weak and moreover is along the xis of the solenoid with no perpendicular or normal component. As the",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p155_Figure_4_17.png"
+  },
+  {
+    "fig_id": "4.18",
+    "label": "Figure_4_18",
+    "page": 155,
+    "chapter": "Chapter 4",
+    "caption": "FIGURE 4.18 The magnetic field of a very long solenoid. We conside rectangular Amperian loop abcd to determine the field.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p155_Figure_4_18.png"
+  },
+  {
+    "fig_id": "4.19",
+    "label": "Figure_4_19",
+    "page": 156,
+    "chapter": "Chapter 4",
+    "caption": "Figure 4.19(b) shows a sectional view of the toroid. The Qe ge direction of the magnetic field inside is clockwise as per the a 5 a right-hand thumb rule for circular loops. Three circular a woop ‘ Amperian loops 1, 2 and 3 are shown by dashed lines. By 3 i PD. ‘ symmetry, the magnetic field should be tangential to each ae ®\\ \\ of them and constant in magnitude for a given loop. The ' \\ Pe 4 y circular areas bounded by loops 2 and 3 both cut the toroid: \\ Xe » / so that each turn of current carrying wire is cut once by \\. ee é the loop 2 and twice by the loop 3. ‘ “ Let the magnetic field along loop 1 be B, in magnitude. ee Then in Ampere’s circuital law [Eq. 4.17(a)], L= 2m r,. oo",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p156_Figure_4_19.png"
+  },
+  {
+    "fig_id": "4.20",
+    "label": "Figure_4_20",
+    "page": 158,
+    "chapter": "Chapter 4",
+    "caption": "FIGURE 4.20 Two long straight parallel conductors carrying steady currents I, and I, and separated by a distance d. B, is the magnetic field set up by conductor ‘a’ at conductor ‘b’.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p158_Figure_4_20.png"
+  },
+  {
+    "fig_id": "4.21",
+    "label": "Figure_4_21",
+    "page": 161,
+    "chapter": "Chapter 4",
+    "caption": "FIGURE 4.21 (a) A rectangular current-carrying coil in uniform magnetic field. The magnetic moment m points downwards. The torque t is along the axis and tends to rotate the coil anticlockwise. (b) The couple acting on the coil.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p161_Figure_4_21.png"
+  },
+  {
+    "fig_id": "4.22",
+    "label": "Figure_4_22",
+    "page": 162,
+    "chapter": "Chapter 4",
+    "caption": "FIGURE 4.22 (a) The area vecto ABCD makes an arbitrary an the magnetic field. (b) Top the loop. The forces F, and ] on the arms AB and (¢",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p162_Figure_4_22.png"
+  },
+  {
+    "fig_id": "4.23",
+    "label": "Figure_4_23",
+    "page": 166,
+    "chapter": "Chapter 4",
+    "caption": "FIGURE 4.23 In the Bohr model “oP (4.32) of hydrogen-like atoms, the and T is the time period of revolution. Let r be the orbital negatively charged clectron is radius of the electron, and v the orbital speed. Then, revolving with uniform speed",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p166_Figure_4_23.png"
+  },
+  {
+    "fig_id": "4.24",
+    "label": "Figure_4_24",
+    "page": 168,
+    "chapter": "Chapter 4",
+    "caption": "FIGURE 4.24 The moving coil called shunt resistance, in parallel with galvanometer. Its elements are the galvanometer coil; so that most of the current described in the text. Depending on passes through the shunt. The resistance of this the requirement, this device can be arrangement is,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p168_Figure_4_24.png"
+  },
+  {
+    "fig_id": "4.27",
+    "label": "Figure_4_27",
+    "page": 170,
+    "chapter": "Chapter 4",
+    "caption": "FIGURE 4.27 Solution (a) Total resistance in",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p170_Figure_4_27.png"
+  },
+  {
+    "fig_id": "5.1",
+    "label": "Figure_5_1",
+    "page": 178,
+    "chapter": "Chapter 5",
+    "caption": "FIGURE 5.1 The arm of the statuette . a . mounted on the chariot always points as a subject in its own right. south. This is an artist’s sketch of one Some of the commonly known ideas regarding of the earliest known compasses, magnetism are:",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p178_Figure_5_1.png"
+  },
+  {
+    "fig_id": "5.2",
+    "label": "Figure_5_2",
+    "page": 179,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.2. SSW",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p179_Figure_5_2.png"
+  },
+  {
+    "fig_id": "5.5",
+    "label": "Figure_5_5",
+    "page": 185,
+    "chapter": "Chapter 5",
+    "caption": "FIGURE 5.5 Solution Potential energy of the configuration arises due to the potential energy of one dipole (say, Q) in the magnetic field due to other (P). Use",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p185_Figure_5_5.png"
+  },
+  {
+    "fig_id": "5.3",
+    "label": "Figure_5_3",
+    "page": 186,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.3(b). Both cases visually demonstrate that the number of magnetic field lines leaving",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p186_Figure_5_3.png"
+  },
+  {
+    "fig_id": "5.6",
+    "label": "Figure_5_6",
+    "page": 186,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.6. The magnetic flux through aS is Wilhelm Welser, he built the defined as A@,, = B-AS, where B is the field at AS. We divide first electric telegraph in S into many small area elements and calculate the 1833. His mathematical individual flux through each. Then, the net flux @, is, theory of curved surface laid the foundation for the Oy = y Aoz = y B-as =0 (5.9) later work of Riemann. ae ‘all where ‘all’ stands for ‘all area elements AS’. Compare this with the Gauss’s law of electrostatics. The flux through a closed surface in that case is given by Yeas = 4 E>",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p186_Figure_5_6.png"
+  },
+  {
+    "fig_id": "5.7",
+    "label": "Figure_5_7",
+    "page": 187,
+    "chapter": "Chapter 5",
+    "caption": "FIGURE 5.7 Solution (a) Wrong. Magnetic field lines can never emanate from a point, as shown in figure. Over any closed surface, the net flux of B must",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p187_Figure_5_7.png"
+  },
+  {
+    "fig_id": "5.8",
+    "label": "Figure_5_8",
+    "page": 190,
+    "chapter": "Chapter 5",
+    "caption": "FIGURE 5.8 The earth as a giant _ like the south pole of a bar magnet inside the earth and magnetic dipole. vice versa. Example 5.8 The earth’s magnetic field at",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p190_Figure_5_8.png"
+  },
+  {
+    "fig_id": "5.10",
+    "label": "Figure_5_10",
+    "page": 191,
+    "chapter": "Chapter 5",
+    "caption": "FIGURE 5.10 section through the earth magnetic field, B,, its horizontal containing the magnetic and vertical components, H, and meridian. The angle between B,. Z,. Also shown are the and the horizontal component declination, D and the H, is the angle of dip. inclination or angle of dip, I. In most of the northern hemisphere, the north pole of the dip needle tilts downwards. Likewise in most of the southern hemisphere, the south pole of the dip needle tilts downwards. To describe the magnetic field of the earth at a point on its surface, we need to specify three quantities, viz., the declination D, the angle of dip or the inclination Iand the horizontal component of the earth’s field H,,. These",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p191_Figure_5_10.png"
+  },
+  {
+    "fig_id": "5.13",
+    "label": "Figure_5_13",
+    "page": 197,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.13(a). When we apply an external magnetic field B,, the domains (a) Randomly orient themselves in the direction of B, and simultaneously the domain oriented domains, oriented in the direction of B, grow in size. This existence of domains and — (b) Aligned domains. their motion in B, are not speculations. One may observe this under a microscope after sprinkling a liquid suspension of powdered 193",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p197_Figure_5_13.png"
+  },
+  {
+    "fig_id": "5.12",
+    "label": "Figure_5_12",
+    "page": 198,
+    "chapter": "Chapter 5",
+    "caption": "Figure 5.12(b) shows the situation when aligned and amalgamated to form a single ‘giant’ domain. Thus, in a ferromagnetic material the field lines are h: concentrated. In non-uniform magnetic field, the sample tends to1",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p198_Figure_5_12.png"
+  },
+  {
+    "fig_id": "5.14",
+    "label": "Figure_5_14",
+    "page": 199,
+    "chapter": "Chapter 5",
+    "caption": "Figure 5.14 depicts the behaviour of the material as we take it through one cycle of magnetisation. Let the material be unmagnetised initially. We place it in a solenoid and increase the current through the solenoid. The magnetic field B in the material rises and saturates as depicted in the curve Oa. This behaviour represents the alignment and merger of domains until no further enhancement is possible. It is pointless to increase the current (and hence the magnetic intensity H) beyond this. Next, we decrease H and reduce it to zero. At H= 0, B #0. This is represented by the curve ab. The value of B at H = Ois called retentivity or remanence. In Fig. 5.14, B, ~ 1.2 T, where the subscript R denotes retentivity.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p199_Figure_5_14.png"
+  },
+  {
+    "fig_id": "5.15",
+    "label": "Figure_5_15",
+    "page": 200,
+    "chapter": "Chapter 5",
+    "caption": "FIGURE 5.15 4 blacksmith The hysteresis curve (Fig. 5.14) allows us to select suitable forging a permanent magnet by striking a red-hot rod of iron materials for permanent magnets. The material should have kept in the north-south high retentivity so that",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p200_Figure_5_15.png"
+  },
+  {
+    "fig_id": "5.16",
+    "label": "Figure_5_16",
+    "page": 200,
+    "chapter": "Chapter 5",
+    "caption": "P s FIGURE In certe magnetisati",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p200_Figure_5_16.png"
+  },
+  {
+    "fig_id": "6.1",
+    "label": "Figure_6_1",
+    "page": 209,
+    "chapter": "Chapter 6",
+    "caption": "FIGURE 6.1 When the bar magnet is pushed towards the coil, the pointer in the galvanometer G deflects.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p209_Figure_6_1.png"
+  },
+  {
+    "fig_id": "6.2",
+    "label": "Figure_6_2",
+    "page": 209,
+    "chapter": "Chapter 6",
+    "caption": "Fig. 6.2 the bar magnet is replaced bya second coil pushed towards the coil, the pointer in C, connected to a battery. The steady current in the the galvanometer G deflects. coil C, produces a steady magnetic field. As coil C, is",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p209_Figure_6_2.png"
+  },
+  {
+    "fig_id": "6.3",
+    "label": "Figure_6_3",
+    "page": 210,
+    "chapter": "Chapter 6",
+    "caption": "FIGURE 6.3 Experimental set-up for Experiment 6.3. 6 Bo & SD It is observed that the galvanometer shows a momentary deflec 5 = when the tapping key K is pressed. The pointer in the galvanometer rett",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p210_Figure_6_3.png"
+  },
+  {
+    "fig_id": "6.4",
+    "label": "Figure_6_4",
+    "page": 211,
+    "chapter": "Chapter 6",
+    "caption": "FIGURE 6.4 A plane of elements dA, surface area A placed in a zareaelement — yniform magnetic field B. sla meter dA; B, ved at a netic flux ervations concept. coil C, in , towards magnetic",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p211_Figure_6_4.png"
+  },
+  {
+    "fig_id": "6.7",
+    "label": "Figure_6_7",
+    "page": 215,
+    "chapter": "Chapter 6",
+    "caption": "Figure 6.7 shows planar loops of different shapes moving out of or into a region of a magnetic field which is directed normal to the plane of the loop away from the reader. Determine the direction of induced current in each loop using Lenz’s law. d a x x x x x c @ x x x x x x Bb a x x x x x x [> c b r x x «x x x Li",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p215_Figure_6_7.png"
+  },
+  {
+    "fig_id": "6.10",
+    "label": "Figure_6_10",
+    "page": 216,
+    "chapter": "Chapter 6",
+    "caption": "FIGURE 6.10 The arm PQ is moved to the left Of flux ®, will induce an emf given by: side, thus decreasing the area of the -d@ d rectangular loop. This movement é=—_4 = -— (Blx) induces a current I as shown. dt dt",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p216_Figure_6_10.png"
+  },
+  {
+    "fig_id": "6.8",
+    "label": "Figure_6_8",
+    "page": 216,
+    "chapter": "Chapter 6",
+    "caption": "FIGURE 6.8 (d) Predict the polarity of the capacitor in the situation described by",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p216_Figure_6_8.png"
+  },
+  {
+    "fig_id": "6.9",
+    "label": "Figure_6_9",
+    "page": 216,
+    "chapter": "Chapter 6",
+    "caption": "FIGURE 6.9 Solution (a) No. However strong",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p216_Figure_6_9.png"
+  },
+  {
+    "fig_id": "6.11",
+    "label": "Figure_6_11",
+    "page": 218,
+    "chapter": "Chapter 6",
+    "caption": "FIGURE 6.11 e electrons in the rod move towards the outer > and get distributed over the ring. Thus, the charges produces an emf across the ends of ue of emf, there is no more flow of electrons ached. Using Eq. (6.5), the magnitude of the ength dr of the rod as it moves at right angles Ziven by 2 -dr= BoR 2 v = qr. This gives re can imagine a closed loop OPQ in which",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p218_Figure_6_11.png"
+  },
+  {
+    "fig_id": "6.12",
+    "label": "Figure_6_12",
+    "page": 221,
+    "chapter": "Chapter 6",
+    "caption": "FIGURE 6.12 The force required to keep the arm PQ in constant motion is I 1B. Its direction is to the left. In magnitude 2-72. F= Ble O<x<b r =0 bs x<2b The Joule heating loss is P,=I’r B?Pv? =~ O<x<b re =0 b<x<2b 2 One obtains similar expressions for the inward motion from x = 2b to >",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p221_Figure_6_12.png"
+  },
+  {
+    "fig_id": "6.13",
+    "label": "Figure_6_13",
+    "page": 222,
+    "chapter": "Chapter 6",
+    "caption": "FIGURE 6.13 Eddy currents are in Fig. 6.14, area available to the flow of eddy currents is less. generated in the copper plate, Thus, the pendulum plate with holes or slots reduces while entering electromagnetic damping and the plate swings more freely. and leaving the region of Note that magnetic moments of the induced currents (which",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p222_Figure_6_13.png"
+  },
+  {
+    "fig_id": "6.14",
+    "label": "Figure_6_14",
+    "page": 222,
+    "chapter": "Chapter 6",
+    "caption": "FIGURE 6.14 Cutting slots rails oppose the motion of the train. As there are no mechanical in the copper plate reduces linkages, the braking effect is smooth. the effect of eddy currents. (ii) Electromagnetic damping: Certain galvanometers have a fixed core made of nonmagnetic metallic material. When",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p222_Figure_6_14.png"
+  },
+  {
+    "fig_id": "6.16",
+    "label": "Figure_6_16",
+    "page": 229,
+    "chapter": "Chapter 6",
+    "caption": "FIGURE 6.16 AC Generator d vector B and the 1ing 0= 0° at t= 0). nagnetic field lines time tis",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p229_Figure_6_16.png"
+  },
+  {
+    "fig_id": "6.17",
+    "label": "Figure_6_17",
+    "page": 230,
+    "chapter": "Chapter 6",
+    "caption": "FIGURE 6.17 An alternating emf is generated by a loop of wire rotating in a magnetic f In commercial generators, the mechanical energy required for 1 of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p230_Figure_6_17.png"
+  },
+  {
+    "fig_id": "6.18",
+    "label": "Figure_6_18",
+    "page": 233,
+    "chapter": "Chapter 6",
+    "caption": "FIGURE 6.18 229",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p233_Figure_6_18.png"
+  },
+  {
+    "fig_id": "6.19",
+    "label": "Figure_6_19",
+    "page": 234,
+    "chapter": "Chapter 6",
+    "caption": "FIGURE 6.19 with 15 turns per cm has a small loop of area 2.0 cm? 1e solenoid normal to its axis. If the current carried changes steadily from 2.0 A to 4.0 A in 0.1 s, what is",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p234_Figure_6_19.png"
+  },
+  {
+    "fig_id": "6.20",
+    "label": "Figure_6_20",
+    "page": 235,
+    "chapter": "Chapter 6",
+    "caption": "FIGURE 6.20 : an excess charge built up at the ends en? What if K is closed? open and the rod moving uniformly",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p235_Figure_6_20.png"
+  },
+  {
+    "fig_id": "6.21",
+    "label": "Figure_6_21",
+    "page": 236,
+    "chapter": "Chapter 6",
+    "caption": "FIGURE 6.21 A per unit length is lodged uniformh s M and radius R.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p236_Figure_6_21.png"
+  },
+  {
+    "fig_id": "6.22",
+    "label": "Figure_6_22",
+    "page": 236,
+    "chapter": "Chapter 6",
+    "caption": "FIGURE 6.22",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p236_Figure_6_22.png"
+  },
+  {
+    "fig_id": "7.2",
+    "label": "Figure_7_2",
+    "page": 238,
+    "chapter": "Chapter 7",
+    "caption": "FIGURE 7.2 In a pure values at the same time. Clearly, the voltage and current « resistor, the voltage and phase with each other. current are in phase. The We see that, like the applied voltage, the current v minima, zero and maxima sinusoidally and has corresponding positive and negative v: occur at the same duri h le. Th th f the instant: respective times. uring each cycle. Thus, the sum of the instantaneous cu values over one complete cycle is zero, and the average cu 234 is zero. The fact that the average current is zero,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p238_Figure_7_2.png"
+  },
+  {
+    "fig_id": "7.3",
+    "label": "Figure_7_3",
+    "page": 239,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.3) and is denoted by I, or I. development of alternating current motors and I apparatus for the i, transmission of high I tension current, pioneering in large scale lighting. 0 a 20 at hn Tee Come ee eet DP",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p239_Figure_7_3.png"
+  },
+  {
+    "fig_id": "7.1",
+    "label": "Figure_7_1",
+    "page": 241,
+    "chapter": "Chapter 7",
+    "caption": "Fig 7.1. (b) Graph of v and iversus at. , U, sinot and i, sinat, rrent at that instant. As )) are generated. he case of a resistor are 5 means that the phase . NDUCTOR",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p241_Figure_7_1.png"
+  },
+  {
+    "fig_id": "7.5",
+    "label": "Figure_7_5",
+    "page": 243,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.5. (b) Graph of v and iversus at. that the current reaches its maximum value later than the [T 2/2]",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p243_Figure_7_5.png"
+  },
+  {
+    "fig_id": "7.6",
+    "label": "Figure_7_6",
+    "page": 243,
+    "chapter": "Chapter 7",
+    "caption": "FIGURE 7.6 (a) A Phasor diagram for the circuit in Fig. 7.5. (b) Graph of v and iversus at. We see that the current reaches its maximum value later than the",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p243_Figure_7_6.png"
+  },
+  {
+    "fig_id": "7.7",
+    "label": "Figure_7_7",
+    "page": 244,
+    "chapter": "Chapter 7",
+    "caption": "FIGURE 7.7 Magnetisation and demagnetisation of an inductor.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p244_Figure_7_7.png"
+  },
+  {
+    "fig_id": "7.8",
+    "label": "Figure_7_8",
+    "page": 245,
+    "chapter": "Chapter 7",
+    "caption": "Figure 7.8 shows an ac source € generating ac voltage v = v,, sin wt connected to a capacitor only, a purely capacitive ac circuit. When a capacitor is connected to a voltage source in a de circuit, current will flow for the short time A B",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p245_Figure_7_8.png"
+  },
+  {
+    "fig_id": "7.9",
+    "label": "Figure_7_9",
+    "page": 246,
+    "chapter": "Chapter 7",
+    "caption": "FIGURE 7.9 (a) A Phasor diagram for the circuit A comparison of Eq. (7.16) with the in Fig. 7.8. (b) Graph of v and iversus ot. equation of source voltage, Eq. (7.1) shows that -",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p246_Figure_7_9.png"
+  },
+  {
+    "fig_id": "7.10",
+    "label": "Figure_7_10",
+    "page": 247,
+    "chapter": "Chapter 7",
+    "caption": "FIGURE 7.10 Charging and discharging of a capacitor.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p247_Figure_7_10.png"
+  },
+  {
+    "fig_id": "7.11",
+    "label": "Figure_7_11",
+    "page": 248,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.11. a",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p248_Figure_7_11.png"
+  },
+  {
+    "fig_id": "7.12",
+    "label": "Figure_7_12",
+    "page": 248,
+    "chapter": "Chapter 7",
+    "caption": "FIGURE 7.12 A series LCR circuit phasors and in the < connected to an ac source. Eq. (7.20) analytica 244 dependence of i.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p248_Figure_7_12.png"
+  },
+  {
+    "fig_id": "7.13",
+    "label": "Figure_7_13",
+    "page": 249,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.13(a) with apppropriate phase- on Yom relations. VR f a The length of these phasors or the amplitude ry RUA of V,, V, and V, are: ¥ ated x ra Vam = bn Rs Vom = bn Xe Urn = bn Xt (7.22) x \" » wt The voltage Equation (7.20) for",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p249_Figure_7_13.png"
+  },
+  {
+    "fig_id": "7.14",
+    "label": "Figure_7_14",
+    "page": 250,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.14: ~ tang= on Pim of URm Using Eq. (7.22), we have , Xo - X, ¢ OY) tan¢ = mee (7.27) R Equations (7.26) and (7.27) are graphically shown in Fig. (7.14). FIGURE 7.14 Impedance This is called Impedance diagram which is a right-triangle with diagram. Zas its hypotenuse. Equation 7.25(a) gives the amplitude of the current and Eq. (7.27) gives the phase angle. With these, Eq. (7.21) is completely specified.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p250_Figure_7_14.png"
+  },
+  {
+    "fig_id": "7.15",
+    "label": "Figure_7_15",
+    "page": 250,
+    "chapter": "Chapter 7",
+    "caption": "FIGURE 7.15 (a) Phasor diagram of V and I. (b) Graphs of v and iversus wt for a series LCR circuit where X, > X,.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p250_Figure_7_15.png"
+  },
+  {
+    "fig_id": "7.16",
+    "label": "Figure_7_16",
+    "page": 252,
+    "chapter": "Chapter 7",
+    "caption": "FIGURE 7.16 Variation of i,, with @ for two Resonant circuits have a var cases: (i) R = 100 Q, (ii) R = 200 Q, applications, for example, in the L = 1.00 mH. mechanism of a radio ora TV set. The an’ a radio accepts signals from many broac",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p252_Figure_7_16.png"
+  },
+  {
+    "fig_id": "7.17",
+    "label": "Figure_7_17",
+    "page": 257,
+    "chapter": "Chapter 7",
+    "caption": "FIGURE 7.17 the applied voltage V and I 7 perpendicular to the applied voltage. I 7 as you have learnt in Section 7.7, is called the wattless component since corresponding to this component of current, there is no power",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p257_Figure_7_17.png"
+  },
+  {
+    "fig_id": "7.18",
+    "label": "Figure_7_18",
+    "page": 259,
+    "chapter": "Chapter 7",
+    "caption": "FIGURE 7.18 At the instant shown,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p259_Figure_7_18.png"
+  },
+  {
+    "fig_id": "7.21",
+    "label": "Figure_7_21",
+    "page": 270,
+    "chapter": "Chapter 7",
+    "caption": "FIGURE 7.21 ine the source frequency which drives the circuit in ice. che impedance of the circuit and the amplitude of current ‘esonating frequency. ne the rms potential drops across the three elements of cuit. Show that the potential drop across the LC ition is zero at the resonating frequency.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p270_Figure_7_21.png"
+  },
+  {
+    "fig_id": "8.1",
+    "label": "Figure_8_1",
+    "page": 275,
+    "chapter": "Chapter 8",
+    "caption": "Fig. 8.1(c)]. On applying Ampere’s circuital law to such to es with the same perimeter, we find that the left hand side of +: 1) has not changed but the right hand side is zero and not Ui, c 10 current passes through the surface of Fig. 8.1(b) and (c). So we contradiction; calculated one way, there is a magnetic field at a fa) ?; calculated another way, the magnetic field at P is zero. . the contradiction arises from our use of Ampere’s circuital law, P - w must be missing something. The missing term must be such . ie gets the same magnetic field at point P, no matter what surface - L - can actually guess the missing term by looking carefully at - l(c). Is there anything passing through the surface S between the . of the capacitor? Yes, of course, the electric field! If the plates of the Cc",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p275_Figure_8_1.png"
+  },
+  {
+    "fig_id": "8.3",
+    "label": "Figure_8_3",
+    "page": 277,
+    "chapter": "Chapter 8",
+    "caption": "FIGURE 8.3 Solution The time constant of the CR circuit is t= CR = 10° s. Then, we have",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p277_Figure_8_3.png"
+  },
+  {
+    "fig_id": "8.2",
+    "label": "Figure_8_2",
+    "page": 279,
+    "chapter": "Chapter 8",
+    "caption": "Fig. 8.2. The electric field inside the plates of the capacitor physicist who was the",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p279_Figure_8_2.png"
+  },
+  {
+    "fig_id": "8.4",
+    "label": "Figure_8_4",
+    "page": 279,
+    "chapter": "Chapter 8",
+    "caption": "Fig. 8.4, we show a typical example of a plane electromagnetic wave propagating along the z direction (the fields are shown as a function of the z coordinate, at a given time ). The electric field E, is along the x-axis, and varies sinusoidally with z, at a given time. The magnetic field B, is along the y-axis, and again varies sinusoidally with z. The electric and magnetic fields E, and B, are perpendicular to each other, and to the direction z of propagation. We can write E, and B,as follows: E.= E, sin (kz-ot) [8.7(a)] B= B, sin (kz-ot) [8.7(b)] Here Icis related to the wave length 4 of the wave by the",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p279_Figure_8_4.png"
+  },
+  {
+    "fig_id": "8.5",
+    "label": "Figure_8_5",
+    "page": 284,
+    "chapter": "Chapter 8",
+    "caption": "FIGURE 8.5 The electromagnetic spectrum, with common names for various part of it. The various regions do not have sharply defined boundaries.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p284_Figure_8_5.png"
+  },
+  {
+    "fig_id": "8.6",
+    "label": "Figure_8_6",
+    "page": 290,
+    "chapter": "Chapter 8",
+    "caption": "FIGURE 8.6 : capacitor (Fig. 8.7) made of circul< 3. a capacitance C = 100 pF. The ca oply with a (angular) frequency of ‘",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p290_Figure_8_6.png"
+  },
+  {
+    "fig_id": "8.7",
+    "label": "Figure_8_7",
+    "page": 290,
+    "chapter": "Chapter 8",
+    "caption": "FIGURE 8.7 quantity is the same for of wavelength 6800 A and 1",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/p290_Figure_8_7.png"
+  }
+]

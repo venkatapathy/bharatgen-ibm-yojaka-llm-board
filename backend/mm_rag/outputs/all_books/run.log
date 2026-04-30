@@ -1,0 +1,108 @@
+nohup: ignoring input
+Books root : /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books
+Extractor  : /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert.py
+Hindi ext. : /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert_hindi.py
+Output root: /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books
+PDF count  : 30
+
+[1/30] Skipping (already extracted): English_Biology_Class-11.pdf
+
+[2/30] Skipping (already extracted): English_Biology_Class-12_Part-1.pdf
+
+[3/30] Skipping (already extracted): English_Biology_Class-12_Part-2.pdf
+
+[4/30] Skipping (already extracted): English_Chemistry_Class-11_Part-1.pdf
+
+[5/30] Skipping (already extracted): English_Chemistry_Class-11_Part-2.pdf
+
+[6/30] Skipping (already extracted): English_Chemistry_Class-12_Part-1.pdf
+
+[7/30] Skipping (already extracted): English_Chemistry_Class-12_Part-2.pdf
+
+[8/30] Skipping (already extracted): English_Maths_Class-10.pdf
+
+[9/30] Skipping (already extracted): English_Maths_Class-11.pdf
+
+[10/30] Skipping (already extracted): English_Maths_Class-12_Part-1.pdf
+
+[11/30] Skipping (already extracted): English_Maths_Class-12_Part-2.pdf
+
+[12/30] Skipping (already extracted): English_Physics_Class-11.pdf
+
+[13/30] Skipping (already extracted): English_Physics_Class-12_Part-1.pdf
+
+[14/30] Skipping (already extracted): English_Physics_Class-12_Part-2.pdf
+
+[15/30] Skipping (already extracted): English_Science_Class-10.pdf
+
+[16/30] Extracting: Hindi_Biology_Class-11.pdf
+  using: extract_ncert_hindi.py
+  ✓ done in 1119.38s -> /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_biology_class-11_hindi_biology_class-11
+
+[17/30] Extracting: Hindi_Biology_Class-12.pdf
+  using: extract_ncert_hindi.py
+  ✓ done in 1152.32s -> /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_biology_class-12_hindi_biology_class-12
+
+[18/30] Extracting: Hindi_Chemistry_Class-11_Part-1.pdf
+  using: extract_ncert_hindi.py
+  ✓ done in 1379.97s -> /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_chemistry_class-11_hindi_chemistry_class-11_part-1
+
+[19/30] Extracting: Hindi_Chemistry_Class-11_Part-2.pdf
+  using: extract_ncert_hindi.py
+  ✓ done in 502.31s -> /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_chemistry_class-11_hindi_chemistry_class-11_part-2
+
+[20/30] Extracting: Hindi_Chemistry_Class-12_Part-1.pdf
+  using: extract_ncert_hindi.py
+  ✓ done in 720.24s -> /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_chemistry_class-12_hindi_chemistry_class-12_part-1
+
+[21/30] Extracting: Hindi_Chemistry_Class-12_Part-2.pdf
+  using: extract_ncert_hindi.py
+  ✓ done in 622.95s -> /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_chemistry_class-12_hindi_chemistry_class-12_part-2
+
+[22/30] Extracting: Hindi_Maths_Class-10.pdf
+  using: extract_ncert_hindi.py
+  ✓ done in 915.14s -> /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_maths_class-10_hindi_maths_class-10
+
+[23/30] Extracting: Hindi_Maths_Class-11.pdf
+  using: extract_ncert_hindi.py
+  ✗ failed in 0.08s
+    ❌  pdfplumber not found.  Run:  pip install pdfplumber
+
+[24/30] Extracting: Hindi_Maths_Class-12_Part-1.pdf
+  using: extract_ncert_hindi.py
+  ✗ failed in 0.08s
+    ❌  pdfplumber not found.  Run:  pip install pdfplumber
+
+[25/30] Extracting: Hindi_Maths_Class-12_Part-2.pdf
+  using: extract_ncert_hindi.py
+  ✗ failed in 0.07s
+    ❌  pdfplumber not found.  Run:  pip install pdfplumber
+
+[26/30] Extracting: Hindi_Physics_Class-11_Part-1.pdf
+  using: extract_ncert_hindi.py
+  ✗ failed in 0.08s
+    ❌  pdfplumber not found.  Run:  pip install pdfplumber
+
+[27/30] Extracting: Hindi_Physics_Class-11_Part-2.pdf
+  using: extract_ncert_hindi.py
+  ✗ failed in 0.08s
+    ❌  pdfplumber not found.  Run:  pip install pdfplumber
+
+[28/30] Extracting: Hindi_Physics_Class-12_Part-1.pdf
+  using: extract_ncert_hindi.py
+  ✗ failed in 0.06s
+    ❌  pdfplumber not found.  Run:  pip install pdfplumber
+
+[29/30] Extracting: Hindi_Physics_Class-12_Part-2.pdf
+  using: extract_ncert_hindi.py
+  ✗ failed in 0.06s
+    ❌  pdfplumber not found.  Run:  pip install pdfplumber
+
+[30/30] Extracting: Hindi_Science_Class-10.pdf
+  using: extract_ncert_hindi.py
+  ✗ failed in 0.07s
+    ❌  pdfplumber not found.  Run:  pip install pdfplumber
+
+============================================================
+Completed. OK=7  SKIPPED=15  FAILED=8
+Summary: /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/batch_summary.json

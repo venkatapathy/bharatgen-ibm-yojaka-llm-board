@@ -1,0 +1,706 @@
+[
+  {
+    "fig_id": "1.1",
+    "label": "Figure_1_1",
+    "page": 15,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.1 Arrangement of particles in solid, liquid and gaseous state Fig. 1.2 Classification of matter (iii) Gases have neither definite volume nor _ the bulk of the mixture and its composition is wae — te vs ele Ud Oe de",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p015_Figure_1_1.png"
+  },
+  {
+    "fig_id": "1.2",
+    "label": "Figure_1_2",
+    "page": 15,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.2 Classification of matter the bulk of the mixture and its composition is uniform throughout. Sugar solution and air",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p015_Figure_1_2.png"
+  },
+  {
+    "fig_id": "1.3",
+    "label": "Figure_1_3",
+    "page": 16,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.3 A representation of atoms and molecules point, density, etc., and chemical proper like composition, combustibility, ractivity When two or more atoms of different acids and bases, etc. elements combine together in a definite ratio, Physical properties can be measure",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p016_Figure_1_3.png"
+  },
+  {
+    "fig_id": "1.4",
+    "label": "Figure_1_4",
+    "page": 16,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.4 A depiction of molecules of water and } carbon dioxide c carbon atom. Thus, the atoms of different 1 elements are present in a compound in a fixed » and definite ratio and this ratio is characteristic > ofa particular compound. Also, the properties of a compound are different from those of its constituent elements. For example, hydrogen and oxygen are gases, whereas, the compound formed by their combination i.e., water is a liquid. It is interesting to note that hydrogen burns with a pop sound and oxygen is a supporter of combustion, but water is used",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p016_Figure_1_4.png"
+  },
+  {
+    "fig_id": "1.5",
+    "label": "Figure_1_5",
+    "page": 19,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.5 Analytical balance T P SI system, volume has units of m°. But again,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p019_Figure_1_5.png"
+  },
+  {
+    "fig_id": "1.6",
+    "label": "Figure_1_6",
+    "page": 19,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.6 Different units used to express substance. It has the units of (length)*. So in volume",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p019_Figure_1_6.png"
+  },
+  {
+    "fig_id": "1.7",
+    "label": "Figure_1_7",
+    "page": 20,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.7 Some volume measuring devices temperature is not possible. 1.3.6 Density The two properties — mass and volume Boiling pin 212°F of water",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p020_Figure_1_7.png"
+  },
+  {
+    "fig_id": "1.8",
+    "label": "Figure_1_8",
+    "page": 20,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.8 Thermometers using different v temperature scales ’ 1.4 UNCERTAINTY IN MEASUREMENT Many a time in the study of chemistry, one",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p020_Figure_1_8.png"
+  },
+  {
+    "fig_id": "1.9",
+    "label": "Figure_1_9",
+    "page": 26,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.9 Two volumes of hydrogen react with one volume of oxygen to give two volumes of water vapour same kind cannot combine and molecules of Dalton’s theory could explain the laws of oxygen or hydrogen containing two atoms did — chemical combination",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p026_Figure_1_9.png"
+  },
+  {
+    "fig_id": "1.10",
+    "label": "Figure_1_10",
+    "page": 27,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.10 Packing of Na* and Cl ions in sodium chloride",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p027_Figure_1_10.png"
+  },
+  {
+    "fig_id": "1.11",
+    "label": "Figure_1_11",
+    "page": 28,
+    "chapter": "Chapter 1",
+    "caption": "Fig. 1.11 One mole of various substances",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p028_Figure_1_11.png"
+  },
+  {
+    "fig_id": "2.2",
+    "label": "Figure_2_2",
+    "page": 41,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.2. The apparatus to determine the charge to the mass ratio of electron",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p041_Figure_2_2.png"
+  },
+  {
+    "fig_id": "2.3",
+    "label": "Figure_2_3",
+    "page": 42,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.3 The Millikan oil drop apparatus for measuring charge ‘e’. In chamber, the forces acting on oil drop are: gravitational, electrostatic due to electrical field and a viscous drag force when the oil drop is moving. e to explain the formation of different kinds of molecules by the combination of different atoms and, e to understand the origin and nature of the characteristics of electromagnetic radiation absorbed or emitted by atoms.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p042_Figure_2_3.png"
+  },
+  {
+    "fig_id": "2.4",
+    "label": "Figure_2_4",
+    "page": 43,
+    "chapter": "Chapter 2",
+    "caption": "Fig.2.4 Thomson model of atom which emit radiation on their own and visualised as a pudding or watermelon of named this phenomenon as positive charge with plums or seeds (electrons) radioactivity and the elements known embedded into it. An important feature of this as radioactive elements. This field was",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p043_Figure_2_4.png"
+  },
+  {
+    "fig_id": "2.5",
+    "label": "Figure_2_5",
+    "page": 44,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.5 Schematic view of Rutherford’s negligibly small as compared to scattering experiment. When a beam volume of the atom. The radius of the of alpha (a) particles is “shot” at a thin atom is about 10°'°m, while that of gold foil, most of them pass through nucleus is 10m. One can appreciate",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p044_Figure_2_5.png"
+  },
+  {
+    "fig_id": "2.6",
+    "label": "Figure_2_6",
+    "page": 48,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.6.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p048_Figure_2_6.png"
+  },
+  {
+    "fig_id": "2.7",
+    "label": "Figure_2_7",
+    "page": 48,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.7 (a) The spectrum of electromagnetic radiation. (b) Visible spectrum. The visible region is only a small part of the entire spectrum.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p048_Figure_2_7.png"
+  },
+  {
+    "fig_id": "2.8",
+    "label": "Figure_2_8",
+    "page": 50,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.8 Wavelength-intensity relationsh Fig. 2.8(a) Black body 19",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p050_Figure_2_8.png"
+  },
+  {
+    "fig_id": "2.9",
+    "label": "Figure_2_9",
+    "page": 51,
+    "chapter": "Chapter 2",
+    "caption": "Fig.2.9 Equipment for studying the photoelectric them should depend on the brightness of light. effect. Light of a Co eee aide te bacuuan It has been observed that though the number chamber. Electrons are ejected from the Of electrons ejected does depend upon the metal and are counted by a detector that _ brightness of light, the kinetic energy of the measures their kinetic energy.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p051_Figure_2_9.png"
+  },
+  {
+    "fig_id": "2.10",
+    "label": "Figure_2_10",
+    "page": 55,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.10 (a) Atomic emission. The light emitted by a sample of excited hydrogen atoms (or any other element) can be passed through a prism and separated into certain discrete wavelengths. Thus an emission spectrum, which is a photographic recording of the separated wavelengths is called as line spectrum. Any sample of reasonable size contains an enormous number of atoms. Although a single atom can be in only one excited state at a time, the collection of atoms contains all possible excited states. The light emitted as these atoms fall to lower energy states is responsible for the spectrum. (b) Atomic absorption. When white light is passed through unexcited atomic hydrogen and then through a slit and prism, the transmitted light is lacking in intensity at the same wavelengths as are emitted in (a) The recorded absorption spectrum is also a line spectrum and the photographic negative of the emission spectrum. spectral lines are expressed in terms of wavenumber (7), then the visible lines of the hydrogen spectrum obey the following formula:",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p055_Figure_2_10.png"
+  },
+  {
+    "fig_id": "2.11",
+    "label": "Figure_2_11",
+    "page": 56,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.11 Transitions of the electron in the hydrogen atom (The diagram shows the Lyman, Balmer and Paschen series of transitions) more and more complex for heavier atom. There are,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p056_Figure_2_11.png"
+  },
+  {
+    "fig_id": "2.12",
+    "label": "Figure_2_12",
+    "page": 67,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.12(a), These probability density variation can be gives such plots for 1s(n=1,1=0)and2s(n= visualised in terms of charge cloud diagrams 2, 1= 0) orbitals. [Fig. 2.13(a)]. In these diagrams,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p067_Figure_2_12.png"
+  },
+  {
+    "fig_id": "2.13",
+    "label": "Figure_2_13",
+    "page": 67,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.13(a)]. In these diagrams,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p067_Figure_2_13.png"
+  },
+  {
+    "fig_id": "2.14",
+    "label": "Figure_2_14",
+    "page": 68,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.14. Inthese _ through the nucleus. The probability density diagrams,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p068_Figure_2_14.png"
+  },
+  {
+    "fig_id": "2.15",
+    "label": "Figure_2_15",
+    "page": 69,
+    "chapter": "Chapter 2",
+    "caption": "Fig. 2.15 Boundary surface diagrams of 3d orbitals.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p069_Figure_2_15.png"
+  },
+  {
+    "fig_id": "2.17",
+    "label": "Figure_2_17",
+    "page": 72,
+    "chapter": "Chapter 2",
+    "caption": "Fig.2.17 Order of filling of orbitals (that is, orbitals of equal en",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p072_Figure_2_17.png"
+  },
+  {
+    "fig_id": "3.2",
+    "label": "Figure_3_2",
+    "page": 90,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.2 Long form of the Periodic Table of the Elements with their atomic numbers and ground state outer electronic configurations.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p090_Figure_3_2.png"
+  },
+  {
+    "fig_id": "3.3",
+    "label": "Figure_3_3",
+    "page": 94,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.3 The types of elements in the Periodic Table based on the orbitals that g",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p094_Figure_3_3.png"
+  },
+  {
+    "fig_id": "3.4",
+    "label": "Figure_3_4",
+    "page": 98,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.4 (a) Variation of atomic radius with Fig. 3.4 (b) Variation of atomic radius with atomic number across the second atomic number for alkali metals period and halogens (b) Ionic Radius attraction of the electrons to the nucleus. Ar",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p098_Figure_3_4.png"
+  },
+  {
+    "fig_id": "3.5",
+    "label": "Figure_3_5",
+    "page": 99,
+    "chapter": "Chapter 3",
+    "caption": "Fig. 3.5. The periodicity of the graphis quite | Properties. To understand these trends, we striking. You will find maxima at the noble gases have to consider two factors : (i) the attraction which have closed electron shells and very of electrons towards the nucleus, and (ii) the stable electron configurations. On the other repulsion of electrons from each other. The",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p099_Figure_3_5.png"
+  },
+  {
+    "fig_id": "3.6",
+    "label": "Figure_3_6",
+    "page": 100,
+    "chapter": "Chapter 3",
+    "caption": "‘on (Z=5)is the ease with which an atom adds an electron (Z=4)even to form anion as represented by equation 3.3. ‘lear charge. . . Viel 2 a- . Wen mai",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p100_Figure_3_6.png"
+  },
+  {
+    "fig_id": "4.1",
+    "label": "Figure_4_1",
+    "page": 117,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.1 The bond ges gra covalent energy is required to separate one mole of a . . solid NaCl into one mole of Na* (g) and one # ake cde taf come a Ta and Tr male af Cl fal ta an infinite dictance wy",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p117_Figure_4_1.png"
+  },
+  {
+    "fig_id": "4.2",
+    "label": "Figure_4_2",
+    "page": 117,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.2. Covalent and van der Waals radii ina core which is in contact with the core of chlorine molecule. The inner circles an adjacent atom in a bonded situation. correspond to the size of the chlorine atom The covalent radius is half of the distance (Tq and r, are van der Waals and between two similar atoms joined by a covalent radii respectively).",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p117_Figure_4_2.png"
+  },
+  {
+    "fig_id": "4.4",
+    "label": "Figure_4_4",
+    "page": 120,
+    "chapter": "Chapter 4",
+    "caption": "Fig.4.4 Resonance in COZ, I, Il and fractions of time in other cannonical III represent the three forms. canonical forms. e There is no such equilibrium between peoDlenr the cannonical forms as we have Explain the structure of CO, molecule. between tautomeric forms (keto and Solution enol) in tautomerism. The experimentally determined carbon ¢ The molecule as such has a single to oxygen bond length in CO, is structure which is the resonance 115 pm. The lengths of a normal hybrid of the cannonical forms and carbon to oxygen double bond (C=O) which cannot as such be depicted by and carbon to oxygen triple bond (C=O) a single Lewis structure. are 121 pm and 110 pm respectively. ————",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p120_Figure_4_4.png"
+  },
+  {
+    "fig_id": "4.5",
+    "label": "Figure_4_5",
+    "page": 120,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.5 Resonance in co, molecule, I, II and III represent the three canonical forms. In general, it may be stated that e Resonance stabilizes the molecule as the energy of the resonance hybrid is less than the energy of any single cannonical structure; and, e Resonance averages the bond characteristics as a whole. Thus the energy of the O, resonance hybrid is lower than either of the two cannonical froms I and II (Fig 4.3).",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p120_Figure_4_5.png"
+  },
+  {
+    "fig_id": "4.6",
+    "label": "Figure_4_6",
+    "page": 123,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.6 The shapes of molecules in which central atom has no lone pair ° The VSEPR Theory is able to predict t geometry of a large number of molecules, 3 especially the compounds of p-block elements ° accurately. It is also quite successful in t determining the geometry quite-accurately ° even when the energy difference between ° possible structures is very small. The f theoretical basis of the VSEPR theory 1 regarding the effects of electron pair repulsions 1 on molecular shapes is not clear and - continues to be a subject of doubt and",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p123_Figure_4_6.png"
+  },
+  {
+    "fig_id": "4.7",
+    "label": "Figure_4_7",
+    "page": 128,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.7 Forces of attraction and repulsion during merging of atomic orbitals is called overlapping the formation of H, molecule. of atomic orbitals which results in the pairing Experimentally it has been found that the of electrons. The extent of overlap decides the magnitude of new attractive force is more than _ Strength ofa covalent bond. In general, greater 4 +e * wo the averlan the etranaar ic the hand farmed",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p128_Figure_4_7.png"
+  },
+  {
+    "fig_id": "4.8",
+    "label": "Figure_4_8",
+    "page": 128,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.8 The potential energy curve for the formation of H, molecule as a function of internuclear distance of the H atoms. The minimum in the curve corresponds to the most stable state of H,. 4.5.1 Orbital Overlap Concept In the formation of hydrogen molecule, there",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p128_Figure_4_8.png"
+  },
+  {
+    "fig_id": "4.9",
+    "label": "Figure_4_9",
+    "page": 129,
+    "chapter": "Chapter 4",
+    "caption": "Fig.4.9 Positive, negative and zero overlaps of 1 s and p atomic orbitals p _ hydrogen.The four atomic orbitals of carbon, each with an unpaired electron can overlap r with the 1s orbitals of the four H atoms which 5 arealso singly occupied. This will result in the ; _ formation of four C-H bonds. It will,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p129_Figure_4_9.png"
+  },
+  {
+    "fig_id": "4.10",
+    "label": "Figure_4_10",
+    "page": 131,
+    "chapter": "Chapter 4",
+    "caption": "Fig.4.10 (a) Formation of sp hybrids from s and p orbitals; (b) Formation of the linear BeCl, molecule (II) sp? hybridisation : In this hybridisation",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p131_Figure_4_10.png"
+  },
+  {
+    "fig_id": "4.11",
+    "label": "Figure_4_11",
+    "page": 131,
+    "chapter": "Chapter 4",
+    "caption": "Planar sp’ hybrids j.4.11 Formation of sp’ hybrids and the BCL, molecule",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p131_Figure_4_11.png"
+  },
+  {
+    "fig_id": "4.12",
+    "label": "Figure_4_12",
+    "page": 132,
+    "chapter": "Chapter 4",
+    "caption": "Fig.4.12 Formation of sp*® hybrids by the combination of s , p,. p, and p, atomic \\ orbitals of carbon and the formation of P SSID CH, molecule 1 H",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p132_Figure_4_12.png"
+  },
+  {
+    "fig_id": "4.13",
+    "label": "Figure_4_13",
+    "page": 132,
+    "chapter": "Chapter 4",
+    "caption": "Fig.4.13 Formation of NH, molecule In case of H,O molecule, the four oxy orbitals (one 2s and three 2p) undergo",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p132_Figure_4_13.png"
+  },
+  {
+    "fig_id": "4.14",
+    "label": "Figure_4_14",
+    "page": 132,
+    "chapter": "Chapter 4",
+    "caption": "Fig.4.14 Formation of H,O molecule -19",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p132_Figure_4_14.png"
+  },
+  {
+    "fig_id": "4.15",
+    "label": "Figure_4_15",
+    "page": 133,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.15 Formation of sigma and pi bonds in ethene",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p133_Figure_4_15.png"
+  },
+  {
+    "fig_id": "4.16",
+    "label": "Figure_4_16",
+    "page": 134,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.16. below: Shape of Hybridisation | Atomic Examples Hs so His molecules/ type orbitals OcDD) oe 3 C CS ; sp sp Square dsp* dt+stp(2) [Ni(CN),]}*, planar [Pt(Cl),]? a (a) Trigonal sp°d stp(3)+d PF,, PCl, bipyramidal Square sp*d? st+p(3)+d(2) | BrF, 2p. 2, pyramidal “ \\ 21, Octahedral sp°a? stp(3)t+d(2) | SF, [CrF,]*",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p134_Figure_4_16.png"
+  },
+  {
+    "fig_id": "4.17",
+    "label": "Figure_4_17",
+    "page": 135,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.17 Trigonal bipyramidal geometry of PCl, molecule 8 F It should be noted that all the bond angles S . toe sae ~4o8 . . ~",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p135_Figure_4_17.png"
+  },
+  {
+    "fig_id": "4.18",
+    "label": "Figure_4_18",
+    "page": 135,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.18 Octahedral geometry of SF, molecule",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p135_Figure_4_18.png"
+  },
+  {
+    "fig_id": "4.19",
+    "label": "Figure_4_19",
+    "page": 136,
+    "chapter": "Chapter 4",
+    "caption": "Fig.4.19 Formation of bonding (6) and e antibonding (6*) molecular orbitals by the a linear combination of atomic orbitals y, r and y,, centered on two atoms A and B s respectively.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p136_Figure_4_19.png"
+  },
+  {
+    "fig_id": "4.20",
+    "label": "Figure_4_20",
+    "page": 138,
+    "chapter": "Chapter 4",
+    "caption": "2p. 2p. m2P 20 Contours and energies of bonding and antibonding molecular orbitals formed thr combinations of (a) 1s atomic orbitals; (b) 2p, atomic orbitals and (c) 2p,, atomic orbitals. » atoms) give rise to the following eight The energy levels of these molec",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p138_Figure_4_20.png"
+  },
+  {
+    "fig_id": "4.21",
+    "label": "Figure_4_21",
+    "page": 141,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.21 MO occupancy and molecular properties for B, through Ne,. TYDROGEN BONDING Hydrogen bond is represented by a dotted gen, oxygen and fluorine are the higly | (-—-) while a solid line represents the cove te . . ww at hand When herdencan hand ane ha Anfi",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p141_Figure_4_21.png"
+  },
+  {
+    "fig_id": "4.22",
+    "label": "Figure_4_22",
+    "page": 142,
+    "chapter": "Chapter 4",
+    "caption": "Fig. 4.22 Intramolecular hydrogen bondir - o-nitrophenol molecule",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p142_Figure_4_22.png"
+  },
+  {
+    "fig_id": "5.1",
+    "label": "Figure_5_1",
+    "page": 147,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.1 Dispersion forces or London fi between atoms.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p147_Figure_5_1.png"
+  },
+  {
+    "fig_id": "5.2",
+    "label": "Figure_5_2",
+    "page": 148,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.2 (a) Distribution of electron cloud in HCl - As already mentioned in section (5.1); this a polar molecule, (b) Dipole-dipole special case of dipole-dipole interaction. ° interaction between two HCl molecules have already learnt about this in Unit 4. Tl",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p148_Figure_5_2.png"
+  },
+  {
+    "fig_id": "5.3",
+    "label": "Figure_5_3",
+    "page": 148,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.3 Dipole - induced dipole interaction between permanent dipole and induced dipole In this case also cumulative effect of ) dispersion forces and dipole-induced dipole interactions exists. 5.1.4 Hydrogen bond - As already mentioned in section (5.1); this is 2 special case of dipole-dipole interaction. We",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p148_Figure_5_3.png"
+  },
+  {
+    "fig_id": "5.4",
+    "label": "Figure_5_4",
+    "page": 150,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.4 Eleven elements that exist as gases On the basis of his experiments, Robert Boyle | ce reached to the conclusion that at constant exist as gases under normal conditions temperature, the pressure of a fixed (Fig 5.4). amount (i.e., number of moles n) of gas The gaseous state is characterized by the varies inversely with its volume. This is following physical properties. known as Boyle’s law. Mathematically, it can",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p150_Figure_5_4.png"
+  },
+  {
+    "fig_id": "5.5",
+    "label": "Figure_5_5",
+    "page": 151,
+    "chapter": "Chapter 5",
+    "caption": "Figure 5.5 shows two conventional ways of graphically presenting Boyle’s law. Fig. 5.5 (a) is the graph of equation (5.3) at different temperatures. The value of k, for each t curve is different because for a given mass of gas, it varies only with temperature. Each S curve corresponds to a different constant 2 temperature and is known as an isotherm s (constant temperature plot). Higher curves g 600 K correspond to higher temperature. It should 8 be noted that volume of the gas doubles if & 400 K pressure is halved. Table 5.1 gives effect of 200 K pressure on volume of 0.09 mol of CO, at",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p151_Figure_5_5.png"
+  },
+  {
+    "fig_id": "5.6",
+    "label": "Figure_5_6",
+    "page": 153,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.6 Volume vs Temperature (°C) graph burst if pressure is not adjusted properly. Each line of the volume vs temperature During winters, on a cold morning one may graph is called isobar. find the pressure in the tyres of a vehicle a+ . aa _ - a decreased considerablv.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p153_Figure_5_6.png"
+  },
+  {
+    "fig_id": "5.7",
+    "label": "Figure_5_7",
+    "page": 154,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.7 Pressure vs temperature (K) graph (STP). (Isochores) of a gas. Argon 22.37 5.5.4 Avogadro Law (Volume - Amount Carbon dioxide 29.54 Relationship) Dinitrasen 29. 69",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p154_Figure_5_7.png"
+  },
+  {
+    "fig_id": "5.8",
+    "label": "Figure_5_8",
+    "page": 158,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.8: Maxwell-Boltzmann distribution of speeds 1 translational kinetic energy, zm , for the The graph shows that number of molecules oo, | ; possessing very high and very low speed is very movement of a gas particle in a straight line om : soos - we remiire the value af mean af canare a",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p158_Figure_5_8.png"
+  },
+  {
+    "fig_id": "5.9",
+    "label": "Figure_5_9",
+    "page": 158,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.9: Distribution of molecular speeds for chlorine and nitrogen at 300 K We know that kinetic energy of a particle is given by the expression: Kinetic Energy = 5 mu? Therefore, if we want to know average i — translational kinetic energy, zm , for the s y movement of a gas particle in a straight line, s we require the value of mean of square of f speeds, 12, of all molecules. This is t represented as follows:",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p158_Figure_5_9.png"
+  },
+  {
+    "fig_id": "5.10",
+    "label": "Figure_5_10",
+    "page": 160,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.10 Plot of pV vs p for real gas and Fig. 5.11 Plot of pressure vs volume for real gas ideal gas and ideal gas",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p160_Figure_5_10.png"
+  },
+  {
+    "fig_id": "5.11",
+    "label": "Figure_5_11",
+    "page": 160,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.11 Plot of pressure vs volume for real gas and ideal gas t It is found that real gases do not follow, 1 Boyle’s law, Charles law and Avogadro law 1 perfectly under all conditions. Now two ° questions arise. 5 (i) Why do gases deviate from the ideal 1 behaviour? > (ii) What are the conditions under which gases a deviate from ideality?",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p160_Figure_5_11.png"
+  },
+  {
+    "fig_id": "5.12",
+    "label": "Figure_5_12",
+    "page": 162,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.12 Variation of compressibility factor for some gases occupied is large so that the volume of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p162_Figure_5_12.png"
+  },
+  {
+    "fig_id": "5.14",
+    "label": "Figure_5_14",
+    "page": 165,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.14 Vapour pressure vs temperature curve force is towards the interior of the liquid (Fig. of some common liquids. 5.15), due to the molecules below it. Since there",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p165_Figure_5_14.png"
+  },
+  {
+    "fig_id": "5.15",
+    "label": "Figure_5_15",
+    "page": 165,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.15 Forces acting on a molecule on liquid surface and on a molecule inside",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p165_Figure_5_15.png"
+  },
+  {
+    "fig_id": "5.16",
+    "label": "Figure_5_16",
+    "page": 166,
+    "chapter": "Chapter 5",
+    "caption": "Fig. 5.16 Gradation of velocity in 3 flow : retards its flow. 3 If the velocity of the layer at a distance dz . ischanged bya value du then velocity gradient 1 du > is given by the amount. a A force is required to maintain the flow of layers. This force is 1 proportional to the area of contact of layers ° and velocity gradient i.e. ‘ F «A (Ais the area of contact) . Fo«A du h du | loci dient o A, — :",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p166_Figure_5_16.png"
+  },
+  {
+    "fig_id": "6.1",
+    "label": "Figure_6_1",
+    "page": 171,
+    "chapter": "Chapter 6",
+    "caption": "Fig. 6.1 System and the surroundings ; |",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p171_Figure_6_1.png"
+  },
+  {
+    "fig_id": "6.2",
+    "label": "Figure_6_2",
+    "page": 171,
+    "chapter": "Chapter 6",
+    "caption": "Fig. 6.2 Open, closed and isolated systems. walls of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p171_Figure_6_2.png"
+  },
+  {
+    "fig_id": "6.3",
+    "label": "Figure_6_3",
+    "page": 172,
+    "chapter": "Chapter 6",
+    "caption": "Fig. 6.3 An adiabatic system which doe permit the transfer of heat throw boundary. it. Let us call the initial state of the syste state A and its temperature as T,. Le internal energy of the system in state called U,. We can change the state of the sy in two different ways.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p172_Figure_6_3.png"
+  },
+  {
+    "fig_id": "6.4",
+    "label": "Figure_6_4",
+    "page": 173,
+    "chapter": "Chapter 6",
+    "caption": "Fig. 6.4 A system which allows heat transfer through its boundary. ] We take water at temperature, T, in a 3 container having thermally conducting walls, a say made up of copper and enclose it in a huge , heat reservoir at temperature, T,. The heat a absorbed by the system (water), q can be 1] measured in terms of temperature difference , T,, — T,. In this case change in internal energy, , AU= q, when no work is done at constant volume. 8 By conventions of IUPAC in chemical 1 thermodynamics. The q is positive, when",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p173_Figure_6_4.png"
+  },
+  {
+    "fig_id": "6.5",
+    "label": "Figure_6_5",
+    "page": 174,
+    "chapter": "Chapter 6",
+    "caption": "Fig. 6.5(a) Work done on an ideal gas ina cylinder when it is compressed by a constant external pressure, Pp., (in single step) is equal to the shaded area.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p174_Figure_6_5.png"
+  },
+  {
+    "fig_id": "6.6",
+    "label": "Figure_6_6",
+    "page": 178,
+    "chapter": "Chapter 6",
+    "caption": "Fig. 6.6(a)]. Let us make a partition such _(C)., . that volume is halved, each part [Fig. 6.6 substance, C,,= n) is the heat capacity for (b)] now has one half of the original volume, one mole of the substance and is the quantity Vv ao. ; of heat needed to raise the temperature of > + but",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p178_Figure_6_6.png"
+  },
+  {
+    "fig_id": "6.7",
+    "label": "Figure_6_7",
+    "page": 179,
+    "chapter": "Chapter 6",
+    "caption": "Fig. 6.7 Bomb calorimeter in the steel bomb. Heat evolved during",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p179_Figure_6_7.png"
+  },
+  {
+    "fig_id": "6.8",
+    "label": "Figure_6_8",
+    "page": 180,
+    "chapter": "Chapter 6",
+    "caption": "Fig. 6.8 Calorimeter for measuring heat changes Reactants — Products at constant pressure (atmospheric The enthalpy change accompanying a pressure). reaction is called the reaction enthalpy. The enthalnv change of a chemical reactinn is diven",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p180_Figure_6_8.png"
+  },
+  {
+    "fig_id": "6.9",
+    "label": "Figure_6_9",
+    "page": 189,
+    "chapter": "Chapter 6",
+    "caption": "Fig. 6.9 Enthalpy diagram for lattice enthalpy The sequence of steps is shown in Fig. 6.9, of NaCl and is known as a Born-Haber cycle. The",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p189_Figure_6_9.png"
+  },
+  {
+    "fig_id": "6.10",
+    "label": "Figure_6_10",
+    "page": 192,
+    "chapter": "Chapter 6",
+    "caption": "Fig. 6.10 (a) Enthalpy diagram for exothermic Marea reactions These reactions though endothermic, are et / spontaneous. The increase in enthalpy may i be represented on an enthalpy diagram as shown in Fig. 6.10(b). () Total enthalpy | Hy Fig. 6.11 Diffusion of two gases of products A,H respectively and separated by a move H Net heat absorbed partition [Fig. 6.11 (a)]. When the partitio Fom the suroundings withdrawn [Fig.6.11( b)], the gases begir diffuse into each other and after a perio",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p192_Figure_6_10.png"
+  },
+  {
+    "fig_id": "7.1",
+    "label": "Figure_7_1",
+    "page": 204,
+    "chapter": "Chapter 7",
+    "caption": "Fig.7.1 Measuring equilibrium vapour pressure of water at a constant temperature molecules into the gaseous phase inside the dispersed into large volume of the room. / box. The rate of evaporation is constant. consequence the rate of condensation fr",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p204_Figure_7_1.png"
+  },
+  {
+    "fig_id": "7.2",
+    "label": "Figure_7_2",
+    "page": 206,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.2 Attainment of chemical equilibrium. Eventually, the two reactions occur at the ame rate and the system reaches a state o",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p206_Figure_7_2.png"
+  },
+  {
+    "fig_id": "7.3",
+    "label": "Figure_7_3",
+    "page": 207,
+    "chapter": "Chapter 7",
+    "caption": "Fig.7.3 Demonstrating dynamic nature of equilibrium. (a) initial stage (b) final stage after",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p207_Figure_7_3.png"
+  },
+  {
+    "fig_id": "7.4",
+    "label": "Figure_7_4",
+    "page": 208,
+    "chapter": "Chapter 7",
+    "caption": "Fig 7.4 Depiction of equilibrium for the reaction start it from pure reactants or pure produ N, (g)+3H, (g) = 2NH, (g) (H,, Nj, NH; and D,, N,, ND) are mixed together and left for a while. Later, when this",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p208_Figure_7_4.png"
+  },
+  {
+    "fig_id": "7.5",
+    "label": "Figure_7_5",
+    "page": 208,
+    "chapter": "Chapter 7",
+    "caption": "Fig.7.5 Chemical equilibrium in H,@ + L@ <=} 2HI(g) can be attained 1 from either direction | 7.3 LAW OF CHEMICAL EQUILIBRIUM > AND EQUILIBRIUM CONSTANT t A mixture of reactants and products in the “equilibrium state is called an equilibrium mixture. In this section we shall address a 1 number of important questions about the , composition of equilibrium mixtures: What is 3 the relationship between the concentrations of 1 reactants and products in an equilibrium mixture? How can we determine equilibrium",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p208_Figure_7_5.png"
+  },
+  {
+    "fig_id": "7.6",
+    "label": "Figure_7_6",
+    "page": 216,
+    "chapter": "Chapter 7",
+    "caption": "Fig.7.6 Dependence of extent of reaction on K, reaction (Fig. 7.7) : 9 7.6.2 Predicting the Direction of the (ZA Reaction — a =",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p216_Figure_7_6.png"
+  },
+  {
+    "fig_id": "7.7",
+    "label": "Figure_7_7",
+    "page": 216,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.7 Predicting the direction of 1 1 ° IfQ,<K,, net reaction goes from left to right . © IfQ,>K,, net reaction goes from right to left. ) e IfQ =K,, no net reaction occurs. ) Problem 7.7 The value of K, for the reaction © 2A = B + Cis 2 x 10°. Ata given time, the composition of reaction mixture is ° [A] = [B] = [C] = 3 x 10M. In which direction",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p216_Figure_7_7.png"
+  },
+  {
+    "fig_id": "7.8",
+    "label": "Figure_7_8",
+    "page": 219,
+    "chapter": "Chapter 7",
+    "caption": "Fig.7.8). This is in then",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p219_Figure_7_8.png"
+  },
+  {
+    "fig_id": "7.9",
+    "label": "Figure_7_9",
+    "page": 221,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.9 Effect of temperature on equilibrium for the reaction, 2NO, (g) = N,O, (g)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p221_Figure_7_9.png"
+  },
+  {
+    "fig_id": "7.10",
+    "label": "Figure_7_10",
+    "page": 223,
+    "chapter": "Chapter 7",
+    "caption": "Fig.7.10 Dissolution of sodium chloride in water. 1 Na’ and CU ions are stablised by their 2 hydration with polar water molecules. f Comparing, the ionization of hydrochloric 1 acid with that of acetic acid in water we find t that though both of them are polar covalent ery limited means. At theageofl4he [jj = ie lowed Faraday to read the books he_ | ; ” i me laboratory assistant to Davy, and ah y Continent. During this trip he gained , y vith many of the leading scientists of of the Royal Institution laboratories, + ofessor of Chemistry. Faraday’s first Michael Faraday",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p223_Figure_7_10.png"
+  },
+  {
+    "fig_id": "7.11",
+    "label": "Figure_7_11",
+    "page": 228,
+    "chapter": "Chapter 7",
+    "caption": "Fig.7.11 pH-paper with four strips that may",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/p228_Figure_7_11.png"
+  }
+]

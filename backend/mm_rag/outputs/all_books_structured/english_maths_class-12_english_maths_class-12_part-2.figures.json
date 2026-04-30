@@ -1,0 +1,522 @@
+[
+  {
+    "fig_id": "7.1",
+    "label": "Figure_7_1",
+    "page": 9,
+    "chapter": "Chapter 7",
+    "caption": "Fig 7.1 che curves y = F(x), C € R, at the points of intersection of the =a, (aé R), are parallel. ollowing equation (statement) [fe dx =F (x) + C= y (say), of curves. The different values of C will correspond to different nily and these members can be obtained by shifting any one of the self. This is the geometrical interpretation of indefinite integral. ties of indefinite integral we shall derive some properties of indefinite integrals. of differentiation and integration are inverses of each other in the dllowing results : da",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p009_Figure_7_1.png"
+  },
+  {
+    "fig_id": "7.2",
+    "label": "Figure_7_2",
+    "page": 48,
+    "chapter": "Chapter 7",
+    "caption": "Fig 7.2 erval [a, b] into n equal subintervals denoted by [,, » X,], where x, =a,x,=a+h,x,=a+t 2h,.., b-a : ne We note that asn > ~,h > 0.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p048_Figure_7_2.png"
+  },
+  {
+    "fig_id": "8.2",
+    "label": "Figure_8_2",
+    "page": 77,
+    "chapter": "Chapter 8",
+    "caption": "Fig 8.2 Fig 8.2 Remark If the position of the curve under consideration is below the x-axis, then since f(x) <0 from x =a to x =b, as shown in Fig 8.3, the area bounded by the curve, x-axis",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p077_Figure_8_2.png"
+  },
+  {
+    "fig_id": "8.3",
+    "label": "Figure_8_3",
+    "page": 77,
+    "chapter": "Chapter 8",
+    "caption": "Fig 8.3 senerally, it may happen that some portion of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p077_Figure_8_3.png"
+  },
+  {
+    "fig_id": "8.4",
+    "label": "Figure_8_4",
+    "page": 78,
+    "chapter": "Chapter 8",
+    "caption": "Fig 8.4 3ind the area enclosed by the circle x? + y’= a’. m Fig 8.5, the whole area enclosed Y circle B|@, a) a of the region AOBA bounded by axis and the ordinates x = 0 and 2 circle is symmetrical about both vy axis] x’ A(a, 0) x ‘dx (taking vertical strips) I la -—x dx Y’ =a gives y=+Va°-x Fig 8.5",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p078_Figure_8_4.png"
+  },
+  {
+    "fig_id": "8.6",
+    "label": "Figure_8_6",
+    "page": 79,
+    "chapter": "Chapter 8",
+    "caption": "Fig8.6 ‘xample 2 Find the area enclosed by the ellipse = + aol a olution From Fig 8.7, the area of the region ABA’B’A bounded by",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p079_Figure_8_6.png"
+  },
+  {
+    "fig_id": "8.7",
+    "label": "Figure_8_7",
+    "page": 79,
+    "chapter": "Chapter 8",
+    "caption": "Fig 8.7, the area of the region ABA’B’A bounded by",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p079_Figure_8_7.png"
+  },
+  {
+    "fig_id": "8.9",
+    "label": "Figure_8_9",
+    "page": 80,
+    "chapter": "Chapter 8",
+    "caption": "Fig 8.9 2 area of the region BONB bounded by curve, y — axis and the lines y=Oand y=4",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p080_Figure_8_9.png"
+  },
+  {
+    "fig_id": "8.10",
+    "label": "Figure_8_10",
+    "page": 81,
+    "chapter": "Chapter 8",
+    "caption": "Fig 8.10 = fo ydx Ly = (y-coordinate of Q) — (y-coordinate of P) = 4 — x7]",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p081_Figure_8_10.png"
+  },
+  {
+    "fig_id": "8.11",
+    "label": "Figure_8_11",
+    "page": 81,
+    "chapter": "Chapter 8",
+    "caption": "Fig 8.11 = sb ] =8 8",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p081_Figure_8_11.png"
+  },
+  {
+    "fig_id": "8.12",
+    "label": "Figure_8_12",
+    "page": 82,
+    "chapter": "Chapter 8",
+    "caption": "Fig 8.12 = ab] evi-e® +sin™! e| EXERCISE 8.1",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p082_Figure_8_12.png"
+  },
+  {
+    "fig_id": "8.13",
+    "label": "Figure_8_13",
+    "page": 84,
+    "chapter": "Chapter 8",
+    "caption": "Fig 8.13 dA = [f(x) — g(x)] dx, and the total area A can be taken as",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p084_Figure_8_13.png"
+  },
+  {
+    "fig_id": "8.14",
+    "label": "Figure_8_14",
+    "page": 84,
+    "chapter": "Chapter 8",
+    "caption": "Fig 8.14, then the area of the regions bounded by curves can be written as Total Area = Area of the region ACBDA + Area of the region BPRQB c b = J [f)-g@]ax+] [g@-fO)]ax vs) x y=f@) P Cc B R A < > KO - a a ° Xx’ 0 X Yy’ Fig 8.14",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p084_Figure_8_14.png"
+  },
+  {
+    "fig_id": "8.15",
+    "label": "Figure_8_15",
+    "page": 85,
+    "chapter": "Chapter 8",
+    "caption": "Fig 8.15. xay Here, we can set y? =x or y =4/x =x) and y= (1)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p085_Figure_8_15.png"
+  },
+  {
+    "fig_id": "8.19",
+    "label": "Figure_8_19",
+    "page": 87,
+    "chapter": "Chapter 8",
+    "caption": "Fig 8.19. 1Bo",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p087_Figure_8_19.png"
+  },
+  {
+    "fig_id": "8.21",
+    "label": "Figure_8_21",
+    "page": 89,
+    "chapter": "Chapter 8",
+    "caption": "Fig 8.21 -axis for x (2. 7 .",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p089_Figure_8_21.png"
+  },
+  {
+    "fig_id": "8.24",
+    "label": "Figure_8_24",
+    "page": 91,
+    "chapter": "Chapter 8",
+    "caption": "Fig 8.24, the required region is the shaded region OPQRSTO whose area = area of the region OTQPO + area of the region TSRQT tle a ae",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p091_Figure_8_24.png"
+  },
+  {
+    "fig_id": "13.5",
+    "label": "Figure_13_5",
+    "page": 131,
+    "chapter": "Chapter 13",
+    "caption": "Fig 13.5 To distinguish X from Y, we require a measure of the extent to which the values of the random variables spread out. In Statistics, we have studied that",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p131_Figure_13_5.png"
+  },
+  {
+    "fig_id": "9.3",
+    "label": "Figure_9_3",
+    "page": 163,
+    "chapter": "Chapter 9",
+    "caption": "Fig 9.3 Differentiating equation (1) with respect to x, we get 2x + a 2 =0 a",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p163_Figure_9_3.png"
+  },
+  {
+    "fig_id": "9.4",
+    "label": "Figure_9_4",
+    "page": 163,
+    "chapter": "Chapter 9",
+    "caption": "Fig 9.4",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p163_Figure_9_4.png"
+  },
+  {
+    "fig_id": "11.1",
+    "label": "Figure_11_1",
+    "page": 199,
+    "chapter": "Chapter 11",
+    "caption": "Fig 11.1 ne in space can be extended in two opposite directions and so it a cosines. In order to have a unique set of direction cosines for we must take the given line as a directed line. These unique noted by /, m and n. 2 in space does not pass through the origin, then, in order to find e draw a line through the origin and parallel to the given line. ected lines from the origin and find its direction cosines as two set of direction cosines. ; which are proportional to the direction cosines of a line are ios of the line. If 1, m, n are direction cosines and a, b, c are 2, then a = Al, b=Am and c = An, for any nonzero A € R. .ors also call direction ratios as direction numbers.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p199_Figure_11_1.png"
+  },
+  {
+    "fig_id": "11.3",
+    "label": "Figure_11_3",
+    "page": 200,
+    "chapter": "Chapter 11",
+    "caption": "Fig 11.3",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p200_Figure_11_3.png"
+  },
+  {
+    "fig_id": "11.4",
+    "label": "Figure_11_4",
+    "page": 203,
+    "chapter": "Chapter 11",
+    "caption": "Fig 11.4). 6 Y Then AP is parallel to the vector b , Le.,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p203_Figure_11_4.png"
+  },
+  {
+    "fig_id": "11.8",
+    "label": "Figure_11_8",
+    "page": 209,
+    "chapter": "Chapter 11",
+    "caption": "Fig 11.8 .. 8)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p209_Figure_11_8.png"
+  },
+  {
+    "fig_id": "11.10",
+    "label": "Figure_11_10",
+    "page": 214,
+    "chapter": "Chapter 11",
+    "caption": "Fig 11.10.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p214_Figure_11_10.png"
+  },
+  {
+    "fig_id": "11.12",
+    "label": "Figure_11_12",
+    "page": 217,
+    "chapter": "Chapter 11",
+    "caption": "Fig 11.12). Let a plane pass through a point A with | position x Fig 11.12 vector a and perpendicular to the vector N.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p217_Figure_11_12.png"
+  },
+  {
+    "fig_id": "11.13",
+    "label": "Figure_11_13",
+    "page": 217,
+    "chapter": "Chapter 11",
+    "caption": "Fig 11.13 d=xity, jth, Faxityj+ck and N=A7+Bj+Ck",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p217_Figure_11_13.png"
+  },
+  {
+    "fig_id": "11.14",
+    "label": "Figure_11_14",
+    "page": 218,
+    "chapter": "Chapter 11",
+    "caption": "Fig 11.14 RS and RT are in the given plane. Therefore, the vector RS xRT to the plane containing points R, S and T. Let 7 be the position vector the plane. Therefore, the equation of the plane passing through R and the vector RS xRT is",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p218_Figure_11_14.png"
+  },
+  {
+    "fig_id": "11.15",
+    "label": "Figure_11_15",
+    "page": 219,
+    "chapter": "Chapter 11",
+    "caption": "Fig 11.15). These planes will resemble the pages of a book where the line containing the points R, S and T are members in",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p219_Figure_11_15.png"
+  },
+  {
+    "fig_id": "11.18",
+    "label": "Figure_11_18",
+    "page": 223,
+    "chapter": "Chapter 11",
+    "caption": "Fig 11.18",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p223_Figure_11_18.png"
+  },
+  {
+    "fig_id": "11.19",
+    "label": "Figure_11_19",
+    "page": 225,
+    "chapter": "Chapter 11",
+    "caption": "Fig 11.19 lane 71, through P parallel to the plane 7,. The unit vector normal to ts equation is (fF - d)-n=0 F-i=G@-n cance ON’ of this plane from",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p225_Figure_11_19.png"
+  },
+  {
+    "fig_id": "11.21",
+    "label": "Figure_11_21",
+    "page": 225,
+    "chapter": "Chapter 11",
+    "caption": "Fig. 11.21 (a)) iLe., ON - ON’ = Id - G-fl",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p225_Figure_11_21.png"
+  },
+  {
+    "fig_id": "12.2",
+    "label": "Figure_12_2",
+    "page": 245,
+    "chapter": "Chapter 12",
+    "caption": "Fig 12.2 Hence, maximum value of Z is 120 at the point (30, 0). Example 2 Solve the following linear programming problem graphically:",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p245_Figure_12_2.png"
+  },
+  {
+    "fig_id": "12.3",
+    "label": "Figure_12_3",
+    "page": 245,
+    "chapter": "Chapter 12",
+    "caption": "Fig 12.3 is the feasible region ABC determined by the system of constraints (2) to (4), which is bounded. The coordinates of corner points x Corner Point | Corresponding value of Z (0,5) 2500 (4, 3) 2300 <— |Minimum",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p245_Figure_12_3.png"
+  },
+  {
+    "fig_id": "12.4",
+    "label": "Figure_12_4",
+    "page": 246,
+    "chapter": "Chapter 12",
+    "caption": "Fig 12.4 We now find the minimum and maximum value of Z. From the table, we find that ie minimum value of Z is 60 at the point B (5, 5) of the feasible region. The maximum value of Z on the feasible region occurs at the two corner points (15, 15) and D (0, 20) and it is 180 in each case. emark Observe that in the above example,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p246_Figure_12_4.png"
+  },
+  {
+    "fig_id": "12.5",
+    "label": "Figure_12_5",
+    "page": 247,
+    "chapter": "Chapter 12",
+    "caption": "Fig 12.5 From this table, we find that — 300 is the smallest value of Z at the corner point (6, 0). Can we say that minimum value of Z is — 300? Note that if the region would",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p247_Figure_12_5.png"
+  },
+  {
+    "fig_id": "12.6",
+    "label": "Figure_12_6",
+    "page": 248,
+    "chapter": "Chapter 12",
+    "caption": "Fig 12.6 1 occurs at the vertex (corner) of the feasible uce the same maximum (or minimum) value very point on the line segment joining these ximum (or minimum) value. <CISE 12.1",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p248_Figure_12_6.png"
+  },
+  {
+    "fig_id": "12.7",
+    "label": "Figure_12_7",
+    "page": 251,
+    "chapter": "Chapter 12",
+    "caption": "Fig 12.7 In the table, we find that smallest value of Z is 380 at the point (2,4). Can we say that the minimum value of Z is 380? Remember that the feasible region is unbounded. Therefore, we have to draw the graph of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p251_Figure_12_7.png"
+  },
+  {
+    "fig_id": "12.8",
+    "label": "Figure_12_8",
+    "page": 252,
+    "chapter": "Chapter 12",
+    "caption": "Fig 12.8 Hence,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p252_Figure_12_8.png"
+  },
+  {
+    "fig_id": "12.9",
+    "label": "Figure_12_9",
+    "page": 253,
+    "chapter": "Chapter 12",
+    "caption": "Fig 12.9 1e objective function Z at each corner point as shown below: Z = 8000 x + 12000 y 00.0) | A.20,0) B (12, 6) 168000 <— | Maximum C0, 10) 120000 maximum value of Z is 1,68,000 at B (12, 6). Hence, the company 2 pieces of Model A and 6 pieces of Model B to realise maximum um profit then will be Rs 1,68,000.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p253_Figure_12_9.png"
+  },
+  {
+    "fig_id": "12.10",
+    "label": "Figure_12_10",
+    "page": 256,
+    "chapter": "Chapter 12",
+    "caption": "Fig 12.10 and note that it is bounded. x+5y= 115 acy =gq 38 +27= 150",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p256_Figure_12_10.png"
+  },
+  {
+    "fig_id": "12.11",
+    "label": "Figure_12_11",
+    "page": 258,
+    "chapter": "Chapter 12",
+    "caption": "Fig 12.11 valuate Z = 600 x + 400 y at these corner points. 50 60 (4,4) 4000 — | M 06 @a",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p258_Figure_12_11.png"
+  },
+  {
+    "fig_id": "12.12",
+    "label": "Figure_12_12",
+    "page": 259,
+    "chapter": "Chapter 12",
+    "caption": "Fig 12.12 Hence, we have x20,y20 and 8-x-y20 ie. x20,y20 and x+y<8",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p259_Figure_12_12.png"
+  },
+  {
+    "fig_id": "10.1",
+    "label": "Figure_10_1",
+    "page": 267,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.1 yserve that if we restrict the line / to the line segment AB, then a magnitude d on the line / with one of the two directions, so that we obtain a directed i (Fig 10.1(iii)). Thus, a directed line segment has magnitude as well as",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p267_Figure_10_1.png"
+  },
+  {
+    "fig_id": "10.2",
+    "label": "Figure_10_2",
+    "page": 268,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.2 Cosines 1e position vector OP(or F) of a point P(x, y, z) as in Fig 10.3. Th oy the vector 7 with the positive directions of x, y and z-axes re its direction angles. The cosine values of these angles, i.e., cos 0",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p268_Figure_10_2.png"
+  },
+  {
+    "fig_id": "10.3",
+    "label": "Figure_10_3",
+    "page": 268,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.3 “x From Fig 10.3, one may note that the triangle OAP is right angled, and in it, we",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p268_Figure_10_3.png"
+  },
+  {
+    "fig_id": "10.4",
+    "label": "Figure_10_4",
+    "page": 269,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.4",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p269_Figure_10_4.png"
+  },
+  {
+    "fig_id": "10.5",
+    "label": "Figure_10_5",
+    "page": 270,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.5 30° east of north.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p270_Figure_10_5.png"
+  },
+  {
+    "fig_id": "10.6",
+    "label": "Figure_10_6",
+    "page": 270,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.6 (iii) Two vectors having same magnitude are collinear. (iv) Two collinear vectors having the same magnitude are equal.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p270_Figure_10_6.png"
+  },
+  {
+    "fig_id": "10.7",
+    "label": "Figure_10_7",
+    "page": 271,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.7). The net displacement made by the girl from K ® point A to the point C, is given by the vector AC and Fig 10.7 expressed as",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p271_Figure_10_7.png"
+  },
+  {
+    "fig_id": "10.8",
+    "label": "Figure_10_8",
+    "page": 271,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.8 For example, in Fig 10.8 (ii), we have shifted vector 5 without changing its magnitude and direction, so that it’s initial point coincides with the terminal point of g . Then, the vector @+b, represented by the third side AC of the triangle ABC, gives us the sum (or resultant) of the vectors @ and b ie., in triangle ABC (Fig 10.8 (ii)), we have AB +BC = AC Now again, since AC=-CA, from the above equation, we have AB+BC+CA = AA=0",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p271_Figure_10_8.png"
+  },
+  {
+    "fig_id": "10.9",
+    "label": "Figure_10_9",
+    "page": 272,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.9, using the triangle law, one may note that OA +AC = OC or OA +OB = OC (since AC =OB )",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p272_Figure_10_9.png"
+  },
+  {
+    "fig_id": "10.10",
+    "label": "Figure_10_10",
+    "page": 273,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.10, we have, AD=BC=b and ace Ss B DC=AB=4. Again using triangle law, from Fig 10.10 triangle ADC, we have",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p273_Figure_10_10.png"
+  },
+  {
+    "fig_id": "10.11",
+    "label": "Figure_10_11",
+    "page": 273,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.11 a+b = PQ+QR=PR b+é = QR+RS=QS (@+b)+ é@ = PR+RS=PS",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p273_Figure_10_11.png"
+  },
+  {
+    "fig_id": "10.12",
+    "label": "Figure_10_12",
+    "page": 274,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.12.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p274_Figure_10_12.png"
+  },
+  {
+    "fig_id": "10.13",
+    "label": "Figure_10_13",
+    "page": 275,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.13). Fig 10.13 Now, consider the position vector OP ofa point P(x, y, z) as in Fig 10.14. Let P, be the foot of the perpendicular from P on the plane XOY. We, thus, see that P, P is",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p275_Figure_10_13.png"
+  },
+  {
+    "fig_id": "10.14",
+    "label": "Figure_10_14",
+    "page": 275,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.14 parallel to z-axis. As 7, j andk are the unit vectors along the x, y and z-axes, respectively, and by the definition of the coordinates of P, we have PP -OR=2zk. Similarly, QP, =OS = yj and OQ=x7.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p275_Figure_10_14.png"
+  },
+  {
+    "fig_id": "10.16",
+    "label": "Figure_10_16",
+    "page": 280,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.16 =nPR, we say that the point R divides PQ internally in the -ORQ and OPR, we have Q = 0Q-OR =b-r R = OR-OP=r-a. #7) =n(F-d) (Why?) mh + na",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p280_Figure_10_16.png"
+  },
+  {
+    "fig_id": "10.20",
+    "label": "Figure_10_20",
+    "page": 285,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.20 vy)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p285_Figure_10_20.png"
+  },
+  {
+    "fig_id": "10.22",
+    "label": "Figure_10_22",
+    "page": 291,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.22 (i), (ii)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p291_Figure_10_22.png"
+  },
+  {
+    "fig_id": "10.23",
+    "label": "Figure_10_23",
+    "page": 291,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.23). i.e., the _h : 4 handed system rotated from @ to b moves in the v Fig 10.23 tion of A. feither @ =0 orb =0, then @ is not defined and in this case, we define axb -0. 2rvations axb isa vector.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p291_Figure_10_23.png"
+  },
+  {
+    "fig_id": "10.25",
+    "label": "Figure_10_25",
+    "page": 292,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.25(ii). A n 8 0 > ; a ? ac Yn, > b (i) (ii) Fig 10.25 (i), (ii) Thus, if we assume 4 and D to lie in the plane of the paper, then f and fi, both will be perpendicular to the plane of the paper. But, 7 being directed above the",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p292_Figure_10_25.png"
+  },
+  {
+    "fig_id": "10.26",
+    "label": "Figure_10_26",
+    "page": 293,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.26, 1 ao D> B Area of triangle ABC = —AB-CD. 5 2 Fig 10.26",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p293_Figure_10_26.png"
+  },
+  {
+    "fig_id": "10.27",
+    "label": "Figure_10_27",
+    "page": 293,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.27, we have Area of parallelogram ABCD = AB. DE. But AB=ID1 (as given), and yc A LD B DE =|dalsinO. EP Thus, Fig 10.27 Area of parallelogram ABCD = |b Ildlsin0 =laxbl. We now state two important properties of vector product. Property 3 (Distributivity of vector product over addition): If d@, b and é",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p293_Figure_10_27.png"
+  },
+  {
+    "fig_id": "10.28",
+    "label": "Figure_10_28",
+    "page": 297,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.28 Also, as 8 varies from 0 to 2n, the point P (Fig 10.28) traces the circle x°+ y’ = 1 counterclockwise, and this covers all possible directions. So, (1) gives every unit vector in the XY-plane.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/p297_Figure_10_28.png"
+  }
+]

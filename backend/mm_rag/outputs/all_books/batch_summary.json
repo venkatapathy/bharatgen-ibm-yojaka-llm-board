@@ -1,0 +1,284 @@
+{
+  "books_root": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books",
+  "output_root": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books",
+  "extractor": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert.py",
+  "hindi_extractor": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert_hindi.py",
+  "started_at": "2026-04-21 00:59:17",
+  "total": 30,
+  "ok": 7,
+  "failed": 8,
+  "skipped": 15,
+  "results": [
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Biology/Class-11/English_Biology_Class-11.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_biology_class-11_english_biology_class-11",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert.py",
+      "ok": true,
+      "skipped": true,
+      "elapsed_s": 0.0,
+      "log_tail": "Skipped: existing index.txt + figure files found."
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Biology/Class-12/English_Biology_Class-12_Part-1.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-1",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert.py",
+      "ok": true,
+      "skipped": true,
+      "elapsed_s": 0.0,
+      "log_tail": "Skipped: existing index.txt + figure files found."
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Biology/Class-12/English_Biology_Class-12_Part-2.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert.py",
+      "ok": true,
+      "skipped": true,
+      "elapsed_s": 0.0,
+      "log_tail": "Skipped: existing index.txt + figure files found."
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Chemistry/Class-11/English_Chemistry_Class-11_Part-1.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert.py",
+      "ok": true,
+      "skipped": true,
+      "elapsed_s": 0.0,
+      "log_tail": "Skipped: existing index.txt + figure files found."
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Chemistry/Class-11/English_Chemistry_Class-11_Part-2.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-2",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert.py",
+      "ok": true,
+      "skipped": true,
+      "elapsed_s": 0.0,
+      "log_tail": "Skipped: existing index.txt + figure files found."
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Chemistry/Class-12/English_Chemistry_Class-12_Part-1.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert.py",
+      "ok": true,
+      "skipped": true,
+      "elapsed_s": 0.0,
+      "log_tail": "Skipped: existing index.txt + figure files found."
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Chemistry/Class-12/English_Chemistry_Class-12_Part-2.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-2",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert.py",
+      "ok": true,
+      "skipped": true,
+      "elapsed_s": 0.0,
+      "log_tail": "Skipped: existing index.txt + figure files found."
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Maths/Class-10/English_Maths_Class-10.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_maths_class-10_english_maths_class-10",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert.py",
+      "ok": true,
+      "skipped": true,
+      "elapsed_s": 0.0,
+      "log_tail": "Skipped: existing index.txt + figure files found."
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Maths/Class-11/English_Maths_Class-11.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert.py",
+      "ok": true,
+      "skipped": true,
+      "elapsed_s": 0.0,
+      "log_tail": "Skipped: existing index.txt + figure files found."
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Maths/Class-12/English_Maths_Class-12_Part-1.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert.py",
+      "ok": true,
+      "skipped": true,
+      "elapsed_s": 0.0,
+      "log_tail": "Skipped: existing index.txt + figure files found."
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Maths/Class-12/English_Maths_Class-12_Part-2.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert.py",
+      "ok": true,
+      "skipped": true,
+      "elapsed_s": 0.0,
+      "log_tail": "Skipped: existing index.txt + figure files found."
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Physics/Class-11/English_Physics_Class-11.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert.py",
+      "ok": true,
+      "skipped": true,
+      "elapsed_s": 0.0,
+      "log_tail": "Skipped: existing index.txt + figure files found."
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Physics/Class-12/English_Physics_Class-12_Part-1.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert.py",
+      "ok": true,
+      "skipped": true,
+      "elapsed_s": 0.0,
+      "log_tail": "Skipped: existing index.txt + figure files found."
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Physics/Class-12/English_Physics_Class-12_Part-2.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert.py",
+      "ok": true,
+      "skipped": true,
+      "elapsed_s": 0.0,
+      "log_tail": "Skipped: existing index.txt + figure files found."
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Science/Class-10/English_Science_Class-10.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_science_class-10_english_science_class-10",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert.py",
+      "ok": true,
+      "skipped": true,
+      "elapsed_s": 0.0,
+      "log_tail": "Skipped: existing index.txt + figure files found."
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/Hindi/Biology/Class-11/Hindi_Biology_Class-11.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_biology_class-11_hindi_biology_class-11",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert_hindi.py",
+      "ok": true,
+      "skipped": false,
+      "elapsed_s": 1119.38,
+      "log_tail": "NCERT Biology Figure Extractor v6\nProcessing 264 pages...\n\n  [50/264] 0 figures so far\n  [100/264] 0 figures so far\n  [150/264] 0 figures so far\n  [200/264] 0 figures so far\n  [250/264] 0 figures so far\n\n============================================================\nTotal figures extracted : 0\nOutput folder           : /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_biology_class-11_hindi_biology_class-11/\nIndex file              : /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_biology_class-11_hindi_biology_class-11/index.txt"
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/Hindi/Biology/Class-12/Hindi_Biology_Class-12.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_biology_class-12_hindi_biology_class-12",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert_hindi.py",
+      "ok": true,
+      "skipped": false,
+      "elapsed_s": 1152.32,
+      "log_tail": "NCERT Biology Figure Extractor v6\nProcessing 260 pages...\n\n  [50/260] 0 figures so far\n  [100/260] 0 figures so far\n  [150/260] 0 figures so far\n  [200/260] 0 figures so far\n  [250/260] 0 figures so far\n\n============================================================\nTotal figures extracted : 0\nOutput folder           : /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_biology_class-12_hindi_biology_class-12/\nIndex file              : /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_biology_class-12_hindi_biology_class-12/index.txt"
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/Hindi/Chemistry/Class-11/Hindi_Chemistry_Class-11_Part-1.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_chemistry_class-11_hindi_chemistry_class-11_part-1",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert_hindi.py",
+      "ok": true,
+      "skipped": false,
+      "elapsed_s": 1379.97,
+      "log_tail": "NCERT Biology Figure Extractor v6\nProcessing 248 pages...\n\n  [50/248] 0 figures so far\n  \u2713 p088 [L] Figure_3_6                      x[0%\u201389%]  y[12%\u201345%]\n  [100/248] 1 figures so far\n  [150/248] 1 figures so far\n  [200/248] 1 figures so far\n\n============================================================\nTotal figures extracted : 1\nOutput folder           : /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_chemistry_class-11_hindi_chemistry_class-11_part-1/\nIndex file              : /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_chemistry_class-11_hindi_chemistry_class-11_part-1/index.txt"
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/Hindi/Chemistry/Class-11/Hindi_Chemistry_Class-11_Part-2.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_chemistry_class-11_hindi_chemistry_class-11_part-2",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert_hindi.py",
+      "ok": true,
+      "skipped": false,
+      "elapsed_s": 502.31,
+      "log_tail": "NCERT Biology Figure Extractor v6\nProcessing 108 pages...\n\n  [50/108] 0 figures so far\n  [100/108] 0 figures so far\n\n============================================================\nTotal figures extracted : 0\nOutput folder           : /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_chemistry_class-11_hindi_chemistry_class-11_part-2/\nIndex file              : /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_chemistry_class-11_hindi_chemistry_class-11_part-2/index.txt"
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/Hindi/Chemistry/Class-12/Hindi_Chemistry_Class-12_Part-1.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_chemistry_class-12_hindi_chemistry_class-12_part-1",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert_hindi.py",
+      "ok": true,
+      "skipped": false,
+      "elapsed_s": 720.24,
+      "log_tail": "NCERT Biology Figure Extractor v6\nProcessing 176 pages...\n\n  [50/176] 0 figures so far\n  [100/176] 0 figures so far\n  [150/176] 0 figures so far\n\n============================================================\nTotal figures extracted : 0\nOutput folder           : /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_chemistry_class-12_hindi_chemistry_class-12_part-1/\nIndex file              : /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_chemistry_class-12_hindi_chemistry_class-12_part-1/index.txt"
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/Hindi/Chemistry/Class-12/Hindi_Chemistry_Class-12_Part-2.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_chemistry_class-12_hindi_chemistry_class-12_part-2",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert_hindi.py",
+      "ok": true,
+      "skipped": false,
+      "elapsed_s": 622.95,
+      "log_tail": "NCERT Biology Figure Extractor v6\nProcessing 164 pages...\n\n  [50/164] 0 figures so far\n  [100/164] 0 figures so far\n  [150/164] 0 figures so far\n\n============================================================\nTotal figures extracted : 0\nOutput folder           : /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_chemistry_class-12_hindi_chemistry_class-12_part-2/\nIndex file              : /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_chemistry_class-12_hindi_chemistry_class-12_part-2/index.txt"
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/Hindi/Maths/Class-10/Hindi_Maths_Class-10.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_maths_class-10_hindi_maths_class-10",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert_hindi.py",
+      "ok": true,
+      "skipped": false,
+      "elapsed_s": 915.14,
+      "log_tail": "NCERT Biology Figure Extractor v6\nProcessing 308 pages...\n\n  [50/308] 0 figures so far\n  [100/308] 0 figures so far\n  [150/308] 0 figures so far\n  [200/308] 0 figures so far\n  [250/308] 0 figures so far\n  [300/308] 0 figures so far\n\n============================================================\nTotal figures extracted : 0\nOutput folder           : /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_maths_class-10_hindi_maths_class-10/\nIndex file              : /home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_maths_class-10_hindi_maths_class-10/index.txt"
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/Hindi/Maths/Class-11/Hindi_Maths_Class-11.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_maths_class-11_hindi_maths_class-11",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert_hindi.py",
+      "ok": false,
+      "skipped": false,
+      "elapsed_s": 0.08,
+      "log_tail": "\u274c  pdfplumber not found.  Run:  pip install pdfplumber"
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/Hindi/Maths/Class-12/Hindi_Maths_Class-12_Part-1.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_maths_class-12_hindi_maths_class-12_part-1",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert_hindi.py",
+      "ok": false,
+      "skipped": false,
+      "elapsed_s": 0.08,
+      "log_tail": "\u274c  pdfplumber not found.  Run:  pip install pdfplumber"
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/Hindi/Maths/Class-12/Hindi_Maths_Class-12_Part-2.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_maths_class-12_hindi_maths_class-12_part-2",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert_hindi.py",
+      "ok": false,
+      "skipped": false,
+      "elapsed_s": 0.07,
+      "log_tail": "\u274c  pdfplumber not found.  Run:  pip install pdfplumber"
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/Hindi/Physics/Class-11/Hindi_Physics_Class-11_Part-1.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_physics_class-11_hindi_physics_class-11_part-1",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert_hindi.py",
+      "ok": false,
+      "skipped": false,
+      "elapsed_s": 0.08,
+      "log_tail": "\u274c  pdfplumber not found.  Run:  pip install pdfplumber"
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/Hindi/Physics/Class-11/Hindi_Physics_Class-11_Part-2.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_physics_class-11_hindi_physics_class-11_part-2",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert_hindi.py",
+      "ok": false,
+      "skipped": false,
+      "elapsed_s": 0.08,
+      "log_tail": "\u274c  pdfplumber not found.  Run:  pip install pdfplumber"
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/Hindi/Physics/Class-12/Hindi_Physics_Class-12_Part-1.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_physics_class-12_hindi_physics_class-12_part-1",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert_hindi.py",
+      "ok": false,
+      "skipped": false,
+      "elapsed_s": 0.06,
+      "log_tail": "\u274c  pdfplumber not found.  Run:  pip install pdfplumber"
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/Hindi/Physics/Class-12/Hindi_Physics_Class-12_Part-2.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_physics_class-12_hindi_physics_class-12_part-2",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert_hindi.py",
+      "ok": false,
+      "skipped": false,
+      "elapsed_s": 0.06,
+      "log_tail": "\u274c  pdfplumber not found.  Run:  pip install pdfplumber"
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/Hindi/Science/Class-10/Hindi_Science_Class-10.pdf",
+      "out_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/hindi_science_class-10_hindi_science_class-10",
+      "extractor_used": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/extract_ncert_hindi.py",
+      "ok": false,
+      "skipped": false,
+      "elapsed_s": 0.07,
+      "log_tail": "\u274c  pdfplumber not found.  Run:  pip install pdfplumber"
+    }
+  ],
+  "ended_at": "2026-04-21 02:46:10"
+}

@@ -1,0 +1,162 @@
+[
+  {
+    "fig_id": "10.1",
+    "label": "Figure_10_1",
+    "page": 22,
+    "chapter": "Chapter 10",
+    "caption": "Fig. 10.1: Comparison of boiling points of some alkyl halides The boiling points of isomeric haloalkanes decrease with in",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-2/p022_Figure_10_1.png"
+  },
+  {
+    "fig_id": "10.2",
+    "label": "Figure_10_2",
+    "page": 25,
+    "chapter": "Chapter 10",
+    "caption": "Fig. 10.2. 2 PO, O20 S © Fig. 10.2: Red ball represents the incoming hydroxide ion and green ball represents the outgoing halide ion In the year 1937, It depicts a bimolecular nucleophilic substitution (S,2) reaction; Edward Davies Hughes the incoming nucleophile interacts with alkyl halide causing the and ar Christopher carbon-halide bond to break and a new bond is formed between ne shanisen “br an S,2 carbon and attacking nucleophile. Here it is C-O bond formed between reaction. C and -OH. These two processes take place simultaneously in a",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-2/p025_Figure_10_2.png"
+  },
+  {
+    "fig_id": "10.4",
+    "label": "Figure_10_4",
+    "page": 30,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.4: Some common examples of chiral and chiral molecules. One such aid is the pres: achiral objects a single asymmetric carbon atom. Let us cc two simple molecules propan-2-ol (Fig.10.5) and buta (Fig. 10.6) and their mirror images.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-2/p030_Figure_10_4.png"
+  },
+  {
+    "fig_id": "10.5",
+    "label": "Figure_10_5",
+    "page": 30,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.5: B is mirror image of A; B is rotated by 180° and C is obtained; C is superimposable on A. As you can see very clearly, propan-2-ol (A) does not contain an asymmetric carbon, as all the four groups attached to the tetrahedral carbon are not different. We rotate the mirror image (B) of the molecule by 180° (structure C) and try to overlap the structure (C) with the structure (A), these structures completely overlap. Thus propan-2-ol is an achiral molecule.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-2/p030_Figure_10_5.png"
+  },
+  {
+    "fig_id": "10.6",
+    "label": "Figure_10_6",
+    "page": 31,
+    "chapter": "Chapter 10",
+    "caption": "180° g 10.6: Eis mirror image of D; E is rotated by 180° to get F non superimposable on its mirror image D. Butan-2-ol has four different groups attac",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-2/p031_Figure_10_6.png"
+  },
+  {
+    "fig_id": "10.7",
+    "label": "Figure_10_7",
+    "page": 31,
+    "chapter": "Chapter 10",
+    "caption": "Fig. 10.7). A and B in Fig. 10.5 and D and E in Fig. 10.6 are enantiomers. Enantiomers possess identical physical properties namely, melting point, boiling point, refractive index, etc. They only differ",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-2/p031_Figure_10_7.png"
+  },
+  {
+    "fig_id": "11.1",
+    "label": "Figure_11_1",
+    "page": 52,
+    "chapter": "Chapter 11",
+    "caption": "Fig. 11.1: Structures of methanol, phenol and methoxymethane Chemistry (328°",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-2/p052_Figure_11_1.png"
+  },
+  {
+    "fig_id": "12.1",
+    "label": "Figure_12_1",
+    "page": 85,
+    "chapter": "Chapter 12",
+    "caption": "Fig.12.1 Orbital diagram for the formation of carbonyl group The carbon-oxygen double bond is polarised due to higher electronegativity of oxygen relative to carbon. Hence,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-2/p085_Figure_12_1.png"
+  },
+  {
+    "fig_id": "12.2",
+    "label": "Figure_12_2",
+    "page": 90,
+    "chapter": "Chapter 12",
+    "caption": "Fig.12.2: Nucleophilic attack on carbonyl carbon (ii) Reactivity Aldehydes are generally more reactive than ketones in",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-2/p090_Figure_12_2.png"
+  },
+  {
+    "fig_id": "13.1",
+    "label": "Figure_13_1",
+    "page": 114,
+    "chapter": "Chapter 13",
+    "caption": "Fig. 13.1 Pyramidal shape of trimethylamine Amines are classified as primary (1°), secondary (2°) and tertiz ' depending upon the number of hydrogen atoms replaced by a eed ne te et Te 7. LeAnne 24 A",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-2/p114_Figure_13_1.png"
+  },
+  {
+    "fig_id": "13.2",
+    "label": "Figure_13_2",
+    "page": 120,
+    "chapter": "Chapter 13",
+    "caption": "Her 13.2 Intermolecular hydrogen bonding i points of amines, alcohols and alkar ss are shown in Table 13.2.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-2/p120_Figure_13_2.png"
+  },
+  {
+    "fig_id": "14.1",
+    "label": "Figure_14_1",
+    "page": 147,
+    "chapter": "Chapter 14",
+    "caption": "Fig. 14.1: o-Helix NH group of each amino acid residue hydrogen bonded to t structure of proteins -C=0 of an adjacent turn of the helix as shown in Fig. 14.: In f-structure all peptide chains are stretched c to nearly maximum extension and then laid side by si",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-2/p147_Figure_14_1.png"
+  },
+  {
+    "fig_id": "14.2",
+    "label": "Figure_14_2",
+    "page": 147,
+    "chapter": "Chapter 14",
+    "caption": "Fig. 14.2: B-Pleated sheet structureof proteins are composed of two or more polypeptide proteins chains referred to as sub-units. The spatial arrangement of these subunits with respect to each other is known as quaternary structure.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-2/p147_Figure_14_2.png"
+  },
+  {
+    "fig_id": "14.5",
+    "label": "Figure_14_5",
+    "page": 152,
+    "chapter": "Chapter 14",
+    "caption": "Fig. 14.5: Structure of (a) a nucleoside and (b) a nucleotide Nucleotides are joined together by phosphodiester linkage between 5’ and 3’ carbon atoms of the pentose sugar. The formation of a typical",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-2/p152_Figure_14_5.png"
+  },
+  {
+    "fig_id": "14.6",
+    "label": "Figure_14_6",
+    "page": 153,
+    "chapter": "Chapter 14",
+    "caption": "Fig. 14.6: Formation of a dinucleotide 5 ZB A simplified version of nucleic acid chain is as shown below. DR ate",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-2/p153_Figure_14_6.png"
+  },
+  {
+    "fig_id": "16.1",
+    "label": "Figure_16_1",
+    "page": 173,
+    "chapter": "Chapter 16",
+    "caption": "Fig. 16.1 | (a) Active site of an enzyme (b) Substrate (c) Substrate held in active site of the enzyme (a) Enzyme (b) Substrate (c) Enzyme holding substrate",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-2/p173_Figure_16_1.png"
+  },
+  {
+    "fig_id": "16.2",
+    "label": "Figure_16_2",
+    "page": 173,
+    "chapter": "Chapter 16",
+    "caption": "Fig. 16.2 Drug Drug and substrate Active La iL N competing for active site site v —_ = Substrate Ree Enzvme euthetrate",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-2/p173_Figure_16_2.png"
+  },
+  {
+    "fig_id": "16.3",
+    "label": "Figure_16_3",
+    "page": 173,
+    "chapter": "Chapter 16",
+    "caption": "Fig. 16.3: Non-competitive inhibitor changes the active an enzyme and an inhibitor is site of enzyme after binding at allosteric site. a strong covalent bond and",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-2/p173_Figure_16_3.png"
+  },
+  {
+    "fig_id": "16.4",
+    "label": "Figure_16_4",
+    "page": 174,
+    "chapter": "Chapter 16",
+    "caption": "Fig. 16.4 ‘ Receptor 3833533 : Bea | protein",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-2/p174_Figure_16_4.png"
+  },
+  {
+    "fig_id": "16.5",
+    "label": "Figure_16_5",
+    "page": 174,
+    "chapter": "Chapter 16",
+    "caption": "Fig. 16.5: (a) Receptor receiving chemical messenger (b) Shape of the receptor changed after attachment of messenger (c) Receptor regains structure after removal of chemical messenger.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-2/p174_Figure_16_5.png"
+  }
+]

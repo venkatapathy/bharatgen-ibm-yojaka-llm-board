@@ -1,0 +1,1010 @@
+[
+  {
+    "fig_id": "9.1",
+    "label": "Figure_9_1",
+    "page": 6,
+    "chapter": "Chapter 9",
+    "caption": "Fig. 9.1). These laws are valid at each point on any reflecting surface whether plane or curved",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p006_Figure_9_1.png"
+  },
+  {
+    "fig_id": "9.2",
+    "label": "Figure_9_2",
+    "page": 7,
+    "chapter": "Chapter 9",
+    "caption": "Fig. 9.2). heights measured downwards are FIGURE 9.2 The Cartesian Sign Convention. taken as negative. With a common accepted convention, it turns out that a single formula for spherical mirrors and a single formula for spherical lenses can handle",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p007_Figure_9_2.png"
+  },
+  {
+    "fig_id": "9.3",
+    "label": "Figure_9_3",
+    "page": 8,
+    "chapter": "Chapter 9",
+    "caption": "FIGURE 9.3 Focus of a concave and convex mirror. The distance between the focus F and the pole P of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p008_Figure_9_3.png"
+  },
+  {
+    "fig_id": "9.4",
+    "label": "Figure_9_4",
+    "page": 8,
+    "chapter": "Chapter 9",
+    "caption": "Fig. 9.4. Let C be the centre of curvature of the mirror. Consider a Cc F Dp] P ray parallel to the principal axis striking the mirror at M. Then CM will be perpendicular to the mirror at M. Let @be the angle of incidence, and MD be the perpendicular from M on the (a) principal axis. Then, ZMCP = @and ZMFP = 20 Now, a tand= ~~ and tan 20= “2 9.1 at [M an@=Gp and tan 26= = (9.1) i 5 vy For small 6, which is true for paraxial rays, tan@ ~ 0, en al oe _ . Pip rc tan 26 = 286. Therefore, Eq. (9.1) gives",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p008_Figure_9_4.png"
+  },
+  {
+    "fig_id": "9.5",
+    "label": "Figure_9_5",
+    "page": 9,
+    "chapter": "Chapter 9",
+    "caption": "Figure 9.5 shows the ray diagram considering three rays. It shows the image A’B’ (in this case, real) of an object AB formed by a concave mirror. It does not mean that only three rays emanate from the point A. An infinite number of rays emanate from any source, in all directions. Thus, point A’ is image point of A if every ray originating at point A and falling on the concave mirror after reflection passes through the point A’.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p009_Figure_9_5.png"
+  },
+  {
+    "fig_id": "9.6",
+    "label": "Figure_9_6",
+    "page": 10,
+    "chapter": "Chapter 9",
+    "caption": "FIGURE 9.6 Image formation by (a) a concave mirror with object between 314 P and F, and (b) a convex mirror.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p010_Figure_9_6.png"
+  },
+  {
+    "fig_id": "9.7",
+    "label": "Figure_9_7",
+    "page": 11,
+    "chapter": "Chapter 9",
+    "caption": "FIGURE 9.7 Solution v4 The ray diagram for the formation of the image of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p011_Figure_9_7.png"
+  },
+  {
+    "fig_id": "9.8",
+    "label": "Figure_9_8",
+    "page": 13,
+    "chapter": "Chapter 9",
+    "caption": "' Refracted ray xURE 9.8 Refraction and reflection of light. 1e second medium well-known Snell’s",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p013_Figure_9_8.png"
+  },
+  {
+    "fig_id": "9.9",
+    "label": "Figure_9_9",
+    "page": 13,
+    "chapter": "Chapter 9",
+    "caption": "FIGURE 9.9 Lateral shift of a ray refracted of refraction follow immediately. For a through a parallel-sided slab. rectangular slab, refraction takes place at two interfaces (air-glass and glass-air). It is easily seen from Fig. 9.9 that r, = i,, ie., the emergent ray is parallel to the incident ray—there is no 317",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p013_Figure_9_9.png"
+  },
+  {
+    "fig_id": "9.10",
+    "label": "Figure_9_10",
+    "page": 14,
+    "chapter": "Chapter 9",
+    "caption": "FIGURE 9.10 Apparent depth for time difference between actual sunset and apparent (a) normal, and (b) oblique viewing. sunset is about 2 minutes (see Example 9.5). The apparent flattening (oval shape) of the sun at sunset and sunrise is also due to the same phenomenon.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p014_Figure_9_10.png"
+  },
+  {
+    "fig_id": "9.11",
+    "label": "Figure_9_11",
+    "page": 14,
+    "chapter": "Chapter 9",
+    "caption": "The earth takes 24 h to rotate once about loes the sun take to shift by 1° when w 360° shift = 24 h w 1° shift = 24/360 h = 4 min.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p014_Figure_9_11.png"
+  },
+  {
+    "fig_id": "9.12",
+    "label": "Figure_9_12",
+    "page": 16,
+    "chapter": "Chapter 9",
+    "caption": "FIGURE 9.12 Refraction and internal reflection | ofmedia. We see from Snell’s law [Eq. (9.10)] of rays from a point A in the denser medium that if the relative refractive index is less (water) incident at different angles at the interface than one then, since the maximum value with a rarer medium (air). of sin r is unity, there is an upper limit",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p016_Figure_9_12.png"
+  },
+  {
+    "fig_id": "9.13",
+    "label": "Figure_9_13",
+    "page": 17,
+    "chapter": "Chapter 9",
+    "caption": "FIGURE 9.13 Observing total internal reflection in water with a laser beam (refraction due to glass of beaker neglected being very thin).",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p017_Figure_9_13.png"
+  },
+  {
+    "fig_id": "9.14",
+    "label": "Figure_9_14",
+    "page": 17,
+    "chapter": "Chapter 9",
+    "caption": "FIGURE 9.14 (a) A tree is seen by an observer at its place when the air above at uniform temperature, (b) When the layers of air close to",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p017_Figure_9_14.png"
+  },
+  {
+    "fig_id": "9.16",
+    "label": "Figure_9_16",
+    "page": 18,
+    "chapter": "Chapter 9",
+    "caption": "FIGURE 9.16 Light undergoes successive total are fabricated such that light reflected at one internal reflections as it moves through an side of inner surface strikes the other at an optical fibre. angle larger than the critical angle. Even if the fihre ic hent light can eacily travel alnno ite",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p018_Figure_9_16.png"
+  },
+  {
+    "fig_id": "9.17",
+    "label": "Figure_9_17",
+    "page": 19,
+    "chapter": "Chapter 9",
+    "caption": "FIGURE 9.17 Refraction at a spherical surface separating two media.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p019_Figure_9_17.png"
+  },
+  {
+    "fig_id": "9.18",
+    "label": "Figure_9_18",
+    "page": 21,
+    "chapter": "Chapter 9",
+    "caption": "Figure 9.18(a) shows the geometry of image formation by a double convex lens. The image formation can be seen in terms of two steps: (i) The first refracting surface forms the image I, of the object O [Fig. 9.18(b)]. The image I, acts as a virtual object for the second surface that forms the image at I [Fig. 9.18(c)]. Applying Eq. (9.15) to the first interface ABC, we get nn, n-n mata St (9.17)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p021_Figure_9_18.png"
+  },
+  {
+    "fig_id": "9.19",
+    "label": "Figure_9_19",
+    "page": 23,
+    "chapter": "Chapter 9",
+    "caption": "FIGURE 9.19 Tracing rays through (a) convex lens (b) concave lens. rays. All these rays will pass through the same image point after refraction at the lens.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p023_Figure_9_19.png"
+  },
+  {
+    "fig_id": "9.20",
+    "label": "Figure_9_20",
+    "page": 24,
+    "chapter": "Chapter 9",
+    "caption": "FIGURE 9.20 Power of a lens. l",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p024_Figure_9_20.png"
+  },
+  {
+    "fig_id": "9.22",
+    "label": "Figure_9_22",
+    "page": 26,
+    "chapter": "Chapter 9",
+    "caption": "FIGURE 9.22 Solution Image formed by the first lens ce es vy, uy Sf i es v, -30 10 or v,=15cm The image formed by the first lens serves as the object for the second. This is at a distance of (15 — 5) cm = 10 cm to the right of the second lens. Though",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p026_Figure_9_22.png"
+  },
+  {
+    "fig_id": "9.23",
+    "label": "Figure_9_23",
+    "page": 26,
+    "chapter": "Chapter 9",
+    "caption": "Figure 9.23 shows the passage of light through a triangular prism ABC. The angles of incidence and refraction at the first face AB are iand r,, while the angle of incidence (from glass to air) at the second face AC is r, and the angle of refraction or emergence e. The angle between the emergent ray RS and the direction of the incident ray PQ is called the angle of deviation, 6.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p026_Figure_9_23.png"
+  },
+  {
+    "fig_id": "9.24",
+    "label": "Figure_9_24",
+    "page": 27,
+    "chapter": "Chapter 9",
+    "caption": "FIGURE 9.24 Plot of angle of deviation (5) versus angle of incidence (i) for a The angles A and D,, can be measured triangular prism. xperimentally. Equation (9.38) thus provides a iethod of determining refractive index of the material of the prism. For a small angle prism, i.e., a thin prism, D_, is also very small, and re get n,, -SinllA+ D,,)/ 2) _ (A+D,,)/2 “1 sin[A/2] A /2. D,, = (n,,-DA",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p027_Figure_9_24.png"
+  },
+  {
+    "fig_id": "9.25",
+    "label": "Figure_9_25",
+    "page": 28,
+    "chapter": "Chapter 9",
+    "caption": "FIGURE 9.25 Dispersion of sunlight or white light on passing through a glass prism. The relative deviation of different colours shown is highly exaggerated. colours that appear in sequence are: violet, indigo, blue, green, yellow, orange and red (given by the acronym VIBGYOR). The red light bends the least, while the violet light bends the most (Fig. 9.25).",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p028_Figure_9_25.png"
+  },
+  {
+    "fig_id": "9.26",
+    "label": "Figure_9_26",
+    "page": 28,
+    "chapter": "Chapter 9",
+    "caption": "FIGURE 9.26 Schematic diagram of Newton’s classic experiment on dispersion of white light.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p028_Figure_9_26.png"
+  },
+  {
+    "fig_id": "9.27",
+    "label": "Figure_9_27",
+    "page": 30,
+    "chapter": "Chapter 9",
+    "caption": "FIGURE 9.27 Rainbow: (a) The sun rays incident on a water drop get refracted twice and reflected internally by a drop; (b) Enlarge view of internal reflection and refraction of a ray of light inside a drop form primary rainbow; and (c) secondary rainbow is formed by rays undergoing internal reflection twice inside the drop. the inner surface of the water drop and get internally reflected if the angle between the refracted ray and normal to the drop surface is greater then the critical angle (48°, in this case). The reflected light is refracted again as it comes out of the drop as shown in the figure. It is found that the violet light emerges at an angle of 40° related to the incoming sunlight and red light emerges at an angle of 42°. For other colours, angles lie in",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p030_Figure_9_27.png"
+  },
+  {
+    "fig_id": "9.30",
+    "label": "Figure_9_30",
+    "page": 35,
+    "chapter": "Chapter 9",
+    "caption": "FIGURE 9.30 A simple microscope; (a) the 1e magnifying lens is located such that the 1e image is at the near point, (b) the angle ie subtanded by the object, is the same as or that at the near point, and (c) the object le near the focal point of the lens; the image h is far off but closer than infinity. or closer to the eye than D. e image is at infinity. In magnification. Suppose it can subtend, and be lear point, i.e., a distance",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p035_Figure_9_30.png"
+  },
+  {
+    "fig_id": "9.29",
+    "label": "Figure_9_29",
+    "page": 36,
+    "chapter": "Chapter 9",
+    "caption": "Sf as is clear from Fig m-(2\\_2 la)” F",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p036_Figure_9_29.png"
+  },
+  {
+    "fig_id": "9.31",
+    "label": "Figure_9_31",
+    "page": 36,
+    "chapter": "Chapter 9",
+    "caption": "Fig. 9.31 shows that the (linear) magnification due to the objective, namely h’/h, equals h'oL",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p036_Figure_9_31.png"
+  },
+  {
+    "fig_id": "9.32",
+    "label": "Figure_9_32",
+    "page": 38,
+    "chapter": "Chapter 9",
+    "caption": "FIGURE 9.32 A refracting telescope. are separated by an angle of 100 x 1’",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p038_Figure_9_32.png"
+  },
+  {
+    "fig_id": "9.33",
+    "label": "Figure_9_33",
+    "page": 38,
+    "chapter": "Chapter 9",
+    "caption": "FIGURE 9.33 Schematic diagram of a reflecting telescope (Cassegrain). arrangement using a conve: 342 which now passes through <",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p038_Figure_9_33.png"
+  },
+  {
+    "fig_id": "9.34",
+    "label": "Figure_9_34",
+    "page": 41,
+    "chapter": "Chapter 9",
+    "caption": "Fig. 9.34(c)].",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p041_Figure_9_34.png"
+  },
+  {
+    "fig_id": "9.35",
+    "label": "Figure_9_35",
+    "page": 43,
+    "chapter": "Chapter 9",
+    "caption": "Figure 9.35 shows a cross-section of a ‘light pipe’ made of a glass fibre of refractive index 1.68. The outer covering of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p043_Figure_9_35.png"
+  },
+  {
+    "fig_id": "9.37",
+    "label": "Figure_9_37",
+    "page": 46,
+    "chapter": "Chapter 9",
+    "caption": "Figure 9.37 shows an equiconvex lens (of refractive index 1.50) in contact with a liquid layer on top of a plane mirror. A small needle with its tip on the principal axis is moved along the axis until its inverted image is found at the position of the needle. The distance of the needle from",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p046_Figure_9_37.png"
+  },
+  {
+    "fig_id": "10.1",
+    "label": "Figure_10_1",
+    "page": 50,
+    "chapter": "Chapter 10",
+    "caption": "FIGURE 10.1 (b) At a which given the shape of the wafefront at any time allows us to determine large distance from the shape of the wavefront at a later time. Let us consider a diverging the source, a smal] Wave and let FF, represent a portion of the spherical wavefront at t= 0 portion of the (Fig. 10.2). Now, according to Huygens principle, each point of the spherical wave can wavefront is the source of a secondary disturbance and",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p050_Figure_10_1.png"
+  },
+  {
+    "fig_id": "10.3",
+    "label": "Figure_10_3",
+    "page": 50,
+    "chapter": "Chapter 10",
+    "caption": "FIGURE 10.3 draw spheres of radius vr from each point on [uygens geometrical where v represents the speed of the waves in the medium construction for a @ Common tangent to all these spheres, we obtain the ne plane wave wavefront at t= t. The new wavefront shown as G,G, in F propagating to the — spherical with point O as the centre. right. F, F, is the The above model has one shortcoming: we also have a’ plane wavefront at js shown as D,D, in Fig. 10.2. Huygens argued that the < = 0 and G,G, is the secondary wavelets is maximum in the forward directior vavelront nes backward direction; by making this adhoc assumption, BB. .. etc. are explain the absence of the backwave",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p050_Figure_10_3.png"
+  },
+  {
+    "fig_id": "10.4",
+    "label": "Figure_10_4",
+    "page": 51,
+    "chapter": "Chapter 10",
+    "caption": "FIGURE 10.4 A plane wave AB is incident at an angle i telescopes. He discovered g on the surface PP separating medium 1 and medium 2. the true geometry of = The plane wave undergoes refraction and CE represents Saturn's rings. ad the refracted wavefront. The figure corresponds to v, < v,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p051_Figure_10_4.png"
+  },
+  {
+    "fig_id": "10.5",
+    "label": "Figure_10_5",
+    "page": 53,
+    "chapter": "Chapter 10",
+    "caption": ": Refracted wavefront V,> By << 10.5 Refraction of a plane wave incident on a rarer m lich v, > v,. The plane wave bends away from",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p053_Figure_10_5.png"
+  },
+  {
+    "fig_id": "10.6",
+    "label": "Figure_10_6",
+    "page": 53,
+    "chapter": "Chapter 10",
+    "caption": "FIGURE 10.6 Reflection of a plane wave AB by AB and CE represent incident and reflected w: If we now consider the triangles EAC and BAC we",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p053_Figure_10_6.png"
+  },
+  {
+    "fig_id": "10.7",
+    "label": "Figure_10_7",
+    "page": 54,
+    "chapter": "Chapter 10",
+    "caption": "FIGURE 10.7 Refraction of a plane wave by (a) a thin prism, (b) a convex lens. (c) Reflection of < plane wave by a concave mirror.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p054_Figure_10_7.png"
+  },
+  {
+    "fig_id": "10.8",
+    "label": "Figure_10_8",
+    "page": 56,
+    "chapter": "Chapter 10",
+    "caption": "FIGURE 10.8 (a) Two jg given by needles oscillating in phase in water Y= acos wt represent two coherent then, the displacement produced by the source S, (at the point P) will",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p056_Figure_10_8.png"
+  },
+  {
+    "fig_id": "10.10",
+    "label": "Figure_10_10",
+    "page": 57,
+    "chapter": "Chapter 10",
+    "caption": "FIGURE 10.10 Locus © of points for which is€ SP -S,P is equal to ant = zero, +A, + 24, + 3A.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p057_Figure_10_10.png"
+  },
+  {
+    "fig_id": "10.9",
+    "label": "Figure_10_9",
+    "page": 57,
+    "chapter": "Chapter 10",
+    "caption": "Fig. 10.9(a)] i for which S,Q-S,Q = 2A The waves emanating from S, will arrive exactly two cycles earlier than the waves from S, and will again be in phase [Fig. 10.9(a)]. Thus, ifs, the displacement produced by S, is given by 'S,Q-S,Q=27, Y, = acos wt fa) then the displacement produced by S, will be given by Y, = acos (wt-4n) = acos ot Ss, where we have used the fact that a path difference of 2A corresponds to a phase difference of 4x. The two displacements are once again in phase and",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p057_Figure_10_9.png"
+  },
+  {
+    "fig_id": "10.13",
+    "label": "Figure_10_13",
+    "page": 61,
+    "chapter": "Chapter 10",
+    "caption": "FIGURE 10.13 Computer generated fringe pattern produced by two point source S, and S, on the screen GG’ (Fig. 10.12); (a) and (b) correspond to d = 0.005 mm and 0.025 mm, respectively (both figures correspond to D = 5 cm and 2 = 5 x 10° cm.) (Adopted from OPTICS by A. Ghatak, Tata McGraw Hill Publishing Co. Ltd., New Delhi, 2000.) In the double-slit experiment shown in Fig. 10.12, we have taken the source hole S on the perpendicular bisector of the two slits, which is shown as the line SO. What happens if the source S is slightly away from the perpendicular bisector. Consider that",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p061_Figure_10_13.png"
+  },
+  {
+    "fig_id": "10.14",
+    "label": "Figure_10_14",
+    "page": 62,
+    "chapter": "Chapter 10",
+    "caption": "FIGURE 10.14 Photograph and the graph of ED distribution in Young’s double-slit experiment. oS SS 9 2 Example 10.3 Two slits are made one millimetre apart and the s fe ro) is placed one metre away. What is the fringe separation when [-} green light of wavelength 500 nm is used? a ef e D2_1x5x107 S| ‘ . Solution Fringe spacing =—— = ———__m E Be Spacing =a Ix10% [| =5x10*m=0.5 mm",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p062_Figure_10_14.png"
+  },
+  {
+    "fig_id": "10.15",
+    "label": "Figure_10_15",
+    "page": 65,
+    "chapter": "Chapter 10",
+    "caption": "Fig. 10.15 indicates that central maximum at 6 = O and other ToP secondary maxima at 6 (n+1/2) A/a, and",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p065_Figure_10_15.png"
+  },
+  {
+    "fig_id": "10.17",
+    "label": "Figure_10_17",
+    "page": 66,
+    "chapter": "Chapter 10",
+    "caption": "Fig. 10.17. It shows a broader diffraction peak in which there appear ge several fringes of smaller width due to double-slit interference. The 5 3 number of interference fringes occuring in the broad diffraction peak 5 g depends on the ratio d/a, that is the ratio of the distance between the fs two slits to the width of a slit. In the limit of a becoming very small, the 3 2 diffraction pattern will become very flat and we will obsrve the two-slit =e interference pattern [see Fig. 10.13(b)]. a9 23 ee an 2 I 5 © -----------------Y J ------------------------ < &",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p066_Figure_10_17.png"
+  },
+  {
+    "fig_id": "10.18",
+    "label": "Figure_10_18",
+    "page": 67,
+    "chapter": "Chapter 10",
+    "caption": "Fig. 10.18). FIGURE 10.18 Keep the slit parallel to the filament, right in front of the eye. Use Holding two blades to spectacles if you normally do. With slight adjustment of the width of the om ° single sit A . . ae ulb filament viewed slit and the parallelism of the edges, the pattern should be seen with its through this shows",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p067_Figure_10_18.png"
+  },
+  {
+    "fig_id": "10.16",
+    "label": "Figure_10_16",
+    "page": 68,
+    "chapter": "Chapter 10",
+    "caption": "Fig. 10.16. The lens of the eye focuses the pattern on the screen (the retina of the eye). With some effort, one can cut a double slit in an aluminium foil with a blade. The bulb filament can be viewed as before to repeat Young's experiment. In daytime, there is another suitable bright source subtending a small angle at the eye. This is the reflection of the Sun in any shiny convex surface (e.g., a cycle bell). Do not try direct sunlight — it can damage the eye and will not give fringes anyway as the Sun subtends an angle of (1/2)°. In interference and diffraction, light energy is redistributed. If it reduces in one region, producing a dark fringe, it increases in another region, producing a bright fringe. There is no gain or loss of energy. which is consistent with the principle of conservation of energy.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p068_Figure_10_16.png"
+  },
+  {
+    "fig_id": "10.19",
+    "label": "Figure_10_19",
+    "page": 68,
+    "chapter": "Chapter 10",
+    "caption": "f+ E 10.19 A parallel beam of light is incident on a convex ecause of diffraction effects, the beam gets focused to < spot of radius =~ 0.61 Af/a.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p068_Figure_10_19.png"
+  },
+  {
+    "fig_id": "10.20",
+    "label": "Figure_10_20",
+    "page": 69,
+    "chapter": "Chapter 10",
+    "caption": "FIGURE 10.20 Real image formed by the objective lens of the mi",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p069_Figure_10_20.png"
+  },
+  {
+    "fig_id": "10.21",
+    "label": "Figure_10_21",
+    "page": 72,
+    "chapter": "Chapter 10",
+    "caption": "FIGURE 10.21 (a) The curves represent the displacement of a string at t = 0 and at ¢ = At, respectively when a sinusoidal wave is propagating in the +x-direction. (b) The curve represents the time variation of the displacement at x = 0 when a sinusoidal wave is propagating in the +x-direction. At x = Ax, the time variation of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p072_Figure_10_21.png"
+  },
+  {
+    "fig_id": "10.22",
+    "label": "Figure_10_22",
+    "page": 74,
+    "chapter": "Chapter 10",
+    "caption": "ction falls from 1 to O as the angle betw 0°. Notice that the light seen through a i vary with angle. (b) Behaviour of the el ht passes through two polaroids. The tr.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p074_Figure_10_22.png"
+  },
+  {
+    "fig_id": "10.23",
+    "label": "Figure_10_23",
+    "page": 75,
+    "chapter": "Chapter 10",
+    "caption": "FIGURE 10.23 (a) Polarisation of the blue scattered light from the sky. The incident sunlight is unpolarised (dots and arrows). A typical molecule is shown. It scatters light by 90° polarised normal to the plane of the paper (dots only). (b) Polarisation of light reflected from a transparent medium at the Brewster angle (reflected ray perpendicular to refracted ray).",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p075_Figure_10_23.png"
+  },
+  {
+    "fig_id": "11.1",
+    "label": "Figure_11_1",
+    "page": 86,
+    "chapter": "Chapter 11",
+    "caption": "Fig. 11.1 to study the variation of photocurrent with (a) intensity of radiation, (b) frequency of incident FIGURE 11.1 Experimental radiation, (c) the potential difference between the arrangement for study of plates A and C, and (d) the nature of the material photoelectric effect. of plate C. Light of different frequencies can be used by putting appropriate coloured filter or coloured glass in the path of light falling on the emitter C. The intensity of light is varied by changing the distance of the light source from the emitter.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p086_Figure_11_1.png"
+  },
+  {
+    "fig_id": "11.3",
+    "label": "Figure_11_3",
+    "page": 87,
+    "chapter": "Chapter 11",
+    "caption": "Fig. 11.3. Thus, for a given frequency of the incident radiation, the stopping potential is independent of its intensity. In other words, the maximum kinetic energy of photoelectrons depends on the light source and the emitter plate material, but is independent of intensity of incident",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p087_Figure_11_3.png"
+  },
+  {
+    "fig_id": "11.4",
+    "label": "Figure_11_4",
+    "page": 88,
+    "chapter": "Chapter 11",
+    "caption": "Fig. 11.4 that the stopping potentials are in the | order Vo3> Vo > Vo, if",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p088_Figure_11_4.png"
+  },
+  {
+    "fig_id": "11.5",
+    "label": "Figure_11_5",
+    "page": 89,
+    "chapter": "Chapter 11",
+    "caption": "Fig. 11.5). (iv) The photoelectric emission is an instantaneous process without any apparent time lag (~10°°s or less), even when the incident radiation is made exceedingly dim.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p089_Figure_11_5.png"
+  },
+  {
+    "fig_id": "11.7",
+    "label": "Figure_11_7",
+    "page": 99,
+    "chapter": "Chapter 11",
+    "caption": "FIGURE 11.7 Davisson-Germer electron diffraction arrangement. 403",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p099_Figure_11_7.png"
+  },
+  {
+    "fig_id": "12.1",
+    "label": "Figure_12_1",
+    "page": 112,
+    "chapter": "Chapter 12",
+    "caption": "FIGURE 12.1 Geiger-Marsden scattering experiment. distribution of the number of scattered The entire apparatus is placed ina vacuum chamber particles may be studied as a function (not shown in this figure). of angle of scattering.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p112_Figure_12_1.png"
+  },
+  {
+    "fig_id": "12.3",
+    "label": "Figure_12_3",
+    "page": 113,
+    "chapter": "Chapter 12",
+    "caption": "FIGURE 12.3 do around the sun. Rutherford’s for a thin gold foil obtained by Geiger and Marsden",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p113_Figure_12_3.png"
+  },
+  {
+    "fig_id": "12.4",
+    "label": "Figure_12_4",
+    "page": 114,
+    "chapter": "Chapter 12",
+    "caption": "FIGURE 12.4 Trajectory of o-particles in the The fact that only a small fraction of the coulomb field of a target nucleus. The impact number of incident pa: rticles rebound back parameter, b and scattering angle 8 indicates that the number of o-particles",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p114_Figure_12_4.png"
+  },
+  {
+    "fig_id": "12.5",
+    "label": "Figure_12_5",
+    "page": 117,
+    "chapter": "Chapter 12",
+    "caption": "Fig. 12.5. Study of emission line spectra of a material can therefore serve as a type of “fingerprint” for identification of the gas. When white light passes through a gas and we analyse the transmitted light using a spectrometer we find",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p117_Figure_12_5.png"
+  },
+  {
+    "fig_id": "12.6",
+    "label": "Figure_12_6",
+    "page": 117,
+    "chapter": "Chapter 12",
+    "caption": "Fig. 12.6). The line with the longest H, Hs Hy He Hy wavelength, 656.3 nm in the red is called H,; the next line with wavelength 486.1 nm in the blue- FIGURE 12.6 Balmer series in",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p117_Figure_12_6.png"
+  },
+  {
+    "fig_id": "12.7",
+    "label": "Figure_12_7",
+    "page": 119,
+    "chapter": "Chapter 12",
+    "caption": "FIGURE 12.7 An accelerated atomic electron must spiral into the nucleus as it loses energy. Example 12.4 According to the classical electromagnetic theory, calculate the initial frequency of the light emitted by the electron revolving around a proton in hydrogen atom. Solution From Example 12.3 we know that velocity of electron moving around a proton in hydrogen atom in an orbit of radius 5.3 x 10°'! m is 2.2 x 10° m/s. Thus, the frequency of the electron moving around",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p119_Figure_12_7.png"
+  },
+  {
+    "fig_id": "12.8",
+    "label": "Figure_12_8",
+    "page": 124,
+    "chapter": "Chapter 12",
+    "caption": "Fig. 12.8. The pri states in the ascer energy state corre: of 0 eV. This is",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p124_Figure_12_8.png"
+  },
+  {
+    "fig_id": "12.10",
+    "label": "Figure_12_10",
+    "page": 127,
+    "chapter": "Chapter 12",
+    "caption": "Figure 12.10 illustrates a standing particle wave on a wavelengths fit into the circular orbit for n= 4, i.e., 2nr, = 4/, where / is the de Broglie circumference of the orbit. wavelength of the electron moving in n™ orbit. From Chapter 11, we have 4 = h/p, where p is the magnitude of the electron’s",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p127_Figure_12_10.png"
+  },
+  {
+    "fig_id": "13.1",
+    "label": "Figure_13_1",
+    "page": 140,
+    "chapter": "Chapter 13",
+    "caption": "Figure 13.1 is a plot of the S40 binding energy per nucleon E,,, o = e es [re | ho fe | versus the mass number A for a g g/t O| -—*_} |W \"lan | 206 large number of nuclei. We notice Se RO |— the following main features of a | the plot: 6 his . . . 3 SLi (i) the binding energy per 2 nucleon, E,,, is practically 3 4 constant, i.e. practically © oY independent of the atomic & 2 number for nuclei of middle",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p140_Figure_13_1.png"
+  },
+  {
+    "fig_id": "13.2",
+    "label": "Figure_13_2",
+    "page": 141,
+    "chapter": "Chapter 13",
+    "caption": "FIGURE 13.2 Potential energy : of a pair of nucleons as a is . . . function of their separation. d For a separation greater e than To,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p141_Figure_13_2.png"
+  },
+  {
+    "fig_id": "13.4",
+    "label": "Figure_13_4",
+    "page": 147,
+    "chapter": "Chapter 13",
+    "caption": "FIGURE 13.4 Energy level diagran showing the emission of y rays by < “Co nucleus subsequent to beta dec",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p147_Figure_13_4.png"
+  },
+  {
+    "fig_id": "13.5",
+    "label": "Figure_13_5",
+    "page": 151,
+    "chapter": "Chapter 13",
+    "caption": "FIGURE 13.5 Simplified outlines of a nuclear power plant. 5 2 x a turbine that drives the electric generator. The low-pressure steam from 3 g",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p151_Figure_13_5.png"
+  },
+  {
+    "fig_id": "13.6",
+    "label": "Figure_13_6",
+    "page": 161,
+    "chapter": "Chapter 13",
+    "caption": "Fig. 13.6. You",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p161_Figure_13_6.png"
+  },
+  {
+    "fig_id": "14.1",
+    "label": "Figure_14_1",
+    "page": 167,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.1 The energy band positions in a semiconductor at 0 K. The upper band, called the conduction band, consists of infinitely large number of closely spaced energy states. The lower band, called the valence band, consists of closely spaced completely filled energy states. m. When the valence band is evel can move to higher level 2 resistance of such materials",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p167_Figure_14_1.png"
+  },
+  {
+    "fig_id": "14.2",
+    "label": "Figure_14_2",
+    "page": 167,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.2 Difference between energy bands of (a) metals, (b) insulators and (c) semiconductors. 471",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p167_Figure_14_2.png"
+  },
+  {
+    "fig_id": "14.3",
+    "label": "Figure_14_3",
+    "page": 168,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.3 Three-dimensional dia- In intrinsic semiconductors, the number of free mond-like crystal structure for Carbon, electrons, n,is equal to the number of holes, n,,. That is Silicon or Germanium with n=, =n, (14.1) respective lattice spacing a equal where n,is called intrinsic carrier concentration. to 3.56, 5.43 and 5.66 A. Semiconductors posses the unique property in 472 which, apart from electrons, the holes also move.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p168_Figure_14_3.png"
+  },
+  {
+    "fig_id": "14.4",
+    "label": "Figure_14_4",
+    "page": 168,
+    "chapter": "Chapter 14",
+    "caption": "Figure 14.4 schematically shows the 2-dimensional representation of Si or Ge structure shown in Fig. 14.3 which overemphasises the covalent bond. It shows an idealised picture in which no bonds are broken (all bonds are intact). Such a situation arises at low temperatures. As the temperature increases, more a thermal energy becomes available to these electrons / and some of these electrons may break-away \\ | (becoming free electrons contributing to conduction). : The thermal energy effectively ionises only a few atoms : in the crystalline lattice and creates a vacancy in the a bond as shown in Fig. 14.5(a). The neighbourhood, u | from which the free electron (with charge -q) has come out leaves a vacancv with an effective charse (+a). This",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p168_Figure_14_4.png"
+  },
+  {
+    "fig_id": "14.5",
+    "label": "Figure_14_5",
+    "page": 169,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.5 (a) Schematic model of generation of hole at site 1 and conduction electron due to thermal energy at moderate temperatures. (b) Simplified representation of possible thermal motion of a hole. The electron from the lower left hand covalent bond (site 2) goes to the earlier hole sitel, leaving a hole at its site indicating an Aza",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p169_Figure_14_5.png"
+  },
+  {
+    "fig_id": "14.6",
+    "label": "Figure_14_6",
+    "page": 170,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.6 (a) An intrinsic semiconductor at T= 0 K as shown in Fig. 14.6(b). Here, behaves like insulator. (b) At T> O K, four thermally generated some electrons are shown in electron-hole pairs. The filled circles (*) represent electrons the conduction band. These and empty fields (©) represent holes. have come from",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p170_Figure_14_6.png"
+  },
+  {
+    "fig_id": "14.8",
+    "label": "Figure_14_8",
+    "page": 172,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.8 (a) Trivalent are minority carriers. Therefore, extrinsic semiconductors doped acceptor atom (In, Al, B etc.) with trivalent impurity are called p-type semiconductors. For coped vine wine oy or Ge p-type semiconductors, the recombination process will reduce ductor. (b) eel d the number (nof intrinsically generated electrons to n,. We . ly use . schematic representation of have, for p-type semiconductors",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p172_Figure_14_8.png"
+  },
+  {
+    "fig_id": "14.9",
+    "label": "Figure_14_9",
+    "page": 173,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.9 Energy bands of (a) n-type semiconductor at T > OK, (b) p-type semiconductor at T > OK.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p173_Figure_14_9.png"
+  },
+  {
+    "fig_id": "14.10",
+    "label": "Figure_14_10",
+    "page": 174,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.10 p-n junction carriers due to the electric field is called drift. Thus a formation process. drift current, which is opposite in direction to",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p174_Figure_14_10.png"
+  },
+  {
+    "fig_id": "14.11",
+    "label": "Figure_14_11",
+    "page": 175,
+    "chapter": "Chapter 14",
+    "caption": "Fig. 14.11(a) and (b). (b) Symbol for p-n junction diode. 14.6.1 p-n junction diode under forward bias When an external voltage Vis applied across a semiconductor diode such",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p175_Figure_14_11.png"
+  },
+  {
+    "fig_id": "14.12",
+    "label": "Figure_14_12",
+    "page": 175,
+    "chapter": "Chapter 14",
+    "caption": "Fig. 14.12(a)] is basically a 7 » 8388 n — p-n junction with metallic contacts provided at the Metallic x Metallic ends for the application of an external voltage. It isa contact Depletion contact two terminal device. A p-n junction diode is layer symbolically represented as shown in Fig. 14.12(b). (a)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p175_Figure_14_12.png"
+  },
+  {
+    "fig_id": "14.13",
+    "label": "Figure_14_13",
+    "page": 175,
+    "chapter": "Chapter 14",
+    "caption": "Fig. 14.13(a)], it is said to be forward biased. The applied voltage mostly drops across the depletion region and the voltage drop across the p-side and n-side of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p175_Figure_14_13.png"
+  },
+  {
+    "fig_id": "14.14",
+    "label": "Figure_14_14",
+    "page": 176,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.14 Forward bias When an external voltage (V) is applied across the diode such minority carrier injection. that n-side is positive and p-side is negative, it is said to be reverse biased [Fig.14.15(a)]. The applied voltage mostly drops across the depletion region. The direction of applied voltage is same as the direction of barrier potential. As a result, the barrier height increases and the depletion region widens due to the change in the electric field. The effective barrier height under reverse bias is (V, + V), [Fig. 14.15(b)]. This suppresses the flow of electrons from n > p and holes from p > n. Thus, diffusion current, decreases enormously compared to the diode under forward bias.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p176_Figure_14_14.png"
+  },
+  {
+    "fig_id": "14.15",
+    "label": "Figure_14_15",
+    "page": 177,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.15 (a) Diode voltage) are shown in Fig. 14.16(a) and (b).",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p177_Figure_14_15.png"
+  },
+  {
+    "fig_id": "14.16",
+    "label": "Figure_14_16",
+    "page": 177,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.16 Experimental circuit arrangement for studying V-I characteristics of a p-n junction diode (a) in forward bias , (b) in reverse bias. (c) Typical V-I 481 characteristics of a silicon diode.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p177_Figure_14_16.png"
+  },
+  {
+    "fig_id": "14.17",
+    "label": "Figure_14_17",
+    "page": 178,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.17 Solution Considering the diode characteristics as a straight line between I = 10 mA to I = 20 mA passing through the origin, we can s calculate the resistance using Ohm’s law. boy (a) From the curve, at I= 20 mA, V=0.8 V, I= 10 mA, V=0.7 V aq Tp» = AV/AI = 0.1V/10 mA = 10 Q a (b) From the curve at V = -10 V, I=-1 uA, F Therefore, [S| r,, = 10 V/1pA= 1.0 x 107 Q",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p178_Figure_14_17.png"
+  },
+  {
+    "fig_id": "14.19",
+    "label": "Figure_14_19",
+    "page": 180,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.19 (a) A Full-wave rectifier circuit; (b) Input wave forms given to the diode D, atA and to the diode D, at B; (c) Output waveform across the",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p180_Figure_14_19.png"
+  },
+  {
+    "fig_id": "14.21",
+    "label": "Figure_14_21",
+    "page": 181,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.21 Zener diode, (a) symbol, (b) -V characteristics.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p181_Figure_14_21.png"
+  },
+  {
+    "fig_id": "14.22",
+    "label": "Figure_14_22",
+    "page": 182,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.22 Zener diode as DC voltage across the Zener diode. Thus any increase/ voltage regulator (to be corrected). decrease in the input voltage results in, increase/ decrease of the voltage drop across R, without any change in voltage across the Zener diode. Thus the Zener diode acts as a",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p182_Figure_14_22.png"
+  },
+  {
+    "fig_id": "14.23",
+    "label": "Figure_14_23",
+    "page": 183,
+    "chapter": "Chapter 14",
+    "caption": "Fig. 14.23(a) and a typical I-V characteristics in| characteristics of a photodiode for different Fig. 14.23(b). illumination intensity I, > I, > I, > I,.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p183_Figure_14_23.png"
+  },
+  {
+    "fig_id": "14.24",
+    "label": "Figure_14_24",
+    "page": 185,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.24 (a) Typical p-n junction solar cell; (b) Cross-sectional view.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p185_Figure_14_24.png"
+  },
+  {
+    "fig_id": "14.25",
+    "label": "Figure_14_25",
+    "page": 185,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.25 (a) A typical illuminated p-n junction solar cell; (b) I-V characteristics of a solar cell. Production of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p185_Figure_14_25.png"
+  },
+  {
+    "fig_id": "14.26",
+    "label": "Figure_14_26",
+    "page": 186,
+    "chapter": "Chapter 14",
+    "caption": "Fig. 14.26. = q ; gx 3 & ; g 5 E & B 10 15 2 3 hy (eV) FIGURE 14.26",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p186_Figure_14_26.png"
+  },
+  {
+    "fig_id": "14.27",
+    "label": "Figure_14_27",
+    "page": 187,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.27 (a) Schematic representations of a n-p-n transistor and p-n-p transistor, and (b) Symbols for n-p-n and p-n-p transistors. 491",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p187_Figure_14_27.png"
+  },
+  {
+    "fig_id": "14.28",
+    "label": "Figure_14_28",
+    "page": 188,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.28 Bias Voltage applied on: (a) p-n-p transistor and (b) n-p-n transistor. junction, but most of junction and the cu fraction of the currer current and the elect I, and I, respectively the sum I, + I, Wes current I, << I, +1,, b coming out of the bas of the emitter curren The current ente emitter current I, Si",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p188_Figure_14_28.png"
+  },
+  {
+    "fig_id": "14.29",
+    "label": "Figure_14_29",
+    "page": 189,
+    "chapter": "Chapter 14",
+    "caption": "Fig. 14.29. for studying the input and output To study the input characteristics of the transistor characteristics oe transistor in in C, configuration, a curve is plotted between the base CE configuration. current I, against the base-emitter voltage V,,,. The 493",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p189_Figure_14_29.png"
+  },
+  {
+    "fig_id": "14.32",
+    "label": "Figure_14_32",
+    "page": 194,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.32 A simple circuit of a an ac input signal v, (to be amplified) on the CE-transistor amplifier. bias V,, (dc) as shown in Fig. 14.32.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p194_Figure_14_32.png"
+  },
+  {
+    "fig_id": "14.31",
+    "label": "Figure_14_31",
+    "page": 195,
+    "chapter": "Chapter 14",
+    "caption": "Fig. 14.31(a), the V,,, supply can be varied from OV to 5.0 V. The Si transistor has Bae = 250 and R, = 100 kQ, R, = 1 KQ, Voc = 5.0V. Assume that when",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p195_Figure_14_31.png"
+  },
+  {
+    "fig_id": "14.33",
+    "label": "Figure_14_33",
+    "page": 196,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.33 (a) Principle of a transistor while the base-collector junction is reverse amplifier with positive feedback working as an biased. Detailed biasing circuits actually oscillator and (b) Tuned collector oscillator, (c) Rise used have been omitted for simplicity and fall (or built up) of current I and I, due to the Let us try to understand how oscillations 500 inductive coupling. are built. Suppose switch S, is put on to",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p196_Figure_14_33.png"
+  },
+  {
+    "fig_id": "14.34",
+    "label": "Figure_14_34",
+    "page": 198,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.34 (a) Analogue signal, (b) Digital signal. y 14.10.1 Logic gates A gate is a digital circuit that follows curtain logical relationshi",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p198_Figure_14_34.png"
+  },
+  {
+    "fig_id": "14.35",
+    "label": "Figure_14_35",
+    "page": 198,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.35 (a) Logic symbol, (b) Truth table of NOT gate.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p198_Figure_14_35.png"
+  },
+  {
+    "fig_id": "14.36",
+    "label": "Figure_14_36",
+    "page": 199,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.36 (a) Logic symbol (b) Truth table of OR gate. Apart from carrying out the above mathematical logic operation, this gate can be used for modifying the pulse waveform as explained in the following example.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p199_Figure_14_36.png"
+  },
+  {
+    "fig_id": "14.37",
+    "label": "Figure_14_37",
+    "page": 199,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.37 Ke (iii) AND Gate [inp",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p199_Figure_14_37.png"
+  },
+  {
+    "fig_id": "14.38",
+    "label": "Figure_14_38",
+    "page": 199,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.38 (a) Logic symbol, (b) Truth table of AND gate.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p199_Figure_14_38.png"
+  },
+  {
+    "fig_id": "14.39",
+    "label": "Figure_14_39",
+    "page": 200,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.39 (iv) NAND Gate This is an AND gate followed by a NOT gate. If inputs A and B are both ‘1’, the output Y is not ‘1’. The gate gets its name from this NOT AND behaviour. Figure 14.40 shows the symbol and truth table of NAND gate. NAND gates are also called Universal Gates since by using these gates you can realise other basic gates like OR, AND and NOT (Exercises 14.16 and 14.17). pofol a | A potil a | | fof ® pata} o | (a) (b)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p200_Figure_14_39.png"
+  },
+  {
+    "fig_id": "14.40",
+    "label": "Figure_14_40",
+    "page": 200,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.40 (a) Logic symbol, (b) Truth table of NAND gate. Example 14.13 Sketch the output Y from a NAND gate having inputs A and B given below: Solution eFort<t; A=1,B=1; Hence Y = 0 eFor t, to t; A=0,B=0; Hence Y = 1 eFor t, to t,; A=0,B=1; Hence Y = 1 For t, to 8 A=1,B=0; Hence Y = 1",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p200_Figure_14_40.png"
+  },
+  {
+    "fig_id": "14.41",
+    "label": "Figure_14_41",
+    "page": 201,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.41 oo (v) NOR Gate It has two or more inputs and one output. A NOT- operation applied",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p201_Figure_14_41.png"
+  },
+  {
+    "fig_id": "14.42",
+    "label": "Figure_14_42",
+    "page": 201,
+    "chapter": "Chapter 14",
+    "caption": "Fig. 14.42. . - - Foto} 1 | 4 fofil o | ‘ pifo}| o | 5 pati} o | (a) (b) FIGURE 14.42 (a) Logic symbol, (b) Truth table of NOR gate. NOR gates are considered as universal gates because you can obt< all the gates like AND, OR, NOT by using only NOR gates (Exercises 14. and 14.19).",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p201_Figure_14_42.png"
+  },
+  {
+    "fig_id": "14.44",
+    "label": "Figure_14_44",
+    "page": 207,
+    "chapter": "Chapter 14",
+    "caption": "Fig. 14.44. Show that circuit (a) acts as OR gate while the circuit (b) acts as AND gate.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p207_Figure_14_44.png"
+  },
+  {
+    "fig_id": "14.45",
+    "label": "Figure_14_45",
+    "page": 207,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.45 fy the exact logic operation carried ou! n two circuits as shown in Fig. 14.4",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p207_Figure_14_45.png"
+  },
+  {
+    "fig_id": "14.46",
+    "label": "Figure_14_46",
+    "page": 207,
+    "chapter": "Chapter 14",
+    "caption": "FIGURE 14.46 14.18 Write the truth table for circuit given in Fig. 14.47 below consisting of NOR gates and identify the logic operation (OR, AND, NOT) which",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p207_Figure_14_46.png"
+  },
+  {
+    "fig_id": "14.48",
+    "label": "Figure_14_48",
+    "page": 208,
+    "chapter": "Chapter 14",
+    "caption": "Fig. 14.48 consisting of NOR gates only. Identify the logic operations (OR, AND, NOT) performed by the two circuits.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p208_Figure_14_48.png"
+  },
+  {
+    "fig_id": "15.1",
+    "label": "Figure_15_1",
+    "page": 211,
+    "chapter": "Chapter 15",
+    "caption": "FIGURE 15.1 Block di In a communication system,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p211_Figure_15_1.png"
+  },
+  {
+    "fig_id": "15.2",
+    "label": "Figure_15_2",
+    "page": 213,
+    "chapter": "Chapter 15",
+    "caption": "Fig. 15.2. A communication satellite is essentially a repeater station in space. rea, on) ‘s 5 PEE ARAL LAL SALE DE OAT AOE OE TB XE 15.2 Use of repeater station to increase the range of communication. 4 BANDWIDTH OF SIGNALS communication system, the message signal can be voice, music,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p213_Figure_15_2.png"
+  },
+  {
+    "fig_id": "15.3",
+    "label": "Figure_15_3",
+    "page": 214,
+    "chapter": "Chapter 15",
+    "caption": "FIGURE 15.3 Approximation of a rectangular wave in terms of a the bandwidth. As a result, fundamental sine wave and its harmonics. received waves are a distorted version of the transmitted one. If",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p214_Figure_15_3.png"
+  },
+  {
+    "fig_id": "15.4",
+    "label": "Figure_15_4",
+    "page": 217,
+    "chapter": "Chapter 15",
+    "caption": "FIGURE 15.4 Sky wave propagation. The layer nomenclature",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p217_Figure_15_4.png"
+  },
+  {
+    "fig_id": "15.5",
+    "label": "Figure_15_5",
+    "page": 217,
+    "chapter": "Chapter 15",
+    "caption": "FIGURE 15.5 Line of sight communication by space waves. If the transmitting antenna is at a height h,, then you can show tha",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p217_Figure_15_5.png"
+  },
+  {
+    "fig_id": "15.6",
+    "label": "Figure_15_6",
+    "page": 218,
+    "chapter": "Chapter 15",
+    "caption": "FIGURE 15.6 Various propagation modes for em waves. Example 15.1 A transmitting antenna at the top of a tower has a height 32 m and the height of the receiving antenna is 50 m. What is the maximum distance between them for satisfactory communication in LOS mode? Given radius of earth 6.4 x 10° m. Solution dyn = 2x64 x10° x 32 +/2x64x10° x50 m =64x107 x 10+ 8x 10°x J10 m =144x10 x J10 m = 45.5km",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p218_Figure_15_6.png"
+  },
+  {
+    "fig_id": "15.8",
+    "label": "Figure_15_8",
+    "page": 220,
+    "chapter": "Chapter 15",
+    "caption": "Fig. 15.8(c). Fro ()= A, sinw,t+ WA, sina,,t sin",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p220_Figure_15_8.png"
+  },
+  {
+    "fig_id": "15.10",
+    "label": "Figure_15_10",
+    "page": 221,
+    "chapter": "Chapter 15",
+    "caption": "FIGURE 15.10 Block diagram of a simple modulator for obtaining an AM signal.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p221_Figure_15_10.png"
+  },
+  {
+    "fig_id": "15.9",
+    "label": "Figure_15_9",
+    "page": 221,
+    "chapter": "Chapter 15",
+    "caption": "FIGURE 15.9 A plot of amplitude versus w for an amplitude modulated signal. As long as the broadcast frequencies (carrier waves) are sufficie",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p221_Figure_15_9.png"
+  },
+  {
+    "fig_id": "15.11",
+    "label": "Figure_15_11",
+    "page": 222,
+    "chapter": "Chapter 15",
+    "caption": "FIGURE 15.11 Block diagram of a transmitter. 15.10 Detection or AMPLITUDE MopuLaTeD Wave",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p222_Figure_15_11.png"
+  },
+  {
+    "fig_id": "15.12",
+    "label": "Figure_15_12",
+    "page": 223,
+    "chapter": "Chapter 15",
+    "caption": "FIGURE 15.12 Block diagram of a receiver. ‘tection is the process of recovering the modulating signal from the lated carrier wave. We just saw that the modulated carrier wave",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p223_Figure_15_12.png"
+  },
+  {
+    "fig_id": "15.13",
+    "label": "Figure_15_13",
+    "page": 223,
+    "chapter": "Chapter 15",
+    "caption": "FIGURE 15.13 Block diagram of a detector for AM signal. The qua on y-axis can be current or voltage.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p223_Figure_15_13.png"
+  },
+  {
+    "fig_id": "15.14",
+    "label": "Figure_15_14",
+    "page": 227,
+    "chapter": "Chapter 15",
+    "caption": "FIGURE 15.14 The carrier wave is given by c(t) = 2sin(8zt) volts. (i) Sketch the amplitude modulated waveform",
+    "image_path": "backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/p227_Figure_15_14.png"
+  }
+]

@@ -1,0 +1,127 @@
+{
+  "total": 15,
+  "ok": 15,
+  "failed": 0,
+  "results": [
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Biology/Class-11/English_Biology_Class-11.pdf",
+      "index": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_biology_class-11_english_biology_class-11/index.txt",
+      "images_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_biology_class-11_english_biology_class-11",
+      "out_json": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books_structured/english_biology_class-11_english_biology_class-11.figures.json",
+      "ok": true,
+      "elapsed_s": 477.72
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Biology/Class-12/English_Biology_Class-12_Part-1.pdf",
+      "index": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-1/index.txt",
+      "images_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-1",
+      "out_json": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books_structured/english_biology_class-12_english_biology_class-12_part-1.figures.json",
+      "ok": true,
+      "elapsed_s": 156.53
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Biology/Class-12/English_Biology_Class-12_Part-2.pdf",
+      "index": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/index.txt",
+      "images_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2",
+      "out_json": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books_structured/english_biology_class-12_english_biology_class-12_part-2.figures.json",
+      "ok": true,
+      "elapsed_s": 298.87
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Chemistry/Class-11/English_Chemistry_Class-11_Part-1.pdf",
+      "index": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1/index.txt",
+      "images_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-1",
+      "out_json": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books_structured/english_chemistry_class-11_english_chemistry_class-11_part-1.figures.json",
+      "ok": true,
+      "elapsed_s": 377.21
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Chemistry/Class-11/English_Chemistry_Class-11_Part-2.pdf",
+      "index": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-2/index.txt",
+      "images_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_chemistry_class-11_english_chemistry_class-11_part-2",
+      "out_json": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books_structured/english_chemistry_class-11_english_chemistry_class-11_part-2.figures.json",
+      "ok": true,
+      "elapsed_s": 103.07
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Chemistry/Class-12/English_Chemistry_Class-12_Part-1.pdf",
+      "index": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1/index.txt",
+      "images_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-1",
+      "out_json": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books_structured/english_chemistry_class-12_english_chemistry_class-12_part-1.figures.json",
+      "ok": true,
+      "elapsed_s": 198.17
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Chemistry/Class-12/English_Chemistry_Class-12_Part-2.pdf",
+      "index": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-2/index.txt",
+      "images_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_chemistry_class-12_english_chemistry_class-12_part-2",
+      "out_json": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books_structured/english_chemistry_class-12_english_chemistry_class-12_part-2.figures.json",
+      "ok": true,
+      "elapsed_s": 63.68
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Maths/Class-10/English_Maths_Class-10.pdf",
+      "index": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_maths_class-10_english_maths_class-10/index.txt",
+      "images_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_maths_class-10_english_maths_class-10",
+      "out_json": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books_structured/english_maths_class-10_english_maths_class-10.figures.json",
+      "ok": true,
+      "elapsed_s": 230.47
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Maths/Class-11/English_Maths_Class-11.pdf",
+      "index": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/index.txt",
+      "images_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11",
+      "out_json": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books_structured/english_maths_class-11_english_maths_class-11.figures.json",
+      "ok": true,
+      "elapsed_s": 222.47
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Maths/Class-12/English_Maths_Class-12_Part-1.pdf",
+      "index": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/index.txt",
+      "images_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1",
+      "out_json": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books_structured/english_maths_class-12_english_maths_class-12_part-1.figures.json",
+      "ok": true,
+      "elapsed_s": 90.21
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Maths/Class-12/English_Maths_Class-12_Part-2.pdf",
+      "index": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2/index.txt",
+      "images_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-2",
+      "out_json": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books_structured/english_maths_class-12_english_maths_class-12_part-2.figures.json",
+      "ok": true,
+      "elapsed_s": 146.92
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Physics/Class-11/English_Physics_Class-11.pdf",
+      "index": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11/index.txt",
+      "images_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_physics_class-11_english_physics_class-11",
+      "out_json": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books_structured/english_physics_class-11_english_physics_class-11.figures.json",
+      "ok": true,
+      "elapsed_s": 402.33
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Physics/Class-12/English_Physics_Class-12_Part-1.pdf",
+      "index": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1/index.txt",
+      "images_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-1",
+      "out_json": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books_structured/english_physics_class-12_english_physics_class-12_part-1.figures.json",
+      "ok": true,
+      "elapsed_s": 592.24
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Physics/Class-12/English_Physics_Class-12_Part-2.pdf",
+      "index": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2/index.txt",
+      "images_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_physics_class-12_english_physics_class-12_part-2",
+      "out_json": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books_structured/english_physics_class-12_english_physics_class-12_part-2.figures.json",
+      "ok": true,
+      "elapsed_s": 440.53
+    },
+    {
+      "pdf": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/books/BharatGen_Yojaka_Multilingual_NCERT_Books/English/Science/Class-10/English_Science_Class-10.pdf",
+      "index": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_science_class-10_english_science_class-10/index.txt",
+      "images_dir": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books/english_science_class-10_english_science_class-10",
+      "out_json": "/home/pankaj/code/bharatgen-ibm-yojaka-llm-board/backend/mm_rag/outputs/all_books_structured/english_science_class-10_english_science_class-10.figures.json",
+      "ok": true,
+      "elapsed_s": 427.74
+    }
+  ]
+}

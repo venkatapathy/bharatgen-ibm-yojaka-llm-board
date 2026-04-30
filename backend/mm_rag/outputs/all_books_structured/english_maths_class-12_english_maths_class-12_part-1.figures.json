@@ -1,0 +1,242 @@
+[
+  {
+    "fig_id": "1.2",
+    "label": "Figure_1_2",
+    "page": 11,
+    "chapter": "Chapter 1",
+    "caption": "Fig 1.2 (i) to (iv) Remark f : X — Y is onto if and only if Range of f= Y. Definition 7 A function f: X — Y is said to be one-one and onto (or bijective), if f is both one-one and onto.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p011_Figure_1_2.png"
+  },
+  {
+    "fig_id": "1.3",
+    "label": "Figure_1_3",
+    "page": 12,
+    "chapter": "Chapter 1",
+    "caption": "Fig 1.3 Example 10 Show that the function f: NN, given by f(1) =f(2) = 1 and f(x) =x- 1, for every x > 2, is onto but not one-one. Solution fis not one-one, as f(1) =f(2) = 1. But fis onto, as given any ye Ny#l, we can choose x as y + | such that f(y + 1) = y+ 1-—1=y. Also for 1 € N we",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p012_Figure_1_3.png"
+  },
+  {
+    "fig_id": "1.5",
+    "label": "Figure_1_5",
+    "page": 15,
+    "chapter": "Chapter 1",
+    "caption": "Fig 1.5 Example 15 Let f: {2, 3, 4, 5} > {3, 4, 5, 9} and g : {3, 4,5, 9} — {7, 11, 15} be functions defined as f(2) = 3, f(3) = 4, f(4) = f(5) = 5 and g(3) = g(4) =7 and g(5) = g(9) = 11. Find gof.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p015_Figure_1_5.png"
+  },
+  {
+    "fig_id": "2.1",
+    "label": "Figure_2_1",
+    "page": 38,
+    "chapter": "Chapter 2",
+    "caption": "Fig 2.1 (i) Y Y 52 |_.) 3m |. 2 2 20 % ( 3n ( 3m ¥ D 2 tT 1 am xe Al 5x yee ZEN 2 A Dx 1710\", i NEYO BM NEY On 2 m2",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p038_Figure_2_1.png"
+  },
+  {
+    "fig_id": "2.2",
+    "label": "Figure_2_2",
+    "page": 39,
+    "chapter": "Chapter 2",
+    "caption": "Fig 2.2 (i) Fig 2.2 (ii) Let us now discuss cosec\"!x and sec”!x as follows:",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p039_Figure_2_2.png"
+  },
+  {
+    "fig_id": "2.3",
+    "label": "Figure_2_3",
+    "page": 40,
+    "chapter": "Chapter 2",
+    "caption": "Fig 2.3 (i) Fig 2.3 (ii) : I . . X Also, since sec x = —— , the domain of y = sec x is the set R-{x:x=(2n+1) 7, cos.x 2",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p040_Figure_2_3.png"
+  },
+  {
+    "fig_id": "2.4",
+    "label": "Figure_2_4",
+    "page": 41,
+    "chapter": "Chapter 2",
+    "caption": "Fig 2.4 (i) Fig 2.4 (ii) Finally, we now discuss tan“! and cot! We know that the domain of the tan function (tangent function) is the set",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p041_Figure_2_4.png"
+  },
+  {
+    "fig_id": "2.5",
+    "label": "Figure_2_5",
+    "page": 42,
+    "chapter": "Chapter 2",
+    "caption": "Fig 2.5 (i) Fig 2.5 (ii) We know that domain of the cot function (cotangent function) is the set {x: xe Rand x ¥#nn,n€ Z} and range is R. It means that cotangent function is not defined for integral multiples of 7. If we restrict the domain of cotangent function to",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p042_Figure_2_5.png"
+  },
+  {
+    "fig_id": "2.6",
+    "label": "Figure_2_6",
+    "page": 43,
+    "chapter": "Chapter 2",
+    "caption": "Fig 2.6 (i) Fig 2.6 (ii) The following table gives the inverse trigonometric function (principal value branches) along with their domains and ranges. . um sin! : (-1, 1] > “32 cost: [-1, 1] > (0, 1] tm cosec! : R-(-1,l) 7-> “a9 I7 {0} T sec! : R-(Cl,) 7 [0, 7] — oO) ' [= “| tan : R => 2°29 cot! : R > (0, 7)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p043_Figure_2_6.png"
+  },
+  {
+    "fig_id": "5.4",
+    "label": "Figure_5_4",
+    "page": 156,
+    "chapter": "Chapter 5",
+    "caption": "Fig 5.4 do not coincide, f is not continuous at x = 1. Hence x= Lis the only point of discontinuity of f The graph of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p156_Figure_5_4.png"
+  },
+  {
+    "fig_id": "5.8",
+    "label": "Figure_5_8",
+    "page": 158,
+    "chapter": "Chapter 5",
+    "caption": "Fig 5.8. From the graph it looks like that fis discontinuous at every integral point. Below we explore, if this is true.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p158_Figure_5_8.png"
+  },
+  {
+    "fig_id": "5.9",
+    "label": "Figure_5_9",
+    "page": 173,
+    "chapter": "Chapter 5",
+    "caption": "Fig 5.9 gives a sketch of yaf@ =x y=hO =x, y= fw =e ODE Fa) and y = f,(x) =x*. Observe that the curves get steeper as the power of x increases. x’ q xX Steeper the curve, faster is the rate of growth. What this means is that for a fixed Y increment in the value of x(> 1), the Fig 5.9 increment in the value of y = f, (x) increases as n increases for n = 1, 2, 3, 4. It is conceivable that such a statement is true for all positive values of n, where f, (x) = x\". Essentially, this means that the graph of y = f, (x) leans more towards the y-axis as n increases. For example, consider f(x) = x'° and f(x) = x\". If x increases from | to 2, f\\) increases from | to 2'° whereas f,, increases from | to 2'°. Thus, for the same increment in x, f,, grow faster than /f,,.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p173_Figure_5_9.png"
+  },
+  {
+    "fig_id": "5.11",
+    "label": "Figure_5_11",
+    "page": 175,
+    "chapter": "Chapter 5",
+    "caption": "Fig 5.11 gives the plot of y = e* and y=Inx. It is of interest to observe ¥ that the two curves are the mirror Fig 5.11 images of each other reflected in the line y = x.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p175_Figure_5_11.png"
+  },
+  {
+    "fig_id": "5.12",
+    "label": "Figure_5_12",
+    "page": 187,
+    "chapter": "Chapter 5",
+    "caption": "Fig 5.12 Fig 5.13 Observe what happens to the slope of the tangent to the curve at between a and b. In each of the graphs, the slope becomes zero at lez That is precisely the claim of the Rolle’s theorem as the slope of the",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p187_Figure_5_12.png"
+  },
+  {
+    "fig_id": "5.14",
+    "label": "Figure_5_14",
+    "page": 188,
+    "chapter": "Chapter 5",
+    "caption": "Fig 5.14. We have already interpreted f’(c) as the slope of the f(b)- fla) b",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p188_Figure_5_14.png"
+  },
+  {
+    "fig_id": "6.1",
+    "label": "Figure_6_1",
+    "page": 202,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.1.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p202_Figure_6_1.png"
+  },
+  {
+    "fig_id": "6.2",
+    "label": "Figure_6_2",
+    "page": 203,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.2. y Y y xv< [~ “9 >X x’< x y y' y Increasing function Strictly Increasing function Decreasing function @ Gi) Y Y — x xg x Y’ ‘ . . y’ Strictly Decreasing function Neither Increasing nor Decreasing function (iy) ww) Fig 6.2",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p203_Figure_6_2.png"
+  },
+  {
+    "fig_id": "6.5",
+    "label": "Figure_6_5",
+    "page": 206,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.5 , 0.2 Tt Tt , Now, f'(x)>0 forall *© | as Osx< > 0S3x<5 and f’(x) <0 for Tt 1 3 all re(24] as Fey ct at ear c. 62 6 2 2 2",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p206_Figure_6_5.png"
+  },
+  {
+    "fig_id": "6.6",
+    "label": "Figure_6_6",
+    "page": 207,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.6 lote that f'(x)>0 if xe [0.2] U (=. 2n| 4 4 Tt 50 r f is strictly increasing in the intervals OF and 4\" nt St ls (x) <0 if xe(24) so f'(Q) 44 nm St r f is strictly decreasing in Va",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p207_Figure_6_6.png"
+  },
+  {
+    "fig_id": "6.8",
+    "label": "Figure_6_8",
+    "page": 216,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.8 iy-(®)se dx",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p216_Figure_6_8.png"
+  },
+  {
+    "fig_id": "6.11",
+    "label": "Figure_6_11",
+    "page": 221,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.11) , note that ; f(x) 20, for allx € Rand f(x) =0 if x=0. 1 Therefore, the function f has a minimum value 0 x 32-19] 12 3 x and the point of minimum value of fis x = 0. Also, the",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p221_Figure_6_11.png"
+  },
+  {
+    "fig_id": "6.9",
+    "label": "Figure_6_9",
+    "page": 221,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.9 Y Example 26 Find the maximum and the minimum values, if any, of the function f given by fa =xr,xER. Solution From the graph of the given function (Fig 6.10), we have f(x) = 0 if x = 0. Also S() = 0, for all xe R. Therefore, the minimum value of f is 0 and the point of minimum value of fis x = 0. Further, it may be observed X’ S340 135 xX from the graph of the function that f has no maximum y, value and hence no point of maximum value of f in R. ee Fig 6.10",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p221_Figure_6_9.png"
+  },
+  {
+    "fig_id": "6.13",
+    "label": "Figure_6_13",
+    "page": 223,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.13 »ys. Similarly,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p223_Figure_6_13.png"
+  },
+  {
+    "fig_id": "6.14",
+    "label": "Figure_6_14",
+    "page": 223,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.14 y’ (b)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p223_Figure_6_14.png"
+  },
+  {
+    "fig_id": "6.15",
+    "label": "Figure_6_15",
+    "page": 224,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.15 (c—h,c +h).",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p224_Figure_6_15.png"
+  },
+  {
+    "fig_id": "6.16",
+    "label": "Figure_6_16",
+    "page": 225,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.16 Example 29 Find all points of local maxima and local minima of the function f given by SQ) = - 3x43. Solution We have",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p225_Figure_6_16.png"
+  },
+  {
+    "fig_id": "6.19",
+    "label": "Figure_6_19",
+    "page": 229,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.19. Draw perpendiculars DP and",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p229_Figure_6_19.png"
+  },
+  {
+    "fig_id": "6.21",
+    "label": "Figure_6_21",
+    "page": 232,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.21 ue is f(b). The function also has a local maxima at x = c and local maximum m the graph, it is evident that f has absolute maximum value f(a) and imum value f(d). Further note that the absolute maximum (minimum) different from local maximum (minimum) value of f. now state two results (without proof) regarding absolute maximum and imum values of a function on a closed interval I. Let f be a continuous function on an interval I = [a, b]. Then f has the <imum value and f attains it at least once in I. Also, f has the absolute lue and attains it at least once in I. Let f be a differentiable function on a closed interval I and let c be any ‘of I. Then",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p232_Figure_6_21.png"
+  },
+  {
+    "fig_id": "6.23",
+    "label": "Figure_6_23",
+    "page": 239,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.23 or AS = 3s (as MN = 2 and AB = 6 (given)) Thus AM = 3s — 5 = 2s. But AM =1 So 1=2s rere ee erefore de dt",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p239_Figure_6_23.png"
+  },
+  {
+    "fig_id": "6.25",
+    "label": "Figure_6_25",
+    "page": 243,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.25 V(x) =x(3 — 2x) (8 — 2x) = 4x? — 22x° + 24x Therefore V(x) =12x? — 44x + 24 = A(x —3)(3.x- 2) V\"(x) =24x-44",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-12_english_maths_class-12_part-1/p243_Figure_6_25.png"
+  }
+]

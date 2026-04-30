@@ -1,0 +1,730 @@
+[
+  {
+    "fig_id": "1.8",
+    "label": "Figure_1_8",
+    "page": 22,
+    "chapter": "Chapter 1",
+    "caption": "Fig 1.8 -B={x:xe Aandx¢ B} lifference of two sets A and B can be |U BOA 1 by Venn diagram as shown in Fig 1.8. ded portion represents the difference of ss A and B. he sets A- B, A> B and B - A are A-B (AAB) isjoint sets, i.e., the intersection of any of =",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p022_Figure_1_8.png"
+  },
+  {
+    "fig_id": "1.9",
+    "label": "Figure_1_9",
+    "page": 22,
+    "chapter": "Chapter 1",
+    "caption": "Fig 1.9. 'e* EXERCISE 1.4 1. Find the union of each of the following pairs of sets : @) X= {13,5} Y= {1,2,3} (i) A= [aeio,u} B= {a,b,c} (iii) A= {x : xis a natural number and multiple of 3} B = {x : x is a natural number less than 6} (iv) A= {x:x is a natural number and 1 <x <6 } B= {x : x is a natural number and 6 <x < 10 } (vy) A={1,2,3},B=6",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p022_Figure_1_9.png"
+  },
+  {
+    "fig_id": "1.11",
+    "label": "Figure_1_11",
+    "page": 26,
+    "chapter": "Chapter 1",
+    "caption": "Fig 1.11). Therefore n(AUB)=n(A-B)+n(A OB)+n(B-A) =n(A-B)+ n(A OB)+n(B-A)+n(A AB)-n(A OB) =n(A)+n(B)-n(A OB), which verifies (2)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p026_Figure_1_11.png"
+  },
+  {
+    "fig_id": "2.2",
+    "label": "Figure_2_2",
+    "page": 36,
+    "chapter": "Chapter 2",
+    "caption": "Fig 2.2)?",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p036_Figure_2_2.png"
+  },
+  {
+    "fig_id": "2.3",
+    "label": "Figure_2_3",
+    "page": 36,
+    "chapter": "Chapter 2",
+    "caption": "Fig 2.3). b; AXB = {(a4, 5,), (4 5), (4 45), (4s By)s (Gy. B))s (Ay 5,), By (a, ,). (a, b))}- b The 8 ordered pairs thus formed can represent the position of points in the plane if A and B are subsets of the set of real numbers and it is = a a, obvious that the point in the position (a,, 5,) will be distinct from the point Fig23 in the position (5,, a,). , Remarks (i) Two ordered pairs are equal, if and only if the corresponding first elements",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p036_Figure_2_3.png"
+  },
+  {
+    "fig_id": "2.4",
+    "label": "Figure_2_4",
+    "page": 39,
+    "chapter": "Chapter 2",
+    "caption": "Fig 2.4. Definition 2 A relation R from a non-empty set A to a non-empty set B is a subset of the cartesian product A X B.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p039_Figure_2_4.png"
+  },
+  {
+    "fig_id": "2.5",
+    "label": "Figure_2_5",
+    "page": 40,
+    "chapter": "Chapter 2",
+    "caption": "Fig 2.5 The Fig 2.6 shows a relation between the sets P and Q. Write this relation (i) in set-builder form, (ii) in roster form. What is its domain and range? P Q It is obvious that the relation R is = “x is the square of y”. 7 ; ; “a uy SS _| (i) In set-builder form, R = {(x, y): x [= =",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p040_Figure_2_5.png"
+  },
+  {
+    "fig_id": "2.7",
+    "label": "Figure_2_7",
+    "page": 41,
+    "chapter": "Chapter 2",
+    "caption": "Fig 2.7 ble by a}.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p041_Figure_2_7.png"
+  },
+  {
+    "fig_id": "2.8",
+    "label": "Figure_2_8",
+    "page": 43,
+    "chapter": "Chapter 2",
+    "caption": "Fig 2.8 Gi) | Constant function Define the function f R > R by y =/(x)=c, x € R where c is a constant and each x € R. Here domain of fis R and its range is {c}. Y 8 6 4 2 x’ x 8 6-4-2 [02 4 6 8 2",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p043_Figure_2_8.png"
+  },
+  {
+    "fig_id": "2.10",
+    "label": "Figure_2_10",
+    "page": 44,
+    "chapter": "Chapter 2",
+    "caption": "Fig 2.10 Y",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p044_Figure_2_10.png"
+  },
+  {
+    "fig_id": "2.11",
+    "label": "Figure_2_11",
+    "page": 45,
+    "chapter": "Chapter 2",
+    "caption": "Fig 2.11 . . . . I(x) (iv) Rational functions are functions of the type “a(n) , where f(x) and g(x) are g(x polynomial functions of x defined in a domain, where g(x) # 0. . 1 Example 15 Define the real valued function f: R — {0} > R defined by f(x) =—, x x€ R-{0}. Complete the Table given below using this definition. What is the domain and range of this function?",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p045_Figure_2_11.png"
+  },
+  {
+    "fig_id": "2.13",
+    "label": "Figure_2_13",
+    "page": 46,
+    "chapter": "Chapter 2",
+    "caption": "Fig 2.13 Lifx>0 f(x) =40,if x=0 -Lifx<0",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p046_Figure_2_13.png"
+  },
+  {
+    "fig_id": "2.14",
+    "label": "Figure_2_14",
+    "page": 47,
+    "chapter": "Chapter 2",
+    "caption": "Fig 2.14 er function Y > R defined assumes the { integer, less 5 sha function : est integer 3 2 -1 x’ c ion of [x], we —o -l<x< 1<x<0",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p047_Figure_2_14.png"
+  },
+  {
+    "fig_id": "2.16",
+    "label": "Figure_2_16",
+    "page": 49,
+    "chapter": "Chapter 2",
+    "caption": "Fig 2.16. Remark The function f defined by fx) =mx+c, y x R, is called /inear function, where m and c are fx) =x +10 constants. Above function is an example ofa /inear",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p049_Figure_2_16.png"
+  },
+  {
+    "fig_id": "2.17",
+    "label": "Figure_2_17",
+    "page": 50,
+    "chapter": "Chapter 2",
+    "caption": "Fig 2.17 Fig 2.17",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p050_Figure_2_17.png"
+  },
+  {
+    "fig_id": "3.3",
+    "label": "Figure_3_3",
+    "page": 55,
+    "chapter": "Chapter 3",
+    "caption": "Fig 3.3. o",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p055_Figure_3_3.png"
+  },
+  {
+    "fig_id": "3.4",
+    "label": "Figure_3_4",
+    "page": 56,
+    "chapter": "Chapter 3",
+    "caption": "Fig 3.4 (i) to (iv) We know that the circumference of a circle of radius 1 unit is 2m. Thus, one complete revolution of the initial side subtends an angle of 27 radian. More generally, in a circle of radius r, an arc of length r will subtend an angle of 1 radian. It is well-known that equal arcs of a circle subtend equal angle at the centre. Since in a circle of radius r, an are of length subtends an angle whose measure is 1 / radian, an arc of length / will subtend an angle whose measure is radian. Thus, if in a circle of radius r, an arc of length / subtends an angle 0 radian at the centre, we have l 8 =— or / =r. 7",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p056_Figure_3_4.png"
+  },
+  {
+    "fig_id": "3.7",
+    "label": "Figure_3_7",
+    "page": 62,
+    "chapter": "Chapter 3",
+    "caption": "Fig 3.7). Therefore Mf cos (—x) = cos x (0-1) [DQ (,-5) and sin (-x) =—sinx",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p062_Figure_3_7.png"
+  },
+  {
+    "fig_id": "3.10",
+    "label": "Figure_3_10",
+    "page": 65,
+    "chapter": "Chapter 3",
+    "caption": "Fig 3.10 y=cotx Fig 3.11",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p065_Figure_3_10.png"
+  },
+  {
+    "fig_id": "3.12",
+    "label": "Figure_3_12",
+    "page": 66,
+    "chapter": "Chapter 3",
+    "caption": "Fig 3.12 Fig 3.13 shall see in the next section that tan (m + x) = tan x. Hence, values of tan x will repeat after an interval of x. Since cot x is reciprocal of tan x, its values will also repeat after an interval of m. Using this knowledge and behaviour of trigonometic functions, we can sketch the graph of these functions. The graph of these functions are given above: Example 6 Ifcosx= - 3 , x lies in the third quadrant, find the values of other five 5 trigonometric functions.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p066_Figure_3_12.png"
+  },
+  {
+    "fig_id": "3.14",
+    "label": "Figure_3_14",
+    "page": 69,
+    "chapter": "Chapter 3",
+    "caption": "Fig 3.14 ie triangles POP, and P,OP,. They are congruent (Why?). Thi 2 equal. By using distance formula, we get 20s x — cos (— y)}> + [sin x — sin(-v? sos x — cos y)’ + (sin x + sin y? ys’ + cos? y — 2 cos x cos y + sin’x + sin’ y + 2sin x sin y — 2 (cos x cos y — sin x sin y) (Why?)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p069_Figure_3_14.png"
+  },
+  {
+    "fig_id": "4.1",
+    "label": "Figure_4_1",
+    "page": 92,
+    "chapter": "Chapter 4",
+    "caption": "Fig 4.1 > first tile is pushed in the indicated direction, all the tiles > that all",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p092_Figure_4_1.png"
+  },
+  {
+    "fig_id": "5.1",
+    "label": "Figure_5_1",
+    "page": 109,
+    "chapter": "Chapter 5",
+    "caption": "Fig 5.1 1 - 2i which correspond to the ordered pairs (2, 4), ( — 2, 3), (0, 1), (2, 0), (-5, -2), and (1, - 2), respectively, have been represented geometrically by the points A, B, C, D, E, and F, respectively in the Fig 5.1. The plane having a complex number assigned to each of its point is called the complex plane or the Argand plane.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p109_Figure_5_1.png"
+  },
+  {
+    "fig_id": "5.2",
+    "label": "Figure_5_2",
+    "page": 110,
+    "chapter": "Chapter 5",
+    "caption": "Fig 5.2 ‘and y-axis in the Argand plane are called, respect ‘y axis.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p110_Figure_5_2.png"
+  },
+  {
+    "fig_id": "5.3",
+    "label": "Figure_5_3",
+    "page": 110,
+    "chapter": "Chapter 5",
+    "caption": "Fig 5.3",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p110_Figure_5_3.png"
+  },
+  {
+    "fig_id": "5.5",
+    "label": "Figure_5_5",
+    "page": 111,
+    "chapter": "Chapter 5",
+    "caption": "Fig 5.5 (0<0<2n) Y P P Y Y Y 6 9 x’ XX’ XX’ XX\" X 0 g\\o/ Ol <o6 8 P P",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p111_Figure_5_5.png"
+  },
+  {
+    "fig_id": "5.7",
+    "label": "Figure_5_7",
+    "page": 112,
+    "chapter": "Chapter 5",
+    "caption": "Fig 5.7 Therefore, required polar form is 7= 2{ cos +i sin3 The complex number z= +iy is represented as shown in Fig 5.7.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p112_Figure_5_7.png"
+  },
+  {
+    "fig_id": "5.8",
+    "label": "Figure_5_8",
+    "page": 112,
+    "chapter": "Chapter 5",
+    "caption": "Fig 5.8 gant = 3. 3 Qn... 2n Thus, the required polar form is 8 cos +1 sn",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p112_Figure_5_8.png"
+  },
+  {
+    "fig_id": "6.1",
+    "label": "Figure_6_1",
+    "page": 125,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.1.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p125_Figure_6_1.png"
+  },
+  {
+    "fig_id": "6.2",
+    "label": "Figure_6_2",
+    "page": 126,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.2 iarks obtained by a student of Class XI in first and second termi and 48, respectively. Find the number of minimum marks he shot xamination to have an average of at least 60 marks. the marks obtained by student in the annual examination. Then 8+ “** > 60 ; x2 180 )",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p126_Figure_6_2.png"
+  },
+  {
+    "fig_id": "6.3",
+    "label": "Figure_6_3",
+    "page": 128,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.3 Fig 6.4 A point in the Cartesian plane will either lie on a line or will lie in either of the half planes I or IT. We shall now examine the relationship, if any, of the points in the plane and the inequalities ax + by <c or ax + by > c. Let us consider the line ax + by=c,a#0,b #0 -- (I)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p128_Figure_6_3.png"
+  },
+  {
+    "fig_id": "6.5",
+    "label": "Figure_6_5",
+    "page": 129,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.5 (a, B) be a point on line ax + by =c and an e half plane II.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p129_Figure_6_5.png"
+  },
+  {
+    "fig_id": "6.7",
+    "label": "Figure_6_7",
+    "page": 131,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.7) of the inequality. Since the points on 2 the line also satisfy the inequality (1) above, the line 3",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p131_Figure_6_7.png"
+  },
+  {
+    "fig_id": "6.8",
+    "label": "Figure_6_8",
+    "page": 131,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.8) and determine if this point %_*, satisfies the given inequality, we note that ° * 7 tI",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p131_Figure_6_8.png"
+  },
+  {
+    "fig_id": "6.9",
+    "label": "Figure_6_9",
+    "page": 131,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.9. 2 Hl",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p131_Figure_6_9.png"
+  },
+  {
+    "fig_id": "6.12",
+    "label": "Figure_6_12",
+    "page": 133,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.12) including all the point on",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p133_Figure_6_12.png"
+  },
+  {
+    "fig_id": "6.14",
+    "label": "Figure_6_14",
+    "page": 134,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.14).",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p134_Figure_6_14.png"
+  },
+  {
+    "fig_id": "6.15",
+    "label": "Figure_6_15",
+    "page": 135,
+    "chapter": "Chapter 6",
+    "caption": "Fig 6.15. o—______—__—_> —_—_—_",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p135_Figure_6_15.png"
+  },
+  {
+    "fig_id": "7.2",
+    "label": "Figure_7_2",
+    "page": 140,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.2. 12 Possibilities BTW,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p140_Figure_7_2.png"
+  },
+  {
+    "fig_id": "7.3",
+    "label": "Figure_7_3",
+    "page": 154,
+    "chapter": "Chapter 7",
+    "caption": "Fig. 7.3",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p154_Figure_7_3.png"
+  },
+  {
+    "fig_id": "8.1",
+    "label": "Figure_8_1",
+    "page": 166,
+    "chapter": "Chapter 8",
+    "caption": "Fig 8.1 a this table that will help us to write t lition of 1’s in the row for index 1 giv:",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p166_Figure_8_1.png"
+  },
+  {
+    "fig_id": "8.2",
+    "label": "Figure_8_2",
+    "page": 166,
+    "chapter": "Chapter 8",
+    "caption": "Fig 8.2 oks like a triangle with 1 at the top vertex and running his array of numbers is known as Pascal’: triangle, ‘ematician Blaise Pascal. It is also known as Meru",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p166_Figure_8_2.png"
+  },
+  {
+    "fig_id": "8.3",
+    "label": "Figure_8_3",
+    "page": 167,
+    "chapter": "Chapter 8",
+    "caption": "Fig 8.3 Pascal’s triangle 1 now write the row of the Pascal’s triangle ws. For example, for the index 7 the row w",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p167_Figure_8_3.png"
+  },
+  {
+    "fig_id": "10.1",
+    "label": "Figure_10_1",
+    "page": 208,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.1. 0 x We may note that the point (6, — 4) is at 6 units ‘ distance from the y-axis measured along the positive ' x-axis and at 4 units distance from the x-axis ' measured along the negative y-axis. Similarly, the wa non n n= -6(6,-4) point (3, 0) is at 3 units distance from the y-axis measured along the positive x-axis and has zero distance from the x-axis. Y' We also studied there following important Fig 10.1 formulae:",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p208_Figure_10_1.png"
+  },
+  {
+    "fig_id": "10.3",
+    "label": "Figure_10_3",
+    "page": 211,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10. 3 (ii) m =tan@ = tan ( 180° — ZMPQ) =— tan ZMPQ",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p211_Figure_10_3.png"
+  },
+  {
+    "fig_id": "10.4",
+    "label": "Figure_10_4",
+    "page": 211,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.4 Then tan o = tan B.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p211_Figure_10_4.png"
+  },
+  {
+    "fig_id": "10.5",
+    "label": "Figure_10_5",
+    "page": 212,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.5), then B = a + 90°. Therefore,tan B= tan (& + 90°) Y",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p212_Figure_10_5.png"
+  },
+  {
+    "fig_id": "10.6",
+    "label": "Figure_10_6",
+    "page": 213,
+    "chapter": "Chapter 10",
+    "caption": "Fig10.6). Then",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p213_Figure_10_6.png"
+  },
+  {
+    "fig_id": "10.7",
+    "label": "Figure_10_7",
+    "page": 215,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.7 Example 3 Line through the points (—2, 6) and (4, 8) is perpendicular to the line through the points (8, 12) and (x, 24). Find the value of x.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p215_Figure_10_7.png"
+  },
+  {
+    "fig_id": "10.8",
+    "label": "Figure_10_8",
+    "page": 215,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.8) ifand only if slope of AB = slope of BC. Fig 10.8",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p215_Figure_10_8.png"
+  },
+  {
+    "fig_id": "10.10",
+    "label": "Figure_10_10",
+    "page": 217,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.10 arious Forms of the Equation of a Line v that every line ina plane contains infinitely many points on it. This r",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p217_Figure_10_10.png"
+  },
+  {
+    "fig_id": "10.11",
+    "label": "Figure_10_11",
+    "page": 218,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.11(b)]. Y Y L L yra L xed] 6, “ 2. x=b x’ xX X O| * oO x ay \\ =-a y L y' (a) Fig 10.11 (b) y'",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p218_Figure_10_11.png"
+  },
+  {
+    "fig_id": "10.13",
+    "label": "Figure_10_13",
+    "page": 219,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.13). ien, by the definition, the slope of L is P@yY ven by —Vo",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p219_Figure_10_13.png"
+  },
+  {
+    "fig_id": "10.16",
+    "label": "Figure_10_16",
+    "page": 221,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.16). (0,5) By two-point form of the equation of the line, * ° we have ‘ 5-0 y-0=——(x-a) or ay=-bx+ab, b O-a ' xy : x FL : ie, ab (0 Sy ) SE eS Thus, equation of the line making intercepts Fig 10.16 aand b on x-and y-axis, respectively, is xy",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p221_Figure_10_16.png"
+  },
+  {
+    "fig_id": "10.17",
+    "label": "Figure_10_17",
+    "page": 222,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.17 (iv) In each case, we have OM = p cos @ and MA= p sin @, so that the coordinates of the point A are (p cos @, p sin @). Further, line L is perpendicular to OA. Therefore The slope of the line L ! 1 __ ose e slope of the line L= ~-~———_—~ = —-—__ = -—_—_, P slope of OA tan © sin @",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p222_Figure_10_17.png"
+  },
+  {
+    "fig_id": "10.19",
+    "label": "Figure_10_19",
+    "page": 230,
+    "chapter": "Chapter 10",
+    "caption": "Fig10.19 axes at the points Q and R, respectively. Thet Cc » OJandR | 0 “Bh Thus, the area of the",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p230_Figure_10_19.png"
+  },
+  {
+    "fig_id": "10.20",
+    "label": "Figure_10_20",
+    "page": 231,
+    "chapter": "Chapter 10",
+    "caption": "Fig10.20. Fig10.20 Distance between two lines is equal to the length of the perpendicular from point o line (2). Therefore, distance between the lines (1) and (2) is | wl @ 4 ay",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p231_Figure_10_20.png"
+  },
+  {
+    "fig_id": "10.21",
+    "label": "Figure_10_21",
+    "page": 234,
+    "chapter": "Chapter 10",
+    "caption": "Fig 10.21 y-1l=-1l(@-4)orx+y-5=0 w. (2) Solving (1) and (2), we get x = 1 and y= 4 so that point of intersection of the two lines",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p234_Figure_10_21.png"
+  },
+  {
+    "fig_id": "10.22",
+    "label": "Figure_10_22",
+    "page": 235,
+    "chapter": "Chapter 10",
+    "caption": "Fig10.22 ine (1) is the perpendicular bisector of line segment fline PQ = ————_.- ———_ >pe of line PQ = Slope of line x-3y+4=0’",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p235_Figure_10_22.png"
+  },
+  {
+    "fig_id": "10.24",
+    "label": "Figure_10_24",
+    "page": 236,
+    "chapter": "Chapter 10",
+    "caption": "Fig10.24). Therefore 5a, -B, +4=0 and 30,+4B,-4=0 Fig 10.24",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p236_Figure_10_24.png"
+  },
+  {
+    "fig_id": "11.2",
+    "label": "Figure_11_2",
+    "page": 242,
+    "chapter": "Chapter 11",
+    "caption": "Fig 11.2 Fig 11.3 cone and extending indefinitely far in both directions (Fig11.2). The point V is called the vertex; the line / is the axis of the cone.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p242_Figure_11_2.png"
+  },
+  {
+    "fig_id": "11.4",
+    "label": "Figure_11_4",
+    "page": 243,
+    "chapter": "Chapter 11",
+    "caption": "Sn yo Y Dv -",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p243_Figure_11_4.png"
+  },
+  {
+    "fig_id": "11.6",
+    "label": "Figure_11_6",
+    "page": 243,
+    "chapter": "Chapter 11",
+    "caption": "Fig 11.6 Degenerated conic sections the plane cuts at the vertex of the cone, we have the following diffe When a < B < 90°, then",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p243_Figure_11_6.png"
+  },
+  {
+    "fig_id": "11.8",
+    "label": "Figure_11_8",
+    "page": 244,
+    "chapter": "Chapter 11",
+    "caption": "Fig 11.8 ‘6 Fig 11.9 ZN \\ NI B BY N",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p244_Figure_11_8.png"
+  },
+  {
+    "fig_id": "11.9",
+    "label": "Figure_11_9",
+    "page": 244,
+    "chapter": "Chapter 11",
+    "caption": "Fig 11.9 IN A Vv Y N N \\ \\",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p244_Figure_11_9.png"
+  },
+  {
+    "fig_id": "11.13",
+    "label": "Figure_11_13",
+    "page": 247,
+    "chapter": "Chapter 11",
+    "caption": "Fig 11.13). (‘Para’ means ‘for’ and P, F=P,B, ‘bola’ means ‘throwing’, i.e., the shape Directrix P, F=P,B, described when you throw a ball in the air). P, F=P,B, If the fixed point lies on the fixed line, then the set of points in the plane, which Fig 11.13",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p247_Figure_11_13.png"
+  },
+  {
+    "fig_id": "11.15",
+    "label": "Figure_11_15",
+    "page": 247,
+    "chapter": "Chapter 11",
+    "caption": "Fig11.15 (a) to (d). Y Y 8 I 8 Hl 7 R ® x’ xX x’ x O} F(a,0) F(-a,0) JO y=4ax Y' Y' y’=-4ax (a) (b)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p247_Figure_11_15.png"
+  },
+  {
+    "fig_id": "11.17",
+    "label": "Figure_11_17",
+    "page": 250,
+    "chapter": "Chapter 11",
+    "caption": "Fig 11.17 Fig 11.18 Y Example 5 Find the coordinates of the focus, axis, { t Lo",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p250_Figure_11_17.png"
+  },
+  {
+    "fig_id": "11.21",
+    "label": "Figure_11_21",
+    "page": 252,
+    "chapter": "Chapter 11",
+    "caption": "Fig 11.21 Fig 11.22",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p252_Figure_11_21.png"
+  },
+  {
+    "fig_id": "11.23",
+    "label": "Figure_11_23",
+    "page": 253,
+    "chapter": "Chapter 11",
+    "caption": "Fig 11.23). Take a point P at one end of the major axis. R P Sum of the distances of the point P to the : foci is F, P+ F,P=F.O + OP + F,P : (Since, FP =F,O + OP) creer ass Dt",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p253_Figure_11_23.png"
+  },
+  {
+    "fig_id": "11.26",
+    "label": "Figure_11_26",
+    "page": 254,
+    "chapter": "Chapter 11",
+    "caption": "Fig 11.26 (b) on the x-axis or y-axis. The two such possible orientations are shown in Fig 11.26.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p254_Figure_11_26.png"
+  },
+  {
+    "fig_id": "11.29",
+    "label": "Figure_11_29",
+    "page": 261,
+    "chapter": "Chapter 11",
+    "caption": "Fig 11.29 he term “difference” that is used in the definition means the distance point minus the distance to the closer point. The two fixed points are ca",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p261_Figure_11_29.png"
+  },
+  {
+    "fig_id": "11.30",
+    "label": "Figure_11_30",
+    "page": 261,
+    "chapter": "Chapter 11",
+    "caption": "Fig 11.30). eee To find the constant PF, — P|F,: By taking the point P at A and B_ in the Fig 11.30, we have",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p261_Figure_11_30.png"
+  },
+  {
+    "fig_id": "11.31",
+    "label": "Figure_11_31",
+    "page": 264,
+    "chapter": "Chapter 11",
+    "caption": "Fig 11.31 (b)as —— BE =1 a hese two equations are known as the standard equations of hyperbolas. «@® Note} The standard equations of hyperbolas have transverse and conjugate axes as the coordinate axes and the centre at the origin",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p264_Figure_11_31.png"
+  },
+  {
+    "fig_id": "11.34",
+    "label": "Figure_11_34",
+    "page": 268,
+    "chapter": "Chapter 11",
+    "caption": "Fig 11.34 equation of the parabola takes the form x?= 4ay. Since it passes through nave (6P=4a{— |, ie, a= 1 — 399 ,we have (6) =4a 100 Jr bee 4 = Dm” m ‘ a. . 2 the deflection of the beam which is oo ™ Coordinates of B are (x, T00 ). 7=4 x 300 x 2 = 24 ° * 100 x = 24 = 2J6 metres 19 Arod AB of length 15 cm rests in between two coordinate axes in such hat the end point A lies on x-axis and end point B lies on point P(x, y) is taken on the rod in such a way Yy 6 cm. Show that the locus of P is an ellipse.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p268_Figure_11_34.png"
+  },
+  {
+    "fig_id": "12.1",
+    "label": "Figure_12_1",
+    "page": 274,
+    "chapter": "Chapter 12",
+    "caption": "Fig 12.1 the plane of",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p274_Figure_12_1.png"
+  },
+  {
+    "fig_id": "12.2",
+    "label": "Figure_12_2",
+    "page": 274,
+    "chapter": "Chapter 12",
+    "caption": "Fig 12.2, we may note that the point P (x, y, z) lies in the octant XOYZ and so all x, y, z are positive. If P was in any other octant, the signs of x, y and z would change",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p274_Figure_12_2.png"
+  },
+  {
+    "fig_id": "12.3",
+    "label": "Figure_12_3",
+    "page": 275,
+    "chapter": "Chapter 12",
+    "caption": "Fig 12.3). Let OA = x, OB = y and OC = z. F",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p275_Figure_12_3.png"
+  },
+  {
+    "fig_id": "13.1",
+    "label": "Figure_13_1",
+    "page": 288,
+    "chapter": "Chapter 13",
+    "caption": "Fig 13.1. This is a plot of distance s of the body from the top of the cliff versus the time relapsed. In the limit as the sequence of time intervals h,, h,, ..., approaches zero, the sequence of average velocities approaches the same limit as does the sequence of ratios Fig 13.1",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p288_Figure_13_1.png"
+  },
+  {
+    "fig_id": "13.3",
+    "label": "Figure_13_3",
+    "page": 290,
+    "chapter": "Chapter 13",
+    "caption": "Fig 13.3 fferent, and hence we say that the ough",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p290_Figure_13_3.png"
+  },
+  {
+    "fig_id": "13.4",
+    "label": "Figure_13_4",
+    "page": 292,
+    "chapter": "Chapter 13",
+    "caption": "Fig 13.4 strengthens this y xX fact. 0 (2, 0) Here again we note that the value of the function at x = 2 coincides with the limit at x = 2.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p292_Figure_13_4.png"
+  },
+  {
+    "fig_id": "13.5",
+    "label": "Figure_13_5",
+    "page": 293,
+    "chapter": "Chapter 13",
+    "caption": "Fig 13.5, it is clear that as x y=fx) sproaches 1, the graph approaches (1, 2). 27-7/ Here, again we observe that the 1 ' lim f(x) =f) x’ x more , 2 JO 1 2 3 4 5 Now, convince yourself of the Y' Fi . slowing three facts: ig 135 limx? =1, limx=1and limx+1=2 x1 x1 xl hen lim x? + limx=1+1=2=lim[ x? +x], x1 xl xl",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p293_Figure_13_5.png"
+  },
+  {
+    "fig_id": "13.6",
+    "label": "Figure_13_6",
+    "page": 296,
+    "chapter": "Chapter 13",
+    "caption": "Fig 13.6 Illustration 10 As a final illustration, we find lim f(x) ; where . x+2 x¥1 x)= rey Table 13.12",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p296_Figure_13_6.png"
+  },
+  {
+    "fig_id": "13.8",
+    "label": "Figure_13_8",
+    "page": 303,
+    "chapter": "Chapter 13",
+    "caption": "Fig 13.8 vich Theorem) Let f g and h be real all x in the common domain of definition. ]",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p303_Figure_13_8.png"
+  },
+  {
+    "fig_id": "13.9",
+    "label": "Figure_13_9",
+    "page": 303,
+    "chapter": "Chapter 13",
+    "caption": "Fig 13.9 w is a beautiful geometric proof of the following i trigonometric functions. tel for O<|x| <> (*)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p303_Figure_13_9.png"
+  },
+  {
+    "fig_id": "13.11",
+    "label": "Figure_13_11",
+    "page": 310,
+    "chapter": "Chapter 13",
+    "caption": "Fig 13.11 is now self explanatory. flath) be ---e2ee eee ‘Qtath, flath))",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p310_Figure_13_11.png"
+  },
+  {
+    "fig_id": "15.2",
+    "label": "Figure_15_2",
+    "page": 353,
+    "chapter": "Chapter 15",
+    "caption": "Fig 15.2",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p353_Figure_15_2.png"
+  },
+  {
+    "fig_id": "15.3",
+    "label": "Figure_15_3",
+    "page": 362,
+    "chapter": "Chapter 15",
+    "caption": "Fig 15.3 ommon factor of all the deviations, we divide them by this implify the deviations.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p362_Figure_15_3.png"
+  },
+  {
+    "fig_id": "15.4",
+    "label": "Figure_15_4",
+    "page": 362,
+    "chapter": "Chapter 15",
+    "caption": "Fig 15.4 The deviations and step-deviations reduce the size of the observations, so that the computations viz. multiplication, etc., become simpler. Let, the new variable be denoted Yr-7",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p362_Figure_15_4.png"
+  },
+  {
+    "fig_id": "15.5",
+    "label": "Figure_15_5",
+    "page": 368,
+    "chapter": "Chapter 15",
+    "caption": "Fig 15.5 or the set B, we have cvecccccccccccccoccoccoccoccocs",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p368_Figure_15_5.png"
+  },
+  {
+    "fig_id": "16.1",
+    "label": "Figure_16_1",
+    "page": 404,
+    "chapter": "Chapter 16",
+    "caption": "Fig 16.1 If A and B are disjoint sets, i-e., they are mutually exclusive events, then AM B = 6 Therefore P(AMB)=P(o)=0 Thus, for mutually exclusive events A and B, we have P(A UB) =P(A)+P(B), which is Axiom (iii) of probability.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_maths_class-11_english_maths_class-11/p404_Figure_16_1.png"
+  }
+]

@@ -1,0 +1,538 @@
+[
+  {
+    "fig_id": "4.1",
+    "label": "Figure_4_1",
+    "page": 4,
+    "chapter": "Chapter 4",
+    "caption": "pea plant studied by Mendel using several true-breeding pea lines. A true- breeding line is one that, having undergone a continuous self-pollination, shows the stable trait inheritance and sn expression for several generations. Mendel selected 14 true-breeding pea",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p004_Figure_4_1.png"
+  },
+  {
+    "fig_id": "4.3",
+    "label": "Figure_4_3",
+    "page": 6,
+    "chapter": "Chapter 4",
+    "caption": "Figure 4.3 ‘ ic",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p006_Figure_4_3.png"
+  },
+  {
+    "fig_id": "4.4",
+    "label": "Figure_4_4",
+    "page": 7,
+    "chapter": "Chapter 4",
+    "caption": "Figure 4.4. It was developed by a British geneticist, Reginald C. Punnett. It is a graphical representation to calculate the probability of all possible genotypes of offspring in a genetic cross. The possible gametes are written on two sides, usually the top row and left columns. All possible combinations are represented in boxes below in the squares, which generates a square output form. The Punnett Square shows the parental tall TT (male) and dwarf tt (female) plants, the gametes produced by them and, the F, Tt progeny. The F, plants of genotype Tt are self-pollinated. The symbols $ and \"are used to denote",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p007_Figure_4_4.png"
+  },
+  {
+    "fig_id": "4.6",
+    "label": "Figure_4_6",
+    "page": 10,
+    "chapter": "Chapter 4",
+    "caption": "Figure 4.6). When the F, was self-pollinated All pink (Rr) the F, resulted in the following ratio 1 (RR) Red: 2 2 Oo (Rr) Pink: 1 (tr) White. Here the genotype ratios were netes ® ®) Gametes ¢Xactly as we would expect in any mendelian monohybrid cross, but the phenotype ratios had ® @ changed from the 3:1 dominant : recessive ratio. RR A What happened was that R was not completely BS, dominant over r and this made it possible to teneration Rr i Rr distinguish Rr as pink from RR (red) and rr (white) . 5 HR ; : AS Explanation of the concept of dominance: Ir What exactly is dominance? Why are some alleles | | | | dominant and some recessive? To tackle these",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p010_Figure_4_6.png"
+  },
+  {
+    "fig_id": "4.7",
+    "label": "Figure_4_7",
+    "page": 13,
+    "chapter": "Chapter 4",
+    "caption": "Figure 4.7 Results of a dihybrid cross where the two parents differed in two pairs of contrasting traits: seed colour and seed shape",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p013_Figure_4_7.png"
+  },
+  {
+    "fig_id": "4.8",
+    "label": "Figure_4_8",
+    "page": 15,
+    "chapter": "Chapter 4",
+    "caption": "Figure 4.8 Meiosis and germ cell formation in a cell with four chromosomes.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p015_Figure_4_8.png"
+  },
+  {
+    "fig_id": "4.9",
+    "label": "Figure_4_9",
+    "page": 16,
+    "chapter": "Chapter 4",
+    "caption": "Figure 4.9 Independent assortment of chromosomes",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p016_Figure_4_9.png"
+  },
+  {
+    "fig_id": "4.11",
+    "label": "Figure_4_11",
+    "page": 18,
+    "chapter": "Chapter 4",
+    "caption": "Figure 4.11 Linkage: Results of two dihybrid crosses conducted by Morgan. Cross A shows crossing between gene y and w; Cross B shows crossing between genes w and m. Here dominant wild type alleles are represented with (+) sign in superscript Note: The strength of linkage between y and w is higher than w and m.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p018_Figure_4_11.png"
+  },
+  {
+    "fig_id": "4.12",
+    "label": "Figure_4_12",
+    "page": 20,
+    "chapter": "Chapter 4",
+    "caption": "Figure 4.12 Determinatior differences: (¢ in Drosophila, XX chromosor male XY (het (c) In many b dissimilar chi two similar ZZ",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p020_Figure_4_12.png"
+  },
+  {
+    "fig_id": "4.13",
+    "label": "Figure_4_13",
+    "page": 22,
+    "chapter": "Chapter 4",
+    "caption": "Figure 4.13 Symbols used in the human Some other organisms, are not possible in ca pedigree analysis human beings, study of the family history a inheritance of a particular trait provide alternative. Such an analysis of traits in a several of generations ofa fi",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p022_Figure_4_13.png"
+  },
+  {
+    "fig_id": "4.14",
+    "label": "Figure_4_14",
+    "page": 23,
+    "chapter": "Chapter 4",
+    "caption": "Figure 4.14 Representative pedigree analysis of (a) Autosomal dominant trait (for example: Myotonic dystrophy) (b) Autosomal recessive trait (for example: Sickle-cell anaemia)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p023_Figure_4_14.png"
+  },
+  {
+    "fig_id": "4.15",
+    "label": "Figure_4_15",
+    "page": 24,
+    "chapter": "Chapter 4",
+    "caption": "Figure 4.15 Micrograph of the red blood cells and the amino acid composition of portion of £-chain of haemoglobin: (a) From a normal individual; (b) From an individual with sickle-cell anaemia",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p024_Figure_4_15.png"
+  },
+  {
+    "fig_id": "4.16",
+    "label": "Figure_4_16",
+    "page": 26,
+    "chapter": "Chapter 4",
+    "caption": "Figure 4.16 A representative figure showing an individual inflicted with Down’s syndrome and the corresponding chromosomes of the individual individual may lack one of any one pair of chromosomes. These situations are known as trisomy 3 or monosomy of a chromosome, respectively. Such a “-* situation leads to very serious consequences in the ed individual. Down’s syndrome, Turner’s syndrome, ) Klinefelter’s syndrome are common examples of a \\ chromosomal disorders. Y Down’s Syndrome : The cause of this genetic disorder",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p026_Figure_4_16.png"
+  },
+  {
+    "fig_id": "4.17",
+    "label": "Figure_4_17",
+    "page": 26,
+    "chapter": "Chapter 4",
+    "caption": "Figure 4.17 a). Such individuals are sterile.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p026_Figure_4_17.png"
+  },
+  {
+    "fig_id": "5.1",
+    "label": "Figure_5_1",
+    "page": 30,
+    "chapter": "Chapter 5",
+    "caption": "Figure 5.1 A Polynucleotide chain",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p030_Figure_5_1.png"
+  },
+  {
+    "fig_id": "5.3",
+    "label": "Figure_5_3",
+    "page": 32,
+    "chapter": "Chapter 5",
+    "caption": "Figure 5.3 DNA double helix information flows from DNA>RNA>Protein.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p032_Figure_5_3.png"
+  },
+  {
+    "fig_id": "5.5",
+    "label": "Figure_5_5",
+    "page": 36,
+    "chapter": "Chapter 5",
+    "caption": "Figure 5.5 The Hershey-Chase experiment 5.2.2 Properties of Genetic Material (DNA versus RNA)",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p036_Figure_5_5.png"
+  },
+  {
+    "fig_id": "5.6",
+    "label": "Figure_5_6",
+    "page": 38,
+    "chapter": "Chapter 5",
+    "caption": "Figure 5.6 Watson-Crick model for. complementary strands. After the completio: semiconservative DNA replication, each DNA molecule would have replication parental and one newly synthesised strand. ’ scheme was termed as semiconservative | replication (Figure 5.6).",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p038_Figure_5_6.png"
+  },
+  {
+    "fig_id": "5.7",
+    "label": "Figure_5_7",
+    "page": 39,
+    "chapter": "Chapter 5",
+    "caption": "Figure 5.7 Meselson and Stahl’s Experiment Ca (iii) Thus, the DNA that was extracted from the culture one _————$——— generation after the transfer from '5N to '4N medium [that is",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p039_Figure_5_7.png"
+  },
+  {
+    "fig_id": "5.9",
+    "label": "Figure_5_9",
+    "page": 42,
+    "chapter": "Chapter 5",
+    "caption": "Figure 5.9 Schematic structure of a transcription unit The promoter and terminator flank the structural gene ir",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p042_Figure_5_9.png"
+  },
+  {
+    "fig_id": "5.10",
+    "label": "Figure_5_10",
+    "page": 43,
+    "chapter": "Chapter 5",
+    "caption": "Figure 5.10 Process of Transcription in Bacteria",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p043_Figure_5_10.png"
+  },
+  {
+    "fig_id": "5.11",
+    "label": "Figure_5_11",
+    "page": 44,
+    "chapter": "Chapter 5",
+    "caption": "Figure 5.11 Process of Transcription in Eukaryotes",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p044_Figure_5_11.png"
+  },
+  {
+    "fig_id": "5.12",
+    "label": "Figure_5_12",
+    "page": 48,
+    "chapter": "Chapter 5",
+    "caption": "Figure 5.12 tRNA - the adapter molecule initiation, there ic another specific tRNA that is referred to as initiator tRNA. There are nc tRNAs for stop codons. In figure 5.12, the secondary structure of tRN/",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p048_Figure_5_12.png"
+  },
+  {
+    "fig_id": "5.14",
+    "label": "Figure_5_14",
+    "page": 51,
+    "chapter": "Chapter 5",
+    "caption": "Figure 5.14 The lac Operon uctose is the substrate for the enzyme beta-galactosidase and it",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p051_Figure_5_14.png"
+  },
+  {
+    "fig_id": "5.16",
+    "label": "Figure_5_16",
+    "page": 57,
+    "chapter": "Chapter 5",
+    "caption": "Figure 5.16 Schematic representation of DNA fingerprinting: Few representative chromosomes",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p057_Figure_5_16.png"
+  },
+  {
+    "fig_id": "6.1",
+    "label": "Figure_6_1",
+    "page": 62,
+    "chapter": "Chapter 6",
+    "caption": "Figure 6.1 Diagrammatic representation of Miller's experiment saccharides, etc.). These capsules reproduced their molecules pert",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p062_Figure_6_1.png"
+  },
+  {
+    "fig_id": "6.2",
+    "label": "Figure_6_2",
+    "page": 64,
+    "chapter": "Chapter 6",
+    "caption": "Stegosaurus Me, i, igure 6.2 A family tree of dinosaurs and their living modern day counterpart organisms 1: crocodiles and birds Such similarities can be interpreted to understand whether comm",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p064_Figure_6_2.png"
+  },
+  {
+    "fig_id": "6.3",
+    "label": "Figure_6_3",
+    "page": 65,
+    "chapter": "Chapter 6",
+    "caption": "Figure 6.3 Example of homologous organs in that differ from other breeds (e.g., dogs) but (a) Plants and (b) Animals still are of the same group. It is argued that if within hundreds of years, man could create new breeds, could not nature",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p065_Figure_6_3.png"
+  },
+  {
+    "fig_id": "6.4",
+    "label": "Figure_6_4",
+    "page": 66,
+    "chapter": "Chapter 6",
+    "caption": "Figure 6.4 Figure showing white - winged moth and dark - winged moth (melanised) on a tree trunk (a) In unpolluted area (b) In polluted area",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p066_Figure_6_4.png"
+  },
+  {
+    "fig_id": "6.5",
+    "label": "Figure_6_5",
+    "page": 67,
+    "chapter": "Chapter 6",
+    "caption": "Figure 6.5 Variety of beaks of finches that Darwin found in Galapagos Island varieties of finches in the same island. All the varieties, he conjectured, evolved on the island itself. From the original seed-eating features, many other forms with altered beaks arose, enabling them to become insectivorous and vegetarian finches (Figure 6.5). This process of evolution of different species in a given geographical area starting from a point and literally radiating to other areas of geography (habitats) is called adaptive radiation. Darwin's finches represent one of the best examples of this phenomenon. Another example is Australian marsupials. A number of marsupials, each different from the other (Figure 6.6) evolved from an ancestral stock, but all within the Australian island continent. When more than one adaptive radiation appeared to have occurred in an isolated geographical area (representing",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p067_Figure_6_5.png"
+  },
+  {
+    "fig_id": "6.6",
+    "label": "Figure_6_6",
+    "page": 67,
+    "chapter": "Chapter 6",
+    "caption": "Figure 6.6 Adaptive radiation of marsupials of Australia",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p067_Figure_6_6.png"
+  },
+  {
+    "fig_id": "6.7",
+    "label": "Figure_6_7",
+    "page": 68,
+    "chapter": "Chapter 6",
+    "caption": "Figure 6.7 Picture sho ing cOuygrgent evolution the new conditions. Nature selects for fitness. of Australian Marsupials and placental mammals One must remember that the so-called fitness is based on characteristics which are inherited.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p068_Figure_6_7.png"
+  },
+  {
+    "fig_id": "6.8",
+    "label": "Figure_6_8",
+    "page": 70,
+    "chapter": "Chapter 6",
+    "caption": "Figure 6.8 Diagrammatic representation of the operation of natural selection on different traits : (a) Stabilising (b) Directional and (c) Disruptive",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p070_Figure_6_8.png"
+  },
+  {
+    "fig_id": "6.11",
+    "label": "Figure_6_11",
+    "page": 75,
+    "chapter": "Chapter 6",
+    "caption": "Figure 6.11 A comparison of the skulls of adult modern human being, baby chimpanzee and adult chimpanzee. The skull of baby chimpanzee is more like adult human skull than adult chimpanzee skull",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p075_Figure_6_11.png"
+  },
+  {
+    "fig_id": "7.1",
+    "label": "Figure_7_1",
+    "page": 82,
+    "chapter": "Chapter 7",
+    "caption": "Figure 7.1 Stages in the life cycle of Plasmodium — Entamoeba histolytica is a protozoan parasite in the large intestin: human which causes amoebiasis (amoebic dysentery). Symptoms",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p082_Figure_7_1.png"
+  },
+  {
+    "fig_id": "7.3",
+    "label": "Figure_7_3",
+    "page": 83,
+    "chapter": "Chapter 7",
+    "caption": "Figure 7.3) are the main symptoms of the disease. These lesions are accompanied by intense itching. Heat and moisture help these fungi to grow, which makes them thrive in skin folds such as those in the groin or between the toes. Ringworms are generally Figure 7.3 Diagram showing ringworm acquired from soil or by using towels, clothes affected area of the skin or even the comb of infected individuals. Maintenance of personal and public hygiene is very important for prevention and control of many infectious diseases. Measures for personal hygiene include keeping the body clean; consumption of clean drinking water, food, vegetables, fruits, etc. Public hygiene includes proper disposal of waste and excreta; periodic cleaning and disinfection of water reservoirs,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p083_Figure_7_3.png"
+  },
+  {
+    "fig_id": "7.4",
+    "label": "Figure_7_4",
+    "page": 85,
+    "chapter": "Chapter 7",
+    "caption": "Figure 7.4 Structure of an antibody molecule es are produced in our body. IgA, IgM, oon of an antibody is given in Figure ound in the blood,",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p085_Figure_7_4.png"
+  },
+  {
+    "fig_id": "7.5",
+    "label": "Figure_7_5",
+    "page": 88,
+    "chapter": "Chapter 7",
+    "caption": "Figure 7.5 Diagrammatic jt acts as a filter of the blood by trapping blood-borne mi representation . . eaieenedes organisms. Spleen also has a large reservoir of erythrocy",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p088_Figure_7_5.png"
+  },
+  {
+    "fig_id": "7.6",
+    "label": "Figure_7_6",
+    "page": 89,
+    "chapter": "Chapter 7",
+    "caption": "Figure 7.6 Replication of retrovirus partners, drug addicts who take drugs intravenously, individuals",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p089_Figure_7_6.png"
+  },
+  {
+    "fig_id": "7.7",
+    "label": "Figure_7_7",
+    "page": 92,
+    "chapter": "Chapter 7",
+    "caption": "Figure 7.7 Chemical structure of Morphine Figure 7.8 Opium poppy",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p092_Figure_7_7.png"
+  },
+  {
+    "fig_id": "7.9",
+    "label": "Figure_7_9",
+    "page": 93,
+    "chapter": "Chapter 7",
+    "caption": "Figure 7.9 Skeletal structure of Figure 7.10 Leaves of Cannabis sativa cannabinoid molecule Coca alkaloid or cocaine is obtained from coca",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p093_Figure_7_9.png"
+  },
+  {
+    "fig_id": "8.1",
+    "label": "Figure_8_1",
+    "page": 100,
+    "chapter": "Chapter 8",
+    "caption": "Figure 8.1 Bacteria: (a) Rod-shaped, y . | magnified 1500X: (b) Spherical Figure 8.2. Viruses: (a) A bacteriophage; (b) shaped, magnified 1500X; (c) A rod- Adenovirus which causes respiratory shaped bacterium showing flagella infections; (c) Rod-shaped Tobacco ified 50,000X ‘ Mosaic Virus (TMV). Magnified about e , 1.00.000-1.50.000X",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p100_Figure_8_1.png"
+  },
+  {
+    "fig_id": "8.2",
+    "label": "Figure_8_2",
+    "page": 100,
+    "chapter": "Chapter 8",
+    "caption": "Figure 8.2. Viruses: (a) A bacteriophage; (E Adenovirus which causes respirator infections; (c) Rod-shaped Tobacc Mosaic Virus (TMV). Magnified abou 1,00,000-1,50,000X",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p100_Figure_8_2.png"
+  },
+  {
+    "fig_id": "8.3",
+    "label": "Figure_8_3",
+    "page": 100,
+    "chapter": "Chapter 8",
+    "caption": "Figure 8.3 (a) Colonies of bacteria growing in a petri dish; (b) Fungal colony growing in a petri dish",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p100_Figure_8_3.png"
+  },
+  {
+    "fig_id": "8.5",
+    "label": "Figure_8_5",
+    "page": 102,
+    "chapter": "Chapter 8",
+    "caption": "Figure 8.5 Fermentation Plant aie. . . ipo life’, together they mean ‘against life’ (in the context of disease causing organisms); whereas with reference to human beings, they are ‘pro life’ and not against. Antibiotics are chemical",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p102_Figure_8_5.png"
+  },
+  {
+    "fig_id": "8.6",
+    "label": "Figure_8_6",
+    "page": 104,
+    "chapter": "Chapter 8",
+    "caption": "Figure 8.6 Secondary treatment the effluent. The effluent from settling tank is taken for secondary treatment. Secondary treatment or Biological treatment : The primary effluent is passed into large aeration tanks (Figure 8.6) where it is",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p104_Figure_8_6.png"
+  },
+  {
+    "fig_id": "8.7",
+    "label": "Figure_8_7",
+    "page": 105,
+    "chapter": "Chapter 8",
+    "caption": "Figure 8.7 An aerial view of a sewage plant ctly into rivers leading to ‘ases. s initiated Ganga Action ajor rivers of our country 1 to build a large number 2wage may be discharged nt situated in any place ting experience.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p105_Figure_8_7.png"
+  },
+  {
+    "fig_id": "8.8",
+    "label": "Figure_8_8",
+    "page": 106,
+    "chapter": "Chapter 8",
+    "caption": "Figure 8.8 A typical biogas plant due to the efforts of Indian Agricul",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p106_Figure_8_8.png"
+  },
+  {
+    "fig_id": "9.1",
+    "label": "Figure_9_1",
+    "page": 116,
+    "chapter": "Chapter 9",
+    "caption": "Figure 9.1 Steps in formation of recombinant DNA by action of restriction endonucle enzyme - EcoRI EE Do you know what palindromes are?",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p116_Figure_9_1.png"
+  },
+  {
+    "fig_id": "9.2",
+    "label": "Figure_9_2",
+    "page": 117,
+    "chapter": "Chapter 9",
+    "caption": "Figure 9.2 Diagrammatic representation of recombinant DNA technology",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p117_Figure_9_2.png"
+  },
+  {
+    "fig_id": "9.3",
+    "label": "Figure_9_3",
+    "page": 118,
+    "chapter": "Chapter 9",
+    "caption": "Figure 9.3 A typical agarose gel from the agarose gel and extracted electrophoresis showing from the gel piece. This step is known migration of undigested as elution. The DNA fragments DNA fragments fang ee purified in this way are used in constructing recombinant DNA by",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p118_Figure_9_3.png"
+  },
+  {
+    "fig_id": "9.4",
+    "label": "Figure_9_4",
+    "page": 119,
+    "chapter": "Chapter 9",
+    "caption": "Figure 9.4 E. coli cloning vector pBR322 at the BamH I site of tetracycline onesie cca es resistance gene in the vector pBR322. (Hind Ill, EcoRI, Bam I, Sal I, The recombinant plasmids will lose Pvu Il, Pst I, Cla I), ori and tetracycline resistance due to insertion antibiotic resistance genes of foreign DNA but can still be selected (amp® and tet’). pl codes for",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p119_Figure_9_4.png"
+  },
+  {
+    "fig_id": "9.6",
+    "label": "Figure_9_6",
+    "page": 122,
+    "chapter": "Chapter 9",
+    "caption": "Figure 9.6 Polymerase chain reaction (PCR) : Each cycle has three steps: (i) Denaturation; (ii) Primer annealing; and (iii) Extension of primers",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p122_Figure_9_6.png"
+  },
+  {
+    "fig_id": "9.7",
+    "label": "Figure_9_7",
+    "page": 124,
+    "chapter": "Chapter 9",
+    "caption": "Figure 9.7 (a) Simple stirred-tank bioreactor; (b) Sparged stirred-tank bioreactor through which sterile air bubbles are sparged",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p124_Figure_9_7.png"
+  },
+  {
+    "fig_id": "10.1",
+    "label": "Figure_10_1",
+    "page": 130,
+    "chapter": "Chapter 10",
+    "caption": ". (b) gure 10.1 Cotton boll: (a) destroyed by bollworms; (b) a fully mat cotton boll ‘st Resistant Plants: Several nematodes parasitise a wide variet",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p130_Figure_10_1.png"
+  },
+  {
+    "fig_id": "10.3",
+    "label": "Figure_10_3",
+    "page": 132,
+    "chapter": "Chapter 10",
+    "caption": "Figure 10.3 Maturation of of E. colito produce insulin chains. Chains A and B were peereee ee on eric produced separately, extracted and combined by creating (simplified) disulfide bonds to form human insulin.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p132_Figure_10_3.png"
+  },
+  {
+    "fig_id": "11.1",
+    "label": "Figure_11_1",
+    "page": 142,
+    "chapter": "Chapter 11",
+    "caption": "Figure 11.1 Representation of age pyramids for human population The size of the population tells us a lot about its status in the habitat. Whatever ecological processes we wish to investigate in a population, be",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p142_Figure_11_1.png"
+  },
+  {
+    "fig_id": "11.2",
+    "label": "Figure_11_2",
+    "page": 143,
+    "chapter": "Chapter 11",
+    "caption": "Figure 11.2 So, if N is the population density at time t, then its density at time t +1 is",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p143_Figure_11_2.png"
+  },
+  {
+    "fig_id": "11.3",
+    "label": "Figure_11_3",
+    "page": 144,
+    "chapter": "Chapter 11",
+    "caption": "Figure 11.3 Population growth curve : 11.3) and results in a J-shaped curve when wi a when responses are not limiting the growth, plot is N in relation to time. If you are familiar with | exponential, calculus, you can derive the integral form o b when responses are limiting —_ exponential growth equation as the growth, plot is logistic, N=N et : : ‘ =Ne K is carrying capacity t ° — where",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p144_Figure_11_3.png"
+  },
+  {
+    "fig_id": "11.4",
+    "label": "Figure_11_4",
+    "page": 151,
+    "chapter": "Chapter 11",
+    "caption": "Figure 11.4 Mutual relationship between fig tree and wasp: (a) Fig flower is pollinated by wasp; (b) Wasp laying eggs in a fig fruit (v) Mutualism: This interaction confers benefits on both the interacting species. Lichens represent an intimate mutualistic relationship p 201 between a fungus and photosynthesising algae or cyanobacteria. —_——",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p151_Figure_11_4.png"
+  },
+  {
+    "fig_id": "11.5",
+    "label": "Figure_11_5",
+    "page": 152,
+    "chapter": "Chapter 11",
+    "caption": "Figure 11.5). Not all ae a orchids offer rewards. The Mediterranean orchid Ophrys vy employs ‘sexual deceit’ to get pollination done by a",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p152_Figure_11_5.png"
+  },
+  {
+    "fig_id": "12.1",
+    "label": "Figure_12_1",
+    "page": 158,
+    "chapter": "Chapter 12",
+    "caption": "Figure 12.1 Diagrammatic representation of decomposition cycle in a terrestrial ecosystem to accumulation of a dark coloured amorphous substance called humus that is highly resistant to microbial action and undergoes decomposition at an extremely slow rate. Being colloidal in nature it serves as a reservoir of nutrients.",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p158_Figure_12_1.png"
+  },
+  {
+    "fig_id": "12.2",
+    "label": "Figure_12_2",
+    "page": 160,
+    "chapter": "Chapter 12",
+    "caption": "Figure 12.2 Diagrammatic representation of trophic levels in an ecosystem",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p160_Figure_12_2.png"
+  },
+  {
+    "fig_id": "12.3",
+    "label": "Figure_12_3",
+    "page": 161,
+    "chapter": "Chapter 12",
+    "caption": "Figure 12.3 Energy flow through different trophic levels Ea 12.5 EcotocicaL Pyramips —",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p161_Figure_12_3.png"
+  },
+  {
+    "fig_id": "12.4",
+    "label": "Figure_12_4",
+    "page": 162,
+    "chapter": "Chapter 12",
+    "caption": "Figure 12.4 (a) Pyramid of numbers in a grassland ecosystem. Only three top-carnivores supported in an ecosystem based on production of nearly 6 millions plants Trophic level Dry weight (kg m”) TC 1.5 sc 11 PC 37 P 809 Figure 12.4 (b) Pyramid of biomass shows a sharp decrease in biomass at higher trophic lev p21 | . “ ee] P 4 Figure 12.4 (c) Inverted pyramid of biomass-small standing crop of phytoplankton supports la standing crop of zooplankton",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p162_Figure_12_4.png"
+  },
+  {
+    "fig_id": "13.1",
+    "label": "Figure_13_1",
+    "page": 168,
+    "chapter": "Chapter 13",
+    "caption": "Figure 13.1 Representing global biodiversity: proportionate number of species of major taxa of plants, invertebrates and vertebrates It should be noted that these estimates do not give any figures for",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p168_Figure_13_1.png"
+  },
+  {
+    "fig_id": "13.2",
+    "label": "Figure_13_2",
+    "page": 170,
+    "chapter": "Chapter 13",
+    "caption": "Figure13.2] 4 oe a logarithmic scale, the relationshij C g x0 y straight line described by the equat 8 o% log S= logC + ZlogA Or where S= Species richness A= Area Area—> Z= slope of the line (regression coefficient) C =Y-intercept = 13.2 Sh lat > Ecologists have discovered tha igure 5 owing species area relationship. ee Note that Sneleé scale thé slajionship value of Z lies in the range of 0.1 to",
+    "image_path": "backend/mm_rag/outputs/all_books/english_biology_class-12_english_biology_class-12_part-2/p170_Figure_13_2.png"
+  }
+]

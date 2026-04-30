@@ -1,0 +1,4 @@
+total_images=125
+index_entries=125
+issue_count=0
+

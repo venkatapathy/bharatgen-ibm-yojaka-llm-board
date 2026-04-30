@@ -22,8 +22,7 @@ data/
 /indexes/
 vector_store/
 backend/mm_rag/books/
-# Generated / too large for GitHub (regenerate locally)
-backend/mm_rag/outputs/
+# Large book archive (> GitHub single-file limit unless using LFS)
 backend/mm_rag/books.zip
 
 # IDE

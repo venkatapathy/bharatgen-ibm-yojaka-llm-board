@@ -19,7 +19,7 @@ transformer/
 
 # Data and index files
 data/
-indexes/
+/indexes/
 vector_store/
 backend/mm_rag/books/
 # Generated / too large for GitHub (regenerate locally)

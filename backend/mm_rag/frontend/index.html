@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MM-RAG — Questions from text & diagrams</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0c0f14;
+            --surface: #151a22;
+            --surface-hover: #1c2330;
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #e8eaef;
+            --muted: #8b95a8;
+            --accent: #7c9cff;
+            --accent-dim: rgba(124, 156, 255, 0.15);
+            --ok: #5ee9a8;
+            --warn: #f5c84c;
+            --danger: #f87171;
+            --radius: 12px;
+            --font: "DM Sans", system-ui, sans-serif;
+            --mono: "JetBrains Mono", ui-monospace, monospace;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: var(--font);
+            background: radial-gradient(1200px 800px at 10% -10%, rgba(124, 156, 255, 0.12), transparent),
+ radial-gradient(900px 600px at 100% 0%, rgba(94, 233, 168, 0.06), transparent),
+                        var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1.5rem 1.25rem 3rem;
+        }
+
+        header {
+            margin-bottom: 1.75rem;
+        }
+        header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin: 0 0 0.35rem;
+        }
+        header p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.95rem;
+            max-width: 42rem;
+        }
+
+        .panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.25rem 1.35rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: flex-end;
+        }
+
+        label.field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--muted);
+        }
+
+        input[type="text"], select {
+            font-family: var(--font);
+            font-size: 1rem;
+            padding: 0.65rem 0.85rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text);
+            min-width: 0;
+        }
+        input[type="text"]::placeholder { color: var(--muted); opacity: 0.7; }
+        input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-dim);
+        }
+
+        input#query { flex: 1 1 220px; min-width: 200px; }
+        select#qtype { flex: 0 1 200px; }
+
+        .btn {
+            font-family: var(--font);
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.7rem 1.25rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(135deg, #6b8cff, #5568d9);
+            color: #fff;
+            box-shadow: 0 2px 12px rgba(85, 104, 217, 0.35);
+            transition: transform 0.12s ease, filter 0.12s ease, opacity 0.12s;
+        }
+        .btn:hover:not(:disabled) {
+            filter: brightness(1.06);
+            transform: translateY(-1px);
+        }
+        .btn:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        details.advanced {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+        details.advanced summary {
+            cursor: pointer;
+            user-select: none;
+            color: var(--accent);
+            font-weight: 500;
+        }
+        .advanced-grid {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .advanced-grid label.field { flex: 0 0 auto; }
+        .advanced-grid input { width: 4.5rem; }
+
+        .status-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem 1rem;
+            min-height: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            font-family: var(--mono);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--muted);
+        }
+        .pill.vision { color: var(--ok); border-color: rgba(94, 233, 168, 0.35); }
+        .pill.text { color: var(--warn); border-color: rgba(245, 200, 76, 0.35); }
+
+        .grid-main {
+            display: grid;
+            gap: 1.25rem;
+        }
+        @media (min-width: 900px) {
+            .grid-main { grid-template-columns: 1fr 1fr; align-items: start; }
+        }
+
+        .section-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+            margin: 0 0 0.75rem;
+        }
+
+        .answer-box {
+            font-family: var(--font);
+            font-size: 0.95rem;
+            white-space: pre-wrap;
+            word-break: break-word;
+            padding: 1rem 1.1rem;
+            background: var(--bg);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            min-height: 120px;
+            line-height: 1.6;
+        }
+        .answer-box.empty {
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        .results-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            max-height: min(70vh, 900px);
+            overflow-y: auto;
+            padding-right: 0.25rem;
+        }
+        .results-list::-webkit-scrollbar { width: 8px; }
+        .results-list::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        .chunk {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.9rem 1rem;
+            transition: border-color 0.15s;
+        }
+        .chunk:hover { border-color: rgba(124, 156, 255, 0.25); }
+
+        .chunk-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.6rem;
+        }
+        .chip {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.15rem 0.45rem;
+            border-radius: 4px;
+        }
+        .chip.text { background: rgba(124, 156, 255, 0.2); color: #a8bfff; }
+        .chip.figure { background: rgba(94, 233, 168, 0.18); color: #7ee8bc; }
+        .score {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--muted);
+        }
+
+        .chunk-body {
+            font-size: 0.88rem;
+            color: var(--text);
+            line-height: 1.55;
+        }
+        .chunk-body p { margin: 0 0 0.5rem; }
+        .chunk-body .cap-label { color: var(--muted); font-size: 0.75rem; margin-bottom: 0.25rem; }
+
+        .thumb {
+            margin-top: 0.65rem;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--surface);
+        }
+        .thumb img {
+            display: block;
+            width: 100%;
+            max-height: 220px;
+            object-fit: contain;
+        }
+
+        .err {
+            color: var(--danger);
+            padding: 0.75rem 1rem;
+            background: rgba(248, 113, 113, 0.08);
+            border: 1px solid rgba(248, 113, 113, 0.25);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .spinner {
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(255,255,255,0.25);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <header>
+            <h1>MM-RAG question lab</h1>
+            <p>Search NCERT text + figures, then generate questions. Diagram-grounded items use vision when images are available.</p>
+        </header>
+
+        <div class="panel">
+            <div class="form-row">
+                <label class="field" style="flex: 1 1 100%;">
+                    Query
+                    <input id="query" type="text" placeholder="e.g. biological classification, cell membrane structure" autocomplete="off">
+                </label>
+                <label class="field">
+                    Subject
+                    <select id="subject" title="Subject">
+                        <option value="biology">Biology</option>
+                        <option value="chemistry">Chemistry</option>
+                        <option value="physics">Physics</option>
+                        <option value="maths">Maths</option>
+                        <option value="science">Science</option>
+                    </select>
+                </label>
+                <label class="field">
+                    Class
+                    <select id="class_level" title="Class">
+                        <option value="10">Class 10</option>
+                        <option value="11" selected>Class 11</option>
+                        <option value="12">Class 12</option>
+                    </select>
+                </label>
+                <label class="field">
+                    Format
+                    <select id="qtype" title="Question type">
+                        <option value="mcq">Multiple choice</option>
+                        <option value="short_answer">Short answer</option>
+                        <option value="fill_blanks">Fill in the blanks</option>
+                        <option value="true_false">True / false</option>
+                    </select>
+                </label>
+                <label class="field">
+                    Questions
+                    <select id="num_questions" title="Number of questions">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3" selected>3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </label>
+                <button type="button" class="btn" id="go">
+                    <span id="btn-label">Generate</span>
+                </button>
+            </div>
+            <details class="advanced">
+                <summary>Retrieval settings</summary>
+                <div class="advanced-grid">
+                    <label class="field">Text chunks
+                        <input id="num_text" type="number" min="0" max="20" value="4">
+                    </label>
+                    <label class="field">Figures
+                        <input id="num_figures" type="number" min="0" max="10" value="1">
+                    </label>
+                </div>
+            </details>
+        </div>
+
+        <div class="status-bar" id="status" aria-live="polite"></div>
+
+        <div class="grid-main">
+            <section class="panel" style="margin-bottom: 0;">
+                <h2 class="section-title">Generated output</h2>
+                <div id="answer" class="answer-box empty" role="region" aria-label="Model output">Run a query to see questions here.</div>
+            </section>
+            <section class="panel" style="margin-bottom: 0;">
+                <h2 class="section-title">Retrieved context</h2>
+                <div id="results" class="results-list" role="list"></div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+    (function () {
+        const go = document.getElementById("go");
+        const btnLabel = document.getElementById("btn-label");
+
+        go.addEventListener("click", search);
+
+        document.getElementById("query").addEventListener("keydown", function (e) {
+            if (e.key === "Enter") search();
+        });
+
+        function pillForMode(mode) {
+            if (!mode) return "";
+            const m = String(mode);
+            const isVision = m === "vision";
+            const cls = isVision ? "pill vision" : "pill text";
+            const label = isVision ? "Vision" : (m.indexOf("fallback") >= 0 ? "Text (fallback)" : "Text");
+            return '<span class="' + cls + '" title="Groq generation path">' + escapeHtml(label) + "</span>";
+        }
+
+        async function search() {
+            const query = document.getElementById("query").value.trim();
+            const qtype = document.getElementById("qtype").value;
+            const numQuestions = parseInt(document.getElementById("num_questions").value, 10) || 3;
+            const subject = document.getElementById("subject").value;
+            const classLevel = document.getElementById("class_level").value;
+            const answerEl = document.getElementById("answer");
+            const resultsDiv = document.getElementById("results");
+            const statusEl = document.getElementById("status");
+
+            answerEl.classList.add("empty");
+            answerEl.textContent = "";
+            resultsDiv.innerHTML = "";
+            statusEl.innerHTML = "";
+
+            if (!query) {
+                answerEl.textContent = "Enter a topic or keyword to search.";
+                return;
+            }
+
+            let numText = parseInt(document.getElementById("num_text").value, 10);
+            let numFigures = parseInt(document.getElementById("num_figures").value, 10);
+            if (Number.isNaN(numText)) numText = 4;
+            if (Number.isNaN(numFigures)) numFigures = 1;
+
+            go.disabled = true;
+            btnLabel.innerHTML = '<span class="spinner"></span> Working…';
+
+            let res;
+            try {
+                res = await fetch("/search", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        query,
+                        qtype,
+                        num_questions: numQuestions,
+                        subject,
+                        class_level: classLevel,
+                        language: "english",
+                        num_text: numText,
+                        num_figures: numFigures
+                    })
+                });
+            } catch (e) {
+                answerEl.classList.remove("empty");
+                answerEl.innerHTML = '<div class="err">Network error: ' + escapeHtml(String(e)) + "</div>";
+                go.disabled = false;
+                btnLabel.textContent = "Generate";
+                return;
+            }
+
+            let data;
+            try {
+                data = await res.json();
+            } catch (e) {
+                answerEl.classList.remove("empty");
+                answerEl.innerHTML = '<div class="err">Invalid response from server (HTTP ' + res.status + ").</div>";
+                go.disabled = false;
+                btnLabel.textContent = "Generate";
+                return;
+            }
+
+            go.disabled = false;
+            btnLabel.textContent = "Generate";
+
+            if (!res.ok) {
+                answerEl.classList.remove("empty");
+                answerEl.innerHTML = '<div class="err">' + escapeHtml(data.error || ("HTTP " + res.status)) + "</div>";
+                return;
+            }
+
+            answerEl.classList.remove("empty");
+            answerEl.textContent = data.answer || "(Empty response)";
+
+            const filterLabel = [
+                subject || "",
+                classLevel ? ("Class " + classLevel) : ""
+            ].filter(Boolean).join(" · ");
+            statusEl.innerHTML = pillForMode(data.generation_mode || "") +
+                '<span class="pill" title="Book filter">' + escapeHtml(filterLabel) + "</span>";
+
+            const list = data.results || [];
+            if (list.length === 0) {
+                resultsDiv.innerHTML = '<p style="color:var(--muted);margin:0;">No chunks returned.</p>';
+                return;
+            }
+
+            list.forEach(function (r, i) {
+                const card = document.createElement("article");
+                card.className = "chunk";
+                card.setAttribute("role", "listitem");
+
+                const score = typeof r.score === "number" ? r.score.toFixed(3) : r.score;
+                const type = r.type === "figure" ? "figure" : "text";
+                const chipLabel = type === "figure" ? "Figure" : "Text";
+
+                let head = '<div class="chunk-head">';
+                head += '<span class="chip ' + type + '">' + chipLabel + "</span>";
+                head += '<span class="score">#' + (i + 1) + " · score " + escapeHtml(String(score)) + "</span>";
+                if (r.fig_id) head += '<span class="score">Fig. ' + escapeHtml(String(r.fig_id)) + "</span>";
+                head += "</div>";
+
+                let body = '<div class="chunk-body">';
+                if (r.type === "text") {
+                    const c = r.content || "";
+                    body += "<p>" + (c.length > 600 ? escapeHtml(c.slice(0, 600)) + "…" : escapeHtml(c)) + "</p>";
+                } else {
+                    const cap = r.caption || "";
+                    if (r.chapter) body += '<p class="cap-label">' + escapeHtml(String(r.chapter)) + (r.page != null ? " · p." + escapeHtml(String(r.page)) : "") + "</p>";
+                    body += "<p><strong>Caption:</strong> " + escapeHtml(cap) + "</p>";
+                    const imagePath = r.image_path || "";
+                    if (imagePath) {
+                        body += '<div class="thumb"><img src="/image?path=' + encodeURIComponent(imagePath) + '" alt="Retrieved figure" loading="lazy"></div>';
+                    }
+                }
+                body += "</div>";
+
+                card.innerHTML = head + body;
+                resultsDiv.appendChild(card);
+            });
+        }
+
+        function escapeHtml(s) {
+            return String(s)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;");
+        }
+    })();
+    </script>
+</body>
+</html>

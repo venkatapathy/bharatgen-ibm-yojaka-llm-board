@@ -1,0 +1,120 @@
+{
+  "image": "fixtures/ncert_urinary_figure_19_1.png",
+  "answer_key": {
+    "1": {
+      "label": "Adrenal gland",
+      "points_to": "A small, oval-shaped structure resting on top of the right bean-shaped organ.",
+      "position": "top-right"
+    },
+    "2": {
+      "label": "Renal artery",
+      "points_to": "A tube originating from the thicker central vertical tube and connecting to the right bean-shaped organ.",
+      "position": "top-right"
+    },
+    "3": {
+      "label": "Renal vein",
+      "points_to": "A tube originating from the right bean-shaped organ and connecting to the thinner central vertical tube.",
+      "position": "top-right"
+    },
+    "4": {
+      "label": "Kidney",
+      "points_to": "The bean-shaped organ on the right side of the central vertical tubes.",
+      "position": "center-right"
+    },
+    "5": {
+      "label": "Dorsal aorta",
+      "points_to": "The thicker, darker vertical tube in the center of the diagram, to the right of the thinner vertical tube.",
+      "position": "center-right"
+    },
+    "6": {
+      "label": "Ureter",
+      "points_to": "A tube extending downwards from the bottom of the right bean-shaped organ, leading to the large sac-like structure below.",
+      "position": "center-right"
+    },
+    "7": {
+      "label": "Urinary bladder",
+      "points_to": "The large, sac-like organ located at the bottom center of the diagram.",
+      "position": "bottom-center"
+    },
+    "8": {
+      "label": "Urethra",
+      "points_to": "The tube extending downwards from the bottom of the large sac-like organ (urinary bladder).",
+      "position": "bottom-center"
+    },
+    "9": {
+      "label": "Inferior vena cava",
+      "points_to": "The thinner, lighter vertical tube in the center of the diagram, to the left of the thicker vertical tube.",
+      "position": "top-left"
+    },
+    "10": {
+      "label": "Pelvis",
+      "points_to": "The branched, funnel-like internal area within the left bean-shaped organ.",
+      "position": "center-left"
+    },
+    "11": {
+      "label": "[edulla",
+      "points_to": "The internal, radially striated, cone-shaped structures within the left bean-shaped organ, surrounding the pelvis.",
+      "position": "center-left"
+    },
+    "12": {
+      "label": "Cortex",
+      "points_to": "The outer, solid layer of the left bean-shaped organ.",
+      "position": "bottom-left"
+    },
+    "13": {
+      "label": "Figure 19.1 Human Urinary system",
+      "points_to": "The entire diagram depicting the interconnected organs of the urinary system.",
+      "position": "bottom-left"
+    }
+  },
+  "questions": [
+    {
+      "type": "identify",
+      "question": "Identify the structures indicated by markers 1, 2, and 3 in the diagram.",
+      "answer": "1: Adrenal gland, 2: Renal artery, 3: Renal vein",
+      "marks": 3
+    },
+    {
+      "type": "spatial",
+      "question": "Which numbered marker indicates the tube that originates from the bottom of the organ at marker 4 and leads directly to the sac-like structure at marker 7?",
+      "answer": "Marker 6",
+      "marks": 1
+    },
+    {
+      "type": "role",
+      "question": "Based on its position and description as 'The large, sac-like organ located at the bottom center', what is the likely primary function of the organ indicated by marker 7 within this system?",
+      "answer": "To temporarily store substances transported to it by marker 6 before they exit via marker 8.",
+      "marks": 1
+    },
+    {
+      "type": "mcq",
+      "question": "Which of the following numbered markers identifies a tube that primarily transports substances *away* from the organ indicated by marker 4 and connects to the thinner central vertical tube (marker 9)?",
+      "options": [
+        "A) Marker 2",
+        "B) Marker 5",
+        "C) Marker 3",
+        "D) Marker 6"
+      ],
+      "answer": "C) Marker 3",
+      "marks": 1
+    },
+    {
+      "type": "match",
+      "question": "Match the numbered markers in Column A with their primary roles in the system described in Column B.",
+      "column_a": [
+        "1. Marker 4",
+        "2. Marker 6",
+        "3. Marker 7",
+        "4. Marker 8"
+      ],
+      "column_b": [
+        "P. A pathway for the exit of stored substances from the system.",
+        "Q. The primary site for processing substances within this system.",
+        "R. A tube that transports processed substances from a bean-shaped organ to a storage sac.",
+        "S. A large, sac-like structure designed for temporary storage of substances before elimination."
+      ],
+      "answer": "1-Q, 2-R, 3-S, 4-P",
+      "marks": 4
+    }
+  ]
+}

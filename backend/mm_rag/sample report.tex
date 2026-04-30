@@ -1,0 +1,400 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb, amscd, amsthm, amsfonts}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage[hidelinks]{hyperref}
+\usepackage{float}
+\usepackage{subcaption}
+\oddsidemargin 0pt
+\evensidemargin 0pt
+\marginparwidth 40pt
+\marginparsep 10pt
+\topmargin -20pt
+\headsep 10pt
+\textheight 8.7in
+\textwidth 6.65in
+\linespread{1.2}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\newcommand{\rr}{\mathbb{R}}
+
+\newcommand{\al}{\alpha}
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\aff}{aff}
+
+\begin{document}
+
+
+\title{ \bf\Huge WSGI}
+\author{\large Pritam Sil}
+\date{August 25, 2021}
+\makeatletter
+
+\begin{titlepage}
+
+    \let\footnotesize\small \let\footnoterule\relax \setcounter{page}{1}
+    \vspace*{0.1in}
+    \begin{center}
+      \mbox{}\\
+      {\bf\expandafter\uppercase\expandafter{\LARGE RESOURCE USAGE CHARACTERIZATION of Apache Spark }} \\[0.6in]
+      {\Large  \textbf{(CS 777) M.S. R\&D 1 Report}} \\
+    %   {\large  of the degree of}\\[0.25in]
+    %   {\large \@iitbdegree} \\[0.25in]
+      {\large by} \\[0.25in]
+      {\large \bf Pritam Sil} \\
+      {\large \bf (Roll No. 21Q05R001)} \\[0.6in]
+      {\large Guide: }  \\
+      {\large \bf Prof. Varsha Apte} \\
+      \mbox{}\\[0.6in]
+      \includegraphics[width=0.2\textwidth]{iitblogo.png} \\[0.25in]
+      {\large \uppercase{Department of Computer Science and Engineering}} \\[0.25in]
+      {\large INDIAN INSTITUTE OF TECHNOLOGY BOMBAY}\\[0.25in]
+      {\large (Academic Year: 2021-2022)}
+    \end{center}
+  \end{titlepage}
+  \setcounter{footnote}{0}
+  \setcounter{page}{1}
+\newpage
+\large
+\tableofcontents
+\newpage
+% \begin{abstract}
+%     Apache Spark is a unified analytics engine for processing Big Data. It was initially developed at UC Berkley in 2009 and later handed over to the Apache foundation.  Spark is well known for its in memory computations which means it does any kind of processing in its memory only. Thus this drastically reduces the time to process big data. Hence Spark is being used extensively by various organizations such as Netflix and Yahoo. Apart from this, it is capable of processing streaming data and has a separate library for machine learning algorithms. There are over 150 parameters in Spark which when tuned properly for a particular system and application can lead drastic reduction in runtime. The main purpose of this R\&D was to study the effect of such parameters on system performance metrics such as CPU utilization and memory usage. Thus a separate monitoring framework had to be built. This was then used to study the effect of two such parameters namely spark.executor.cores and spark.executor.memory on such metrics.
+% \end{abstract}
+
+\section{Introduction}
+Big Data is quite prevalent in today's world. As the number of internet users are increasing day by day, so is the amount of data generated. If the amount of data generated is accumulated it builds up to PetaBytes and even ZetaBytes which is really huge. Normal applications running on a single machine can never handle this kind of data. As a result we need some kind of distributed data processing application which is capable of processing this data over a cluster of nodes. It will be responsible for splitting this data into smaller fragments and then processing each fragment parallelly on a separate machine and to accumulate and display the results. This is where technologies such as Hadoop Map-Reduce and Apache Spark comes to play. 
+\par The next problem that comes to play while processing  Big Data is time. Todays world is fast. As a result, the application should also be able to keep up with that pace. The data is changing by the second so will its end result. Technologies such as Hadoop Map-Reduce does not utilize the RAM properly. It will read some data into the memory process it and then store it back into the persistent storage and this is repeated. Thus there is a lot of DiskIO involved which slows this down. This is where Apache Spark comes to play with its concept of Resilient Distributed Datasets(RDDs) and in memory computation. The data is once loaded into the memory and any kind of processing is done on it only. Thus this reduces DiskIO and speeds up the whole process. However Spark contain over 150 parameters which are used to control how much memory will be used, how many cores will be used, how many processes(executors and drivers) will be spawned and others. These in turn need to be tuned judiciously. 
+\par The next question that arises is  how can we determine the exact amount of physical resources that we need ? Is there a pre-defined formula? Is there any indicator that will help us to determine the same? This is where system performance metrics comes to play. It should give us an answer to the question that if we keep on adding more resources whether they are being utilized or not.  To test this a monitoring framework had been built and extensive exploration has been done to verify the same. This led to an interesting observation that it is safe to limit the number of executor cores allocated to 9 but has also raised a lot of questions as to how Apache Spark works.
+\par The report is divided into five sections. The next section gives a little background as to how Spark is working and the previous work that has been done in this domain. The next section talks about the experimentation setup, the section after that talks about all the experiments done till now and their corresponding results. Finally the whole report is being concluded in the last section. 
+\section{Background and Motivation}
+\subsection{Apache Spark}
+
+Apache Spark is a unified analytics engine for processing Big Data. It is capable of processing batch data, provide SQL analytics and even training machine learning algorithms on large-scale scale datasets and thus making this a perfect data analytics platform in the industry. Currently Spark is being widely used by various companies such as Netflix and Yahoo. So the question that remains is that what makes Apache Spark different from its counterparts such as Hadoop Map-Reduce. Spark performs in memory computations and also makes use of the concept of Lazy Evaluation. In memory computation means there is less DiskIO which means less IOwait and this in turn decreases runtime of a spark job drastically. Lazy evaluation means that spark will not immediately perform any operation on the data and will wait till the need to so comes. Thus this will also save precious CPU time. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{Figures/master_slave.png}
+    \caption{Role of Driver and Executor in Spark}
+    \label{spark}
+\end{figure}
+\par Spark uses a master slave architecture where the master is known as the driver and the slave is known as the executor. The driver is responsible for interacting with the Cluster Manager and for requesting new nodes. Once allocated , it will spawn the executors and assign tasks to them. It is also responsible for killing those executors once the tasks are complete and for freeing the resources after that.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{Figures/spark.png}
+    \caption{Spark Job Execution }
+    \label{spark}
+\end{figure}
+\par Apart from this, spark makes use of an abstraction called Resilient Distributed Datasets(RDDs) which are immutable and partitioned datasets that can be transformed in parallel. Apart from this Spark also exhibits high fault tolerance. When the application is started, the first thing that spark creates is a SparkContext. It can be used to create RDDs, request for resources such as worker nodes or pods from the cluster manager (here we are using Kubernetes). Thus when an application is submitted to spark, it is converted to a DAG or Directed Acyclic Graph. Each node of a DAG represents an RDD and each edge represents a transformation or operations. Any two consecutive operations can always be merged for optimizing the DAG. Since spark uses Lazy evaluation approach, the graph is not executed unless and until it is needed. This whole thing is happening inside the spark driver program. Next it will convert this DAG into Stages and then it creates the Tasks needed for each stage. The Tasks are then in turn executed by the Executors. Once all the stages are complete the Driver makes sure to kill the  executors, free the resources.  and exit from the program. 
+\par Spark contains more than 150 runtime parameters which need to be tuned in order to achieve the best possible runtime of an application. However in order to study the actual amount of resources used by spark, we consider two parameters namely spark.executor.cores and spark.executor.memory. While spark.executor.cores represents the number of cores assigned to a single executor, spark.executor.memory represents the amount of memory or RAM allocated to a single executor. The next section will give an overview about the experimentation setup that has been used.
+\subsection{Previous Work}
+Prior to this a lot of work has been done in the domain of Performance Tuning of Apache Spark. A.V.S. Bharadwaj in this Mtech thesis titled \emph{Performance Modelling and Auto-conguration of Apache Spark Applications using Machine Learning} made an attempt to build a performance model which could predict runtime from spark configuration parameters. At first he studied how the runtime varied when a particular parameter was varied gradually. This led to some interesting results. One such example was that when he increase executor cores, it showed a gradual decrease in runtime. Same thing happened when he allocated 1gb per core and reran the experiments. There was a gradual decrease in runtime. This was quite interesting but this led to another question , is it actually using up all the resources and can we decrease the range as well ? Thus in the next step he took a certain range of values in each parameter, generated sample configurations using various methods such as Sobol sampling and then trained this model using that. Now if the range is large then it will increase the search space as well. So can we limit this ? 
+\par Furthermore Alka Bhusan in her recent technical report used these sampling methods to sample some configurations, execute that on spark and collect runtime and then use that to train a Machine Learning model. The algorithm will keep on training that model unless and until it has an MAPE value lesser than a particular threshold. However the search space was quite large which resulted in a huge training time for the model. This needs to be reduced and the only way to reduce this is to reduce our search space. Reducing our search space means to reduce the range of values of each parameter. The only way to reduce parameters which control the amount of physical resources allocated is to determine if they are being actually used or not. To determine this we need to monitor system performance metrics such as CPU utilization, Memory utilization and even CPU time. 
+\par Hence this RnD aims to answer this question. Can we limit these resource parameters using system performance metric data. Is there a correlation between that and these parameters ? The next section talks about the setup that has been used. This includes the hardware setup and the framework that has been used to collect this data.
+
+\section{Resource usage characterization}
+This section talks about the problem statement and the experimentation setup which was used to solve that. As mentioned earlier, Spark has over 150 parameters  which need to be tuned in order to obtain the least runtime for a particular application on a particular machine. Thus this can easily be done by selecting a specific range for each parameter, generating sample configurations from that, training a performance model using that and then predicting runtime. This was the path taken by Alka Bhusan in her recent technical report. However the main problem with this approach is that it will never look into the system side of these things that is whether the system resources are actually being utilized or not. This can actually serve as an important indicator to reduce our search space.  So if we keep on adding more resources to our system and it is seen that they are not being utilized properly, this only means one thing that we do not need to allocate that many resources. Thus the resource usage graphs should show a decrease in usage when that previously mentioned point happens. Thus from it we can safely reduce our search space. This is how resource usage characterization plays a vital role in reducing the parameter specific range of values in Spark.
+\subsection{Cluster Overview}
+\begin{minipage}{\linewidth}
+\centering
+\vspace{10px}
+    \includegraphics[scale=0.5]{Figures/machine.png}
+    \captionof{figure}{Setup}
+    \label{mach}
+    \vspace{10px}
+\end{minipage}
+The setup consists of a physical machine named ub01 having 64 cores and 128 GB of RAM. On top of ub01 we have four virtual machines namely spark2, spark3, spark4 and spark5. While spark2, spark3,spark5 has been assigned 16 cores and 32GB of RAM each, spark4 has been assigned 8 cores and 16GB of RAM (Figure~\ref{mach}). Apart from this we have \textbf{--}
+\begin{itemize}
+    \item 1 single node HDFS, NAS of 3TB mounted
+    \item 1 K8 master (8 CPU, 16GB)
+    \item Applications : Wordcount
+\end{itemize}
+
+
+\subsection{Framework for measurement of System Performance metrics}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{Figures/framework.png}
+    \caption{Framework Flowchart}
+    \label{fover}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{Figures/monitor.png}
+    \caption{Framework Flowchart}
+    \label{fig:my_label}
+\end{figure}
+In order to measure system performance metrics, Linux commands such as mpstat, ps, top and pidstat have been used. The full command along with its parameters used are as follows\textbf{--}
+\begin{enumerate}
+    \item For measuring CPU utilization -
+    \begin{verbatim}
+        mpstat 1 $1
+    \end{verbatim}
+    Here 1 denotes that it will be measured every second and \$1 denotes how many seconds this will be executed.
+    \item For measuring time spent by the Java threads on the CPU -
+    \begin{verbatim}
+        pidstat -u -T ALL
+    \end{verbatim}
+    Here -u means CPU utilization statistics will be shown and -T ALL  denotes that \emph{"statistics are to be reported for individual tasks and globally for the selected tasks and their children"}(As per man page \cite{b6}).
+    \item For measuring memory used -
+    \begin{verbatim}
+        top -b -n 1
+    \end{verbatim}
+    Here -b denotes batch mode and -n denotes the number of times this will be executed.
+    \item 
+    For measuring number of Java threads created -
+    \begin{verbatim}
+        ps -eL | grep java | wc -l
+    \end{verbatim}
+    Here -e will show all processes and -L  will show all threads. After this we are selecting all java threads using the grep command and then using wc to count the number of lines. 
+\end{enumerate}
+Thus in our framework , there is a script for each and every one of these commands. For example for mpstat we have a separate folder called mpstat\_scripts containing the mpstat.sh script. Each such script also takes in one parameter which is time in seconds. This denotes how long each script will collect their corresponding data. There is a master script named executeall.sh which is to start all these command specific scripts with the same number of seconds on all the machines that we need to observe. Thus once we start our monitoring scripts one can finally submit the spark job. However one thing to be noted, a prior idea of how many seconds a spark job will execute is to be known to run these scripts. This whole setup has been summarized in Figure~\ref{fover}. Thus each master script will start all the individual  machine specific master scripts.
+\par Once we have finished collecting all our data we can also execute the generate\_graphs.sh script to generate a few graphs for this data. The data for each Linux command is being stored as a JSON file. Hence it becomes easier to process this data once collected. 
+\par To make things easier the setup also contains a master script called run\_batch.py which is capable of taking in a set of configuration files and collect the necessary performance metrics. Each configuration file should follow this naming convention : config\_config\_no\_expt.conf (Example config\_0\_100.conf for executing  the monitoring scripts for configuration 0 for 100 seconds). Thus the master script will do the steps as mentioned in Figure~\ref{ffchart}.
+% \begin{enumerate}
+%     \item Upload all monitoring scripts to the necessary machines
+%     \item Start all the monitoring scripts with the specified number of seconds in expt
+%     \item Submit a spark job with that configuration file (input data file location has been hardcoded for now)
+%     \item  Generate the necessary graphs on each server using generate\_graphs.sh
+%     \item Download all the JSON files and other graphs
+%     \item Parse those JSON files for any other data that is needed and dump the final output in a csv file along with the configuration parameters
+% \end{enumerate}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{Figures/framework_flow.png}
+    \caption{Framework Flowchart}
+    \label{ffchart}
+\end{figure}
+Thus the end user will only use the csv file to derive necessary conclusions. For each of these experiments we have collected the following data for each machine \textbf{--}
+\begin{enumerate}
+    \item CPU Utilization (Average and Maximum)
+    \item Maximum amount of memory used in KB 
+    \item Number of java threads spawned by a spark job (Average and Maximum)
+    \item Cumulative CPU time for the java threads in ms
+\end{enumerate}
+A few things to be noted is that spark will only spawn java threads when the executors are executing some task and hence for the rest of the time it will be zero. Also this framework will automatically parse spark logs and filter out only that part of the monitoring data where the tasks were being executed. Hence even if the monitoring scripts have been started for a longer time there won't be any problem of getting wrong average values. Apart from this one can easily add other monitoring tools as and when needed. One has to just put that script as command.sh under command\_scripts directory and add the command name to executeall.sh script.
+
+\section{Univariate Experiments}
+This chapter summarizes all the experiments done till now to try and establish a relationship between spark parameters and system performance metrics. We have mainly observed the following parameters - spark.executor.cores, spark.executor.memory. The main objective was to check if there is an observable trend when we are varying only one allocated resource. Also will there be a bottleneck at which we can safely conclude that this is where we stop and eventually reduce our search space. The dataset used is that of WordCount and its size is that of 8GB. For experiments 1 and 2 executor instances was set to 1 and for 3 after a certain point (for executor.memory=4g) it was increased to 2 else the spark job was exiting with an error code 143 which indicates insufficient resources. 
+For each experiments 1, 2 and 3 the constant spark parameters with their values are as follows\textbf{--}
+\begin{enumerate}
+    \item spark.task.cpus$\rightarrow$1
+    \item spark.default.parallelism$\rightarrow$16
+    \item spark.memory.storage.fraction$\rightarrow$0.6
+    \item spark.memory.fraction$\rightarrow$0.6
+    \item spark.shuffle.spill.compress$\rightarrow$False
+    \item spark.ioCompressionCode$\rightarrow$snappy
+    \item spark.shuffleFileBuffer$\rightarrow$112k
+    \item spark.locality.wait$\rightarrow$6s
+    \item spark.rdd.compress$\rightarrow$True
+    \item spark.reducerMaxSizeInFlight$\rightarrow$48m
+    \item spark.shuffle.compress$\rightarrow$True
+\end{enumerate}
+Here spark.executor.cores denotes the number of cores allocated to an executor instance and
+spark.executor.memory denotes the amount of memory allocated to the same. Since executors are actually responsible for spawning tasks and executing the spark job, hypothetically varying these parameters should also directly affect runtime. Apart from this spark.executor.instance dictates how many executor will be spawned on a slave machine. Thus we need to have an optimal combination of (spark.executor.cores,spark.executor.memory,spark.executor.instances) to in turn decrease runtime. 
+\par Another purpose of these experiments  were to measure if the resources are actually being used to their fullest. Suppose we are continuously assigning more and more cores to the spark application is not showing any improvements, in that case system performance metrics will give us an insight as to whether assigning more cores means more CPU utilization or not. Similarly for memory we can increase more and more but the actual memory used will give us an insight as to whether more memory is being used or not.
+Thus to verify this  four sets of experiments have been performed. The first set of experiments deal with executor cores being increased for a single executor instance in order to study its effects on CPU utilization. The next set of experiments deals with the same but the executor memory allocated is also increased accordingly. Hence effectively there will be 1GB of memory per core. In the third set of experiments, the executor memory is increased gradually keeping the rest of the parameters as constant. This is done to monitor memory utilization. The final set of experiments is to verify our claim from experiment 2 that 9 is the maximum number of cores that we can allocate to each executor before we reach a bottleneck situation. 
+% Observation:
+% Hypothesis: 
+% Experiment to validate/invalidate hypothesis:  
+% Prediction: 
+% Results:
+% Conclusion
+
+\subsection{Runtime vs Executor Cores}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.4]{Figures/exp1/runtime.png}
+  \caption{Graph for Runtime}
+  \label{e1f1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.4]{Figures/exp1/graphhhh_cpu_util_avg.png}
+  \caption{Graph for CPU utilization}
+  \label{e1f2}
+\end{subfigure}
+% \caption{Graphs for Experiment 1}
+% \label{e2}
+\newline
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.4]{Figures/exp1/graphhhh_pidstat_cput.png}
+  \caption{Graph for CPU time}
+  \label{e1f3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.4]{Figures/exp1/graphhhh_ps_th_avg.png}
+  \caption{Graph for Nuumber of Java threads spawned}
+  \label{e1f4}
+\end{subfigure}
+
+\centering
+\begin{subfigure}{\textwidth}
+  \centering
+  \includegraphics[scale=0.4]{Figures/exp1/graphhhh_top_max_used.png}
+  \caption{Graph for Total Memory Usage}
+  \label{e1f5}
+\end{subfigure}%
+
+
+\caption{System performance metrics for Experiment 1}
+\label{e2_3}
+\end{figure}
+
+
+% \end{minipage}
+% \begin{enumerate}
+%     \item Hypothesis : is there a correlation between SPMetrics and runtime
+%     \item Observation : Min at 10, Spike at 6 even though high CPU util but less memory,
+%     \item Conclusion : Memory constraint, next exp 1gb/core  or outlier
+% \end{enumerate}
+The hypothesis for our first experiment was to check if there is a correlation between system performance metrics and runtime. To verify this we have studied the effects of increasing executor.cores for a single executor instance on runtime. To test this the necessary configuration files were prepared and executed using a run\_batch.py. As it can be seen from Figure~\ref{e1f1}, the runtime had gradually decreased as number of executor cores has been increased. However there has been a major increase in runtime at 6 and a few minor increase in runtimes at 9,11 and 13. Now if we compare this data with the CPU utilization data and memory used,  it can be seen that the average CPU utilization for all the experiments was close to 20 abd there was a gradual increase in memory utilization. For 5 cores it can be see that there was a decrease in memory utilization. 
+The minimum runtime here was for 10 which is 6.22455467725 seconds. Since the average CPU utilization was similar and memory utilization did show a slight increase, this led to another hypothesis. This hypothesis states that is this happening because of insufficient executor memory. The next set of experiments was done to test this hypothesis.
+
+
+
+\subsection{Runtime vs Executor Cores (where memory/core=1)}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.4]{Figures/exp2/runtime.png}
+  \caption{Graph for Runtime}
+  \label{e2f1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.4]{Figures/exp2/graphhhh_cpu_util_avg.png}
+  \caption{Graph for CPU utilization}
+  \label{e2f2}
+\end{subfigure}
+% \caption{Graphs for Experiment 1}
+% \label{e2}
+\newline
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.4]{Figures/exp2/graphhhh_yes_pidstat_cput.png}
+  \caption{Graph for CPU time}
+  \label{e2f1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.4]{Figures/exp2/graphhhh_ps_th_avg.png}
+  \caption{Graph for Nuumber of Java threads spawned}
+  \label{e2f2}
+\end{subfigure}
+
+\centering
+\begin{subfigure}{\textwidth}
+  \centering
+  \includegraphics[scale=0.4]{Figures/exp2/graphhhh_top_max_used.png}
+  \caption{Graph for Total Memory Used}
+  \label{e2f1}
+\end{subfigure}%
+
+
+\caption{System performance metrics for Experiment 2}
+\label{e2_3}
+\end{figure}
+
+% \begin{enumerate}
+%     \item Hypothesis : if we fix 1gb/core, is there a correlation between SPMetrics and runtime
+%     \item Observation : Min at 9, 11,3-> outliers, gradual increase in CPU util and memory and max threads
+%     \item Conclusion :
+% \end{enumerate}
+The hypothesis for this experiment was to test if memory allocated per executor is increased along with the executor cores(to maintain a memory to ratio of 1), will runtime decrease and in turn will there be efficient utilization of system resources. From Figure~\ref{e1f1} it can be seen that the runtime has gradually decreased. For this set of experiments, 9 had the lowest runtime with a value of 5.8011s. Apart from this, there are minor spikes in runtime for 11 and 13 and they can be treated as outliers. Coming to memory utilization, it can be seen that there was a good change in memory used till 9. After that the curve almost flattens indicating that not much of memory is needed after that. From CPU utilization graphs it can be seen that the average utilization curve is almost flat while the maximum utilization kept on increasing till 13 and then it fell down. This can be indicative of the fact that we do not need to increase the number of cores beyond 13 or it maybe just another outlier. Compared to this it can also be seen that there was a gradual increase in maximum number of threads however its corresponding average value goes hand in hand with CPU time. Thus from this data it is safe to conclude that 9 is an optimal point and there is no point in increasing the number of cores beyond that. 
+% Hypothetically lesser the runtime more is the CPU utilization and memory used. Hence from the runtime graph we can predict that beyond 9 (which has the minimum value of 5.8011 s) there is no need to increase allocated executor cores and memory as there no significant change in runtime. Also from system performance metric graphs it can be seen that 9 has the highest average CPU utilization and average number of threads spawned. Apart from this, the threads also spent a fair amount of time executing on the CPU and it did show an increased usage of memory. Thus it can be concluded that at 9 the resources were used efficiently to show a a good decrease in runtime. Thus for one executor instance, the optimal number of executor cores is 9.
+
+\subsection{Runtime vs Executor memory}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.3]{Figures/exp3/runtime.png}
+  \caption{Graph for Runtime}
+  \label{e3f1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.3]{Figures/exp3/graphhhh_cpu_util_avg.png}
+  \caption{Graph for CPU utilization}
+  \label{e3f2}
+\end{subfigure}
+% \caption{Graphs for Experiment 3}
+% \label{e2}
+\newline
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.3]{Figures/exp3/graphhhh_yes_pidstat_cput.png}
+  \caption{Graph for CPU time}
+  \label{e2f3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.3]{Figures/exp3/graphhhh_ps_th_avg.png}
+  \caption{Graph for Nuumber of Java threads spawned}
+  \label{e3f2}
+\end{subfigure}
+
+\centering
+\begin{subfigure}{\textwidth}
+  \centering
+  \includegraphics[scale=0.3]{Figures/exp3/graphhhh_top_max_used.png}
+  \caption{Graph for Total Memory Used}
+  \label{e3f1}
+\end{subfigure}%
+
+
+\caption{System performance metrics for Experiment 3}
+\label{e2_3}
+\end{figure}
+% \begin{enumerate}
+%     \item Hypothesis : is there a correlation between SPMetrics and runtime 
+%     \item Observation : 
+%     \item Conclusion :  Nothing conclusive
+% \end{enumerate}
+The main purpose of this experiment was to test if there is a correlation between system performance metrics and runtime if we only increase the memory allocated for a single executor instance.  However as we can see from Figure~\ref{e3f1} that after 5 the runtime is comparable and there is no drastic change in it. However from the memory usage graphs it can be seen that the amount of memory used is actually increasing for increase in executor memory. Apart from this it can be seen that the average CPU utilization for each experiment is comparable however the maximum value has shown a gradual decrease. The maximum and average number of threads spawned show no change while the CPU time also shows a similar trend.
+Hence runtime throughout this graph
+starting from  5 is also comparable.
+Thus it can be concluded that as we add more and more memory, the memory utilization is increasing but not the CPU utilization. This indicates one thing that there is a bottleneck situation and the executors need more cores to speed up the processing part. Another thing to be noted is that the min runtime is at 13 and it is 15.6274391658667s which is triple of what we had in the previous set of experiments. This is indicative of the fact that the executor.cores values should also be at par with the executor.memory value. Thus from these three experiments it is safe to conclude that memory and cores should be increased parallelly and should go hand in hand.    
+% min at 13 -> 15.6274391658667
+\subsection{Can we reduce Executor Cores bound to 9 ?}
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{Figures/exp4/runtime.png}
+\caption{Runtime obtained for each configuration}
+\label{e4_1}
+\end{figure}
+
+The main purpose of this experiment was to verify whether our claim that we can reduce the upper bound of spark.executor.cores to 9. For this experiment, three sets of five different configurations were considered. For the first set executor cores were set to 9, for the next one it was 10 and the last set it was 11. Thus a total 15 configurations were executed. In Experiment 2, the minimum runtime was 5.8 mins which is roughly 348s. From Figure~\ref{e4_1}, it can be seen that the minimum is much higher than 348s. Hence it can be concluded that the max number of executor cores allocated can be set to 9.
+
+\section{Conclusion}
+Thus the volume of data generated is increasing at rapid rate. Applications such as Apache Spark should also keep up with that pace. With over 150 runtime parameters that need to be tuned, the search space for the optimal set of configurations is huge. Thus resource usage characterization can play a vital role in reducing that. This R\&D aims to answer the question that is there a correlation between system performance metrics and runtime and can we use this data to reduce our search space. The reason being having a huge search space increases the training time for system performance models and this is not desirable. Thus this the main objective of this R\&D project was to build a framework capable of monitoring system performance metrics while a spark application is running and then use it to study the effect of various parameters on these metrics. Accordingly we have performed a few experiments to check if there is a correlation between that and runtime. Turns out that there is a direct correlation between executor cores and CPU utilization(when memory to core ratio is 1) and it is reasonable to fix the upper bound of spark.executor.cores to 9. The next step would be to use this existing framework and the study the effects of the remaining spark parameters on system performance metrics. For each of our experiments the average CPU utilization was almost in the range of 15 to 25\%. This indicates that threads are being executed concurrently. This can we verified from the CPU time data. Thus a possible question that remains is how is spark actually executing these tasks. Will assigning more task cpus help them to execute parallelly ? Answering this question might help in narrowing down our search space more and in turn reduce the time to determine the optimal set of parameters for a particular spark application and for a particular machine configuration.
+
+\section{Acknowledgments}
+% \label{ch:Acknowledgments}
+% \addcontentsline{toc}{chapter}{\nameref{ch:Acknowledgments}}
+% \vspace{10mm}
+I hereby thank Professor Varsha Apte for her valuable guidance throughout this project and for giving me this wonderful opportunity to work on Apache Spark.
+\newpage
+\begin{thebibliography}{}
+
+\bibitem{b1} https://spark.apache.org/
+\bibitem{b2}https://databricks.com/spark/about
+\bibitem{b3}https://man7.org/linux/man-pages/
+\bibitem{b4}https://spark.apache.org/docs/latest/cluster-overview.html
+\bibitem{b5}https://stackoverflow.com/questions/32621990/what-are-workers-executors-cores-in-spark-standalone-cluster
+\bibitem{b6}https://linux.die.net/man/1/pidstat
+\end{thebibliography}
+\end{document}

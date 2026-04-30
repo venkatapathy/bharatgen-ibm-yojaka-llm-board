@@ -1,0 +1,401 @@
+% R&D Technical Report: Multimodal RAG (mm_rag)
+% Layout and title-page style aligned with sample report.tex (IITB-style template).
+% Replace bracketed placeholders on the title page before formal submission.
+
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb, amscd, amsthm, amsfonts}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage[hidelinks]{hyperref}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{url}
+
+\oddsidemargin 0pt
+\evensidemargin 0pt
+\marginparwidth 40pt
+\marginparsep 10pt
+\topmargin -20pt
+\headsep 10pt
+\textheight 8.7in
+\textwidth 6.65in
+\linespread{1.2}
+
+\hypersetup{
+  pdftitle={R and D Report: Multimodal NCERT RAG (mm_rag)},
+  pdfauthor={BharatGen Yojaka},
+}
+
+\begin{document}
+
+\title{\bf\Huge mm\_rag}
+\author{\large Technical report (codebase-derived)}
+\date{April 2026}
+
+% ----- Title page (structure from sample report.tex) -----
+\begin{titlepage}
+  \let\footnotesize\small \let\footnoterule\relax \setcounter{page}{1}
+  \vspace*{0.1in}
+  \begin{center}
+    \mbox{}\\
+    {\bf\expandafter\uppercase\expandafter{\LARGE Multimodal Retrieval-Augmented Generation over NCERT Textbooks}} \\[0.45in]
+    {\Large  \textbf{(Technical) M.S.\ R\&D-style Report}} \\[0.35in]
+    {\large \texttt{backend/mm\_rag} --- BharatGen Yojaka / IBM LLM Board} \\[0.5in]
+    {\large by} \\[0.25in]
+    {\large \bf [Author Name]} \\
+    {\large \bf [Roll / Employee ID if applicable]} \\[0.5in]
+    {\large Guide / Technical lead: }  \\
+    {\large \bf [Guide Name]} \\
+    \mbox{}\\[0.45in]
+    \IfFileExists{iitblogo.png}{%
+      \includegraphics[width=0.2\textwidth]{iitblogo.png} \\[0.25in]
+    }{%
+      \textit{\small (Place \texttt{iitblogo.png} beside this \texttt{.tex} to show institute logo.)} \\[0.25in]
+    }
+    {\large \uppercase{[Department / Organization]}} \\[0.25in]
+    {\large [Institute or company name]}\\[0.25in]
+    {\large (Academic Year: 2025--2026)}
+  \end{center}
+\end{titlepage}
+
+\setcounter{footnote}{0}
+\setcounter{page}{1}
+\newpage
+\large
+
+\begin{abstract}
+\noindent
+\textbf{Context.} The BharatGen Yojaka question-generation platform already included a \emph{textual} NCERT retrieval stack under \texttt{backend/} (outside \texttt{mm\_rag}): FastAPI services, dense text embeddings with FAISS, ingestion in \texttt{ncert\_rag\_pipe/}, and optional remote reranking. That system was taken through \textbf{OpenShift} deployment (project \texttt{nextgen}, deployment \texttt{bharatgen-yojaka-qg-platform}, routes and secrets as documented in \texttt{backend/deployment.md} and \texttt{backend/deploy\_app.yaml}).
+
+\textbf{Gap.} After deployment, usage made clear that \textbf{text-only RAG cannot faithfully support diagram-based questions}: labeling anatomical drawings, interpreting circuit or ray diagrams, and similar items require retrieved \emph{images} and vision-capable generation, not paragraphs alone.
+
+\textbf{Contribution.} This report documents the follow-on \texttt{mm\_rag} module: multimodal retrieval and question generation by indexing \textbf{text chunks and figure records} in a shared SigLIP space, FAISS search with balanced text--figure quotas, and a Flask service using split text/vision Groq calls. We tie this extension to the prior stack, the OpenShift rollout, and the closing \emph{defense} narrative (slide template PDF at repository root). We also summarize ingestion, API surface, configuration, batch-index limitations, and future work.
+\end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
+
+%---------------------------------------------------------------------
+\section{Introduction}
+%---------------------------------------------------------------------
+
+Large language models and retrieval-augmented generation have become central to curriculum-aligned question generation for NCERT-style corpora. The work reported here sits in \textbf{two phases}: (i)~delivery of the existing \texttt{backend/} textual stack on OpenShift, and (ii)~identification of a real product gap---diagram-heavy assessment---and the design of \texttt{mm\_rag} as a \textbf{multimodal RAG} extension for multimodal question generation.
+
+\par
+Section~\ref{sec:prior} describes the \emph{prior} system (everything under \texttt{backend/} except \texttt{mm\_rag}). Section~\ref{sec:openshift} summarizes OpenShift deployment and operations as recorded in the repository. Section~\ref{sec:problem} states the problem: limits of textual RAG for diagram-based items. Section~\ref{sec:objectives} lists objectives of the multimodal extension. Sections~\ref{sec:overview}--\ref{sec:technical} present architecture and methods; Section~\ref{sec:results} reports measurable and qualitative outcomes. Sections~\ref{sec:data}--\ref{sec:future} cover data pipelines, configuration, limitations, and future work; Section~\ref{sec:conclusion} concludes.
+
+%---------------------------------------------------------------------
+\section{Prior system: textual NCERT stack (\texttt{backend/} excluding \texttt{mm\_rag})}
+\label{sec:prior}
+%---------------------------------------------------------------------
+
+Until the multimodal extension, the ``current'' platform logic lived in the rest of \texttt{backend/}, separate from \texttt{backend/mm\_rag/}. Representative components (from the codebase layout) include:
+
+\begin{itemize}
+  \item \textbf{API entry}: \texttt{backend/app.py} runs Uvicorn and imports the FastAPI application from \texttt{backend/main.py}, exposing HTTP endpoints for question generation and related flows.
+  \item \textbf{Textual NCERT RAG}: \texttt{backend/ncert\_rag\_pipe/} implements retrieval over \textbf{text chunks} using dense sentence embeddings (e.g.\ SentenceTransformer \texttt{all-MiniLM-L6-v2}) and FAISS indexes (\texttt{vector\_db.index}, \texttt{chunks\_metadata.pkl}) under language-specific paths such as \texttt{indexes/<language>/}, with code paths that can call a remote \texttt{/reference}-style HTTP API for ranked document text.
+  \item \textbf{Remote reference / reranking}: \texttt{backend/nextgen\_rag.py} calls an external \texttt{/v2/rerank} service with subject/class filters---another text-centric retrieval path.
+  \item \textbf{Supporting modules}: \texttt{model\_runner.py}, \texttt{council.py}, \texttt{prompt.py}, \texttt{GEval.py}, \texttt{db.py}, and Kubernetes/OpenShift manifests (\texttt{deploy\_app.yaml}, \texttt{param5B.yaml}, \texttt{qwen32.yaml}) support model choice, prompts, evaluation, and deployment.
+\end{itemize}
+
+\noindent
+This stack was sufficient for \textbf{prose-grounded} MCQs and short answers where retrieved context is textual. It did not index textbook figures as first-class retrieval units, which motivates Section~\ref{sec:problem}.
+
+%---------------------------------------------------------------------
+\section{OpenShift deployment and release context}
+\label{sec:openshift}
+%---------------------------------------------------------------------
+
+The repository documents deployment to \textbf{Red Hat OpenShift}: VPN and \texttt{oc login}, project namespace \texttt{nextgen}, creation of secrets (e.g.\ \texttt{GROQ\_API\_KEY}, \texttt{HF\_TOKEN}), Deployment/Service/Route for the application, and verification via \texttt{oc get pods}, routes, and logs (\texttt{backend/deployment.md}). The consolidated manifest \texttt{backend/deploy\_app.yaml} names the deployment \texttt{bharatgen-yojaka-qg-platform}, container port \texttt{8100}, and replica scaling---aligned with the ``education RAG backend'' operational story.
+
+\par
+Completing this deployment was a major milestone: the textual pipeline became \textbf{accessible on-cluster} with TLS routes and secret-injected credentials. User-facing validation then surfaced the multimodal gap below rather than an abstract research curiosity.
+
+\par
+\textbf{Link to defense materials.} Outcomes of the deployment phase and the subsequent R\&D on multimodal retrieval were also prepared for oral defense using a minimal monochrome slide template PDF at the \textbf{repository root} (same tree as \texttt{backend/}), filename:
+\begin{center}
+\texttt{\detokenize{Brown Monochrome Simple Minimalist Research Project Final Defense Presentation Template (1).pdf}}
+\end{center}
+That artifact is the \emph{presentation} counterpart to this written report: it narrates timeline, deployment, and the pivot to multimodal question generation.
+
+%---------------------------------------------------------------------
+\section{Problem statement: diagram-based questions and textual RAG}
+\label{sec:problem}
+%---------------------------------------------------------------------
+
+NCERT-style assessments routinely ask students to \textbf{interpret diagrams}: identify labeled parts, trace processes in flowcharts, read graphs, or apply physics ray or circuit diagrams. Such items are not reducible to the surrounding paragraph alone; even perfect text retrieval may omit the figure, or the LLM may hallucinate labels never present in the book.
+
+\par
+The prior system (Section~\ref{sec:prior}) retrieves and conditions on \textbf{text chunks} only. Consequences include:
+
+\begin{enumerate}
+  \item \textbf{No figure in context}: the generator never receives the actual image pixels for the page the student sees.
+  \item \textbf{Weak query--image alignment}: text embeddings of a query like ``label the parts in Figure 19.1'' are not matched against a unified index of figure crops.
+  \item \textbf{Poor diagram question validity}: items may be text-plausible but not visually grounded, undermining exam fidelity.
+\end{enumerate}
+
+\noindent
+The \textbf{problem statement} for this R\&D is therefore: \emph{extend the platform with multimodal retrieval and generation so that diagram-based NCERT questions can be sourced and grounded in real textbook figures, while preserving the existing textual pipeline for prose-heavy items.} The \texttt{mm\_rag} module is the proposed engineering response.
+
+%---------------------------------------------------------------------
+\section{Objectives and scope of the multimodal extension (\texttt{mm\_rag})}
+\label{sec:objectives}
+%---------------------------------------------------------------------
+
+Educational question generation grounded in official curricula benefits from narrative text and instructional diagrams. The \texttt{mm\_rag} module targets:
+
+\begin{enumerate}
+  \item \textbf{Unified retrieval}: a single query surfaces relevant paragraphs \emph{and} figures from the same book corpus.
+  \item \textbf{Curriculum alignment}: sources are BharatGen Yojaka multilingual NCERT PDFs, organized by language, subject, and class.
+  \item \textbf{Grounded multimodal generation}: downstream LLMs receive text context and, when appropriate, images with metadata (captions, chapter, page, optional \texttt{label\_map})---addressing Section~\ref{sec:problem}.
+  \item \textbf{Operational clarity}: batch scripts build per-book FAISS indexes; environment variables control models, paths, and chunking without code edits; the service can evolve alongside the OpenShift-hosted main backend.
+\end{enumerate}
+
+%---------------------------------------------------------------------
+\section{System overview: the \texttt{mm\_rag} multimodal pipeline}
+\label{sec:overview}
+%---------------------------------------------------------------------
+
+This section concerns \textbf{only} \texttt{backend/mm\_rag/}: the add-on multimodal stack (Section~\ref{sec:objectives}) that complements the textual backend in Section~\ref{sec:prior}. Integration paths (same Groq keys, similar container patterns) are natural but not mandatory for understanding the design.
+
+Figure~\ref{fig:flow} summarizes the end-to-end pipeline (logical flow).
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.92\linewidth}{
+\textbf{Ingestion:} PDF $\rightarrow$ text chunks (\texttt{pdf\_text\_chunks.py})\\
+\phantom{XX} + structured figures JSON (\texttt{structure\_fig.py}, batch extractors)\\
+\textbf{Indexing:} SigLIP embeddings $\rightarrow$ FAISS IndexFlatIP (\texttt{build\_multimodal\_index.py}, \texttt{build\_all\_english\_indexes.py})\\
+\textbf{Serving:} Flask \texttt{app.py}: \texttt{/search} $\rightarrow$ \texttt{retrieve\_mm.retrieve} $\rightarrow$ Groq (text + vision)
+}}
+\caption{Logical data and control flow for \texttt{mm\_rag}.}
+\label{fig:flow}
+\end{figure}
+
+\noindent
+\textbf{Core Python modules:}
+\begin{itemize}
+  \item \texttt{mm\_siglip.py} --- shared SigLIP model loading; L2-normalized text and image embeddings; index path defaults.
+  \item \texttt{pdf\_text\_chunks.py} --- pypdf-based text-layer extraction with PyMuPDF fallback and word-chunking (env-tunable overlap).
+  \item \texttt{build\_multimodal\_index.py} --- builds one FAISS index + pickle metadata from one PDF + \texttt{figures.json}.
+  \item \texttt{retrieve\_mm.py} --- query encoding, optional multi-index fan-out with subject/class/language filters, balanced text vs.\ figure quotas.
+  \item \texttt{app.py} --- HTTP API, image resolution, split text/vision generation, diagram-query heuristics.
+\end{itemize}
+
+%---------------------------------------------------------------------
+\section{Technical approach}
+\label{sec:technical}
+%---------------------------------------------------------------------
+
+\subsection{Background: multimodal embeddings}
+
+Vision-language models map images and text into a joint vector space so that similarity search can retrieve both modalities with one query vector. SigLIP (Sigmoid Loss for Language--Image Pre-training) is used here as a practical encoder with a manageable footprint (\texttt{google/siglip-base-patch16-224} by default).
+
+\subsection{Shared embedding space (SigLIP)}
+
+The stack uses \textbf{SigLIP} via Hugging Face \texttt{transformers}. Text and images are embedded in a common space suitable for inner-product (cosine) search after L2 normalization.
+
+\begin{itemize}
+  \item Text embeddings respect the model's short context; \texttt{text\_max\_length()} informs chunk sizing upstream.
+  \item For each figure record, the index builder averages \textbf{image} and \textbf{caption} embeddings, then re-normalizes, biasing retrieval toward captions that co-occur with visuals.
+  \item Override model and paths with \texttt{SIGLIP\_MODEL\_ID}, \texttt{MM\_RAG\_INDEX\_PATH}, \texttt{MM\_RAG\_META\_PATH}, \texttt{MM\_RAG\_INDEX\_ROOT}.
+\end{itemize}
+
+\subsection{Text extraction and chunking}
+
+\texttt{pdf\_text\_chunks.py} prefers the PDF text layer (\texttt{pypdf}), falls back to PyMuPDF for problematic streams, and filters pages using an alpha-ratio heuristic to skip non-readable garbage. Chunk size defaults (\texttt{MM\_RAG\_CHUNK\_WORDS}, \texttt{MM\_RAG\_CHUNK\_OVERLAP}) align with SigLIP token limits.
+
+\subsection{Figure structuring}
+
+\texttt{structure\_fig.py} (and related batch tooling) produces structured JSON for figures: image paths, merged captions (PNG crop OCR + full-page OCR where the PDF text layer is unreliable), chapter and page metadata, and optional fields such as \texttt{diagram\_type} and \texttt{label\_map} for downstream visual prompting. Incremental JSON writes improve crash resilience on long runs.
+
+\subsection{Vector index and metadata}
+
+FAISS \texttt{IndexFlatIP} stores all text and figure vectors in one index per book (or legacy single-book outputs). Parallel \texttt{.meta.pkl} files hold ordered records (\texttt{type}: \texttt{text}|\texttt{figure}, content or paths, captions, provenance).
+
+\subsection{Retrieval design}
+
+\texttt{retrieve\_mm.retrieve} defaults to \textbf{balanced} retrieval: it fills separate quotas for text and figures from the global similarity ranking. This mitigates dominance of text chunks when figure cardinality is low. Filters map HTTP parameters to index stems under \texttt{indexes/all\_books\_english} (language, subject, class, part).
+
+\subsection{Question generation service (\texttt{app.py})}
+
+The Flask application:
+
+\begin{enumerate}
+  \item Accepts JSON on \texttt{POST /search} with \texttt{query}, \texttt{qtype}, \texttt{subject}, \texttt{class\_level}, \texttt{language}, and retrieval/generation counts.
+  \item Calls \texttt{retrieve} with explicit \texttt{num\_text} / \texttt{num\_figures}; boosts figure slots when the query matches \textbf{diagram keywords} (e.g.\ ``diagram'', ``label'', ``structure'').
+  \item Enriches figure rows from \texttt{outputs/figures.json} lookup (fig id, labels, diagram type).
+  \item Uses \textbf{split generation}: a vision-capable Groq model for image-grounded items (capped at two images per call to limit attention dilution) and a text model for prose-only questions, with a text-only fallback if vision fails.
+  \item Serves static UI from \texttt{frontend/index.html} and images under constrained paths (\texttt{/images/...}, \texttt{/image?path=...}).
+\end{enumerate}
+
+\noindent
+Default Groq models are configurable via \texttt{MM\_RAG\_GROQ\_TEXT\_MODEL} and \texttt{MM\_RAG\_GROQ\_VISION\_MODEL}. The service requires \texttt{GROQ\_API\_KEY}.
+
+%---------------------------------------------------------------------
+\section{Results and preliminary evaluation}
+\label{sec:results}
+%---------------------------------------------------------------------
+
+An R\&D report can present \textbf{results} at several levels---not only machine-learning benchmarks. For \texttt{mm\_rag}, useful categories are: (a)~engineering outcomes (indexes built, failures categorized); (b)~retrieval behavior (qualitative or scored); (c)~generation behavior (modes, sample outputs); (d)~optional formal evaluation (human rubrics, nDCG, latency/cost). Subsections~\ref{res:batch}--\ref{res:eval} follow that pattern; rows marked ``---'' are placeholders for you to fill after running experiments.
+
+\subsection{Batch multimodal index construction}
+\label{res:batch}
+
+A representative batch run for English books is summarized in \texttt{indexes/all\_books\_english/summary.json} (snapshot reflected below): eight PDF/figure pairs were attempted, five indexes completed, three failed for identifiable reasons.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}llc@{}}
+\toprule
+Book (English) & Outcome & Notes \\
+\midrule
+Biology Class-12 Part-1 & Fail & PDF stream decompression limit \\
+Maths Class-11 & Fail & No readable text layer in PDF \\
+Maths Class-12 Part-1 & OK & FAISS + meta written \\
+Maths Class-12 Part-2 & OK & FAISS + meta written \\
+Physics Class-11 & OK & FAISS + meta written \\
+Physics Class-12 Part-1 & OK & FAISS + meta written \\
+Physics Class-12 Part-2 & OK & FAISS + meta written \\
+Science Class-10 & Fail & PDF stream decompression limit \\
+\midrule
+\multicolumn{2}{@{}l}{\textbf{Aggregate}} & \textbf{5 / 8 OK} \\
+\bottomrule
+\end{tabular}
+\caption{Per-book multimodal index build outcomes (representative \texttt{summary.json}).}
+\label{tab:index-batch}
+\end{table}
+
+\noindent
+These rows are themselves \textbf{results}: they quantify coverage of the corpus under current extractors and show where OCR or alternate PDF pipelines are required before ``100\% books indexed'' claims can be made.
+
+\subsection{Retrieval spot-checks (fill in)}
+\label{res:retrieve}
+
+Run \texttt{python retrieve\_mm.py ``\emph{your query}'' -k 5} (with \texttt{MM\_RAG\_INDEX\_ROOT} and filters as needed) and paste top hits into a table or appendix. Example dimensions to record:
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}p{0.28\linewidth}p{0.18\linewidth}p{0.42\linewidth}@{}}
+\toprule
+Query (topic) & Filters (subject/class) & Top-1 type / short note \\
+\midrule
+\textit{e.g.}\ ray diagram for lens & physics / 12 & --- \\
+\textit{e.g.}\ label parts of nephron & biology / 11 & --- \\
+\textit{e.g.}\ structure of cell membrane & biology / 11 & --- \\
+\bottomrule
+\end{tabular}
+\caption{Template for qualitative retrieval results (replace ``---'' with your runs).}
+\label{tab:retrieve-spot}
+\end{table}
+
+\noindent
+\textbf{What to put here:} cosine/IP scores, whether balanced mode returned at least one \texttt{figure} row, and screenshot or figure ID for the defense deck.
+
+\subsection{Question generation and service behavior}
+\label{res:qg}
+
+\textbf{What to put here:} (1)~JSON from \texttt{POST /search} showing \texttt{generation\_mode} (\texttt{vision}, \texttt{text\_only}, \texttt{vision\_fallback\_as\_text}, etc.); (2)~one redacted example where diagram keywords increased \texttt{num\_figures}; (3)~latency (wall-clock) for text-only vs.\ vision split calls if you log them.
+
+\par
+The repository includes \texttt{test\_diagram\_questions.py} and fixture \texttt{fixtures/ncert\_urinary\_figure\_19\_1\_questions.json} for \textbf{label-grounded} diagram QA experiments (e.g.\ Gemini); you can summarize label-extraction accuracy or rubric-scored questions in a paragraph or small table.
+
+\subsection{Formal evaluation (optional extension)}
+\label{res:eval}
+
+\textbf{What to put here later:} inter-annotator agreement on ``diagram faithfulness''; precision@$k$ for figure retrieval against a hand-labeled query set; comparison to text-only baseline on the same queries; API cost per question in USD or tokens.
+
+%---------------------------------------------------------------------
+\section{Data corpus and batch operations}
+\label{sec:data}
+%---------------------------------------------------------------------
+
+Textbooks live under \texttt{books/BharatGen\_Yojaka\_Multilingual\_NCERT\_Books/} with a language $\rightarrow$ subject hierarchy (English and Hindi trees in the repository). Batch drivers include:
+
+\begin{itemize}
+  \item \texttt{build\_all\_english\_indexes.py} --- pairs each \texttt{*.figures.json} under \texttt{outputs/all\_books\_structured/} with a matching PDF and writes \texttt{*.faiss} + \texttt{*.meta.pkl} under \texttt{indexes/all\_books\_english/}.
+  \item \texttt{extract\_ncert*.py}, \texttt{extract\_all\_books.py} --- extraction utilities for various PDF sources and languages.
+  \item \texttt{test\_diagram\_questions.py} --- targeted tests for diagram-style queries.
+\end{itemize}
+
+%---------------------------------------------------------------------
+\section{Configuration reference (selected)}
+%---------------------------------------------------------------------
+
+\begin{center}
+\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+Variable & Role \\
+\midrule
+\texttt{SIGLIP\_MODEL\_ID} & Hugging Face model id for build and query \\
+\texttt{MM\_RAG\_INDEX\_ROOT} & Directory of per-book \texttt{.faiss} pairs \\
+\texttt{MM\_RAG\_CHUNK\_*} & Text chunk size and overlap \\
+\texttt{MM\_RAG\_PORT} & Flask bind port (default 5050) \\
+\texttt{MM\_RAG\_VISION\_MAX\_SIDE} & JPEG resize bound for vision payloads \\
+\texttt{GROQ\_API\_KEY} & Required for \texttt{/search} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%---------------------------------------------------------------------
+\section{Known limitations and risks}
+\label{sec:limitations}
+%---------------------------------------------------------------------
+
+\begin{itemize}
+  \item \textbf{PDF text layer quality}: some mathematics PDFs lack a machine-readable text layer; extraction returns empty chunks and index build aborts for that book until OCR or alternate sources are introduced.
+  \item \textbf{Decompression limits}: very large content streams can hit library decompression limits; PyMuPDF env tuning (\texttt{PYPDF\_ZLIB\_MAX\_OUTPUT\_LENGTH}) mitigates some cases but not all (batch \texttt{summary.json} records ``Limit reached while decompressing'' failures).
+  \item \textbf{SigLIP context}: short text windows imply many small chunks; retrieval quality depends on chunk boundaries and overlap.
+  \item \textbf{Vision cost and latency}: multimodal API calls are heavier than text-only; the implementation caps images per request by design.
+  \item \textbf{Security}: path-based image serving uses allowlists; new deployment roots must extend those checks consistently.
+\end{itemize}
+
+%---------------------------------------------------------------------
+\section{Future research and engineering}
+\label{sec:future}
+%---------------------------------------------------------------------
+
+\begin{enumerate}
+  \item \textbf{Math/scanned PDFs}: integrate layout-aware OCR or specialized math parsers where the text layer is absent.
+  \item \textbf{Hierarchical retrieval}: chapter-aware routing or two-stage retrieve-then-rerank for long books.
+  \item \textbf{Cross-lingual alignment}: joint or aligned indexes for Hindi and English duplicates of the same concepts.
+  \item \textbf{Evaluation harness}: automatic metrics (nDCG, figure hit rate) and human rubrics for diagram question faithfulness.
+  \item \textbf{Index compression}: IVF or product quantization when corpus scales beyond flat IP indexes in RAM.
+\end{enumerate}
+
+%---------------------------------------------------------------------
+\section{Conclusion}
+\label{sec:conclusion}
+%---------------------------------------------------------------------
+
+The project evolved from a \textbf{deployed textual NCERT stack} on OpenShift (Section~\ref{sec:prior}--\ref{sec:openshift}) to an explicit \textbf{problem statement}: text-only RAG cannot adequately serve diagram-based questions (Section~\ref{sec:problem}). \texttt{mm\_rag} implements a pragmatic response---multimodal RAG for NCERT-style corpora: SigLIP for modality alignment, FAISS for similarity search, structured figure metadata for faithful visual prompting, and split text/vision generation to reduce hallucinated figure references. Section~\ref{sec:results} records concrete batch indexing outcomes and templates for retrieval and generation metrics. The batch tooling and environment-driven configuration support scaling across many books while surfacing PDF-engine limitations that inform the next iteration of ingestion. Together with the defense slide template PDF cited in Section~\ref{sec:openshift}, this document closes the arc from \emph{cloud deployment} to \emph{multimodal question generation}.
+
+%---------------------------------------------------------------------
+\section{Acknowledgments}
+%---------------------------------------------------------------------
+
+% I hereby thank [advisor / team] for guidance on this module and for access to the BharatGen Yojaka corpus.
+
+\newpage
+\begin{thebibliography}{9}
+
+\bibitem{siglip} Zhai, X.\ et al.\ ``Sigmoid Loss for Language Image Pre-Training.'' \url{https://arxiv.org/abs/2303.15343}
+
+\bibitem{faiss} Johnson, J.\ et al.\ ``Billion-scale similarity search with GPUs.'' FAISS library: \url{https://github.com/facebookresearch/faiss}
+
+\bibitem{hf} Hugging Face Transformers: \url{https://huggingface.co/docs/transformers}
+
+\bibitem{groq} Groq API (LLM inference): \url{https://console.groq.com/docs}
+
+\bibitem{flask} Flask documentation: \url{https://flask.palletsprojects.com/}
+
+\bibitem{openshift} Red Hat OpenShift documentation: \url{https://docs.openshift.com/}
+
+\end{thebibliography}
+
+\end{document}

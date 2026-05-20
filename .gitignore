@@ -22,13 +22,17 @@ data/
 indexes/
 vector_store/
 rag_store_books/
+rag_store_books_hindi/
 indexed_for_RAG/
 CHECK_rag_store_books/
 draft_RAG/
 testing/
+scripts/
 books/
 *.log
 *.db
+*.csv
+*.xlsx
 *.pid
 # IDE
 .vscode/
@@ -46,3 +50,4 @@ Interface/
 
 questions.db.env
 *.yaml
+/backend/cleanup_db.py

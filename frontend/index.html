@@ -342,8 +342,6 @@
         <div class="flex items-center gap-5 flex-wrap justify-center md:justify-start">
 
                 <img src="/static/logo/BharatGen.svg" class="logo-img logo-lg">
-                <img src="/static/logo/IBM.svg" class="logo-img logo-sm">
-                <img src="/static/logo/nxtgen.svg" class="logo-img logo-sm">
 
 
         </div>
@@ -1413,8 +1411,8 @@ function toHindiNumber(num) {
             updateQuestionDistributionLabel(); 
             updateWorkspaceText();
             updateStartChatButton();
-            populateCourseDropdown();
-            populateBlockDropdown(activeCourse);
+            // Fetch filtered courses when language changes
+            loadCourseCatalog();
         });
 
         function updateGenerateButton(loading = false) {
@@ -1702,7 +1700,7 @@ function toHindiNumber(num) {
 
         async function loadCourseCatalog() {
             try {
-                const response = await fetch('/course-blocks');
+                const response = await fetch(`/course-blocks?lang=${activeLanguage}`);
                 const payload = await response.json();
                 courseCatalog = Array.isArray(payload?.courses) ? payload.courses : [];
             } catch (error) {

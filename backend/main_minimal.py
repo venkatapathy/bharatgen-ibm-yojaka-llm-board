@@ -38,7 +38,8 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = BASE_DIR.parent
-RAG_STORE_DIR = Path(os.getenv("RAG_STORE_DIR", str(PROJECT_ROOT / "rag_store_books"))).resolve()
+RAG_STORE_DIR_EN = Path(os.getenv("RAG_STORE_DIR_EN", str(PROJECT_ROOT / "rag_store_books"))).resolve()
+RAG_STORE_DIR_HI = Path(os.getenv("RAG_STORE_DIR_HI", str(PROJECT_ROOT / "rag_store_books_hindi"))).resolve()
 DEFAULT_K = 5
 DB_PATH = Path(os.getenv("MINIMAL_DB_PATH", str(BASE_DIR / "minimal_questions.db"))).resolve()
 
@@ -722,7 +723,30 @@ else:
     groq_client = None
 
 
-retriever = MinimalRAGRetriever(RAG_STORE_DIR)
+# --- Initialize Retrievers (Dual Mode) ---
+retriever_en = None
+retriever_hi = None
+
+try:
+    if RAG_STORE_DIR_EN.exists():
+        retriever_en = MinimalRAGRetriever(RAG_STORE_DIR_EN)
+        print(f" English RAG Store loaded: {RAG_STORE_DIR_EN}")
+except Exception as e:
+    print(f" Warning: Failed to load English RAG store: {e}")
+
+try:
+    if RAG_STORE_DIR_HI.exists():
+        retriever_hi = MinimalRAGRetriever(RAG_STORE_DIR_HI)
+        print(f" Hindi RAG Store loaded: {RAG_STORE_DIR_HI}")
+except Exception as e:
+    print(f" Warning: Failed to load Hindi RAG store: {e}")
+
+def get_retriever_for_subject(subject: str):
+    """Router: Pick Hindi retriever for BHDC/BHDL/BHDS courses, English for everything else."""
+    subj = (subject or "").upper()
+    if any(code in subj for code in ["BHDC", "BHDL", "BHDS"]):
+        return retriever_hi or retriever_en
+    return retriever_en
 store = QuestionStore(DB_PATH)
 
 
@@ -818,11 +842,14 @@ def health() -> Dict[str, Any]:
     is_ok = groq_client is not None if llm_provider == "groq" else True 
 
     return {
-        "ok": is_ok,
+        "status": "healthy",
+        "retrievers_loaded": {
+            "en": retriever_en is not None,
+            "hi": retriever_hi is not None
+        },
+        "documents_loaded": (len(retriever_en.records) if retriever_en else 0) + (len(retriever_hi.records) if retriever_hi else 0),
         "provider": llm_provider,
         "groq_ready": groq_client is not None,
-        "rag_store": str(RAG_STORE_DIR),
-        "documents_loaded": len(retriever.records),
         "default_k": DEFAULT_K,
         "chunk_word_limits": [MIN_CHUNK_WORDS + 1, MAX_CHUNK_WORDS - 1],
         "import_error": str(_import_error) if _import_error else None,
@@ -865,6 +892,10 @@ async def _async_generate_chunk(req: QueryRequest, session_id: str) -> List[Dict
         raise HTTPException(status_code=500, detail="Groq client not available. Set GROQ_API_KEY and install groq.")
 
     _validate_generation_request(req)
+    
+    retriever = get_retriever_for_subject(req.subject)
+    if not retriever and (req.use_rag or req.use_citation):
+        raise HTTPException(status_code=500, detail="No RAG retriever available for this subject")
 
     model_id = _normalize_legacy_generation_model_id(_ensure_model_id(req.model_id, "groq-llama-70b"))
     if req.board is None and model_id not in ALLOWED_MODELS:
@@ -884,6 +915,7 @@ async def _async_generate_chunk(req: QueryRequest, session_id: str) -> List[Dict
         if not member_models:
             raise HTTPException(status_code=400, detail="At least one board member is required")
 
+        retriever = get_retriever_for_subject(req.subject)
         council_result = await run_council_flow(
             chairman_model_id=chairman_model,
             member_model_ids=member_models,
@@ -893,7 +925,8 @@ async def _async_generate_chunk(req: QueryRequest, session_id: str) -> List[Dict
             theme=req.theme,
             qType=req.qType,
             depth=req.depth,
-            num_questions=get_generation_question_count(req.depth, req.num_questions),
+            num_questions=req.num_questions,
+            retriever=retriever,
             use_rag=req.use_rag,
             use_citation=req.use_citation,
             enable_dynamic_dropoff=req.enable_dynamic_dropoff,
@@ -948,6 +981,10 @@ async def _async_generate_chunk(req: QueryRequest, session_id: str) -> List[Dict
     retrieval_query = " ".join([req.chapter or "", req.theme or ""]).strip() or req.subject
     chunk_text = ""
     metas: List[Dict[str, Any]] = []
+
+    retriever = get_retriever_for_subject(req.subject)
+    if not retriever and (req.use_rag or req.use_citation):
+        raise HTTPException(status_code=500, detail="No RAG retriever available for this subject")
 
     # Citation mode takes precedence over generic RAG retrieval when enabled
     if req.use_citation:
@@ -1142,40 +1179,49 @@ def _extract_block_label(file_name: str) -> str:
     return stem
 
 @app.get("/course-blocks")
-async def list_course_blocks():
-    """Dynamically build the UI dropdowns directly from the indexed RAG folders."""
-    if not RAG_STORE_DIR.exists() or not RAG_STORE_DIR.is_dir():
-        return {"courses": []}
-
+async def list_course_blocks(lang: Optional[str] = None):
+    """Dynamically build the UI dropdowns directly from the indexed RAG folders, with optional language filtering."""
+    stores = []
+    if lang == "en":
+        stores = [RAG_STORE_DIR_EN]
+    elif lang == "hi":
+        stores = [RAG_STORE_DIR_HI]
+    else:
+        stores = [RAG_STORE_DIR_EN, RAG_STORE_DIR_HI]
+        
     course_rows = []
-    
-    for course_dir in sorted([p for p in RAG_STORE_DIR.iterdir() if p.is_dir()], key=lambda p: p.name.lower()):
-        blocks = []
-        
-        search_dirs = [course_dir]
-        if (course_dir / "egyankosh").is_dir():
-            search_dirs.append(course_dir / "egyankosh")
-            
-        for search_dir in search_dirs:
-            for block_dir in search_dir.iterdir():
-                if block_dir.is_dir() and "block" in block_dir.name.lower():
-                    # Do not truncate the name using regex - keep the full folder name.
-                    blocks.append(block_dir.name)
-        
-        # Sort blocks intelligently (Block 1, Block 2, etc.)
-        uniq_blocks = sorted(
-            set(blocks),
-            key=lambda b: (int(re.search(r"\d+", b).group()) if re.search(r"\d+", b) else 10_000, b.lower())
-        )
 
-        if not uniq_blocks:
+    for store_path in stores:
+        if not store_path.exists() or not store_path.is_dir():
             continue
+        
+        for course_dir in sorted([p for p in store_path.iterdir() if p.is_dir()], key=lambda p: p.name.lower()):
+            blocks = []
+            
+            search_dirs = [course_dir]
+            if (course_dir / "egyankosh").is_dir():
+                search_dirs.append(course_dir / "egyankosh")
+                
+            for search_dir in search_dirs:
+                for block_dir in search_dir.iterdir():
+                    if block_dir.is_dir() and "block" in block_dir.name.lower():
+                        # Do not truncate the name using regex - keep the full folder name.
+                        blocks.append(block_dir.name)
+            
+            # Sort blocks intelligently (Block 1, Block 2, etc.)
+            uniq_blocks = sorted(
+                set(blocks),
+                key=lambda b: (int(re.search(r"\d+", b).group()) if re.search(r"\d+", b) else 10_000, b.lower())
+            )
 
-        course_rows.append(
-            {
-                "course_name": course_dir.name,
-                "blocks": uniq_blocks,
-            }
-        )
+            if not uniq_blocks:
+                continue
+
+            course_rows.append(
+                {
+                    "course_name": course_dir.name,
+                    "blocks": uniq_blocks,
+                }
+            )
 
     return {"courses": course_rows}

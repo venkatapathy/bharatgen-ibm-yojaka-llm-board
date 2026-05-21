@@ -187,6 +187,8 @@ class MinimalRAGRetriever:
                 effective_block = chapter
 
         had_explicit_filters = bool(subject or effective_block)
+        print(f"DEBUG RAG: Searching for subject='{subject}', block='{effective_block}'")
+        print(f"DEBUG RAG: Total potential records in index: {len(self.records)}")
 
         if subject:
             subject_lower = subject.lower()
@@ -194,6 +196,7 @@ class MinimalRAGRetriever:
                 r for r in filtered_records
                 if r["extracted_subject"] and subject_lower in r["extracted_subject"].lower()
             ]
+            print(f"DEBUG RAG: Records after subject filter: {len(filtered_records)}")
 
         if effective_block:
             # Ensure exact matching so "Block 1" doesn't retrieve "Block 10"
@@ -212,9 +215,11 @@ class MinimalRAGRetriever:
                     r for r in filtered_records
                     if r["extracted_block"] and block_lower in r["extracted_block"].lower()
                 ]
+            print(f"DEBUG RAG: Records after block filter: {len(filtered_records)}")
 
         # RESTORED MISSING RETURN STATEMENTS:
         if not filtered_records and had_explicit_filters:
+            print(f"DEBUG RAG: No candidates found matching filters.")
             return []
 
         if not filtered_records:

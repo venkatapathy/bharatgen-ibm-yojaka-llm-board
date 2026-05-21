@@ -427,6 +427,7 @@ async def run_council_flow(chairman_model_id: str, member_model_ids: List[str],
                           language: str,
                           subject: str, chapter: str, theme: str, qType: str,
                           depth: str, num_questions: int,
+                          retriever: Optional[MinimalRAGRetriever] = None,
                           use_rag: bool = False,
                           use_citation: bool = False,
                           enable_dynamic_dropoff: bool = True,
@@ -455,51 +456,39 @@ async def run_council_flow(chairman_model_id: str, member_model_ids: List[str],
     theme_meta = []
     source_meta = None
     
-    if use_citation:
-        # Citation-based retrieval path: pick one verbatim citation per topic/theme
-        rag_store_dir = Path(os.getenv("RAG_STORE_DIR", str(Path(__file__).parent.parent / "rag_store_books"))).resolve()
+    if (use_citation or use_rag) and retriever:
         try:
-            retriever = MinimalRAGRetriever(rag_store_dir)
-            topic_chunk, theme_chunk, topic_meta, theme_meta = retriever.retrieve_dual_citation(
-                topic_query=chapter,
-                theme_query=theme,
-                subject=subject,
-                chapter=chapter,
-                block=None,
-                language=language,
-            )
-            if topic_meta and len(topic_meta) > 0:
-                source_meta = topic_meta[0]
-            elif theme_meta and len(theme_meta) > 0:
-                source_meta = theme_meta[0]
-        except Exception as e:
-            print(f"[Council] Citation retrieval failed: {e}. Proceeding without RAG context.")
-    elif use_rag:
-        # Fetch RAG context using unified retriever
-        rag_store_dir = Path(os.getenv("RAG_STORE_DIR", str(Path(__file__).parent.parent / "rag_store_books"))).resolve()
-        try:
-            retriever = MinimalRAGRetriever(rag_store_dir)
-            loop = asyncio.get_event_loop()
-            topic_chunk, theme_chunk, topic_meta, theme_meta = await loop.run_in_executor(
-                None,
-                lambda: retriever.retrieve_dual(
-                    topic_query=chapter,
-                    theme_query=theme,
+            if use_citation:
+                topic_chunk, theme_chunk, topic_meta, theme_meta = retriever.retrieve_dual_citation(
+                    query=chapter,  # Using chapter as query for citations
                     subject=subject,
                     chapter=chapter,
                     block=None,
                     language=language,
-                    k=5,
-                    enable_dynamic_dropoff=enable_dynamic_dropoff,
-                    enable_graph_expansion=enable_graph_expansion,
                 )
-            )
+            else:
+                loop = asyncio.get_event_loop()
+                topic_chunk, theme_chunk, topic_meta, theme_meta = await loop.run_in_executor(
+                    None,
+                    lambda: retriever.retrieve_dual(
+                        topic_query=chapter,
+                        theme_query=theme,
+                        subject=subject,
+                        chapter=chapter,
+                        block=None,
+                        language=language,
+                        k=5,
+                        enable_dynamic_dropoff=enable_dynamic_dropoff,
+                        enable_graph_expansion=enable_graph_expansion,
+                    )
+                )
+            
             if topic_meta and len(topic_meta) > 0:
                 source_meta = topic_meta[0]
             elif theme_meta and len(theme_meta) > 0:
                 source_meta = theme_meta[0]
         except Exception as e:
-            print(f"[Council] RAG retrieval failed: {e}. Proceeding without RAG context.")
+            print(f"[Council] Retrieval failed: {e}. Proceeding without RAG context.")
     
     # Stage 1: Chairman proposal
     chairman_prompt = build_chairman_proposal_prompt(

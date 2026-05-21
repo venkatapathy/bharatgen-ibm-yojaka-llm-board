@@ -125,25 +125,21 @@ Bulk question generation runs asynchronously via Celery. You **must** start at l
 ```bash
 # Start 3 background workers (adjust the number based on your GPU VRAM)
 cd backend
-celery -A tasks multi start worker1 worker2 worker3 \
-    --pool=solo --loglevel=info \
-    --pidfile="./%n.pid" --logfile="./%n.log"
+celery -A tasks multi start worker1 worker2 worker3 --pool=solo --loglevel=info --pidfile="./%n.pid" --logfile="./%n.log"
 ```
 
 **Stop workers:**
 
 ```bash
 cd backend
-celery -A tasks multi stop worker1 worker2 worker3 --pidfile="./%n.pid"
+celery -A tasks multi stop worker1 worker2 worker3 --pidfile="./%n.pid" --logfile="./%n.log"
 ```
 
 **Restart workers (after code changes):**
 
 ```bash
 cd backend
-celery -A tasks multi restart worker1 worker2 worker3 \
-    --pool=solo --loglevel=info \
-    --pidfile="./%n.pid" --logfile="./%n.log"
+celery -A tasks multi restart worker1 worker2 worker3 --pool=solo --loglevel=info --pidfile="./%n.pid" --logfile="./%n.log"
 ```
 
 **View worker logs:**

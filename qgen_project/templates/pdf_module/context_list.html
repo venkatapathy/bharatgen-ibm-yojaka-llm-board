@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}PDF Contexts{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>PDF Contexts</h1>
+  <a class="btn btn-primary" href="{% url 'pdf_module:upload' %}">+ Upload</a>
+</div>
+
+<table class="table">
+  <thead><tr><th>Name</th><th>Strategy</th><th>Chunks</th><th>Status</th><th>Actions</th></tr></thead>
+  <tbody>
+  {% for ctx in contexts %}
+  <tr>
+    <td><a href="{% url 'pdf_module:detail' ctx.id %}">{{ ctx.name }}</a></td>
+    <td>{{ ctx.get_strategy_display }}</td>
+    <td>{{ ctx.chunk_count }}</td>
+    <td><span class="badge status-{{ ctx.status }}">{{ ctx.status }}</span></td>
+    <td>
+      <a href="{% url 'pdf_module:detail' ctx.id %}">View</a> |
+      <a href="{% url 'pdf_module:delete' ctx.id %}" onclick="return confirm('Delete?')">Delete</a>
+    </td>
+  </tr>
+  {% empty %}
+  <tr><td colspan="5">No PDF contexts yet. <a href="{% url 'pdf_module:upload' %}">Upload one</a>.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

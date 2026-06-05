@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}{{ object.name }}{% endblock %}
+{% block content %}
+<h1>{{ object.name }}</h1>
+<p>Status: <span class="badge status-{{ object.status }}">{{ object.status }}</span></p>
+
+<h2>Extracted Questions</h2>
+<table class="table">
+  <thead><tr><th>Type</th><th>Bloom</th><th>Marks</th><th>Topic</th><th>Question</th><th>Actions</th></tr></thead>
+  <tbody>
+  {% for q in questions %}
+  <tr>
+    <td>{{ q.question_type }}</td>
+    <td>{{ q.bloom }}</td>
+    <td>{{ q.marks }}</td>
+    <td>{{ q.topic }}</td>
+    <td>{{ q.question_text|truncatechars:100 }}</td>
+    <td><a href="{% url 'pyq_module:question_edit' q.id %}">Edit</a></td>
+  </tr>
+  {% empty %}
+  <tr><td colspan="6">No questions extracted yet.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

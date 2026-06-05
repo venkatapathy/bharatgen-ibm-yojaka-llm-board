@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}{{ object.name }}{% endblock %}
+{% block content %}
+<h1>{{ object.name }}</h1>
+<p>Status: <span class="badge status-{{ object.status }}">{{ object.status }}</span></p>
+<p>Strategy: {{ object.get_strategy_display }} | Chunk Size: {{ object.chunk_size }} | Overlap: {{ object.chunk_overlap }}</p>
+<p>Chunks: {{ object.chunk_count }}</p>
+
+<div id="status-poll"
+     hx-get="{% url 'pdf_module:status' object.id %}"
+     hx-trigger="{% if object.status == 'processing' %}every 3s{% endif %}"
+     hx-swap="outerHTML">
+  {% if object.status == 'processing' %}<p>⏳ Indexing in progress…</p>{% endif %}
+</div>
+
+<form method="post" action="{% url 'pdf_module:reindex' object.id %}">
+  {% csrf_token %}
+  <button type="submit" class="btn">Re-index</button>
+</form>
+
+<h2>Chunks (sample)</h2>
+<table class="table">
+  <thead><tr><th>File</th><th>Page</th><th>Index</th><th>Preview</th></tr></thead>
+  <tbody>
+  {% for chunk in object.chunks.all|slice:":20" %}
+  <tr>
+    <td>{{ chunk.source_file }}</td>
+    <td>{{ chunk.page_number }}</td>
+    <td>{{ chunk.chunk_index }}</td>
+    <td>{{ chunk.text|truncatechars:120 }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

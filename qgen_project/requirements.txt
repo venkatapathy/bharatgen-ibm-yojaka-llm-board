@@ -1,0 +1,39 @@
+# Web
+Django==4.2.*
+djangorestframework==3.15.*
+django-allauth==0.63.*
+django-extensions==3.2.*
+
+#  Database
+psycopg2-binary==2.9.*
+pgvector==0.3.*          # includes Django integration — django-pgvector does not exist on PyPI
+
+# Task Queue
+celery==5.3.*
+redis==5.0.*
+django-celery-results==2.5.*
+
+# AI / LLM
+litellm==1.*
+openai==1.*
+anthropic==0.25.*
+sentence-transformers==3.*
+
+# PDF
+PyMuPDF==1.24.*
+pdfplumber==0.11.*
+
+# Text splitting
+langchain==0.2.*
+langchain-experimental==0.0.*
+nltk==3.8.*
+
+# Export
+python-docx==1.1.*
+openpyxl==3.1.*
+
+# Utils
+python-decouple==3.8
+Pillow==10.*
+Jinja2==3.1.*
+gunicorn==21.*

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Upload PYQ Paper{% endblock %}
+{% block content %}
+<h1>Upload Exam Paper (PDF)</h1>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button class="btn btn-primary" type="submit">Upload &amp; Extract</button>
+  <a class="btn" href="{% url 'pyq_module:list' %}">Cancel</a>
+</form>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}{% if object %}Edit{% else %}New{% endif %} Prompt{% endblock %}
+{% block content %}
+<h1>{% if object %}Edit: {{ object.name }}{% else %}New Prompt Template{% endif %}</h1>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button class="btn btn-primary" type="submit">Save (new version)</button>
+  <a class="btn" href="{% url 'prompt_module:list' %}">Cancel</a>
+  {% if object %}
+  <a class="btn btn-danger" href="{% url 'prompt_module:delete' object.id %}">Delete</a>
+  {% endif %}
+</form>
+
+{% if history %}
+<h2>Version History</h2>
+<table class="table">
+  <thead><tr><th>Version</th><th>Saved At</th><th>By</th><th>Action</th></tr></thead>
+  <tbody>
+  {% for v in history %}
+  <tr>
+    <td>v{{ v.version }}</td>
+    <td>{{ v.saved_at|date:"d M Y H:i" }}</td>
+    <td>{{ v.saved_by }}</td>
+    <td><a href="{% url 'prompt_module:restore' object.id v.version %}">Restore</a></td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+{% endblock %}

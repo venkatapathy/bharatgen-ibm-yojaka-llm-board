@@ -51,3 +51,6 @@ Interface/
 questions.db.env
 *.yaml
 /backend/cleanup_db.py
+qgen_project/apps/*/migrations/*.py
+qgen_project/apps/*/__init__.py
+qgen_project/*/__init__.py

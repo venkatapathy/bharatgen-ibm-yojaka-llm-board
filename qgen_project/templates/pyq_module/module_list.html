@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}PYQ Bank{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>PYQ Bank</h1>
+  <a class="btn btn-primary" href="{% url 'pyq_module:upload' %}">+ Upload Paper</a>
+</div>
+<table class="table">
+  <thead><tr><th>Name</th><th>Questions</th><th>Status</th><th>Actions</th></tr></thead>
+  <tbody>
+  {% for mod in modules %}
+  <tr>
+    <td><a href="{% url 'pyq_module:detail' mod.id %}">{{ mod.name }}</a></td>
+    <td>{{ mod.questions.count }}</td>
+    <td><span class="badge status-{{ mod.status }}">{{ mod.status }}</span></td>
+    <td><a href="{% url 'pyq_module:delete' mod.id %}">Delete</a></td>
+  </tr>
+  {% empty %}
+  <tr><td colspan="4">No PYQ modules yet.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

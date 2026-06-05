@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# Django
+staticfiles/
+media/
+*.sqlite3
+
+# Docker — exclude compose files and sql init, but KEEP entrypoint.sh
+docker/
+!docker/entrypoint.sh
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Git
+.git/
+.gitignore
+
+# Env files (injected at runtime via --env-file)
+.env

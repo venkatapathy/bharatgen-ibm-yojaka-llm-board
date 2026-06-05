@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — QGen{% endblock %}
+
+{% block content %}
+<h1>Welcome, {{ user.username }}</h1>
+<p>Organisation: <strong>{{ user.organization }}</strong> &nbsp;|&nbsp; Role: <strong>{{ user.role }}</strong></p>
+
+<div class="card-grid">
+  <a class="card" href="{% url 'pdf_module:list' %}">
+    <h2>📄 PDF Contexts</h2>
+    <p>Upload and index PDF documents for RAG retrieval.</p>
+  </a>
+  <a class="card" href="{% url 'pyq_module:list' %}">
+    <h2>📝 PYQ Bank</h2>
+    <p>Upload previous-year exam papers and extract questions.</p>
+  </a>
+  <a class="card" href="{% url 'prompt_module:list' %}">
+    <h2>💬 Prompt Manager</h2>
+    <p>Create and manage prompt templates with version history.</p>
+  </a>
+  <a class="card" href="{% url 'question_generation:list' %}">
+    <h2>⚡ Generate Questions</h2>
+    <p>Launch AI-powered batch question generation runs.</p>
+  </a>
+</div>
+{% endblock %}

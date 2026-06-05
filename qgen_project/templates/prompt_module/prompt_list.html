@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Prompt Templates{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>Prompt Templates</h1>
+  <a class="btn btn-primary" href="{% url 'prompt_module:create' %}">+ New Template</a>
+</div>
+<div class="card-grid">
+{% for p in prompts %}
+  <div class="card">
+    <h3><a href="{% url 'prompt_module:detail' p.id %}">{{ p.name }}</a>
+      {% if p.is_active %}<span class="badge badge-success">Active</span>{% endif %}
+    </h3>
+    <p>{{ p.description|default:"No description." }}</p>
+    <small>v{{ p.version }} — {{ p.updated_at|date:"d M Y" }}</small>
+    <div class="card-actions">
+      <a href="{% url 'prompt_module:duplicate' p.id %}">Duplicate</a> |
+      <form method="post" action="{% url 'prompt_module:activate' p.id %}" style="display:inline">
+        {% csrf_token %}<button type="submit" class="link-btn">Activate</button>
+      </form>
+    </div>
+  </div>
+{% empty %}
+  <p>No templates yet. <a href="{% url 'prompt_module:create' %}">Create one</a>.</p>
+{% endfor %}
+</div>
+{% endblock %}

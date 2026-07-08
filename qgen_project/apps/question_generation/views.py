@@ -54,12 +54,15 @@ class BatchRunNewView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('question_generation:list')
 
     def get_context_data(self, **kwargs):
+        from .council import ensure_council_models
+
         ctx = super().get_context_data(**kwargs)
         org = self.request.user.organization
         ctx['pdf_contexts']  = PDFContext.objects.filter(organization=org, status='ready')
         ctx['pyq_modules']   = PYQModule.objects.filter(organization=org, status='ready')
         ctx['prompts']       = PromptTemplate.objects.all()
         ctx['model_configs'] = ModelConfig.objects.all()
+        ctx['council_models'] = ensure_council_models()
         ctx['question_types'] = QuestionType.choices
         ctx['bloom_levels']   = BloomLevel.choices
         return ctx
@@ -67,10 +70,17 @@ class BatchRunNewView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         from .tasks import run_batch
         form.instance.created_by = self.request.user
+        data = self.request.POST
+        council_ids = data.getlist('council_models')
+        form.instance.council_enabled = bool(council_ids)
         response = super().form_valid(form)
 
+        if council_ids:
+            self.object.council_models.set(
+                ModelConfig.objects.filter(pk__in=council_ids)
+            )
+
         # Parse the dynamic item rows submitted with the form
-        data = self.request.POST
         indices = set()
         for key in data:
             if key.startswith('items-') and '-question_type' in key:
@@ -88,7 +98,14 @@ class BatchRunNewView(LoginRequiredMixin, CreateView):
         self.object.expected_questions = sum(item.count for item in self.object.items.all())
         self.object.save(update_fields=["expected_questions"])
         run_batch.delay(self.object.pk)
-        messages.success(self.request, 'Batch run queued successfully.')
+        if council_ids:
+            messages.success(
+                self.request,
+                f'Batch run queued with council of {len(council_ids)} models '
+                '(bloom · correctness · Q-type · appropriate).',
+            )
+        else:
+            messages.success(self.request, 'Batch run queued successfully.')
         return redirect('question_generation:detail', pk=self.object.pk)
 
 

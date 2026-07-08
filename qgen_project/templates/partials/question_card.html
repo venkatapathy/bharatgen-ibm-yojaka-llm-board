@@ -4,6 +4,13 @@
     <span class="badge badge-muted">{{ question.bloom }}</span>
     <span class="badge badge-muted">{{ question.marks }} marks</span>
     {% if question.topic %}<span class="badge badge-muted">{{ question.topic }}</span>{% endif %}
+    {% with council=question.rubrics.council %}
+    {% if council.enabled %}
+    <span class="badge badge-success" title="Council majority approval">
+      Council {{ council.approvals }}/{{ council.total_models }}
+    </span>
+    {% endif %}
+    {% endwith %}
   </div>
   <div class="question-text">{{ question.question_text }}</div>
   {% if question.question_type == 'MCQ' %}
@@ -29,6 +36,31 @@
   {% if question.reference_answer %}
   <p><strong>Answer:</strong> {{ question.reference_answer }}</p>
   {% endif %}
+  {% with council=question.rubrics.council %}
+  {% if council.enabled and council.votes %}
+  <details class="council-votes">
+    <summary>Council votes ({{ council.approvals }}/{{ council.total_models }} approved · threshold {{ council.threshold }})</summary>
+    <ul class="council-vote-list">
+      {% for vote in council.votes %}
+      <li class="council-vote {% if vote.approved %}is-approved{% else %}is-rejected{% endif %}">
+        <strong>{{ vote.model }}</strong>
+        {% if vote.approved %}
+        <span class="badge badge-success">approved</span>
+        {% else %}
+        <span class="badge status-error">rejected</span>
+        {% endif %}
+        <span class="council-dims">
+          bloom:{% if vote.bloom %}✓{% else %}✗{% endif %}
+          correct:{% if vote.correctness %}✓{% else %}✗{% endif %}
+          type:{% if vote.question_type %}✓{% else %}✗{% endif %}
+          apt:{% if vote.appropriate %}✓{% else %}✗{% endif %}
+        </span>
+      </li>
+      {% endfor %}
+    </ul>
+  </details>
+  {% endif %}
+  {% endwith %}
   {% if question.is_generated and question.batch_run_id %}
   <div class="question-actions table-actions__inner">
     <a class="btn btn-sm" href="{% url 'question_generation:question_edit' question.id %}">Edit</a>

@@ -779,6 +779,11 @@ progress {
   color: #6a1b9a;
 }
 
+.context-chip--council .context-chip__icon {
+  background: #e0f2f1;
+  color: #00695c;
+}
+
 .context-chip__label {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -806,6 +811,47 @@ progress {
 .context-chip:has(input:focus-visible) {
   outline: 2px solid var(--accent-2);
   outline-offset: 2px;
+}
+
+.council-votes {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.council-votes summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.council-vote-list {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.council-vote {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+  padding: 0.4rem 0.55rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: #fafbff;
+}
+
+.council-vote.is-approved { border-color: #a5d6a7; background: #f1f8f4; }
+.council-vote.is-rejected { border-color: #ef9a9a; background: #fff5f5; }
+
+.council-dims {
+  font-family: ui-monospace, monospace;
+  font-size: 0.78rem;
+  color: #455a64;
 }
 
 /* ── Responsive ──────────────────────────────────────────────── */

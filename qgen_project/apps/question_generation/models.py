@@ -21,6 +21,21 @@ class BatchRun(models.Model):
     model_config  = models.ForeignKey(ModelConfig,    on_delete=models.SET_NULL, null=True)
     rag_top_k     = models.IntegerField(default=5)
     pyq_shots     = models.IntegerField(default=3)
+    council_enabled = models.BooleanField(
+        default=False,
+        help_text='When enabled, generated questions are verified by selected council models '
+                  'on bloom, correctness, question type, and appropriateness. '
+                  'Only majority-approved questions are kept.',
+    )
+    council_models = models.ManyToManyField(
+        ModelConfig,
+        blank=True,
+        related_name='council_batch_runs',
+    )
+    council_rejected_count = models.IntegerField(
+        default=0,
+        help_text='Questions discarded because they failed majority council approval.',
+    )
     status        = models.CharField(max_length=16, choices=Status.choices,
                                      default=Status.PENDING)
     error_summary = models.TextField(blank=True)

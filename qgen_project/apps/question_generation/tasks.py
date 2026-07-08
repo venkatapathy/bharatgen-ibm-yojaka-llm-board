@@ -1,5 +1,7 @@
 import json
 import logging
+from types import SimpleNamespace
+
 from celery import shared_task
 from django.utils import timezone
 
@@ -7,6 +9,8 @@ from apps.core.embeddings import embed_texts
 from apps.core.llm import get_litellm_kwargs
 from apps.core.provisioning import ProvisioningError, execution_slot, record_token_usage
 from apps.core.rerankers import rerank_passages
+
+from .council import filter_by_council
 
 logger = logging.getLogger(__name__)
 
@@ -112,16 +116,26 @@ def run_batch(self, batch_run_id: int):
                         )
                         pyq_text = format_examples(examples)
 
-                    system_prompt, user_prompt = render_prompt_context(
-                        run=run,
-                        item=item,
-                        context_chunks=context_text,
-                        pyq_examples=pyq_text,
-                    )
+                    # When council is on, ask for a larger pool so majority filtering can still fill count.
+                    target_count = item.count
+                    if run.council_enabled and run.council_models.exists():
+                        target_count = max(item.count * 2, item.count + 2)
 
                     generated = []
                     last_error = None
                     for _ in range(3):
+                        item_for_prompt = SimpleNamespace(
+                            count=target_count,
+                            question_type=item.question_type,
+                            bloom=item.bloom,
+                            marks=item.marks,
+                        )
+                        system_prompt, user_prompt = render_prompt_context(
+                            run=run,
+                            item=item_for_prompt,
+                            context_chunks=context_text,
+                            pyq_examples=pyq_text,
+                        )
                         response = litellm.completion(
                             messages=[
                                 {'role': 'system', 'content': system_prompt},
@@ -146,10 +160,35 @@ def run_batch(self, batch_run_id: int):
                         except Exception as exc:
                             last_error = exc
                             continue
-                        if len(generated) >= item.count:
+                        if len(generated) >= target_count:
                             break
                     if len(generated) < item.count:
                         raise ValueError(last_error or "Model did not return enough questions.")
+
+                    candidates = generated[:target_count] if run.council_enabled else generated[: item.count]
+                    rejected_meta = []
+                    if run.council_enabled and run.council_models.exists():
+                        # Over-generate pool: verify all returned, keep majority-approved,
+                        # then refill from extras if needed until we have item.count.
+                        pool = list(generated)
+                        approved, rejected_meta = filter_by_council(
+                            pool,
+                            item,
+                            run.council_models.all(),
+                            user=run.created_by,
+                            batch_run=run,
+                        )
+                        candidates = approved[: item.count]
+                        run.council_rejected_count = (
+                            run.council_rejected_count or 0
+                        ) + len(rejected_meta)
+                        run.save(update_fields=["council_rejected_count"])
+                        if not candidates:
+                            raise ValueError(
+                                "Council of models rejected all generated questions "
+                                f"(need majority of {run.council_models.count()} models "
+                                "passing bloom, correctness, Q-type, and appropriateness)."
+                            )
 
                     Question.objects.bulk_create(
                         [
@@ -165,7 +204,7 @@ def run_batch(self, batch_run_id: int):
                                 rubrics=question.get('rubrics', {}),
                                 options=question.get('options', []),
                             )
-                            for question in generated[: item.count]
+                            for question in candidates
                         ]
                     )
                     item.status = 'done'

@@ -5,7 +5,14 @@
   <div>
     <div class="eyebrow">Generated assessment set</div>
     <h1>{{ object.name }}</h1>
-    <p class="muted">Topic: <strong>{{ object.topic }}</strong></p>
+    <p class="muted">Topic: <strong>{{ object.topic }}</strong>
+      {% if object.council_enabled %}
+      · Council: {% for m in object.council_models.all %}<span class="badge badge-muted">{{ m.name }}</span> {% empty %}<span class="muted">none</span>{% endfor %}
+      {% if object.council_rejected_count %}
+      · <span class="muted">{{ object.council_rejected_count }} rejected by council</span>
+      {% endif %}
+      {% endif %}
+    </p>
   </div>
   <div class="btn-row">
     <a class="btn" href="{% url 'question_generation:export' object.id %}?format=docx">Export DOCX</a>

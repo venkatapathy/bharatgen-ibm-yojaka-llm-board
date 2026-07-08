@@ -64,6 +64,30 @@
     {% endif %}
   </div>
 
+  <div class="form-section context-section">
+    <div class="context-section__head">
+      <span class="field-label">Council of models</span>
+      <span class="field-hint">Each model verifies bloom · correctness · Q-type · appropriate — majority must approve</span>
+    </div>
+    {% if council_models %}
+    <div class="context-chips" role="group" aria-label="Council models">
+      {% for mc in council_models %}
+      <label class="context-chip context-chip--council" title="{{ mc.name }} ({{ mc.provider }} / {{ mc.llm_model_id }})">
+        <input type="checkbox" name="council_models" value="{{ mc.id }}">
+        <span class="context-chip__icon" aria-hidden="true">LLM</span>
+        <span class="context-chip__label">{{ mc.name }}</span>
+      </label>
+      {% endfor %}
+    </div>
+    <p class="field-hint" style="margin-top:0.55rem;">
+      Optional. Leave unchecked to skip verification. A model approves only if all four dimensions pass;
+      a question is shown only when a majority of selected models approve.
+    </p>
+    {% else %}
+    <p class="muted">No council models configured.</p>
+    {% endif %}
+  </div>
+
   <div class="form-section">
     <h3>Question Specification</h3>
     <table class="table" id="items-table">

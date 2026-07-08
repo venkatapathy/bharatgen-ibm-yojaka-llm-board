@@ -27,6 +27,7 @@ Bloom's {{ bloom }} level, {{ marks }} marks each.
 class PromptTemplate(models.Model):
     name          = models.CharField(max_length=256, unique=True)
     description   = models.TextField(blank=True)
+    topic_grounding = models.TextField(blank=True)
     system_prompt = models.TextField(default=DEFAULT_SYSTEM_PROMPT)
     user_prompt   = models.TextField(default=DEFAULT_USER_PROMPT)
     version       = models.IntegerField(default=1)

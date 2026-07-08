@@ -1,0 +1,38 @@
+<article class="question-card card">
+  <div class="question-meta">
+    <span class="badge">{{ question.question_type }}</span>
+    <span class="badge badge-muted">{{ question.bloom }}</span>
+    <span class="badge badge-muted">{{ question.marks }} marks</span>
+    {% if question.topic %}<span class="badge badge-muted">{{ question.topic }}</span>{% endif %}
+  </div>
+  <div class="question-text">{{ question.question_text }}</div>
+  {% if question.question_type == 'MCQ' %}
+    {% if question.get_mcq_options %}
+    <ul class="mcq-options">
+      {% for opt in question.get_mcq_options %}
+      <li class="mcq-option{% if opt.is_correct %} is-correct{% endif %}">
+        <span class="mcq-option__label">{{ opt.label }}.</span>
+        <span>{{ opt.text }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+    {% elif question.options %}
+    <ul class="question-options">
+      {% for option in question.options %}
+      <li>{{ option }}</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="mcq-missing-options">MCQ options not available for this question.</p>
+    {% endif %}
+  {% endif %}
+  {% if question.reference_answer %}
+  <p><strong>Answer:</strong> {{ question.reference_answer }}</p>
+  {% endif %}
+  {% if question.is_generated and question.batch_run_id %}
+  <div class="question-actions table-actions__inner">
+    <a class="btn btn-sm" href="{% url 'question_generation:question_edit' question.id %}">Edit</a>
+    <a class="btn btn-sm btn-danger" href="{% url 'question_generation:question_delete' question.id %}">Delete</a>
+  </div>
+  {% endif %}
+</article>

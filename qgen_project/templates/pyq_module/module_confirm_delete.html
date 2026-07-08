@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Delete PYQ Module{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>Delete PYQ Module</h1>
+</div>
+<div class="form-section">
+  <p>Delete <strong>{{ object.name }}</strong> and all extracted questions?</p>
+  <ul class="delete-summary">
+    <li><strong>Status:</strong> {{ object.status }}</li>
+    <li><strong>Questions:</strong> {{ object.question_count }}</li>
+    {% if object.original_filename %}<li><strong>File:</strong> {{ object.original_filename }}</li>{% endif %}
+  </ul>
+  <form method="post">
+    {% csrf_token %}
+    <div class="btn-row">
+      <button class="btn btn-danger" type="submit">Delete</button>
+      <a class="btn" href="{% url 'pyq_module:detail' object.id %}">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

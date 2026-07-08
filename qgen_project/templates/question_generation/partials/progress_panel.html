@@ -1,0 +1,12 @@
+<div class="progress-shell panel" id="progress-bar">
+  <div class="question-meta">
+    <span class="badge status-{{ object.status }}">{{ object.status }}</span>
+    <span class="muted">Expected: {{ object.expected_questions }}</span>
+    <span class="muted">Generated: {{ object.total_questions }}</span>
+    {% if object.active_item %}<span class="muted">Active: {{ object.active_item }}</span>{% endif %}
+  </div>
+  <progress value="{{ object.progress }}" max="100"></progress>
+  {% if object.error_summary %}
+  <p class="alert alert-warning" style="margin-top:0.75rem;">{{ object.error_summary }}</p>
+  {% endif %}
+</div>

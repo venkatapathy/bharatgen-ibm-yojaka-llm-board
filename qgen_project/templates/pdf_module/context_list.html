@@ -2,27 +2,47 @@
 {% block title %}PDF Contexts{% endblock %}
 {% block content %}
 <div class="page-header">
-  <h1>PDF Contexts</h1>
-  <a class="btn btn-primary" href="{% url 'pdf_module:upload' %}">+ Upload</a>
+  <div>
+    <div class="eyebrow">Semantic context store</div>
+    <h1>PDF Contexts</h1>
+  </div>
+  <div class="btn-row">
+    <form method="post" action="{% url 'pdf_module:reindex_stale' %}">
+      {% csrf_token %}
+      <button class="btn" type="submit">Reindex Stale</button>
+    </form>
+    <a class="btn btn-primary" href="{% url 'pdf_module:upload' %}">Upload Context</a>
+  </div>
 </div>
 
-<table class="table">
-  <thead><tr><th>Name</th><th>Strategy</th><th>Chunks</th><th>Status</th><th>Actions</th></tr></thead>
-  <tbody>
-  {% for ctx in contexts %}
-  <tr>
-    <td><a href="{% url 'pdf_module:detail' ctx.id %}">{{ ctx.name }}</a></td>
-    <td>{{ ctx.get_strategy_display }}</td>
-    <td>{{ ctx.chunk_count }}</td>
-    <td><span class="badge status-{{ ctx.status }}">{{ ctx.status }}</span></td>
-    <td>
-      <a href="{% url 'pdf_module:detail' ctx.id %}">View</a> |
-      <a href="{% url 'pdf_module:delete' ctx.id %}" onclick="return confirm('Delete?')">Delete</a>
-    </td>
-  </tr>
-  {% empty %}
-  <tr><td colspan="5">No PDF contexts yet. <a href="{% url 'pdf_module:upload' %}">Upload one</a>.</td></tr>
-  {% endfor %}
-  </tbody>
-</table>
+<div class="stat-grid" style="margin-bottom:1.25rem;">
+  <div class="stat-card"><span class="muted">Total storage</span><strong>{{ quota.current_total_storage_gb|floatformat:2 }} GB</strong></div>
+  <div class="stat-card"><span class="muted">PDF uploads</span><strong>{{ quota.current_saved_pdf_zips }} / {{ quota.max_saved_pdf_zips }}</strong></div>
+  <div class="stat-card"><span class="muted">Vector storage</span><strong>{{ quota.current_vector_storage_gb|floatformat:2 }} / {{ quota.max_vector_storage_gb|floatformat:2 }} GB</strong></div>
+</div>
+
+<div class="table-wrap">
+  <table class="table">
+    <thead><tr><th>Name</th><th>Strategy</th><th>File</th><th>Chunks</th><th>Status</th><th>Actions</th></tr></thead>
+    <tbody>
+    {% for ctx in contexts %}
+    <tr>
+      <td><a href="{% url 'pdf_module:detail' ctx.id %}">{{ ctx.name }}</a></td>
+      <td>{{ ctx.get_strategy_display }}</td>
+      <td>{{ ctx.original_filename|default:"-" }}</td>
+      <td>{{ ctx.chunk_count }}</td>
+      <td><span class="badge status-{{ ctx.status }}">{{ ctx.status }}</span></td>
+      <td class="table-actions">
+        <div class="table-actions__inner">
+          <a class="btn btn-sm" href="{% url 'pdf_module:detail' ctx.id %}">View</a>
+          <a class="btn btn-sm btn-danger" href="{% url 'pdf_module:delete' ctx.id %}">Delete</a>
+        </div>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="6">No PDF contexts yet. <a href="{% url 'pdf_module:upload' %}">Upload one</a>.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endblock %}

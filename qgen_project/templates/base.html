@@ -5,14 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}QGen Platform{% endblock %}</title>
   {% load static %}
-  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}?v=7">
   <script src="https://unpkg.com/htmx.org@1.9.12" defer></script>
   <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
 <body>
-
-<nav class="navbar">
-  <a class="navbar-brand" href="{% url 'core:dashboard' %}">⚡ QGen</a>
+<header class="navbar">
+  <a class="navbar-brand" href="{% url 'core:dashboard' %}">QGen Demo</a>
   <ul class="nav-links">
     <li><a href="{% url 'pdf_module:list' %}">PDF Contexts</a></li>
     <li><a href="{% url 'pyq_module:list' %}">PYQ Bank</a></li>
@@ -28,11 +30,12 @@
       <a href="{% url 'account_logout' %}">Logout</a>
     {% else %}
       <a href="{% url 'account_login' %}">Login</a>
+      <a href="{% url 'account_signup' %}">Sign up</a>
     {% endif %}
   </div>
-</nav>
+</header>
 
-<main class="container">
+<main class="container shell">
   {% if messages %}
   <div class="messages">
     {% for msg in messages %}
@@ -45,7 +48,7 @@
 </main>
 
 <footer class="footer">
-  <small>QGen Platform — Internal Tool</small>
+  <small>EduQGen — AI Question Generation Demo</small>
 </footer>
 
 </body>

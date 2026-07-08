@@ -1,46 +1,39 @@
 {% extends "base.html" %}
 {% block title %}Run: {{ object.name }}{% endblock %}
 {% block content %}
-<h1>{{ object.name }}</h1>
-<p>Topic: <strong>{{ object.topic }}</strong></p>
-<p>Status: <span class="badge status-{{ object.status }}">{{ object.status }}</span></p>
-
-{% if object.status in "pending,running" %}
-<div id="progress-bar"
-     hx-get="{% url 'question_generation:status' object.id %}"
-     hx-trigger="every 3s"
-     hx-swap="outerHTML">
-  <p>⏳ Generating… ({{ object.progress }}% complete)</p>
-  <progress value="{{ object.progress }}" max="100"></progress>
+<div class="page-header">
+  <div>
+    <div class="eyebrow">Generated assessment set</div>
+    <h1>{{ object.name }}</h1>
+    <p class="muted">Topic: <strong>{{ object.topic }}</strong></p>
+  </div>
+  <div class="btn-row">
+    <a class="btn" href="{% url 'question_generation:export' object.id %}?format=docx">Export DOCX</a>
+    <a class="btn" href="{% url 'question_generation:export' object.id %}?format=csv">CSV</a>
+    <a class="btn" href="{% url 'question_generation:export' object.id %}?format=json">JSON</a>
+    {% if object.status == 'partial' %}
+    <form method="post" action="{% url 'question_generation:rerun' object.id %}">
+      {% csrf_token %}
+      <button class="btn" type="submit">Retry Failed</button>
+    </form>
+    {% endif %}
+  </div>
 </div>
-{% else %}
-<div class="export-buttons">
-  <a class="btn" href="{% url 'question_generation:export' object.id %}?format=csv">Export CSV</a>
-  <a class="btn" href="{% url 'question_generation:export' object.id %}?format=json">Export JSON</a>
-  {% if object.status == 'partial' %}
-  <form method="post" action="{% url 'question_generation:rerun' object.id %}" style="display:inline">
-    {% csrf_token %}<button class="btn" type="submit">Re-run Failed</button>
-  </form>
-  {% endif %}
+
+<div
+  id="progress-bar"
+  hx-get="{% url 'question_generation:status' object.id %}"
+  hx-trigger="{% if object.status == 'pending' or object.status == 'running' %}load, every 3s{% else %}load{% endif %}"
+  hx-swap="outerHTML">
+  {% include "question_generation/partials/progress_panel.html" with object=object %}
 </div>
 
 <h2>Generated Questions ({{ questions.count }})</h2>
-<table class="table">
-  <thead><tr><th>Type</th><th>Bloom</th><th>Marks</th><th>Topic</th><th>Question</th><th>Answer</th></tr></thead>
-  <tbody>
-  {% for q in questions %}
-  <tr>
-    <td>{{ q.question_type }}</td>
-    <td>{{ q.bloom }}</td>
-    <td>{{ q.marks }}</td>
-    <td>{{ q.topic }}</td>
-    <td>{{ q.question_text }}</td>
-    <td>{{ q.reference_answer|truncatechars:80 }}</td>
-  </tr>
-  {% empty %}
-  <tr><td colspan="6">No questions generated yet.</td></tr>
-  {% endfor %}
-  </tbody>
-</table>
-{% endif %}
+<div class="question-list">
+{% for q in questions %}
+  {% include "partials/question_card.html" with question=q %}
+{% empty %}
+  <div class="form-section">No questions generated yet.</div>
+{% endfor %}
+</div>
 {% endblock %}

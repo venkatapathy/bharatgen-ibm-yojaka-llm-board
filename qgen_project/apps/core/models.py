@@ -121,3 +121,40 @@ class OrganizationProvisioningPolicy(models.Model):
     default_pyq_zip_limit      = models.IntegerField(default=10)
     default_daily_run_limit    = models.IntegerField(default=20)
     default_concurrent_run_limit = models.IntegerField(default=2)
+
+
+class TokenUsageLog(models.Model):
+    class RequestKind(models.TextChoices):
+        GENERATION = 'generation', 'Generation'
+        EMBEDDING = 'embedding', 'Embedding'
+        RERANK = 'rerank', 'Rerank'
+        EXTRACTION = 'extraction', 'Extraction'
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='token_usage')
+    batch_run = models.ForeignKey(
+        'question_generation.BatchRun',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='token_logs',
+    )
+    provider = models.CharField(max_length=64, blank=True)
+    model_name = models.CharField(max_length=128, blank=True)
+    request_kind = models.CharField(
+        max_length=16,
+        choices=RequestKind.choices,
+        default=RequestKind.GENERATION,
+    )
+    prompt_tokens = models.IntegerField(default=0)
+    completion_tokens = models.IntegerField(default=0)
+    embedding_tokens = models.IntegerField(default=0)
+    total_tokens = models.IntegerField(default=0)
+    credits_consumed = models.IntegerField(default=0)
+    metadata = models.JSONField(default=dict, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f'{self.user.username} - {self.request_kind} ({self.total_tokens} tokens)'

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Delete Generated Question{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>Delete Generated Question</h1>
+</div>
+<div class="form-section">
+  <p>Are you sure you want to delete this generated question?</p>
+  <p>{{ object.question_text|truncatechars:240 }}</p>
+  <form method="post">
+    {% csrf_token %}
+    <div class="btn-row">
+      <button class="btn btn-danger" type="submit">Delete</button>
+      <a class="btn" href="{% url 'question_generation:detail' object.batch_run_id %}">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

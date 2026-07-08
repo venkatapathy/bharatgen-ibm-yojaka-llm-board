@@ -1,30 +1,67 @@
 {% extends "base.html" %}
 {% block title %}New Generation Run{% endblock %}
 {% block content %}
-<h1>New Batch Run</h1>
+<div class="stack-header">
+  <div>
+    <div class="eyebrow">Prompted generation with RAG and PYQ examples</div>
+    <h1>New Batch Run</h1>
+  </div>
+</div>
 
 <form method="post" x-data="{ items: [{type:'SHORT',bloom:'remember',marks:1,count:5}] }">
   {% csrf_token %}
 
   <div class="form-section">
-    <label>Batch Name <input type="text" name="name" required class="form-control"></label>
-    <label>Topic <input type="text" name="topic" required class="form-control"></label>
+    <div class="form-grid">
+      <label class="form-field">
+        <span class="field-label">Batch name</span>
+        <input type="text" name="name" required class="form-control">
+      </label>
+      <label class="form-field">
+        <span class="field-label">Topic</span>
+        <input type="text" name="topic" required class="form-control">
+      </label>
+    </div>
   </div>
 
-  <div class="form-section">
-    <h3>PDF Contexts (RAG sources)</h3>
-    {% for ctx in pdf_contexts %}
-    <label><input type="checkbox" name="pdf_contexts" value="{{ ctx.id }}"> {{ ctx.name }}</label><br>
-    {% empty %}<p><em>No ready PDF contexts.</em></p>
-    {% endfor %}
+  <div class="form-section context-section">
+    <div class="context-section__head">
+      <span class="field-label">PDF contexts</span>
+      <span class="field-hint">RAG sources — click to add</span>
+    </div>
+    {% if pdf_contexts %}
+    <div class="context-chips" role="group" aria-label="PDF contexts">
+      {% for ctx in pdf_contexts %}
+      <label class="context-chip context-chip--pdf" title="{{ ctx.name }} · {{ ctx.chunk_count }} chunks">
+        <input type="checkbox" name="pdf_contexts" value="{{ ctx.id }}">
+        <span class="context-chip__icon" aria-hidden="true">PDF</span>
+        <span class="context-chip__label">{{ ctx.name }}</span>
+      </label>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="muted">No ready PDF contexts. <a href="{% url 'pdf_module:upload' %}">Upload one</a>.</p>
+    {% endif %}
   </div>
 
-  <div class="form-section">
-    <h3>PYQ Modules (n-shot examples)</h3>
-    {% for mod in pyq_modules %}
-    <label><input type="checkbox" name="pyq_modules" value="{{ mod.id }}"> {{ mod.name }}</label><br>
-    {% empty %}<p><em>No ready PYQ modules.</em></p>
-    {% endfor %}
+  <div class="form-section context-section">
+    <div class="context-section__head">
+      <span class="field-label">PYQ modules</span>
+      <span class="field-hint">Few-shot examples — click to add</span>
+    </div>
+    {% if pyq_modules %}
+    <div class="context-chips" role="group" aria-label="PYQ modules">
+      {% for mod in pyq_modules %}
+      <label class="context-chip context-chip--pyq" title="{{ mod.name }} · {{ mod.question_count }} questions">
+        <input type="checkbox" name="pyq_modules" value="{{ mod.id }}">
+        <span class="context-chip__icon" aria-hidden="true">PYQ</span>
+        <span class="context-chip__label">{{ mod.name }}</span>
+      </label>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="muted">No ready PYQ modules. <a href="{% url 'pyq_module:upload' %}">Upload one</a>.</p>
+    {% endif %}
   </div>
 
   <div class="form-section">
@@ -78,6 +115,6 @@
     <label>PYQ n-shot <input type="number" name="pyq_shots" value="3" min="0" max="10" class="form-control" style="width:100px"></label>
   </details>
 
-  <button type="submit" class="btn btn-primary btn-lg">⚡ Generate Questions</button>
+  <button type="submit" class="btn btn-primary btn-lg">Generate Questions</button>
 </form>
 {% endblock %}

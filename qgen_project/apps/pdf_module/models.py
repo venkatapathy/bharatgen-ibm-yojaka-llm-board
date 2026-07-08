@@ -8,6 +8,8 @@ except ImportError:
     # Fallback when pgvector not installed (CI / dev without PG)
     from django.db.models import TextField as VectorField  # type: ignore
 
+DEFAULT_EMBED_DIMENSIONS = 768
+
 
 class ChunkingStrategy(models.TextChoices):
     FIXED_SIZE = 'fixed_size', 'Fixed Size (tokens)'
@@ -31,6 +33,11 @@ class PDFContext(models.Model):
     reranker_model= models.CharField(max_length=128, blank=True)
     status        = models.CharField(max_length=32, default='pending')
     error_message = models.TextField(blank=True)
+    file_size_bytes = models.BigIntegerField(default=0)
+    original_filename = models.CharField(max_length=512, blank=True)
+    has_embedding = models.BooleanField(default=True)
+    needs_reindex = models.BooleanField(default=False)
+    embedded_chunk_count = models.IntegerField(default=0)
     created_by    = models.ForeignKey(User, on_delete=models.SET_NULL, null=True,
                                       related_name='pdf_contexts')
     created_at    = models.DateTimeField(auto_now_add=True)
@@ -55,7 +62,7 @@ class PDFChunk(models.Model):
     chunk_index = models.IntegerField()
     text        = models.TextField()
     # VectorField falls back to TextField when pgvector unavailable
-    embedding   = VectorField(dimensions=1536, null=True) if hasattr(VectorField, 'dimensions') \
+    embedding   = VectorField(dimensions=DEFAULT_EMBED_DIMENSIONS, null=True, blank=True) if hasattr(VectorField, 'dimensions') \
                   else models.TextField(null=True, blank=True)
     token_count = models.IntegerField(default=0)
     metadata    = models.JSONField(default=dict)

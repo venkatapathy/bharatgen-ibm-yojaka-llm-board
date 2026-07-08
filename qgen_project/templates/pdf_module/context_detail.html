@@ -1,35 +1,36 @@
 {% extends "base.html" %}
 {% block title %}{{ object.name }}{% endblock %}
 {% block content %}
-<h1>{{ object.name }}</h1>
-<p>Status: <span class="badge status-{{ object.status }}">{{ object.status }}</span></p>
-<p>Strategy: {{ object.get_strategy_display }} | Chunk Size: {{ object.chunk_size }} | Overlap: {{ object.chunk_overlap }}</p>
-<p>Chunks: {{ object.chunk_count }}</p>
-
-<div id="status-poll"
-     hx-get="{% url 'pdf_module:status' object.id %}"
-     hx-trigger="{% if object.status == 'processing' %}every 3s{% endif %}"
-     hx-swap="outerHTML">
-  {% if object.status == 'processing' %}<p>⏳ Indexing in progress…</p>{% endif %}
+<div class="page-header">
+  <div>
+    <div class="eyebrow">Chunk explorer</div>
+    <h1>{{ object.name }}</h1>
+    {% if object.original_filename %}
+    <p class="muted">{{ object.original_filename }}{% if object.file_size_bytes %} ({{ object.file_size_bytes|filesizeformat }}){% endif %}</p>
+    {% endif %}
+  </div>
+  <div class="btn-row">
+    <form method="post" action="{% url 'pdf_module:reindex' object.id %}">
+      {% csrf_token %}
+      <button type="submit" class="btn">Reindex</button>
+    </form>
+    <a class="btn btn-danger" href="{% url 'pdf_module:delete' object.id %}">Delete</a>
+  </div>
 </div>
 
-<form method="post" action="{% url 'pdf_module:reindex' object.id %}">
-  {% csrf_token %}
-  <button type="submit" class="btn">Re-index</button>
-</form>
+<div
+  id="status-poll"
+  hx-get="{% url 'pdf_module:status' object.id %}"
+  hx-trigger="{% if object.status == 'processing' or object.status == 'pending' %}load, every 3s{% endif %}"
+  hx-swap="outerHTML">
+  {% include "pdf_module/partials/context_status.html" with object=object %}
+</div>
 
-<h2>Chunks (sample)</h2>
-<table class="table">
-  <thead><tr><th>File</th><th>Page</th><th>Index</th><th>Preview</th></tr></thead>
-  <tbody>
-  {% for chunk in object.chunks.all|slice:":20" %}
-  <tr>
-    <td>{{ chunk.source_file }}</td>
-    <td>{{ chunk.page_number }}</td>
-    <td>{{ chunk.chunk_index }}</td>
-    <td>{{ chunk.text|truncatechars:120 }}</td>
-  </tr>
-  {% endfor %}
-  </tbody>
-</table>
+<div
+  id="chunk-table"
+  hx-get="{% url 'pdf_module:chunks' object.id %}"
+  hx-trigger="load"
+  hx-swap="innerHTML">
+  {% include "pdf_module/partials/chunk_table.html" with object=object chunks=chunks %}
+</div>
 {% endblock %}

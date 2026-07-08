@@ -1,11 +1,84 @@
 {% extends "base.html" %}
 {% block title %}Upload PDF Context{% endblock %}
 {% block content %}
-<h1>Upload PDF / ZIP</h1>
-<form method="post" enctype="multipart/form-data">
+<div class="stack-header">
+  <div>
+    <div class="eyebrow">PDF chunking and embeddings</div>
+    <h1>Upload PDF Context</h1>
+    <p class="muted">Supports single PDF or ZIP archive. Semantic chunking uses sentence embeddings.</p>
+  </div>
+</div>
+
+<form method="post" enctype="multipart/form-data" x-data="{ fileName: '' }">
   {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit" class="btn btn-primary">Upload &amp; Index</button>
-  <a href="{% url 'pdf_module:list' %}" class="btn">Cancel</a>
+
+  <div class="form-section">
+    <div class="form-grid">
+      <label class="form-field">
+        <span class="field-label">Context name</span>
+        {{ form.name }}
+      </label>
+      <label class="form-field">
+        <span class="field-label">Chunking strategy</span>
+        {{ form.strategy }}
+      </label>
+    </div>
+    <label class="form-field">
+      <span class="field-label">Description</span>
+      {{ form.description }}
+    </label>
+  </div>
+
+  <div class="form-section">
+    <span class="field-label">PDF or ZIP file</span>
+    <label class="upload-zone"
+           :class="{ 'is-dragover': false }"
+           @dragover.prevent
+           @drop.prevent="$refs.fileInput.files = $event.dataTransfer.files; fileName = $event.dataTransfer.files[0]?.name || ''">
+      <div class="upload-zone__icon">📄</div>
+      <div class="upload-zone__title" x-text="fileName || 'Drag & drop your file here'">Drag & drop your file here</div>
+      <div class="upload-zone__hint">or click to browse — PDF or ZIP, max {{ form.zip_path.field.max_length|default:"100" }} MB</div>
+      {{ form.zip_path }}
+    </label>
+    {% if form.zip_path.errors %}
+    <p class="alert alert-error">{{ form.zip_path.errors.0 }}</p>
+    {% endif %}
+  </div>
+
+  <div class="form-section">
+    <div class="form-grid">
+      <label class="form-field">
+        <span class="field-label">Chunk size</span>
+        {{ form.chunk_size }}
+      </label>
+      <label class="form-field">
+        <span class="field-label">Chunk overlap</span>
+        {{ form.chunk_overlap }}
+      </label>
+      <label class="form-field">
+        <span class="field-label">Embedding model</span>
+        {{ form.embed_config }}
+      </label>
+      <label class="form-field">
+        <span class="field-label">Reranker model</span>
+        {{ form.reranker_config }}
+      </label>
+    </div>
+    <div class="semantic-hint">
+      <strong>Semantic chunking</strong> embeds sentences and splits at topic boundaries for better RAG retrieval.
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button type="submit" class="btn btn-primary btn-lg">Upload and Index</button>
+    <a href="{% url 'pdf_module:list' %}" class="btn">Cancel</a>
+  </div>
 </form>
+
+<script>
+document.querySelector('.upload-zone input[type="file"]')?.addEventListener('change', function (e) {
+  const title = document.querySelector('.upload-zone__title');
+  if (title && e.target.files[0]) title.textContent = e.target.files[0].name;
+});
+</script>
 {% endblock %}

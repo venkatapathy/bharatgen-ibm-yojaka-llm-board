@@ -3,6 +3,11 @@ import logging
 from celery import shared_task
 from django.utils import timezone
 
+from apps.core.embeddings import embed_texts
+from apps.core.llm import get_litellm_kwargs
+from apps.core.provisioning import ProvisioningError, execution_slot, record_token_usage
+from apps.core.rerankers import rerank_passages
+
 logger = logging.getLogger(__name__)
 
 
@@ -16,24 +21,27 @@ def format_examples(questions) -> str:
 
 
 def retrieve_rag_chunks(run, q_type: str, bloom: str, top_k: int) -> str:
-    """Embed the query and return the top-k most relevant PDF chunks."""
     from apps.pdf_module.models import PDFChunk
 
     try:
+        query = f"{run.topic} {bloom} {q_type}"
+        q_emb = embed_texts([query], run.model_config.embed_model_id)[0]
         from pgvector.django import L2Distance
-        from apps.pdf_module.tasks import get_embed_fn
 
-        embed_fn = get_embed_fn(run.model_config.embed_model_id)
-        query    = f'{run.topic} {bloom} {q_type}'
-        q_emb    = embed_fn([query])[0]
-        if q_emb is None:
-            raise ValueError('Embedding returned None')
-
-        chunks = (
-            PDFChunk.objects
-            .filter(context__in=run.pdf_contexts.all())
-            .order_by(L2Distance('embedding', q_emb))[:top_k]
+        chunks = list(
+            PDFChunk.objects.filter(context__in=run.pdf_contexts.all()).order_by(L2Distance("embedding", q_emb))[: top_k * 3]
         )
+        if run.model_config.reranker_model and chunks:
+            ranked = rerank_passages(
+                query,
+                [chunk.text for chunk in chunks],
+                run.model_config.reranker_model,
+                top_k=top_k,
+            )
+            text_lookup = {chunk.text: chunk for chunk in chunks}
+            chunks = [text_lookup[item["text"]] for item in ranked if item["text"] in text_lookup]
+        else:
+            chunks = chunks[:top_k]
     except Exception as exc:
         logger.warning('RAG retrieval failed (%s), falling back to random chunks', exc)
         chunks = (
@@ -45,12 +53,31 @@ def retrieve_rag_chunks(run, q_type: str, bloom: str, top_k: int) -> str:
     return '\n\n'.join(c.text for c in chunks)
 
 
+def parse_llm_json(raw_text):
+    raw_text = raw_text.strip()
+    if raw_text.startswith("```"):
+        raw_text = raw_text.split("\n", 1)[1].rsplit("```", 1)[0].strip()
+    payload = json.loads(raw_text)
+    if isinstance(payload, dict):
+        payload = payload.get("questions", [])
+    return payload
+
+
+def ensure_mcq_shape(question):
+    if question.get("question_type") == "MCQ":
+        options = question.get("options") or []
+        while len(options) < 4:
+            options.append(f"Option {len(options) + 1}")
+        question["options"] = options[:4]
+    return question
+
+
 @shared_task(bind=True)
 def run_batch(self, batch_run_id: int):
     from .models import BatchRun, BatchRunItem
     from apps.pyq_module.models import Question
     import litellm
-    from jinja2 import Template as JinjaTemplate
+    from .prompts import render_prompt_context
 
     run = BatchRun.objects.get(id=batch_run_id)
     run.status        = 'running'
@@ -58,81 +85,105 @@ def run_batch(self, batch_run_id: int):
     run.save(update_fields=['status', 'celery_task_id'])
 
     errors = []
+    run.expected_questions = sum(item.count for item in run.items.all())
+    run.save(update_fields=["expected_questions"])
 
-    for item in run.items.all():
-        item.status = 'generating'
-        item.save(update_fields=['status'])
-        try:
-            # 1. RAG retrieval
-            context_text = ''
-            if run.pdf_contexts.exists():
-                context_text = retrieve_rag_chunks(
-                    run, item.question_type, item.bloom, run.rag_top_k)
+    try:
+        with execution_slot(run.created_by):
+            for item in run.items.all():
+                item.status = 'generating'
+                item.save(update_fields=['status'])
+                run.active_item = item
+                run.save(update_fields=["active_item"])
+                try:
+                    context_text = ''
+                    if run.pdf_contexts.exists():
+                        context_text = retrieve_rag_chunks(run, item.question_type, item.bloom, run.rag_top_k)
 
-            # 2. PYQ n-shot examples
-            pyq_text = ''
-            if run.pyq_modules.exists():
-                examples = (
-                    Question.objects
-                    .filter(pyq_module__in=run.pyq_modules.all(),
-                            question_type=item.question_type,
-                            bloom=item.bloom)
-                    .order_by('?')[:run.pyq_shots]
-                )
-                pyq_text = format_examples(examples)
+                    pyq_text = ''
+                    if run.pyq_modules.exists():
+                        examples = (
+                            Question.objects.filter(
+                                pyq_module__in=run.pyq_modules.all(),
+                                question_type=item.question_type,
+                                bloom=item.bloom,
+                            )
+                            .order_by('?')[:run.pyq_shots]
+                        )
+                        pyq_text = format_examples(examples)
 
-            # 3. Render prompt
-            ctx = dict(
-                count=item.count,
-                question_type=item.question_type,
-                bloom=item.bloom,
-                marks=item.marks,
-                topic=run.topic,
-                context_chunks=context_text,
-                pyq_examples=pyq_text,
-            )
-            sys_tmpl = JinjaTemplate(run.prompt.system_prompt)
-            usr_tmpl = JinjaTemplate(run.prompt.user_prompt)
+                    system_prompt, user_prompt = render_prompt_context(
+                        run=run,
+                        item=item,
+                        context_chunks=context_text,
+                        pyq_examples=pyq_text,
+                    )
 
-            # 4. LLM call
-            response = litellm.completion(
-                model=run.model_config.llm_model_id,
-                messages=[
-                    {'role': 'system', 'content': sys_tmpl.render(**ctx)},
-                    {'role': 'user',   'content': usr_tmpl.render(**ctx)},
-                ],
-                temperature=run.model_config.temperature,
-                max_tokens=run.model_config.max_tokens,
-            )
-            raw       = response.choices[0].message.content.strip()
-            generated = json.loads(raw)
+                    generated = []
+                    last_error = None
+                    for _ in range(3):
+                        response = litellm.completion(
+                            messages=[
+                                {'role': 'system', 'content': system_prompt},
+                                {'role': 'user', 'content': user_prompt},
+                            ],
+                            **get_litellm_kwargs(run.model_config),
+                        )
+                        usage = getattr(response, "usage", None)
+                        if usage:
+                            record_token_usage(
+                                user=run.created_by,
+                                batch_run=run,
+                                provider=run.model_config.provider,
+                                model_name=run.model_config.llm_model_id,
+                                request_kind="generation",
+                                prompt_tokens=getattr(usage, "prompt_tokens", 0),
+                                completion_tokens=getattr(usage, "completion_tokens", 0),
+                            )
+                        raw = response.choices[0].message.content.strip()
+                        try:
+                            generated = [ensure_mcq_shape(question) for question in parse_llm_json(raw)]
+                        except Exception as exc:
+                            last_error = exc
+                            continue
+                        if len(generated) >= item.count:
+                            break
+                    if len(generated) < item.count:
+                        raise ValueError(last_error or "Model did not return enough questions.")
 
-            # 5. Persist
-            Question.objects.bulk_create([
-                Question(
-                    batch_run=run,
-                    is_generated=True,
-                    question_type=item.question_type,
-                    bloom=item.bloom,
-                    marks=item.marks,
-                    topic=run.topic,
-                    question_text=q.get('question_text', ''),
-                    reference_answer=q.get('reference_answer', ''),
-                    rubrics=q.get('rubrics', {}),
-                )
-                for q in generated
-            ])
-            item.status = 'done'
-            item.save(update_fields=['status'])
+                    Question.objects.bulk_create(
+                        [
+                            Question(
+                                batch_run=run,
+                                is_generated=True,
+                                question_type=item.question_type,
+                                bloom=item.bloom,
+                                marks=item.marks,
+                                topic=run.topic,
+                                question_text=question.get('question_text', ''),
+                                reference_answer=question.get('reference_answer', ''),
+                                rubrics=question.get('rubrics', {}),
+                                options=question.get('options', []),
+                            )
+                            for question in generated[: item.count]
+                        ]
+                    )
+                    item.status = 'done'
+                    item.save(update_fields=['status'])
 
-        except Exception as exc:
-            logger.exception('BatchRunItem %s failed', item.pk)
-            item.status      = 'error'
-            item.error_detail = str(exc)
-            item.save(update_fields=['status', 'error_detail'])
-            errors.append(str(exc))
+                except Exception as exc:
+                    logger.exception('BatchRunItem %s failed', item.pk)
+                    item.status = 'error'
+                    item.error_detail = str(exc)
+                    item.save(update_fields=['status', 'error_detail'])
+                    errors.append(str(exc))
+    except ProvisioningError as exc:
+        errors.append(str(exc))
 
-    run.status       = 'partial' if errors else 'completed'
+    run.status = 'partial' if errors else 'completed'
+    if errors and not run.questions.exists():
+        run.status = 'failed'
+    run.active_item = None
     run.error_summary = '\n'.join(errors)
-    run.completed_at  = timezone.now()
-    run.save(update_fields=['status', 'error_summary', 'completed_at'])
+    run.completed_at = timezone.now()
+    run.save(update_fields=['status', 'active_item', 'error_summary', 'completed_at'])

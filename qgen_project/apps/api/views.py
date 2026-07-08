@@ -1,6 +1,7 @@
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from django.db.models import Q
 from apps.core.models import User, Organization, ModelConfig
 from apps.core.permissions import IsSuperUser, IsOrgUser
 from apps.pdf_module.models import PDFContext
@@ -58,7 +59,14 @@ class QuestionViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        qs = Question.objects.all()
+        user = self.request.user
+        if user.role == User.Role.SUPERUSER:
+            qs = Question.objects.all()
+        else:
+            qs = Question.objects.filter(
+                Q(pyq_module__organization=user.organization) |
+                Q(batch_run__created_by__organization=user.organization)
+            ).distinct()
         if pyq_id := self.request.query_params.get('pyq_module'):
             qs = qs.filter(pyq_module_id=pyq_id)
         if run_id := self.request.query_params.get('batch_run'):

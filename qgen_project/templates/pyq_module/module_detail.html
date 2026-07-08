@@ -1,25 +1,92 @@
 {% extends "base.html" %}
 {% block title %}{{ object.name }}{% endblock %}
 {% block content %}
-<h1>{{ object.name }}</h1>
-<p>Status: <span class="badge status-{{ object.status }}">{{ object.status }}</span></p>
+<div class="page-header">
+  <div>
+    <div class="eyebrow">Question bank detail</div>
+    <h1>{{ object.name }}</h1>
+    <p class="muted">
+      <span class="badge status-{{ object.status }}">{{ object.status }}</span>
+      {% if object.original_filename %}&nbsp;{{ object.original_filename }}{% endif %}
+      &nbsp;·&nbsp;{{ object.question_count }} questions
+    </p>
+  </div>
+  <div class="page-header__actions">
+    <a class="btn btn-danger" href="{% url 'pyq_module:delete' object.id %}">Delete Module</a>
+  </div>
+</div>
 
-<h2>Extracted Questions</h2>
-<table class="table">
-  <thead><tr><th>Type</th><th>Bloom</th><th>Marks</th><th>Topic</th><th>Question</th><th>Actions</th></tr></thead>
-  <tbody>
-  {% for q in questions %}
-  <tr>
-    <td>{{ q.question_type }}</td>
-    <td>{{ q.bloom }}</td>
-    <td>{{ q.marks }}</td>
-    <td>{{ q.topic }}</td>
-    <td>{{ q.question_text|truncatechars:100 }}</td>
-    <td><a href="{% url 'pyq_module:question_edit' q.id %}">Edit</a></td>
-  </tr>
-  {% empty %}
-  <tr><td colspan="6">No questions extracted yet.</td></tr>
-  {% endfor %}
-  </tbody>
-</table>
+<div class="detail-stats">
+  <div class="stat-card"><span class="muted">Total questions</span><strong>{{ object.question_count }}</strong></div>
+  <div class="stat-card"><span class="muted">Status</span><strong style="font-size:1rem;">{{ object.status }}</strong></div>
+</div>
+
+{% if object.question_type_breakdown %}
+<div class="type-breakdown-panel panel" style="padding:1rem 1.15rem; margin-bottom:1.25rem;">
+  <span class="muted" style="display:block; margin-bottom:0.5rem; font-size:0.85rem; font-weight:600; text-transform:uppercase; letter-spacing:0.04em;">Question types in this paper</span>
+  <div class="type-breakdown">
+    {% for item in object.question_type_breakdown %}
+    <span class="badge badge-muted" title="{{ item.label }}">{{ item.label }}: {{ item.count }}</span>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+<div class="table-wrap">
+  <table class="table">
+    <thead><tr><th>Type</th><th>Bloom</th><th>Marks</th><th>Topic</th><th>Question</th><th>Actions</th></tr></thead>
+    <tbody>
+    {% for q in questions %}
+    <tr>
+      <td><span class="badge badge-muted">{{ q.question_type }}</span></td>
+      <td>{{ q.bloom }}</td>
+      <td>{{ q.marks }}</td>
+      <td>{{ q.topic|default:"-" }}</td>
+      <td class="table-mcq-cell">
+        <div class="question-text">{{ q.question_text }}</div>
+        {% if q.question_type == 'MCQ' and q.get_mcq_options %}
+        <ul class="table-mcq-options">
+          {% for opt in q.get_mcq_options %}
+          <li class="mcq-option{% if opt.is_correct %} is-correct{% endif %}">
+            <span class="mcq-option__label">{{ opt.label }}.</span>
+            <span>{{ opt.text }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+        {% elif q.question_type == 'MCQ' and q.options %}
+        <ul class="table-mcq-options">
+          {% for option in q.options %}
+          <li class="mcq-option">{{ option }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        {% if q.reference_answer and q.question_type != 'MCQ' %}
+        <p class="muted" style="margin-top:0.5rem;"><strong>Answer:</strong> {{ q.reference_answer }}</p>
+        {% endif %}
+      </td>
+      <td class="table-actions">
+        <div class="table-actions__inner">
+          <a class="btn btn-sm" href="{% url 'pyq_module:question_edit' q.id %}">Edit</a>
+          <a class="btn btn-sm btn-danger" href="{% url 'pyq_module:question_delete' q.id %}">Delete</a>
+        </div>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="6">No questions extracted yet.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% if questions.has_other_pages %}
+<nav class="pagination" aria-label="Question pages">
+  {% if questions.has_previous %}
+  <a href="?page={{ questions.previous_page_number }}">← Previous</a>
+  {% endif %}
+  <span class="current">Page {{ questions.number }} of {{ questions.paginator.num_pages }}</span>
+  {% if questions.has_next %}
+  <a href="?page={{ questions.next_page_number }}">Next →</a>
+  {% endif %}
+</nav>
+{% endif %}
 {% endblock %}

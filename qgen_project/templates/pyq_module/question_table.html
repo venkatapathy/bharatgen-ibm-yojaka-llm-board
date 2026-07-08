@@ -1,10 +1,18 @@
 {% extends "base.html" %}
 {% block title %}Edit Question{% endblock %}
 {% block content %}
-<h1>Edit Question</h1>
+<div class="stack-header">
+  <div>
+    <div class="eyebrow">PYQ editor</div>
+    <h1>Edit Extracted Question</h1>
+  </div>
+</div>
 <form method="post">
   {% csrf_token %}
-  {{ form.as_p }}
-  <button class="btn btn-primary" type="submit">Save</button>
+  <div class="form-section">{{ form.as_p }}</div>
+  <div class="btn-row">
+    <button class="btn btn-primary" type="submit">Save</button>
+    <a class="btn" href="{% url 'pyq_module:detail' object.pyq_module_id %}">Cancel</a>
+  </div>
 </form>
 {% endblock %}

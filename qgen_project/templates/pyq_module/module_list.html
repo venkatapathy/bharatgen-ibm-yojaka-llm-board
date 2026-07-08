@@ -2,22 +2,45 @@
 {% block title %}PYQ Bank{% endblock %}
 {% block content %}
 <div class="page-header">
-  <h1>PYQ Bank</h1>
-  <a class="btn btn-primary" href="{% url 'pyq_module:upload' %}">+ Upload Paper</a>
+  <div>
+    <div class="eyebrow">Past-year question extraction</div>
+    <h1>PYQ Bank</h1>
+    <p class="muted">Exam papers may include MCQ, short answer, long answer, and other formats.</p>
+  </div>
+  <a class="btn btn-primary" href="{% url 'pyq_module:upload' %}">Upload Paper</a>
 </div>
-<table class="table">
-  <thead><tr><th>Name</th><th>Questions</th><th>Status</th><th>Actions</th></tr></thead>
-  <tbody>
-  {% for mod in modules %}
-  <tr>
-    <td><a href="{% url 'pyq_module:detail' mod.id %}">{{ mod.name }}</a></td>
-    <td>{{ mod.questions.count }}</td>
-    <td><span class="badge status-{{ mod.status }}">{{ mod.status }}</span></td>
-    <td><a href="{% url 'pyq_module:delete' mod.id %}">Delete</a></td>
-  </tr>
-  {% empty %}
-  <tr><td colspan="4">No PYQ modules yet.</td></tr>
-  {% endfor %}
-  </tbody>
-</table>
+<div class="table-wrap">
+  <table class="table">
+    <thead><tr><th>Name</th><th>File</th><th>Questions</th><th>Types</th><th>Status</th><th>Actions</th></tr></thead>
+    <tbody>
+    {% for mod in modules %}
+    <tr>
+      <td><a href="{% url 'pyq_module:detail' mod.id %}">{{ mod.name }}</a></td>
+      <td>{{ mod.original_filename|default:"-" }}</td>
+      <td>{{ mod.question_count }}</td>
+      <td>
+        {% if mod.question_type_breakdown %}
+        <div class="type-breakdown">
+          {% for item in mod.question_type_breakdown %}
+          <span class="badge badge-muted" title="{{ item.label }}">{{ item.code }} {{ item.count }}</span>
+          {% endfor %}
+        </div>
+        {% else %}
+        <span class="muted">—</span>
+        {% endif %}
+      </td>
+      <td><span class="badge status-{{ mod.status }}">{{ mod.status }}</span></td>
+      <td class="table-actions">
+        <div class="table-actions__inner">
+          <a class="btn btn-sm" href="{% url 'pyq_module:detail' mod.id %}">Open</a>
+          <a class="btn btn-sm btn-danger" href="{% url 'pyq_module:delete' mod.id %}">Delete</a>
+        </div>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="6">No PYQ modules yet.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endblock %}

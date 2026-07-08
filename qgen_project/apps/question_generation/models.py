@@ -25,6 +25,14 @@ class BatchRun(models.Model):
                                      default=Status.PENDING)
     error_summary = models.TextField(blank=True)
     celery_task_id= models.CharField(max_length=256, blank=True)
+    expected_questions = models.IntegerField(default=0)
+    active_item = models.ForeignKey(
+        'question_generation.BatchRunItem',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='+',
+    )
     created_by    = models.ForeignKey(User, on_delete=models.SET_NULL, null=True,
                                       related_name='batch_runs')
     created_at    = models.DateTimeField(auto_now_add=True)

@@ -1,11 +1,48 @@
 {% extends "base.html" %}
 {% block title %}Upload PYQ Paper{% endblock %}
 {% block content %}
-<h1>Upload Exam Paper (PDF)</h1>
+<div class="stack-header">
+  <div>
+    <div class="eyebrow">OCR-backed extraction</div>
+    <h1>Upload Exam Paper</h1>
+    <p class="muted">Extract structured questions from scanned or digital exam PDFs.</p>
+  </div>
+</div>
+
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
-  {{ form.as_p }}
-  <button class="btn btn-primary" type="submit">Upload &amp; Extract</button>
-  <a class="btn" href="{% url 'pyq_module:list' %}">Cancel</a>
+  <div class="form-section">
+    <div class="form-grid">
+      <label class="form-field">
+        <span class="field-label">Module name</span>
+        {{ form.name }}
+      </label>
+      <label class="form-field">
+        <span class="field-label">Description</span>
+        {{ form.description }}
+      </label>
+    </div>
+    <span class="field-label">Exam paper (PDF)</span>
+    <label class="upload-zone">
+      <div class="upload-zone__icon">📝</div>
+      <div class="upload-zone__title" id="pyq-file-label">Drag & drop exam PDF here</div>
+      <div class="upload-zone__hint">or click to browse</div>
+      {{ form.source_file }}
+    </label>
+    {% if form.source_file.errors %}
+    <p class="alert alert-error">{{ form.source_file.errors.0 }}</p>
+    {% endif %}
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-primary btn-lg" type="submit">Upload and Extract</button>
+    <a class="btn" href="{% url 'pyq_module:list' %}">Cancel</a>
+  </div>
 </form>
+
+<script>
+document.querySelector('.upload-zone input[type="file"]')?.addEventListener('change', function (e) {
+  const label = document.getElementById('pyq-file-label');
+  if (label && e.target.files[0]) label.textContent = e.target.files[0].name;
+});
+</script>
 {% endblock %}

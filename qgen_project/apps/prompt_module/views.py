@@ -1,10 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.contrib import messages
 from .models import PromptTemplate, PromptVersion
 from apps.core.permissions import OrgUserRequiredMixin
+from apps.core.models import User
 
 
 class PromptListView(LoginRequiredMixin, ListView):
@@ -13,14 +15,18 @@ class PromptListView(LoginRequiredMixin, ListView):
     context_object_name = 'prompts'
 
 
-class PromptDetailView(OrgUserRequiredMixin, UpdateView):
+class PromptDetailView(LoginRequiredMixin, UpdateView):
     model = PromptTemplate
     template_name = 'prompt_module/prompt_editor.html'
-    fields = ['name', 'description', 'system_prompt', 'user_prompt']
+    fields = ['name', 'description', 'topic_grounding', 'system_prompt', 'user_prompt']
+
+    def post(self, request, *args, **kwargs):
+        if request.user.role not in (User.Role.SUPERUSER, User.Role.ORGUSER):
+            raise PermissionDenied('Only org admins can edit prompts.')
+        return super().post(request, *args, **kwargs)
 
     def form_valid(self, form):
         obj = form.save(commit=False)
-        # Save current version to history before bumping
         PromptVersion.objects.create(
             template=obj,
             version=obj.version,
@@ -36,13 +42,14 @@ class PromptDetailView(OrgUserRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx['history'] = self.object.history.all()
+        ctx['can_edit'] = self.request.user.role in (User.Role.SUPERUSER, User.Role.ORGUSER)
         return ctx
 
 
 class PromptCreateView(OrgUserRequiredMixin, CreateView):
     model = PromptTemplate
     template_name = 'prompt_module/prompt_editor.html'
-    fields = ['name', 'description', 'system_prompt', 'user_prompt']
+    fields = ['name', 'description', 'topic_grounding', 'system_prompt', 'user_prompt']
     success_url = reverse_lazy('prompt_module:list')
 
     def form_valid(self, form):
@@ -52,6 +59,7 @@ class PromptCreateView(OrgUserRequiredMixin, CreateView):
 
 class PromptDeleteView(OrgUserRequiredMixin, DeleteView):
     model = PromptTemplate
+    template_name = "prompt_module/prompt_confirm_delete.html"
     success_url = reverse_lazy('prompt_module:list')
 
 

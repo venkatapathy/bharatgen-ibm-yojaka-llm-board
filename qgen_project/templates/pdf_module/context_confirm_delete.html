@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Delete PDF Context{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>Delete PDF Context</h1>
+</div>
+
+<div class="form-section">
+  <p>Are you sure you want to delete <strong>{{ object.name }}</strong>?</p>
+  <ul class="delete-summary">
+    {% if object.original_filename %}
+    <li><strong>File:</strong> {{ object.original_filename }}</li>
+    {% endif %}
+    <li><strong>Chunks:</strong> {{ object.chunk_count }}</li>
+    <li><strong>Status:</strong> {{ object.status }}</li>
+  </ul>
+  <form method="post">
+    {% csrf_token %}
+    <div class="btn-row">
+      <button class="btn btn-danger" type="submit">Delete</button>
+      <a class="btn" href="{% url 'pdf_module:detail' object.id %}">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

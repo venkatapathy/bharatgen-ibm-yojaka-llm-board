@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Delete Prompt{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>Delete Prompt Template</h1>
+</div>
+<div class="form-section">
+  <p>Delete <strong>{{ object.name }}</strong>?</p>
+  <form method="post">
+    {% csrf_token %}
+    <div class="btn-row">
+      <button class="btn btn-danger" type="submit">Delete</button>
+      <a class="btn" href="{% url 'prompt_module:detail' object.id %}">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

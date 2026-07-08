@@ -2,7 +2,12 @@ import json
 import logging
 
 from celery import shared_task
+
+from apps.core.llm import get_litellm_kwargs
+from apps.core.provisioning import record_token_usage
+
 from .models import PYQModule, Question
+from .pdf_text import chunk_text, extract_text
 
 logger = logging.getLogger(__name__)
 
@@ -17,11 +22,23 @@ Return ONLY the JSON array, no extra text.
 """
 
 
+def parse_llm_json(raw_text):
+    raw_text = raw_text.strip()
+    if raw_text.startswith("```"):
+        raw_text = raw_text.split("\n", 1)[1].rsplit("```", 1)[0].strip()
+    return json.loads(raw_text)
+
+
+def looks_like_instruction_block(text: str):
+    lowered = text.lower()
+    markers = ["instruction", "attempt any", "all questions are compulsory", "section a", "note:"]
+    return any(marker in lowered for marker in markers) and len(text.split()) < 80
+
+
 @shared_task(bind=True, max_retries=3)
 def extract_pyq_questions(self, pyq_module_id: int, model_config_id: int):
     from apps.core.models import ModelConfig
     import litellm
-    import fitz
 
     mod    = PYQModule.objects.get(id=pyq_module_id)
     config = ModelConfig.objects.get(id=model_config_id)
@@ -29,19 +46,31 @@ def extract_pyq_questions(self, pyq_module_id: int, model_config_id: int):
     mod.save(update_fields=['status'])
 
     try:
-        doc  = fitz.open(mod.source_file.path)
-        text = '\n'.join(page.get_text() for page in doc)
+        pages = extract_text(mod.source_file.path)
+        filtered_pages = [page["text"] for page in pages if not looks_like_instruction_block(page["text"])]
+        text_chunks = chunk_text("\n\n".join(filtered_pages))
+        extracted = []
 
-        response = litellm.completion(
-            model=config.llm_model_id,
-            messages=[
-                {'role': 'system', 'content': EXTRACTION_PROMPT},
-                {'role': 'user',   'content': text[:12000]},
-            ],
-            temperature=0.1,
-        )
-        raw       = response.choices[0].message.content.strip()
-        extracted = json.loads(raw)
+        for text_chunk in text_chunks[:6]:
+            response = litellm.completion(
+                messages=[
+                    {"role": "system", "content": EXTRACTION_PROMPT},
+                    {"role": "user", "content": text_chunk[:12000]},
+                ],
+                **get_litellm_kwargs(config, temperature=0.1, max_tokens=1500),
+            )
+            usage = getattr(response, "usage", None)
+            if usage:
+                record_token_usage(
+                    user=mod.created_by,
+                    provider=config.provider,
+                    model_name=config.llm_model_id,
+                    request_kind="extraction",
+                    prompt_tokens=getattr(usage, "prompt_tokens", 0),
+                    completion_tokens=getattr(usage, "completion_tokens", 0),
+                )
+            raw = response.choices[0].message.content.strip()
+            extracted.extend(parse_llm_json(raw))
 
         questions = [
             Question(

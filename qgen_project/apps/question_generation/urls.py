@@ -11,4 +11,6 @@ urlpatterns = [
     path('<int:pk>/status/',     views.batch_run_status,             name='status'),
     path('<int:pk>/export/',     views.batch_run_export,             name='export'),
     path('<int:pk>/rerun/',      views.batch_run_rerun,              name='rerun'),
+    path('question/<int:pk>/edit/', views.GeneratedQuestionUpdateView.as_view(), name='question_edit'),
+    path('question/<int:pk>/delete/', views.GeneratedQuestionDeleteView.as_view(), name='question_delete'),
 ]

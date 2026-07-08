@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Edit Generated Question{% endblock %}
+{% block content %}
+<div class="stack-header">
+  <div>
+    <div class="eyebrow">Generated question editor</div>
+    <h1>Edit Generated Question</h1>
+  </div>
+</div>
+<form method="post">
+  {% csrf_token %}
+  <div class="form-section">{{ form.as_p }}</div>
+  <div class="btn-row">
+    <button class="btn btn-primary" type="submit">Save</button>
+    <a class="btn" href="{% url 'question_generation:detail' object.batch_run_id %}">Cancel</a>
+  </div>
+</form>
+{% endblock %}

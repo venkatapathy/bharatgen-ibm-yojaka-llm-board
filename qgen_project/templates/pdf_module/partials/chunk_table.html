@@ -1,0 +1,31 @@
+<div class="detail-stats" style="margin-bottom:1rem;">
+  <div class="stat-card"><span class="muted">Total chunks</span><strong>{{ object.chunk_count }}</strong></div>
+  <div class="stat-card"><span class="muted">Embedded</span><strong>{{ object.embedded_chunk_count }}</strong></div>
+  <div class="stat-card"><span class="muted">Strategy</span><strong style="font-size:0.95rem;">{{ object.get_strategy_display }}</strong></div>
+</div>
+
+<div class="table-wrap">
+  <table class="table">
+    <thead><tr><th>File</th><th>Page</th><th>#</th><th>Preview</th></tr></thead>
+    <tbody>
+    {% for chunk in chunks %}
+    <tr>
+      <td>{{ chunk.source_file|default:"-" }}</td>
+      <td>{{ chunk.page_number|default:"-" }}</td>
+      <td>{{ chunk.chunk_index }}</td>
+      <td>
+        <div class="chunk-preview">{{ chunk.text|truncatechars:200 }}</div>
+        {% if chunk.text|length > 200 %}
+        <details>
+          <summary class="chunk-expand">Show full text</summary>
+          <div class="chunk-full">{{ chunk.text }}</div>
+        </details>
+        {% endif %}
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4">No chunks indexed yet.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>

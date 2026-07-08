@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Sign up{% endblock %}
+{% block content %}
+<div class="auth-shell">
+  <div class="auth-card">
+    <div class="eyebrow">New account</div>
+    <h1>Create account</h1>
+    <p>Register to access the EduQGen demo workspace.</p>
+    <form method="post">
+      {% csrf_token %}
+      {% for field in form %}
+      <label class="form-field">
+        <span class="field-label">{{ field.label }}</span>
+        {{ field }}
+        {% if field.help_text %}<span class="field-hint">{{ field.help_text }}</span>{% endif %}
+        {% if field.errors %}<span class="alert alert-error" style="display:block;margin-top:0.35rem;">{{ field.errors.0 }}</span>{% endif %}
+      </label>
+      {% endfor %}
+      <div class="btn-row" style="margin-top:1rem;">
+        <button class="btn btn-primary btn-lg" type="submit">Sign up</button>
+        <a class="btn" href="{% url 'account_login' %}">Already have an account?</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

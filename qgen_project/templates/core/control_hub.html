@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Control — QGen{% endblock %}
+{% block content %}
+<div class="stack-header">
+  <div>
+    <div class="eyebrow">Access & quotas</div>
+    <h1>Control panel</h1>
+    <p class="muted">Manage organisations, users, and usage limits for your role.</p>
+  </div>
+</div>
+
+<div class="card-grid">
+  {% if is_admin %}
+  <a class="card" href="{% url 'core:control_orgs' %}">
+    <h2>Organisations &amp; quotas</h2>
+    <p>Set organisation credit and storage pools ({{ org_count }} orgs · {{ org_admin_count }} org admins). Users get allocated shares; Org Admins draw from what remains unallocated.</p>
+  </a>
+  <a class="card" href="{% url 'core:control_users' %}">
+    <h2>Org Admins</h2>
+    <p>Create Org Admins by username. They manage distribution — they do not hold personal pool shares.</p>
+  </a>
+  <a class="card" href="/admin/">
+    <h2>Technical settings</h2>
+    <p>Model configs, council members, prompts DB, and system settings (Django Admin).</p>
+  </a>
+  <a class="card" href="{% url 'prompt_module:list' %}">
+    <h2>Prompt templates</h2>
+    <p>Create and activate generation prompts used across the platform.</p>
+  </a>
+  {% endif %}
+
+  {% if is_org_admin or is_admin %}
+  {% if is_org_admin %}
+  <a class="card" href="{% url 'core:control_users' %}">
+    <h2>User management</h2>
+    <p>Add users by username and distribute credits/storage from your organisation pools{% if budget %} ({{ budget.remaining }} credits left of {{ budget.pool }}){% endif %}{% if member_count %} · {{ member_count }} members{% endif %}.</p>
+  </a>
+  {% endif %}
+  {% endif %}
+</div>
+{% endblock %}

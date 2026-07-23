@@ -41,10 +41,44 @@ def _iter_pdf_files(context, tmpdir):
         yield zip_path
 
 
+EMBED_BATCH_SIZE = 64
+
+
 def _build_chunks(context):
     embed_fn = get_embed_fn(context.embed_model)
     chunks_to_create = []
+    pending_texts = []
+    pending_meta = []
     embedded_count = 0
+
+    def flush_batch():
+        nonlocal embedded_count
+        if not pending_texts:
+            return
+        embeddings = (
+            embed_fn(pending_texts)
+            if context.has_embedding
+            else [None] * len(pending_texts)
+        )
+        for meta, text, embedding in zip(pending_meta, pending_texts, embeddings):
+            if embedding is not None:
+                embedded_count += 1
+            chunks_to_create.append(
+                PDFChunk(
+                    context=context,
+                    source_file=meta["source_file"],
+                    page_number=meta["page_number"],
+                    chunk_index=meta["chunk_index"],
+                    text=text,
+                    embedding=embedding,
+                    token_count=len(text.split()),
+                    metadata={"strategy": context.strategy},
+                )
+            )
+        pending_texts.clear()
+        pending_meta.clear()
+        context.embedded_chunk_count = embedded_count
+        context.save(update_fields=["embedded_chunk_count"])
 
     with tempfile.TemporaryDirectory() as tmpdir:
         for pdf_path in _iter_pdf_files(context, tmpdir):
@@ -56,22 +90,18 @@ def _build_chunks(context):
                     chunk_overlap=context.chunk_overlap,
                     embed_fn=embed_fn,
                 )
-                embeddings = embed_fn(page_chunks) if context.has_embedding else [None] * len(page_chunks)
-                for index, (text, embedding) in enumerate(zip(page_chunks, embeddings)):
-                    if embedding is not None:
-                        embedded_count += 1
-                    chunks_to_create.append(
-                        PDFChunk(
-                            context=context,
-                            source_file=page["source_file"],
-                            page_number=page["page_number"],
-                            chunk_index=index,
-                            text=text,
-                            embedding=embedding,
-                            token_count=len(text.split()),
-                            metadata={"strategy": context.strategy},
-                        )
+                for index, text in enumerate(page_chunks):
+                    pending_texts.append(text)
+                    pending_meta.append(
+                        {
+                            "source_file": page["source_file"],
+                            "page_number": page["page_number"],
+                            "chunk_index": index,
+                        }
                     )
+                    if len(pending_texts) >= EMBED_BATCH_SIZE:
+                        flush_batch()
+        flush_batch()
     return chunks_to_create, embedded_count
 
 
@@ -90,6 +120,10 @@ def index_pdf_context(self, context_id: str):
         context.needs_reindex = False
         context.embedded_chunk_count = embedded_count
         context.save(update_fields=["status", "needs_reindex", "embedded_chunk_count", "error_message"])
+        if context.created_by_id:
+            from apps.core.storage import recompute_vector_storage
+
+            recompute_vector_storage(context.created_by)
 
     except Exception as exc:
         context.status = 'error'

@@ -9,13 +9,44 @@
   </div>
   <a class="btn btn-primary" href="{% url 'pyq_module:upload' %}">Upload Paper</a>
 </div>
+
+<div class="stat-grid stat-grid--rings" style="margin-bottom:1.25rem;">
+  <div class="stat-card stat-card--ring">
+    <div class="stat-ring" style="--pct: {{ quota.storage_pct }};" aria-hidden="true">
+      <svg viewBox="0 0 36 36" class="stat-ring__svg">
+        <circle class="stat-ring__track" cx="18" cy="18" r="15.9155"></circle>
+        <circle class="stat-ring__value" cx="18" cy="18" r="15.9155" pathLength="100"></circle>
+      </svg>
+      <span class="stat-ring__pct">{{ quota.storage_pct }}%</span>
+    </div>
+    <div class="stat-ring__meta">
+      <span class="muted">{% if quota.uses_unallocated_pool %}Unallocated storage{% else %}Storage{% endif %}</span>
+      <strong>{{ quota.current_total_storage_gb|floatformat:2 }} / {{ quota.max_total_storage_gb|floatformat:2 }} GB</strong>
+    </div>
+  </div>
+  <div class="stat-card stat-card--ring">
+    <div class="stat-ring" style="--pct: {{ quota.pyq_pct }};" aria-hidden="true">
+      <svg viewBox="0 0 36 36" class="stat-ring__svg">
+        <circle class="stat-ring__track" cx="18" cy="18" r="15.9155"></circle>
+        <circle class="stat-ring__value" cx="18" cy="18" r="15.9155" pathLength="100"></circle>
+      </svg>
+      <span class="stat-ring__pct">{{ quota.pyq_pct }}%</span>
+    </div>
+    <div class="stat-ring__meta">
+      <span class="muted">PYQ uploads</span>
+      <strong>{{ quota.current_saved_pyq_zips }} / {{ quota.max_saved_pyq_zips }}</strong>
+    </div>
+  </div>
+</div>
+
 <div class="table-wrap">
   <table class="table">
-    <thead><tr><th>Name</th><th>File</th><th>Questions</th><th>Types</th><th>Status</th><th>Actions</th></tr></thead>
+    <thead><tr><th>Name</th>{% if show_owner %}<th>Owner</th>{% endif %}<th>File</th><th>Questions</th><th>Types</th><th>Status</th><th>Actions</th></tr></thead>
     <tbody>
     {% for mod in modules %}
     <tr>
       <td><a href="{% url 'pyq_module:detail' mod.id %}">{{ mod.name }}</a></td>
+      {% if show_owner %}<td>{{ mod.created_by.username|default:"—" }}</td>{% endif %}
       <td>{{ mod.original_filename|default:"-" }}</td>
       <td>{{ mod.question_count }}</td>
       <td>
@@ -38,7 +69,7 @@
       </td>
     </tr>
     {% empty %}
-    <tr><td colspan="6">No PYQ modules yet.</td></tr>
+    <tr><td colspan="{% if show_owner %}7{% else %}6{% endif %}">No PYQ modules yet.</td></tr>
     {% endfor %}
     </tbody>
   </table>

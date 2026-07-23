@@ -75,17 +75,68 @@ class PYQModule(models.Model):
         ]
 
 
+class QuestionQuerySet(models.QuerySet):
+    """Ensure review/provenance fields are never NULL on bulk inserts."""
+
+    _NULL_SAFE_DEFAULTS = {
+        "rag_chunks": list,
+        "pyq_examples": list,
+        "rubrics": dict,
+        "options": list,
+        "user_decision": "pending",
+        "user_feedback": "",
+        "reference_answer": "",
+        "topic": "",
+    }
+
+    def bulk_create(self, objs, *args, **kwargs):
+        for obj in objs:
+            self.model.normalize_null_safe_fields(obj)
+        return super().bulk_create(objs, *args, **kwargs)
+
+
+class QuestionManager(models.Manager.from_queryset(QuestionQuerySet)):
+    pass
+
+
 class Question(models.Model):
     """Shared table: PYQ-extracted (is_generated=False) and AI-generated (is_generated=True)."""
+
+    class UserDecision(models.TextChoices):
+        PENDING = "pending", "Pending review"
+        APPROVED = "approved", "Approved"
+        REJECTED = "rejected", "Rejected"
+
     question_type    = models.CharField(max_length=8, choices=QuestionType.choices)
     bloom            = models.CharField(max_length=16, choices=BloomLevel.choices)
     marks            = models.FloatField()
     is_generated     = models.BooleanField(default=False)
     question_text    = models.TextField()
-    reference_answer = models.TextField(blank=True)
+    reference_answer = models.TextField(blank=True, default="")
     rubrics          = models.JSONField(default=dict)
-    topic            = models.CharField(max_length=256, blank=True)
+    topic            = models.CharField(max_length=256, blank=True, default="")
     options          = models.JSONField(default=list)   # MCQ options
+
+    # PhD dataset: RAG / PYQ provenance used when this question was generated.
+    rag_chunks = models.JSONField(
+        default=list,
+        blank=True,
+        help_text="Snapshot of PDF chunks retrieved for this generation item.",
+    )
+    pyq_examples = models.JSONField(
+        default=list,
+        blank=True,
+        help_text="Snapshot of PYQ few-shot examples used for this generation item.",
+    )
+    # Human review (mandatory after generation completes).
+    user_decision = models.CharField(
+        max_length=16,
+        choices=UserDecision.choices,
+        default=UserDecision.PENDING,
+        blank=True,
+    )
+    user_feedback = models.TextField(blank=True, default="")
+    reviewed_at = models.DateTimeField(null=True, blank=True)
 
     pyq_module = models.ForeignKey(
         PYQModule, on_delete=models.SET_NULL, null=True, blank=True,
@@ -95,8 +146,23 @@ class Question(models.Model):
         related_name='questions')
     created_at = models.DateTimeField(auto_now_add=True)
 
+    objects = QuestionManager()
+
     class Meta:
         ordering = ['pyq_module', 'topic', 'created_at']
+
+    @classmethod
+    def normalize_null_safe_fields(cls, obj):
+        """Fill NOT NULL JSON/text fields that bulk_create may otherwise omit as NULL."""
+        for field, default in QuestionQuerySet._NULL_SAFE_DEFAULTS.items():
+            value = getattr(obj, field, None)
+            if value is None:
+                setattr(obj, field, default() if callable(default) else default)
+        return obj
+
+    def save(self, *args, **kwargs):
+        self.normalize_null_safe_fields(self)
+        return super().save(*args, **kwargs)
 
     def __str__(self):
         return f'[{self.question_type}] {self.question_text[:60]}'
@@ -104,6 +170,14 @@ class Question(models.Model):
     @property
     def is_mcq(self):
         return self.question_type == QuestionType.MCQ
+
+    @property
+    def council_opinion(self):
+        return (self.rubrics or {}).get("council") or {}
+
+    @property
+    def needs_review(self):
+        return self.is_generated and self.user_decision == self.UserDecision.PENDING
 
     def is_correct_option(self, label: str, text: str = '') -> bool:
         answer = _norm_answer_text(self.reference_answer)

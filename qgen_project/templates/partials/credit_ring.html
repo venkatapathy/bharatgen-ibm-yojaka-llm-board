@@ -1,0 +1,24 @@
+{# Expects `credits` from credit_quota_display(user). Cursor-style usage line. #}
+{% if credits.unlimited %}
+<div class="usage-line" title="Unlimited credits">
+  <svg class="usage-line__icon" viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M12 12 L12 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M12 12 L16.5 14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </svg>
+  <span class="usage-line__text">Unlimited included usage</span>
+</div>
+{% else %}
+<div class="usage-line" title="Included monthly usage">
+  <svg class="usage-line__icon" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M4.5 16.5a9 9 0 1 1 15 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M12 14.5 L7.2 9.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="14.5" r="1.5" fill="currentColor"/>
+  </svg>
+  <span class="usage-line__text">
+    You've used <strong>{{ credits.pct }}%</strong> of your included
+    {% if credits.uses_unallocated_pool %}unallocated {% endif %}usage
+  </span>
+</div>
+{% endif %}

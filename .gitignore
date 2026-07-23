@@ -51,6 +51,10 @@ Interface/
 questions.db.env
 *.yaml
 /backend/cleanup_db.py
-qgen_project/apps/*/migrations/*.py
+# Keep Django migrations in git so schema changes deploy reliably.
+# (Previously ignored, which caused missing review-field migrations on fresh setups.)
 qgen_project/apps/*/__init__.py
 qgen_project/*/__init__.py
+celerybeat-schedule
+*.zip
+*.pdf

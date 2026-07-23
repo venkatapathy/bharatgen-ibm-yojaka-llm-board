@@ -2,6 +2,11 @@
 
 import re
 
+from apps.pdf_module.legacy_hindi import (
+    normalize_legacy_hindi,
+    page_uses_legacy_hindi_font,
+)
+
 
 def extract_text(path: str):
     import fitz
@@ -9,7 +14,10 @@ def extract_text(path: str):
     doc = fitz.open(path)
     pages = []
     for page_number, page in enumerate(doc, start=1):
+        force_legacy = page_uses_legacy_hindi_font(page)
         text = page.get_text().strip()
+        if text:
+            text = normalize_legacy_hindi(text, force=force_legacy)
         if not text:
             try:
                 import pytesseract
@@ -18,7 +26,7 @@ def extract_text(path: str):
 
                 pix = page.get_pixmap()
                 image = Image.open(io.BytesIO(pix.tobytes("png")))
-                text = pytesseract.image_to_string(image).strip()
+                text = pytesseract.image_to_string(image, lang="hin+eng").strip()
             except Exception:
                 text = ""
         if text:

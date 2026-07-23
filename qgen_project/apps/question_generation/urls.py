@@ -7,6 +7,7 @@ urlpatterns = [
     path('',                     views.BatchRunListView.as_view(),   name='list'),
     path('new/',                 views.BatchRunNewView.as_view(),    name='new'),
     path('<int:pk>/',            views.BatchRunDetailView.as_view(), name='detail'),
+    path('<int:pk>/review/',     views.batch_run_review,             name='review'),
     path('<int:pk>/delete/',     views.BatchRunDeleteView.as_view(), name='delete'),
     path('<int:pk>/status/',     views.batch_run_status,             name='status'),
     path('<int:pk>/export/',     views.batch_run_export,             name='export'),

@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'css/main.css' %}?v=8">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}?v=13">
   <script src="https://unpkg.com/htmx.org@1.9.12" defer></script>
   <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
@@ -18,9 +18,14 @@
   <ul class="nav-links">
     <li><a href="{% url 'pdf_module:list' %}">PDF Contexts</a></li>
     <li><a href="{% url 'pyq_module:list' %}">PYQ Bank</a></li>
+    {% if user.can_manage_prompts %}
     <li><a href="{% url 'prompt_module:list' %}">Prompts</a></li>
+    {% endif %}
     <li><a href="{% url 'question_generation:list' %}">Generate</a></li>
-    {% if user.is_orguser %}
+    {% if user.can_access_control %}
+    <li><a href="{% url 'core:control_hub' %}">Control</a></li>
+    {% endif %}
+    {% if user.is_superuser_role %}
     <li><a href="/admin/">Admin</a></li>
     {% endif %}
   </ul>

@@ -8,7 +8,38 @@
   </div>
 </div>
 
-<form method="post" x-data="{ items: [{type:'SHORT',bloom:'remember',marks:1,count:5}] }">
+<form method="post"
+  x-data="{
+    items: [{type:'SHORT',bloom:'remember',marks:1,count:5}],
+    hasRag: false,
+    hasPyq: false,
+    thinkOn: false,
+    unlimited: {{ credits.unlimited|yesno:'true,false' }},
+    remaining: {{ credits.remaining }},
+    base: {{ credit_tariff.per_question }},
+    ragFee: {{ credit_tariff.rag }},
+    pyqFee: {{ credit_tariff.pyq }},
+    thinkFee: {{ credit_tariff.think }},
+    get qCount() { return this.items.reduce((s, i) => s + (Number(i.count) || 0), 0) },
+    get perQ() {
+      return this.base
+        + (this.hasRag ? this.ragFee : 0)
+        + (this.hasPyq ? this.pyqFee : 0)
+        + (this.thinkOn ? this.thinkFee : 0);
+    },
+    get overLimit() {
+      if (this.unlimited) return false;
+      return this.qCount * this.perQ > this.remaining;
+    },
+    syncFlags() {
+      this.hasRag = this.$el.querySelectorAll('input[name=pdf_contexts]:checked').length > 0;
+      this.hasPyq = this.$el.querySelectorAll('input[name=pyq_modules]:checked').length > 0;
+      const t = this.$el.querySelector('input[name=think]');
+      this.thinkOn = !!(t && t.checked);
+    }
+  }"
+  @change="syncFlags()"
+  @input="syncFlags()">
   {% csrf_token %}
 
   <div class="form-section">
@@ -66,25 +97,39 @@
 
   <div class="form-section context-section">
     <div class="context-section__head">
-      <span class="field-label">Council of models</span>
-      <span class="field-hint">Each model verifies bloom · correctness · Q-type · appropriate — majority must approve</span>
+      <span class="field-label">Output language</span>
+      <span class="field-hint">Questions and answers will be written in this language</span>
     </div>
-    {% if council_models %}
-    <div class="context-chips" role="group" aria-label="Council models">
-      {% for mc in council_models %}
-      <label class="context-chip context-chip--council" title="{{ mc.name }} ({{ mc.provider }} / {{ mc.llm_model_id }})">
-        <input type="checkbox" name="council_models" value="{{ mc.id }}">
-        <span class="context-chip__icon" aria-hidden="true">LLM</span>
-        <span class="context-chip__label">{{ mc.name }}</span>
+    <div class="lang-toggle" role="radiogroup" aria-label="Output language"
+         x-data="{ lang: 'en', hindiId: '{{ hindi_prompt_id|default:'' }}', englishId: '{{ english_prompt_id|default:'' }}' }"
+         x-init="$watch('lang', v => { const sel = document.querySelector('select[name=prompt]'); if (!sel) return; if (v === 'hi' && hindiId) sel.value = hindiId; if (v === 'en' && englishId) sel.value = englishId; })">
+      <label class="lang-toggle__option" :class="{ 'is-active': lang === 'en' }">
+        <input type="radio" name="language" value="en" x-model="lang">
+        <span>English</span>
       </label>
-      {% endfor %}
+      <label class="lang-toggle__option" :class="{ 'is-active': lang === 'hi' }">
+        <input type="radio" name="language" value="hi" x-model="lang">
+        <span>हिंदी</span>
+      </label>
     </div>
-    <p class="field-hint" style="margin-top:0.55rem;">
-      Optional. Leave unchecked to skip verification. A model approves only if all four dimensions pass;
-      a question is shown only when a majority of selected models approve.
-    </p>
+  </div>
+
+  <div class="form-section context-section">
+    <div class="context-section__head">
+      <span class="field-label">Think mode</span>
+      <span class="field-hint">Extra multi-model verification before questions are kept</span>
+    </div>
+    {% if think_available %}
+    <label class="think-toggle" title="Enable Think mode">
+      <input type="checkbox" name="think" value="on">
+      <span class="think-toggle__track" aria-hidden="true"><span class="think-toggle__thumb"></span></span>
+      <span class="think-toggle__copy">
+        <strong>Think</strong>
+        <span class="muted">Verify bloom, correctness, question type, and appropriateness before showing results</span>
+      </span>
+    </label>
     {% else %}
-    <p class="muted">No council models configured.</p>
+    <p class="muted">Think mode is not available yet. Ask an admin to enable council models in Admin → Model configs.</p>
     {% endif %}
   </div>
 
@@ -123,6 +168,7 @@
     <button type="button" @click="items.push({type:'SHORT',bloom:'remember',marks:1,count:5})" class="btn">+ Add Row</button>
   </div>
 
+  {% if show_advanced_settings %}
   <details class="form-section">
     <summary><strong>Advanced Settings</strong></summary>
     <label>Prompt Template
@@ -138,7 +184,15 @@
     <label>RAG Top-K <input type="number" name="rag_top_k" value="5" min="1" max="20" class="form-control" style="width:100px"></label>
     <label>PYQ n-shot <input type="number" name="pyq_shots" value="3" min="0" max="10" class="form-control" style="width:100px"></label>
   </details>
+  {% endif %}
 
-  <button type="submit" class="btn btn-primary btn-lg">Generate Questions</button>
+  <div class="usage-line-wrap" style="margin:1rem 0 1.25rem;">
+    {% include "partials/credit_ring.html" with credits=credits %}
+    <p class="alert alert-warning" style="margin-top:0.75rem;" x-show="overLimit" x-cloak>
+      You don't have enough credits for this run.
+    </p>
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-lg" :disabled="overLimit">Generate Questions</button>
 </form>
 {% endblock %}

@@ -9,10 +9,12 @@ from django.http import JsonResponse
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
 from apps.core.models import ModelConfig
+from apps.core.ownership import owned_pyq_modules, owned_pyq_questions
 from apps.core.storage import (
     StorageQuotaExceeded,
     release_pyq_storage,
     reserve_pyq_storage,
+    storage_quota_display,
 )
 
 from .forms import PYQModuleUploadForm, QuestionEditForm
@@ -25,7 +27,17 @@ class PYQModuleListView(LoginRequiredMixin, ListView):
     context_object_name = 'modules'
 
     def get_queryset(self):
-        return PYQModule.objects.filter(organization=self.request.user.organization)
+        return owned_pyq_modules(self.request.user)
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        user = self.request.user
+        ctx["quota"] = storage_quota_display(user)
+        ctx["show_owner"] = bool(
+            getattr(user, "is_superuser", False)
+            or getattr(user, "is_orguser", False)
+        )
+        return ctx
 
 
 class PYQModuleUploadView(LoginRequiredMixin, CreateView):
@@ -63,7 +75,7 @@ class PYQModuleDetailView(LoginRequiredMixin, DetailView):
     template_name = 'pyq_module/module_detail.html'
 
     def get_queryset(self):
-        return PYQModule.objects.filter(organization=self.request.user.organization)
+        return owned_pyq_modules(self.request.user)
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
@@ -78,11 +90,12 @@ class PYQModuleDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('pyq_module:list')
 
     def get_queryset(self):
-        return PYQModule.objects.filter(organization=self.request.user.organization)
+        return owned_pyq_modules(self.request.user)
 
     def form_valid(self, form):
+        owner = self.object.created_by or self.request.user
         if self.object.file_size_bytes:
-            release_pyq_storage(self.request.user, self.object.file_size_bytes)
+            release_pyq_storage(owner, self.object.file_size_bytes)
         messages.success(self.request, "PYQ module deleted.")
         return super().form_valid(form)
 
@@ -93,7 +106,7 @@ class QuestionUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'pyq_module/question_table.html'
 
     def get_queryset(self):
-        return Question.objects.filter(pyq_module__organization=self.request.user.organization)
+        return owned_pyq_questions(self.request.user)
 
     def get_success_url(self):
         return reverse_lazy('pyq_module:detail', kwargs={'pk': self.object.pyq_module_id})
@@ -104,7 +117,7 @@ class QuestionDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "pyq_module/question_confirm_delete.html"
 
     def get_queryset(self):
-        return Question.objects.filter(pyq_module__organization=self.request.user.organization)
+        return owned_pyq_questions(self.request.user)
 
     def get_success_url(self):
         return reverse_lazy("pyq_module:detail", kwargs={"pk": self.object.pyq_module_id})
@@ -112,5 +125,5 @@ class QuestionDeleteView(LoginRequiredMixin, DeleteView):
 
 @login_required
 def pyq_module_status(request, pk):
-    mod = get_object_or_404(PYQModule, pk=pk, organization=request.user.organization)
+    mod = get_object_or_404(owned_pyq_modules(request.user), pk=pk)
     return JsonResponse({'status': mod.status, 'question_count': mod.questions.count()})

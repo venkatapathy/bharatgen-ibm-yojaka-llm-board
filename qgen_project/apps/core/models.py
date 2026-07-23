@@ -4,7 +4,11 @@ from django.db import models
 
 class Organization(models.Model):
     name       = models.CharField(max_length=255)
-    slug       = models.SlugField(unique=True)
+    slug       = models.SlugField(
+        'username',
+        unique=True,
+        help_text='Unique organisation username (letters, numbers, hyphens).',
+    )
     is_active  = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -14,8 +18,8 @@ class Organization(models.Model):
 
 class User(AbstractUser):
     class Role(models.TextChoices):
-        SUPERUSER = 'superuser', 'SuperUser'
-        ORGUSER   = 'orguser',   'OrgUser'
+        SUPERUSER = 'superuser', 'Admin'
+        ORGUSER   = 'orguser',   'Org Admin'
         USER      = 'user',      'User'
 
     role = models.CharField(
@@ -31,13 +35,28 @@ class User(AbstractUser):
     )
     is_active_member = models.BooleanField(default=True)
     created_at       = models.DateTimeField(auto_now_add=True)
+    # Plain login password note for Control-created accounts (DB legacy column).
+    control_password = models.CharField(max_length=255, blank=True, default="")
 
     @property
     def is_superuser_role(self):
         return self.role == self.Role.SUPERUSER
 
     @property
+    def is_org_admin(self):
+        """Org Admin only (not platform Admin)."""
+        return self.role == self.Role.ORGUSER
+
+    @property
     def is_orguser(self):
+        return self.role in (self.Role.SUPERUSER, self.Role.ORGUSER)
+
+    @property
+    def can_manage_prompts(self):
+        return self.role == self.Role.SUPERUSER
+
+    @property
+    def can_access_control(self):
         return self.role in (self.Role.SUPERUSER, self.Role.ORGUSER)
 
     def __str__(self):
@@ -58,6 +77,11 @@ class ModelConfig(models.Model):
         help_text='Name of the env-var that holds the API key (not the key itself)',
     )
     is_default       = models.BooleanField(default=False)
+    is_council_member = models.BooleanField(
+        default=False,
+        help_text='When Think mode is on, all models marked here are used as the '
+                  'hidden Council of Models (configured in Admin only).',
+    )
     created_at       = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -113,13 +137,29 @@ class ExecutionQuota(models.Model):
 
 
 class OrganizationProvisioningPolicy(models.Model):
-    organization               = models.OneToOneField(Organization, on_delete=models.CASCADE)
-    default_monthly_credits    = models.IntegerField(default=100_000)
-    default_storage_limit_gb   = models.FloatField(default=5.0)
-    default_vector_storage_gb  = models.FloatField(default=2.0)
-    default_pdf_zip_limit      = models.IntegerField(default=20)
-    default_pyq_zip_limit      = models.IntegerField(default=10)
-    default_daily_run_limit    = models.IntegerField(default=20)
+    organization = models.OneToOneField(Organization, on_delete=models.CASCADE)
+    # Organisation-owned pools. Org Admin distributes these among Users (not Org Admins).
+    credit_pool = models.IntegerField(
+        default=10_000,
+        help_text='Total monthly credits for this organisation. Distributed to users only.',
+    )
+    storage_pool_gb = models.FloatField(
+        default=50.0,
+        help_text='Total file storage (GB) for this organisation. Distributed to users only.',
+    )
+    vector_storage_pool_gb = models.FloatField(
+        default=20.0,
+        help_text='Total vector/embedding storage (GB) for this organisation. Distributed to users only.',
+    )
+    default_monthly_credits = models.IntegerField(
+        default=1_000,
+        help_text='Suggested starting credits when creating a new user (must fit in remaining pool).',
+    )
+    default_storage_limit_gb = models.FloatField(default=5.0)
+    default_vector_storage_gb = models.FloatField(default=2.0)
+    default_pdf_zip_limit = models.IntegerField(default=20)
+    default_pyq_zip_limit = models.IntegerField(default=10)
+    default_daily_run_limit = models.IntegerField(default=20)
     default_concurrent_run_limit = models.IntegerField(default=2)
 
 

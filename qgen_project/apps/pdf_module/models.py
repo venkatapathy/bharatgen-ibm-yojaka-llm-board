@@ -1,12 +1,7 @@
 import uuid
 from django.db import models
 from apps.core.models import User
-
-try:
-    from pgvector.django import VectorField
-except ImportError:
-    # Fallback when pgvector not installed (CI / dev without PG)
-    from django.db.models import TextField as VectorField  # type: ignore
+from pgvector.django import VectorField
 
 DEFAULT_EMBED_DIMENSIONS = 768
 
@@ -61,9 +56,7 @@ class PDFChunk(models.Model):
     page_number = models.IntegerField(null=True, blank=True)
     chunk_index = models.IntegerField()
     text        = models.TextField()
-    # VectorField falls back to TextField when pgvector unavailable
-    embedding   = VectorField(dimensions=DEFAULT_EMBED_DIMENSIONS, null=True, blank=True) if hasattr(VectorField, 'dimensions') \
-                  else models.TextField(null=True, blank=True)
+    embedding   = VectorField(dimensions=DEFAULT_EMBED_DIMENSIONS, null=True, blank=True)
     token_count = models.IntegerField(default=0)
     metadata    = models.JSONField(default=dict)
 

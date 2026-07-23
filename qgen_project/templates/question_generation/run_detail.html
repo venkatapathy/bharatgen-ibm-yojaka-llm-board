@@ -6,22 +6,27 @@
     <div class="eyebrow">Generated assessment set</div>
     <h1>{{ object.name }}</h1>
     <p class="muted">Topic: <strong>{{ object.topic }}</strong>
+      · <span class="badge badge-muted">{% if object.language == 'hi' %}हिंदी{% else %}English{% endif %}</span>
       {% if object.council_enabled %}
-      · Council: {% for m in object.council_models.all %}<span class="badge badge-muted">{{ m.name }}</span> {% empty %}<span class="muted">none</span>{% endfor %}
+      · <span class="badge badge-muted">Think on</span>
+      {% if show_council_models %}
+      · Council:{% for m in object.council_models.all %} <span class="badge badge-muted">{{ m.name }}</span>{% empty %} <span class="muted">none</span>{% endfor %}
+      {% endif %}
       {% if object.council_rejected_count %}
-      · <span class="muted">{{ object.council_rejected_count }} rejected by council</span>
+      · <span class="muted">{{ object.council_rejected_count }} rejected by Think</span>
       {% endif %}
       {% endif %}
     </p>
   </div>
   <div class="btn-row">
+    <a class="btn" href="{% url 'question_generation:export' object.id %}?format=dataset">Dataset JSON</a>
     <a class="btn" href="{% url 'question_generation:export' object.id %}?format=docx">Export DOCX</a>
     <a class="btn" href="{% url 'question_generation:export' object.id %}?format=csv">CSV</a>
     <a class="btn" href="{% url 'question_generation:export' object.id %}?format=json">JSON</a>
-    {% if object.status == 'partial' %}
-    <form method="post" action="{% url 'question_generation:rerun' object.id %}">
+    {% if object.status == 'failed' or object.status == 'partial' %}
+    <form method="post" action="{% url 'question_generation:rerun' object.id %}" class="inline-form">
       {% csrf_token %}
-      <button class="btn" type="submit">Retry Failed</button>
+      <button class="btn btn-primary" type="submit">Retry</button>
     </form>
     {% endif %}
   </div>
@@ -38,7 +43,7 @@
 <h2>Generated Questions ({{ questions.count }})</h2>
 <div class="question-list">
 {% for q in questions %}
-  {% include "partials/question_card.html" with question=q %}
+  {% include "partials/question_card.html" with question=q show_council_models=show_council_models show_dataset_meta=True %}
 {% empty %}
   <div class="form-section">No questions generated yet.</div>
 {% endfor %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}{{ page_title }} — Control{% endblock %}
+{% block content %}
+<div class="stack-header">
+  <div>
+    <div class="eyebrow"><a href="{% url 'core:control_users' %}">{% if create_org_admin %}Org Admins{% else %}Users{% endif %}</a> · Create</div>
+    <h1>{{ page_title }}</h1>
+    <p class="muted">
+      {% if create_org_admin %}
+      Org Admins distribute pools to users and draw from whatever remains unallocated.
+      {% else %}
+      Assign credits and storage from the organisation pools.
+      {% endif %}
+    </p>
+    {% if budget and not create_org_admin %}
+    <p class="muted">
+      Credits left: <strong>{{ budget.remaining }}</strong> / {{ budget.pool }}
+      {% if storage_budget %}
+      · Storage left: <strong>{{ storage_budget.storage_remaining|floatformat:1 }}</strong> GB
+      · Vector left: <strong>{{ storage_budget.vector_remaining|floatformat:1 }}</strong> GB
+      {% endif %}
+    </p>
+    {% endif %}
+  </div>
+</div>
+
+<form method="post" class="form-section">
+  {% csrf_token %}
+  <div class="form-grid">
+    {% if orgs %}
+    <label class="form-field">
+      <span class="field-label">Organisation</span>
+      <select name="organization" class="form-control" required
+              onchange="window.location='{% url 'core:control_user_create' %}?org='+this.value">
+        {% for org in orgs %}
+        <option value="{{ org.id }}" {% if selected_org_id == org.id %}selected{% endif %}>{{ org.name }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    {% endif %}
+    {% for field in form %}
+    {% if field.is_hidden %}
+      {{ field }}
+    {% else %}
+    <label class="form-field">
+      <span class="field-label">{{ field.label }}</span>
+      {{ field }}
+      {% if field.errors %}<span class="muted">{{ field.errors }}</span>{% endif %}
+      {% if field.help_text %}<span class="field-hint">{{ field.help_text }}</span>{% endif %}
+    </label>
+    {% endif %}
+    {% endfor %}
+  </div>
+  <button type="submit" class="btn btn-primary">{% if create_org_admin %}Create Org Admin{% else %}Create user{% endif %}</button>
+  <a class="btn" href="{% url 'core:control_users' %}">Cancel</a>
+</form>
+{% endblock %}

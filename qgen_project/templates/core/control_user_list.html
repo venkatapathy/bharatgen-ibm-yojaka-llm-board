@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}{{ list_title }} — Control{% endblock %}
+{% block content %}
+<div class="stack-header">
+  <div>
+    <div class="eyebrow"><a href="{% url 'core:control_hub' %}">Control</a> · {{ list_title }}</div>
+    <h1>{{ list_title }}</h1>
+    <p class="muted">
+      {% if is_admin %}
+      Create Org Admins by username. Organisation pools are shared by users — Org Admins manage distribution.
+      {% else %}
+      Create users and assign credits/storage from your organisation pools.
+      {% endif %}
+    </p>
+    {% if budget %}
+    <p class="muted">
+      Credits: <strong>{{ budget.allocated }}</strong> / {{ budget.pool }}
+      ({{ budget.remaining }} left)
+      {% if storage_budget %}
+      · Storage: <strong>{{ storage_budget.storage_assigned|floatformat:1 }}</strong> / {{ storage_budget.storage_pool|floatformat:1 }} GB
+      · Vector: <strong>{{ storage_budget.vector_assigned|floatformat:1 }}</strong> / {{ storage_budget.vector_pool|floatformat:1 }} GB
+      {% endif %}
+    </p>
+    {% endif %}
+  </div>
+  <a class="btn btn-primary" href="{% url 'core:control_user_create' %}">{{ create_label }}</a>
+</div>
+
+{% if orgs %}
+<form method="get" class="form-section" style="margin-bottom:1rem">
+  <label class="form-field">
+    <span class="field-label">Filter by organisation</span>
+    <select name="org" class="form-control" onchange="this.form.submit()">
+      <option value="">All organisations</option>
+      {% for org in orgs %}
+      <option value="{{ org.id }}" {% if selected_org == org.id|stringformat:'s' %}selected{% endif %}>{{ org.name }}</option>
+      {% endfor %}
+    </select>
+  </label>
+</form>
+{% endif %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Organisation</th>
+      <th>Credits</th>
+      {% if not is_admin %}
+      <th>Storage</th>
+      <th>Daily runs</th>
+      {% endif %}
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in rows %}
+    <tr>
+      <td><strong>{{ row.user.username }}</strong></td>
+      <td>{{ row.user.organization|default:"—" }}</td>
+      <td>
+        {% if is_admin %}
+        <span class="muted">pool manager</span>
+        {% else %}
+        {{ row.credits.current_month_credits_used }} / {{ row.credits.monthly_credit_limit }}
+        {% endif %}
+      </td>
+      {% if not is_admin %}
+      <td>{{ row.storage.current_total_storage_gb|floatformat:2 }} / {{ row.storage.max_total_storage_gb|floatformat:2 }} GB</td>
+      <td>{{ row.execution.today_generation_runs }} / {{ row.execution.max_generation_runs_per_day }}</td>
+      {% endif %}
+      <td>{% if row.user.is_active_member %}<span class="badge badge-success">active</span>{% else %}<span class="badge badge-muted">inactive</span>{% endif %}</td>
+      <td><a class="btn btn-sm" href="{% url 'core:control_user_quota' row.user.id %}">{% if is_admin %}Manage{% else %}Edit quota{% endif %}</a></td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="{% if is_admin %}5{% else %}7{% endif %}" class="muted">No {% if is_admin %}Org Admins{% else %}users{% endif %} found.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

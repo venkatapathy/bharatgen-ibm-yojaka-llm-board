@@ -7,27 +7,47 @@
     <h1>PDF Contexts</h1>
   </div>
   <div class="btn-row">
-    <form method="post" action="{% url 'pdf_module:reindex_stale' %}">
-      {% csrf_token %}
-      <button class="btn" type="submit">Reindex Stale</button>
-    </form>
     <a class="btn btn-primary" href="{% url 'pdf_module:upload' %}">Upload Context</a>
   </div>
 </div>
 
-<div class="stat-grid" style="margin-bottom:1.25rem;">
-  <div class="stat-card"><span class="muted">Total storage</span><strong>{{ quota.current_total_storage_gb|floatformat:2 }} GB</strong></div>
-  <div class="stat-card"><span class="muted">PDF uploads</span><strong>{{ quota.current_saved_pdf_zips }} / {{ quota.max_saved_pdf_zips }}</strong></div>
-  <div class="stat-card"><span class="muted">Vector storage</span><strong>{{ quota.current_vector_storage_gb|floatformat:2 }} / {{ quota.max_vector_storage_gb|floatformat:2 }} GB</strong></div>
+<div class="stat-grid stat-grid--rings" style="margin-bottom:1.25rem;">
+  <div class="stat-card stat-card--ring">
+    <div class="stat-ring" style="--pct: {{ quota.storage_pct }};" aria-hidden="true">
+      <svg viewBox="0 0 36 36" class="stat-ring__svg">
+        <circle class="stat-ring__track" cx="18" cy="18" r="15.9155"></circle>
+        <circle class="stat-ring__value" cx="18" cy="18" r="15.9155" pathLength="100"></circle>
+      </svg>
+      <span class="stat-ring__pct">{{ quota.storage_pct }}%</span>
+    </div>
+    <div class="stat-ring__meta">
+      <span class="muted">{% if quota.uses_unallocated_pool %}Unallocated storage{% else %}Storage{% endif %}</span>
+      <strong>{{ quota.current_total_storage_gb|floatformat:2 }} / {{ quota.max_total_storage_gb|floatformat:2 }} GB</strong>
+    </div>
+  </div>
+  <div class="stat-card stat-card--ring">
+    <div class="stat-ring" style="--pct: {{ quota.pdf_pct }};" aria-hidden="true">
+      <svg viewBox="0 0 36 36" class="stat-ring__svg">
+        <circle class="stat-ring__track" cx="18" cy="18" r="15.9155"></circle>
+        <circle class="stat-ring__value" cx="18" cy="18" r="15.9155" pathLength="100"></circle>
+      </svg>
+      <span class="stat-ring__pct">{{ quota.pdf_pct }}%</span>
+    </div>
+    <div class="stat-ring__meta">
+      <span class="muted">PDF uploads</span>
+      <strong>{{ quota.current_saved_pdf_zips }} / {{ quota.max_saved_pdf_zips }}</strong>
+    </div>
+  </div>
 </div>
 
 <div class="table-wrap">
   <table class="table">
-    <thead><tr><th>Name</th><th>Strategy</th><th>File</th><th>Chunks</th><th>Status</th><th>Actions</th></tr></thead>
+    <thead><tr><th>Name</th>{% if show_owner %}<th>Owner</th>{% endif %}<th>Strategy</th><th>File</th><th>Chunks</th><th>Status</th><th>Actions</th></tr></thead>
     <tbody>
     {% for ctx in contexts %}
     <tr>
       <td><a href="{% url 'pdf_module:detail' ctx.id %}">{{ ctx.name }}</a></td>
+      {% if show_owner %}<td>{{ ctx.created_by.username|default:"—" }}</td>{% endif %}
       <td>{{ ctx.get_strategy_display }}</td>
       <td>{{ ctx.original_filename|default:"-" }}</td>
       <td>{{ ctx.chunk_count }}</td>
@@ -40,7 +60,7 @@
       </td>
     </tr>
     {% empty %}
-    <tr><td colspan="6">No PDF contexts yet. <a href="{% url 'pdf_module:upload' %}">Upload one</a>.</td></tr>
+    <tr><td colspan="{% if show_owner %}7{% else %}6{% endif %}">No PDF contexts yet. <a href="{% url 'pdf_module:upload' %}">Upload one</a>.</td></tr>
     {% endfor %}
     </tbody>
   </table>

@@ -13,8 +13,23 @@ class BatchRun(models.Model):
         PARTIAL   = 'partial',   'Partial (some failed)'
         FAILED    = 'failed',    'Failed'
 
+    class Language(models.TextChoices):
+        ENGLISH = 'en', 'English'
+        HINDI   = 'hi', 'Hindi'
+
+    class ReviewStatus(models.TextChoices):
+        NOT_STARTED = 'not_started', 'Not started'
+        PENDING = 'pending_review', 'Pending review'
+        COMPLETE = 'review_complete', 'Review complete'
+
     name          = models.CharField(max_length=256)
     topic         = models.CharField(max_length=512)
+    language      = models.CharField(
+        max_length=8,
+        choices=Language.choices,
+        default=Language.ENGLISH,
+        help_text='Output language for generated questions and answers.',
+    )
     pdf_contexts  = models.ManyToManyField(PDFContext, blank=True, related_name='batch_runs')
     pyq_modules   = models.ManyToManyField(PYQModule,  blank=True, related_name='batch_runs')
     prompt        = models.ForeignKey(PromptTemplate, on_delete=models.SET_NULL, null=True)
@@ -38,6 +53,12 @@ class BatchRun(models.Model):
     )
     status        = models.CharField(max_length=16, choices=Status.choices,
                                      default=Status.PENDING)
+    review_status = models.CharField(
+        max_length=32,
+        choices=ReviewStatus.choices,
+        default=ReviewStatus.NOT_STARTED,
+        help_text='Human must approve/reject each generated question before full results.',
+    )
     error_summary = models.TextField(blank=True)
     celery_task_id= models.CharField(max_length=256, blank=True)
     expected_questions = models.IntegerField(default=0)
@@ -62,6 +83,23 @@ class BatchRun(models.Model):
     @property
     def total_questions(self):
         return self.questions.count()
+
+    @property
+    def pending_review_count(self):
+        from apps.pyq_module.models import Question
+
+        return self.questions.filter(
+            is_generated=True,
+            user_decision=Question.UserDecision.PENDING,
+        ).count()
+
+    @property
+    def needs_human_review(self):
+        if self.status not in {self.Status.COMPLETED, self.Status.PARTIAL}:
+            return False
+        if self.review_status == self.ReviewStatus.COMPLETE:
+            return False
+        return self.pending_review_count > 0
 
     @property
     def progress(self):

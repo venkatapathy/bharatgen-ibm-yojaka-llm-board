@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}{{ org.name }} quotas — Control{% endblock %}
+{% block content %}
+<div class="stack-header">
+  <div>
+    <div class="eyebrow"><a href="{% url 'core:control_orgs' %}">Organisations</a> · Policy</div>
+    <h1>{{ org.name }}</h1>
+    <p class="muted">
+      Credits: <strong>{{ budget.allocated }}</strong> / {{ budget.pool }}
+      ({{ budget.remaining }} unallocated{% if budget.org_admin_used %} · Org Admins used {{ budget.org_admin_used }}{% endif %})
+      · Storage: <strong>{{ storage_budget.storage_assigned|floatformat:1 }}</strong> / {{ storage_budget.storage_pool|floatformat:1 }} GB
+      · Vector: <strong>{{ storage_budget.vector_assigned|floatformat:1 }}</strong> / {{ storage_budget.vector_pool|floatformat:1 }} GB
+    </p>
+  </div>
+</div>
+
+<form method="post" class="form-section">
+  {% csrf_token %}
+  <div class="form-grid">
+    {% for field in form %}
+    <label class="form-field">
+      <span class="field-label">{{ field.label }}</span>
+      {{ field }}
+      {% if field.errors %}<span class="muted">{{ field.errors }}</span>{% endif %}
+    </label>
+    {% endfor %}
+  </div>
+  <button type="submit" class="btn btn-primary">Save defaults</button>
+  <a class="btn" href="{% url 'core:control_orgs' %}">Cancel</a>
+</form>
+
+{% if org_admins %}
+<section class="form-section">
+  <h3>Org admins</h3>
+  <p class="muted">They distribute organisation pools to users. Their own usage draws from whatever remains unallocated (pool − user assignments).</p>
+  <ul>
+    {% for admin in org_admins %}
+    <li>{{ admin.username }}</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% endblock %}

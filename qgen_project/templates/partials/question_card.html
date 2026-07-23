@@ -6,8 +6,8 @@
     {% if question.topic %}<span class="badge badge-muted">{{ question.topic }}</span>{% endif %}
     {% with council=question.rubrics.council %}
     {% if council.enabled %}
-    <span class="badge badge-success" title="Council majority approval">
-      Council {{ council.approvals }}/{{ council.total_models }}
+    <span class="badge {% if council.majority_passed and not council.forced_keep %}badge-success{% else %}badge-muted{% endif %}" title="Think verification">
+      {% if council.forced_keep %}Think kept{% elif council.degraded %}Think soft{% else %}Think {{ council.approvals }}/{{ council.voted_models|default:council.total_models }}{% endif %}
     </span>
     {% endif %}
     {% endwith %}
@@ -20,6 +20,7 @@
       <li class="mcq-option{% if opt.is_correct %} is-correct{% endif %}">
         <span class="mcq-option__label">{{ opt.label }}.</span>
         <span>{{ opt.text }}</span>
+        {% if opt.is_correct %}<span class="correct-tag">Correct</span>{% endif %}
       </li>
       {% endfor %}
     </ul>
@@ -29,39 +30,99 @@
       <li>{{ option }}</li>
       {% endfor %}
     </ul>
+    {% if question.reference_answer %}
+    <div class="correct-answer">
+      <span class="correct-answer__label">Correct answer</span>
+      <div class="correct-answer__body">{{ question.reference_answer }}</div>
+    </div>
+    {% endif %}
     {% else %}
     <p class="mcq-missing-options">MCQ options not available for this question.</p>
     {% endif %}
+  {% elif question.reference_answer %}
+  <div class="correct-answer">
+    <span class="correct-answer__label">Correct answer</span>
+    <div class="correct-answer__body">{{ question.reference_answer }}</div>
+  </div>
+  {% elif question.is_generated %}
+  <p class="mcq-missing-options">Correct answer was not returned by the model.</p>
   {% endif %}
-  {% if question.reference_answer %}
-  <p><strong>Answer:</strong> {{ question.reference_answer }}</p>
-  {% endif %}
+
   {% with council=question.rubrics.council %}
   {% if council.enabled and council.votes %}
   <details class="council-votes">
-    <summary>Council votes ({{ council.approvals }}/{{ council.total_models }} approved · threshold {{ council.threshold }})</summary>
+    <summary>Think verification ({{ council.approvals }}/{{ council.voted_models|default:council.total_models }} approved · need {{ council.threshold }}{% if council.abstentions %} · {{ council.abstentions }} abstain{% endif %})</summary>
     <ul class="council-vote-list">
       {% for vote in council.votes %}
-      <li class="council-vote {% if vote.approved %}is-approved{% else %}is-rejected{% endif %}">
-        <strong>{{ vote.model }}</strong>
-        {% if vote.approved %}
+      <li class="council-vote {% if vote.abstain %}is-abstain{% elif vote.approved %}is-approved{% else %}is-rejected{% endif %}">
+        <strong>{% if show_council_models %}{{ vote.model }}{% else %}Verifier {{ forloop.counter }}{% endif %}</strong>
+        {% if vote.abstain %}
+        <span class="badge badge-muted">abstain</span>
+        {% elif vote.approved %}
         <span class="badge badge-success">approved</span>
         {% else %}
         <span class="badge status-error">rejected</span>
         {% endif %}
+        {% if not vote.abstain %}
         <span class="council-dims">
           bloom:{% if vote.bloom %}✓{% else %}✗{% endif %}
           correct:{% if vote.correctness %}✓{% else %}✗{% endif %}
           type:{% if vote.question_type %}✓{% else %}✗{% endif %}
           apt:{% if vote.appropriate %}✓{% else %}✗{% endif %}
         </span>
+        {% elif show_council_models and vote.error %}
+        <span class="muted">{{ vote.error|truncatechars:80 }}</span>
+        {% endif %}
       </li>
       {% endfor %}
     </ul>
   </details>
+  {% elif council.enabled and council.forced_keep %}
+  <p class="muted">Think could not majority-approve; question kept for delivery.</p>
   {% endif %}
   {% endwith %}
-  {% if question.is_generated and question.batch_run_id %}
+
+  {% if show_dataset_meta %}
+  <details class="dataset-meta">
+    <summary>Dataset sources (chunks · PYQ)</summary>
+    {% if question.rag_chunks %}
+    <p class="muted" style="margin-top:0.5rem;"><strong>RAG chunks ({{ question.rag_chunks|length }})</strong></p>
+    <ul class="dataset-meta__list">
+      {% for chunk in question.rag_chunks %}
+      <li>
+        <span class="muted">{{ chunk.context_name|default:"PDF" }}{% if chunk.page_number %} · p.{{ chunk.page_number }}{% endif %}</span>
+        <div>{{ chunk.text|truncatechars:220 }}</div>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="muted" style="margin-top:0.5rem;">No RAG chunks stored for this question.</p>
+    {% endif %}
+    {% if question.pyq_examples %}
+    <p class="muted" style="margin-top:0.75rem;"><strong>PYQ examples ({{ question.pyq_examples|length }})</strong></p>
+    <ul class="dataset-meta__list">
+      {% for ex in question.pyq_examples %}
+      <li>
+        <span class="muted">{{ ex.pyq_module_name|default:"PYQ" }} · {{ ex.question_type }} · {{ ex.bloom }}</span>
+        <div>{{ ex.question_text|truncatechars:220 }}</div>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="muted" style="margin-top:0.5rem;">No PYQ examples stored for this question.</p>
+    {% endif %}
+  </details>
+  {% endif %}
+
+  {% if question.is_generated and question.user_decision and question.user_decision != 'pending' %}
+  <p class="muted" style="margin-top:0.65rem;">
+    Your decision:
+    <strong>{{ question.get_user_decision_display }}</strong>
+    {% if question.user_feedback %} — {{ question.user_feedback }}{% endif %}
+  </p>
+  {% endif %}
+
+  {% if question.is_generated and question.batch_run_id and not hide_actions %}
   <div class="question-actions table-actions__inner">
     <a class="btn btn-sm" href="{% url 'question_generation:question_edit' question.id %}">Edit</a>
     <a class="btn btn-sm btn-danger" href="{% url 'question_generation:question_delete' question.id %}">Delete</a>

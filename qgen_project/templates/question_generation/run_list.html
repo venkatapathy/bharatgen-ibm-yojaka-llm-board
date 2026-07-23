@@ -8,27 +8,53 @@
   </div>
   <a class="btn btn-primary" href="{% url 'question_generation:new' %}">New Run</a>
 </div>
+
+<div class="usage-line-wrap">
+  {% include "partials/credit_ring.html" with credits=credits %}
+</div>
+
 <div class="table-wrap">
   <table class="table">
-    <thead><tr><th>Name</th><th>Topic</th><th>Status</th><th>Expected</th><th>Generated</th><th>Actions</th></tr></thead>
+    <thead><tr><th>Name</th>{% if show_owner %}<th>Owner</th>{% endif %}<th>Topic</th><th>Status</th><th>Expected</th><th>Generated</th><th>Actions</th></tr></thead>
     <tbody>
     {% for run in runs %}
     <tr>
       <td><a href="{% url 'question_generation:detail' run.id %}">{{ run.name }}</a></td>
+      {% if show_owner %}<td>{{ run.created_by.username|default:"—" }}</td>{% endif %}
       <td>{{ run.topic }}</td>
-      <td><span class="badge status-{{ run.status }}">{{ run.status }}</span></td>
+      <td>
+        <span class="badge status-{{ run.status }}">{{ run.status }}</span>
+        {% if run.needs_human_review %}
+        <span class="badge badge-muted">review</span>
+        {% elif run.review_status == 'review_complete' and run.total_questions %}
+        <span class="badge badge-success">reviewed</span>
+        {% endif %}
+      </td>
       <td>{{ run.expected_questions }}</td>
       <td>{{ run.total_questions }}</td>
       <td class="table-actions">
         <div class="table-actions__inner">
+          {% if run.needs_human_review %}
+          <a class="btn btn-sm btn-primary" href="{% url 'question_generation:review' run.id %}">Review</a>
+          {% else %}
           <a class="btn btn-sm" href="{% url 'question_generation:detail' run.id %}">Open</a>
+          {% endif %}
+          {% if run.status == 'failed' or run.status == 'partial' %}
+          <form method="post" action="{% url 'question_generation:rerun' run.id %}" class="inline-form">
+            {% csrf_token %}
+            <button class="btn btn-sm btn-primary" type="submit">Retry</button>
+          </form>
+          {% endif %}
+          {% if run.review_status == 'review_complete' %}
+          <a class="btn btn-sm" href="{% url 'question_generation:export' run.id %}?format=dataset">Dataset</a>
+          {% endif %}
           <a class="btn btn-sm" href="{% url 'question_generation:export' run.id %}?format=docx">DOCX</a>
           <a class="btn btn-sm btn-danger" href="{% url 'question_generation:delete' run.id %}">Delete</a>
         </div>
       </td>
     </tr>
     {% empty %}
-    <tr><td colspan="6">No runs yet. <a href="{% url 'question_generation:new' %}">Start one</a>.</td></tr>
+    <tr><td colspan="{% if show_owner %}7{% else %}6{% endif %}">No runs yet. <a href="{% url 'question_generation:new' %}">Start one</a>.</td></tr>
     {% endfor %}
     </tbody>
   </table>

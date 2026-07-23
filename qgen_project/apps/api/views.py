@@ -1,8 +1,13 @@
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from django.db.models import Q
 from apps.core.models import User, Organization, ModelConfig
+from apps.core.ownership import (
+    owned_batch_runs,
+    owned_pdf_contexts,
+    owned_pyq_modules,
+    owned_pyq_questions,
+)
 from apps.core.permissions import IsSuperUser, IsOrgUser
 from apps.pdf_module.models import PDFContext
 from apps.pyq_module.models import PYQModule, Question
@@ -41,8 +46,7 @@ class PDFContextViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return PDFContext.objects.filter(
-            organization=self.request.user.organization, status='ready')
+        return owned_pdf_contexts(self.request.user, ready_only=True)
 
 
 class PYQModuleViewSet(viewsets.ReadOnlyModelViewSet):
@@ -50,8 +54,7 @@ class PYQModuleViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return PYQModule.objects.filter(
-            organization=self.request.user.organization, status='ready')
+        return owned_pyq_modules(self.request.user, ready_only=True)
 
 
 class QuestionViewSet(viewsets.ModelViewSet):
@@ -60,13 +63,10 @@ class QuestionViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        if user.role == User.Role.SUPERUSER:
-            qs = Question.objects.all()
-        else:
-            qs = Question.objects.filter(
-                Q(pyq_module__organization=user.organization) |
-                Q(batch_run__created_by__organization=user.organization)
-            ).distinct()
+        qs = owned_pyq_questions(user) | Question.objects.filter(
+            is_generated=True, batch_run__created_by=user
+        )
+        qs = qs.distinct()
         if pyq_id := self.request.query_params.get('pyq_module'):
             qs = qs.filter(pyq_module_id=pyq_id)
         if run_id := self.request.query_params.get('batch_run'):
@@ -77,7 +77,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
 class PromptTemplateViewSet(viewsets.ReadOnlyModelViewSet):
     queryset           = PromptTemplate.objects.all()
     serializer_class   = PromptTemplateSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsSuperUser]
 
 
 class BatchRunViewSet(viewsets.ModelViewSet):
@@ -85,7 +85,7 @@ class BatchRunViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return BatchRun.objects.filter(created_by=self.request.user)
+        return owned_batch_runs(self.request.user)
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)

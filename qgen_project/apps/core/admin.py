@@ -8,7 +8,10 @@ from .models import (User, Organization, ModelConfig, OrganizationSettings,
 @admin.register(Organization)
 class OrganizationAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'is_active', 'created_at')
+    list_display_links = ('name',)
+    search_fields = ('name', 'slug')
     prepopulated_fields = {'slug': ('name',)}
+    # slug field is shown as "username" via model verbose_name
 
 
 @admin.register(User)
@@ -22,8 +25,26 @@ class UserAdmin(BaseUserAdmin):
 
 @admin.register(ModelConfig)
 class ModelConfigAdmin(admin.ModelAdmin):
-    list_display = ('name', 'provider', 'llm_model_id', 'is_default')
-    list_filter  = ('provider',)
+    list_display = ('name', 'provider', 'llm_model_id', 'is_default', 'is_council_member')
+    list_filter  = ('provider', 'is_default', 'is_council_member')
+    list_editable = ('is_council_member',)
+    search_fields = ('name', 'llm_model_id')
+    fieldsets = (
+        (None, {
+            'fields': (
+                'name', 'provider', 'llm_model_id', 'embed_model_id',
+                'reranker_model', 'temperature', 'max_tokens', 'api_key_env_var',
+                'is_default',
+            ),
+        }),
+        ('Council of Models (Think mode)', {
+            'description': (
+                'Users only see a Think toggle on New Run. Mark models here to '
+                'include them in the hidden council when Think is enabled.'
+            ),
+            'fields': ('is_council_member',),
+        }),
+    )
 
 
 admin.site.register(OrganizationSettings)

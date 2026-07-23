@@ -23,13 +23,21 @@
     <h2>PYQ Bank</h2>
     <p>Upload previous-year exam papers and extract structured questions.</p>
   </a>
+  {% if user.can_manage_prompts %}
   <a class="card" href="{% url 'prompt_module:list' %}">
     <h2>Prompt Manager</h2>
     <p>Create and manage prompt templates with version history.</p>
   </a>
+  {% endif %}
   <a class="card" href="{% url 'question_generation:list' %}">
     <h2>Generate Questions</h2>
     <p>Launch AI-powered batch question generation with RAG and PYQ examples.</p>
   </a>
+  {% if user.can_access_control %}
+  <a class="card" href="{% url 'core:control_hub' %}">
+    <h2>Control</h2>
+    <p>{% if user.is_superuser_role %}Set organisation quotas and technical settings.{% else %}Manage users and quotas in your organisation.{% endif %}</p>
+  </a>
+  {% endif %}
 </div>
 {% endblock %}

@@ -7,11 +7,13 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView
 
 from apps.core.models import ModelConfig
+from apps.core.ownership import owned_pdf_contexts
 from apps.core.storage import (
     StorageQuotaExceeded,
-    get_storage_quota,
+    recompute_vector_storage,
     release_pdf_storage,
     reserve_pdf_storage,
+    storage_quota_display,
 )
 
 from .forms import PDFContextUploadForm
@@ -25,11 +27,18 @@ class PDFContextListView(LoginRequiredMixin, ListView):
     context_object_name = 'contexts'
 
     def get_queryset(self):
-        return PDFContext.objects.filter(organization=self.request.user.organization)
+        return owned_pdf_contexts(self.request.user)
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx["quota"] = get_storage_quota(self.request.user)
+        # Keep vector storage card accurate from live chunk embeddings.
+        recompute_vector_storage(self.request.user)
+        ctx["quota"] = storage_quota_display(self.request.user)
+        user = self.request.user
+        ctx["show_owner"] = bool(
+            getattr(user, "is_superuser", False)
+            or getattr(user, "is_orguser", False)
+        )
         return ctx
 
 
@@ -73,7 +82,7 @@ class PDFContextDetailView(LoginRequiredMixin, DetailView):
     template_name = 'pdf_module/context_detail.html'
 
     def get_queryset(self):
-        return PDFContext.objects.filter(organization=self.request.user.organization)
+        return owned_pdf_contexts(self.request.user)
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
@@ -87,24 +96,27 @@ class PDFContextDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('pdf_module:list')
 
     def get_queryset(self):
-        return PDFContext.objects.filter(organization=self.request.user.organization)
+        return owned_pdf_contexts(self.request.user)
 
     def form_valid(self, form):
+        owner = self.object.created_by or self.request.user
         if self.object.file_size_bytes:
-            release_pdf_storage(self.request.user, self.object.file_size_bytes)
+            release_pdf_storage(owner, self.object.file_size_bytes)
         messages.success(self.request, "PDF context deleted.")
-        return super().form_valid(form)
+        response = super().form_valid(form)
+        recompute_vector_storage(owner)
+        return response
 
 
 @login_required
 def pdf_context_status(request, pk):
-    ctx = get_object_or_404(PDFContext, pk=pk, organization=request.user.organization)
+    ctx = get_object_or_404(owned_pdf_contexts(request.user), pk=pk)
     return render(request, "pdf_module/partials/context_status.html", {"object": ctx})
 
 
 @login_required
 def pdf_context_chunks(request, pk):
-    ctx = get_object_or_404(PDFContext, pk=pk, organization=request.user.organization)
+    ctx = get_object_or_404(owned_pdf_contexts(request.user), pk=pk)
     chunks = PDFChunk.objects.filter(context=ctx).order_by("source_file", "page_number", "chunk_index")[:100]
     return render(request, "pdf_module/partials/chunk_table.html", {"object": ctx, "chunks": chunks})
 
@@ -112,7 +124,7 @@ def pdf_context_chunks(request, pk):
 @login_required
 def pdf_context_reindex(request, pk):
     if request.method == 'POST':
-        ctx = get_object_or_404(PDFContext, pk=pk, organization=request.user.organization)
+        ctx = get_object_or_404(owned_pdf_contexts(request.user), pk=pk)
         ctx.status = 'pending'
         ctx.needs_reindex = True
         ctx.save(update_fields=['status', 'needs_reindex'])
@@ -124,8 +136,9 @@ def pdf_context_reindex(request, pk):
 @login_required
 def reindex_stale_pdfs(request):
     if request.method == "POST":
-        count = PDFContext.objects.filter(organization=request.user.organization, needs_reindex=True).count()
-        for context in PDFContext.objects.filter(organization=request.user.organization, needs_reindex=True):
+        stale = owned_pdf_contexts(request.user).filter(needs_reindex=True)
+        count = stale.count()
+        for context in stale:
             index_pdf_context.delay(str(context.id))
         messages.info(request, f"Queued {count} stale PDF contexts for reindexing.")
     return redirect("pdf_module:list")

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Review · {{ object.name }}{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <div class="eyebrow">Human review required</div>
+    <h1>{{ object.name }}</h1>
+    <p class="muted">
+      Approve or reject each question before the full results open.
+      · Question <strong>{{ position }}</strong> of <strong>{{ total_count }}</strong>
+    </p>
+  </div>
+</div>
+
+<div class="form-section" style="margin-bottom:1rem;">
+  <div class="progress-shell">
+    <progress value="{{ reviewed_count }}" max="{{ total_count }}"></progress>
+    <p class="muted" style="margin-top:0.5rem;">{{ reviewed_count }} reviewed · {{ total_count|add:"0" }} total</p>
+  </div>
+</div>
+
+{% include "partials/question_card.html" with question=question show_council_models=show_council_models hide_actions=True show_dataset_meta=True %}
+
+<form method="post" class="form-section review-form">
+  {% csrf_token %}
+  <label class="form-field">
+    <span class="field-label">Feedback comment {% if True %}(required if you reject){% endif %}</span>
+    <textarea name="feedback" class="form-control" rows="3" placeholder="Why approve or reject? Notes are saved for the research dataset."></textarea>
+  </label>
+  <div class="btn-row" style="margin-top:1rem;">
+    <button type="submit" name="decision" value="approved" class="btn btn-primary btn-lg">Approve</button>
+    <button type="submit" name="decision" value="rejected" class="btn btn-danger btn-lg">Reject</button>
+  </div>
+</form>
+{% endblock %}

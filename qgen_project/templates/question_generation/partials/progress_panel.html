@@ -1,4 +1,9 @@
-<div class="progress-shell panel" id="progress-bar">
+<div class="progress-shell panel" id="progress-bar"
+     {% if object.status == 'pending' or object.status == 'running' %}
+     hx-get="{% url 'question_generation:status' object.id %}"
+     hx-trigger="every 3s"
+     hx-swap="outerHTML"
+     {% endif %}>
   <div class="question-meta">
     <span class="badge status-{{ object.status }}">{{ object.status }}</span>
     <span class="muted">Expected: {{ object.expected_questions }}</span>
@@ -8,5 +13,19 @@
   <progress value="{{ object.progress }}" max="100"></progress>
   {% if object.error_summary %}
   <p class="alert alert-warning" style="margin-top:0.75rem;">{{ object.error_summary }}</p>
+  {% endif %}
+  {% if object.status == 'failed' or object.status == 'partial' %}
+  <div class="btn-row" style="margin-top:0.85rem;">
+    <form method="post" action="{% url 'question_generation:rerun' object.id %}" class="inline-form">
+      {% csrf_token %}
+      <button class="btn btn-primary" type="submit">
+        {% if object.status == 'failed' %}Retry generation{% else %}Retry failed items{% endif %}
+      </button>
+    </form>
+  </div>
+  {% elif object.needs_human_review %}
+  <div class="btn-row" style="margin-top:0.85rem;">
+    <a class="btn btn-primary" href="{% url 'question_generation:review' object.id %}">Review questions</a>
+  </div>
   {% endif %}
 </div>

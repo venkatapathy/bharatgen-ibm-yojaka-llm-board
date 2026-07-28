@@ -188,11 +188,11 @@ def get_execution_quota(user):
 
 
 # ── Fixed credit tariff (generation only; PYQ extraction is free) ───────────
-# Tuned so a normal 5-question RAG run ≈ 30k credits (~6k/q), Think adds ~2.5k/q.
-CREDITS_PER_QUESTION = 5_000
-CREDITS_RAG_PER_QUESTION = 500
-CREDITS_PYQ_PER_QUESTION = 250
-CREDITS_THINK_PER_QUESTION = 2_500
+# Demo-friendly rates so a typical 5-question run fits a 6k user quota.
+CREDITS_PER_QUESTION = 200
+CREDITS_RAG_PER_QUESTION = 50
+CREDITS_PYQ_PER_QUESTION = 25
+CREDITS_THINK_PER_QUESTION = 100
 
 
 def rule_credits_per_question(

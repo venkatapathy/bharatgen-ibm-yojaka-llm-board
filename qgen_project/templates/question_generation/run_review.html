@@ -19,7 +19,7 @@
   </div>
 </div>
 
-{% include "partials/question_card.html" with question=question show_council_models=show_council_models hide_actions=True show_dataset_meta=True %}
+{% include "partials/question_card.html" with question=question show_council_models=show_council_models hide_actions=True show_dataset_meta=show_dataset_meta %}
 
 <form method="post" class="form-section review-form">
   {% csrf_token %}

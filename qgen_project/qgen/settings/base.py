@@ -47,6 +47,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    'apps.core.middleware.ActiveMemberMiddleware',
 ]
 
 ROOT_URLCONF = 'qgen.urls'
@@ -134,6 +135,12 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_ADAPTER = 'apps.core.adapters.QGenAccountAdapter'
+ACCOUNT_FORMS = {
+    'login': 'apps.core.forms.QGenLoginForm',
+}
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+# None = honor the "Remember Me" checkbox on login
+ACCOUNT_SESSION_REMEMBER = None
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 14  # 14 days when Remember Me is checked
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'

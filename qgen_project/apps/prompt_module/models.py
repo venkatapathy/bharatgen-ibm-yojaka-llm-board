@@ -1,26 +1,47 @@
 from django.db import models
 from apps.core.models import User
 
+
 DEFAULT_SYSTEM_PROMPT = """\
 You are an expert exam question setter following Bloom's Taxonomy.
 Generate exactly {{ count }} questions of type {{ question_type }} at
-Bloom's level {{ bloom }} for the topic: {{ topic }}.
-Each question must be worth {{ marks }} marks.
+Bloom's level {{ bloom }}. Each question must be worth {{ marks }} marks.
 {% if context_chunks %}
-Use the following reference material:
+IMPORTANT: Base every question ONLY on the reference material below.
+Questions must be answerable from that material alone.
+Do NOT invent a subject around any batch/run label, and do NOT put such a label in questions.
+
+Reference material:
 {{ context_chunks }}
+{% else %}
+Generate questions for the subject area: {{ topic }}.
+If the topic is not a clear real academic subject, return an empty JSON array [].
 {% endif %}
 {% if pyq_examples %}
-Model your style on these example questions:
+Match the difficulty, style, and format of these example questions (use new content, not copies):
 {{ pyq_examples }}
 {% endif %}
-Return a JSON array where each element has:
+Return a JSON array with EXACTLY {{ count }} elements. Each element has:
   question_text, reference_answer, rubrics.
+For MCQ questions you MUST also include:
+  options: an array of exactly 4 objects, each with "label" (A/B/C/D) and "text".
+  reference_answer: the correct option label (e.g. "B") or full option text.
+Do not prefix question_text with "[MCQ]".
+The array length must equal {{ count }} — no more, no less.
 """
 
 DEFAULT_USER_PROMPT = """\
-Generate {{ count }} {{ question_type }} questions on "{{ topic }}" at
-Bloom's {{ bloom }} level, {{ marks }} marks each.
+{% if context_chunks %}
+Generate {{ count }} {{ question_type }} question(s) from the reference material
+at Bloom's {{ bloom }} level, {{ marks }} marks each.
+Do not mention any batch/run name in the questions.
+{% else %}
+Generate {{ count }} {{ question_type }} question(s) on "{{ topic }}"
+at Bloom's {{ bloom }} level, {{ marks }} marks each.
+{% endif %}
+{% if question_type == 'MCQ' %}
+Each MCQ must have exactly 4 labelled options (A, B, C, D) and a clear correct answer.
+{% endif %}
 """
 
 

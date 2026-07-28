@@ -85,11 +85,29 @@ def looks_like_legacy_hindi(text: str) -> Tuple[bool, str]:
         return False, "unknown"
     if len(_DEVANAGARI_RE.findall(text)) / max(len(text), 1) > 0.25:
         return False, "unknown"
+
+    # Clear English must never be remapped (lipi false-positives on BA English PDFs).
+    try:
+        from .latin_encoding import _english_score
+
+        if _english_score(text) >= 0.12:
+            return False, "unknown"
+    except Exception:
+        pass
+
     try:
         from lipi import HindiPreprocessor
 
         has_legacy, font_type = HindiPreprocessor.detect_encoding(text)
         if has_legacy and font_type != "unknown":
+            # Re-check after lipi says yes — protect English body text.
+            try:
+                from .latin_encoding import _english_score
+
+                if _english_score(text) >= 0.10:
+                    return False, "unknown"
+            except Exception:
+                pass
             return True, font_type
     except Exception as exc:
         logger.debug("lipi detect_encoding failed: %s", exc)
@@ -99,6 +117,13 @@ def looks_like_legacy_hindi(text: str) -> Tuple[bool, str]:
     score = sum(text.count(p) for p in fingerprints)
     latin_letters = sum(1 for ch in text if "A" <= ch <= "Z" or "a" <= ch <= "z")
     if score >= 3 and latin_letters > 40 and len(_DEVANAGARI_RE.findall(text)) < 5:
+        try:
+            from .latin_encoding import _english_score
+
+            if _english_score(text) >= 0.10:
+                return False, "unknown"
+        except Exception:
+            pass
         return True, "krutidev"
     return False, "unknown"
 

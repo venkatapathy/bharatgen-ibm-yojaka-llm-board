@@ -1,0 +1,30 @@
+{# Shared Admin / Org Admin browse filter: org (admin) + user / My … #}
+{% if needs_user_filter %}
+<form method="get" class="form-section" style="margin-bottom:1.25rem;">
+  <div class="btn-row" style="flex-wrap:wrap; gap:1rem; align-items:flex-end;">
+    {% if filter_orgs %}
+    <label class="form-field" style="min-width:220px; margin:0;">
+      <span class="field-label">Organisation</span>
+      <select name="org" class="form-control" onchange="this.form.submit()">
+        <option value="">Select organisation…</option>
+        {% for org in filter_orgs %}
+        <option value="{{ org.id }}" {% if selected_org == org.id|stringformat:'s' %}selected{% endif %}>{{ org.name }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    {% endif %}
+    <label class="form-field" style="min-width:220px; margin:0;">
+      <span class="field-label">User</span>
+      <select name="user" class="form-control" onchange="this.form.submit()">
+        <option value="">Select user…</option>
+        <option value="{{ self_browse_value }}" {% if selected_user == self_browse_value %}selected{% endif %}>{{ mine_label|default:"My items" }} ({{ user.username }})</option>
+        {% for u in filter_users %}
+        <option value="{{ u.id }}" {% if selected_user == u.id|stringformat:'s' %}selected{% endif %}>
+          {{ u.username }}{% if u.role == 'orguser' %} (Org Admin){% endif %}
+        </option>
+        {% endfor %}
+      </select>
+    </label>
+  </div>
+</form>
+{% endif %}

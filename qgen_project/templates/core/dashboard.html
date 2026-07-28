@@ -36,7 +36,7 @@
   {% if user.can_access_control %}
   <a class="card" href="{% url 'core:control_hub' %}">
     <h2>Control</h2>
-    <p>{% if user.is_superuser_role %}Set organisation quotas and technical settings.{% else %}Manage users and quotas in your organisation.{% endif %}</p>
+    <p>{% if user.is_superuser_role %}Set organisation quotas and PDF indexing / technical settings.{% else %}Manage users and quotas in your organisation.{% endif %}</p>
   </a>
   {% endif %}
 </div>

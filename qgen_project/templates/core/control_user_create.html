@@ -17,7 +17,6 @@
       Credits left: <strong>{{ budget.remaining }}</strong> / {{ budget.pool }}
       {% if storage_budget %}
       · Storage left: <strong>{{ storage_budget.storage_remaining|floatformat:1 }}</strong> GB
-      · Vector left: <strong>{{ storage_budget.vector_remaining|floatformat:1 }}</strong> GB
       {% endif %}
     </p>
     {% endif %}
@@ -26,8 +25,9 @@
 
 <form method="post" class="form-section">
   {% csrf_token %}
+  {% if orgs %}
+  <h2 class="form-section__title">Organisation</h2>
   <div class="form-grid">
-    {% if orgs %}
     <label class="form-field">
       <span class="field-label">Organisation</span>
       <select name="organization" class="form-control" required
@@ -37,11 +37,15 @@
         {% endfor %}
       </select>
     </label>
-    {% endif %}
+  </div>
+  {% endif %}
+
+  <h2 class="form-section__title">Account</h2>
+  <div class="form-grid">
     {% for field in form %}
     {% if field.is_hidden %}
       {{ field }}
-    {% else %}
+    {% elif field.name == "username" or field.name == "email" or field.name == "password1" or field.name == "password2" %}
     <label class="form-field">
       <span class="field-label">{{ field.label }}</span>
       {{ field }}
@@ -51,7 +55,26 @@
     {% endif %}
     {% endfor %}
   </div>
-  <button type="submit" class="btn btn-primary">{% if create_org_admin %}Create Org Admin{% else %}Create user{% endif %}</button>
-  <a class="btn" href="{% url 'core:control_users' %}">Cancel</a>
+
+  {% if not create_org_admin %}
+  <h2 class="form-section__title">Quotas</h2>
+  <div class="form-grid">
+    {% for field in form %}
+    {% if field.name == "credits_to_assign" or field.name == "storage_gb" %}
+    <label class="form-field">
+      <span class="field-label">{{ field.label }}</span>
+      {{ field }}
+      {% if field.errors %}<span class="muted">{{ field.errors }}</span>{% endif %}
+      {% if field.help_text %}<span class="field-hint">{{ field.help_text }}</span>{% endif %}
+    </label>
+    {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="btn-row">
+    <button type="submit" class="btn btn-primary">{% if create_org_admin %}Create Org Admin{% else %}Create user{% endif %}</button>
+    <a class="btn" href="{% url 'core:control_users' %}">Cancel</a>
+  </div>
 </form>
 {% endblock %}

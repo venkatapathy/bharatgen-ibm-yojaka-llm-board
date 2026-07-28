@@ -2,7 +2,9 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import (User, Organization, ModelConfig, OrganizationSettings,
                      UserProvisioningQuota, StorageQuota, ExecutionQuota,
-                     OrganizationProvisioningPolicy, TokenUsageLog)
+                     OrganizationProvisioningPolicy, PDFIndexingSettings,
+                     GenerationSettings, TokenUsageLog)
+
 
 
 @admin.register(Organization)
@@ -48,6 +50,8 @@ class ModelConfigAdmin(admin.ModelAdmin):
 
 
 admin.site.register(OrganizationSettings)
+admin.site.register(PDFIndexingSettings)
+admin.site.register(GenerationSettings)
 admin.site.register(UserProvisioningQuota)
 admin.site.register(StorageQuota)
 admin.site.register(ExecutionQuota)

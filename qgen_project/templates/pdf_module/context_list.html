@@ -3,66 +3,58 @@
 {% block content %}
 <div class="page-header">
   <div>
-    <div class="eyebrow">Semantic context store</div>
+    <div class="eyebrow">PDF context store</div>
     <h1>PDF Contexts</h1>
+    {% if browse_user %}
+    <p class="muted">
+      {% if browsing_own %}
+      Showing <strong>your</strong> PDF contexts
+      {% else %}
+      Showing contexts for <strong>{{ browse_user.username }}</strong>{% if browse_user.organization %} · {{ browse_user.organization.name }}{% endif %}
+      {% endif %}
+    </p>
+    {% elif needs_user_filter %}
+    <p class="muted">Select {% if filter_orgs %}an organisation and {% endif %}a user to view PDF contexts — or choose <strong>My PDFs</strong> for your own uploads.</p>
+    {% endif %}
   </div>
   <div class="btn-row">
     <a class="btn btn-primary" href="{% url 'pdf_module:upload' %}">Upload Context</a>
   </div>
 </div>
 
-<div class="stat-grid stat-grid--rings" style="margin-bottom:1.25rem;">
-  <div class="stat-card stat-card--ring">
-    <div class="stat-ring" style="--pct: {{ quota.storage_pct }};" aria-hidden="true">
-      <svg viewBox="0 0 36 36" class="stat-ring__svg">
-        <circle class="stat-ring__track" cx="18" cy="18" r="15.9155"></circle>
-        <circle class="stat-ring__value" cx="18" cy="18" r="15.9155" pathLength="100"></circle>
-      </svg>
-      <span class="stat-ring__pct">{{ quota.storage_pct }}%</span>
-    </div>
-    <div class="stat-ring__meta">
-      <span class="muted">{% if quota.uses_unallocated_pool %}Unallocated storage{% else %}Storage{% endif %}</span>
-      <strong>{{ quota.current_total_storage_gb|floatformat:2 }} / {{ quota.max_total_storage_gb|floatformat:2 }} GB</strong>
-    </div>
-  </div>
-  <div class="stat-card stat-card--ring">
-    <div class="stat-ring" style="--pct: {{ quota.pdf_pct }};" aria-hidden="true">
-      <svg viewBox="0 0 36 36" class="stat-ring__svg">
-        <circle class="stat-ring__track" cx="18" cy="18" r="15.9155"></circle>
-        <circle class="stat-ring__value" cx="18" cy="18" r="15.9155" pathLength="100"></circle>
-      </svg>
-      <span class="stat-ring__pct">{{ quota.pdf_pct }}%</span>
-    </div>
-    <div class="stat-ring__meta">
-      <span class="muted">PDF uploads</span>
-      <strong>{{ quota.current_saved_pdf_zips }} / {{ quota.max_saved_pdf_zips }}</strong>
-    </div>
-  </div>
-</div>
+{% include "partials/browse_user_filter.html" %}
+
+{% if browse_user or not needs_user_filter %}
+{% include "partials/quota_stat_rings.html" with quota=quota upload_label="PDF uploads" upload_used=quota.current_saved_pdf_zips upload_max=quota.max_saved_pdf_zips upload_pct=quota.pdf_pct upload_pct_label=quota.pdf_pct_label %}
 
 <div class="table-wrap">
   <table class="table">
-    <thead><tr><th>Name</th>{% if show_owner %}<th>Owner</th>{% endif %}<th>Strategy</th><th>File</th><th>Chunks</th><th>Status</th><th>Actions</th></tr></thead>
+    <thead><tr><th>Name</th>{% if show_chunks %}<th>Strategy</th>{% endif %}<th>File</th><th>Size</th>{% if show_chunks %}<th>Chunks</th>{% endif %}<th>Status</th><th>Actions</th></tr></thead>
     <tbody>
     {% for ctx in contexts %}
     <tr>
-      <td><a href="{% url 'pdf_module:detail' ctx.id %}">{{ ctx.name }}</a></td>
-      {% if show_owner %}<td>{{ ctx.created_by.username|default:"—" }}</td>{% endif %}
-      <td>{{ ctx.get_strategy_display }}</td>
+      <td>{% if show_chunks %}<a href="{% url 'pdf_module:detail' ctx.id %}">{{ ctx.name }}</a>{% else %}{{ ctx.name }}{% endif %}</td>
+      {% if show_chunks %}<td>{{ ctx.get_strategy_display }}</td>{% endif %}
       <td>{{ ctx.original_filename|default:"-" }}</td>
-      <td>{{ ctx.chunk_count }}</td>
+      <td>{{ ctx.file_size_label }}</td>
+      {% if show_chunks %}<td>{{ ctx.chunk_count }}</td>{% endif %}
       <td><span class="badge status-{{ ctx.status }}">{{ ctx.status }}</span></td>
       <td class="table-actions">
         <div class="table-actions__inner">
+          {% if show_chunks %}
           <a class="btn btn-sm" href="{% url 'pdf_module:detail' ctx.id %}">View</a>
+          {% endif %}
           <a class="btn btn-sm btn-danger" href="{% url 'pdf_module:delete' ctx.id %}">Delete</a>
         </div>
       </td>
     </tr>
     {% empty %}
-    <tr><td colspan="{% if show_owner %}7{% else %}6{% endif %}">No PDF contexts yet. <a href="{% url 'pdf_module:upload' %}">Upload one</a>.</td></tr>
+    <tr><td colspan="{% if show_chunks %}7{% else %}5{% endif %}">
+      {% if browse_user %}No PDF contexts for this user yet.{% else %}No PDF contexts yet. <a href="{% url 'pdf_module:upload' %}">Upload one</a>.{% endif %}
+    </td></tr>
     {% endfor %}
     </tbody>
   </table>
 </div>
+{% endif %}
 {% endblock %}

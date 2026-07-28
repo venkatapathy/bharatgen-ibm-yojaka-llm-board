@@ -10,11 +10,11 @@
       {% if target.organization %}· {{ target.organization }}{% endif %}
       {% if target.role != 'orguser' %}
       · used {{ credits.current_month_credits_used }} credits this month
-      · {{ storage.current_total_storage_gb|floatformat:2 }} GB stored
+      · {{ storage_summary.used_label }} / {{ storage_summary.max_label }} stored
       {% else %}
       · uses unallocated org pool (not a personal share)
       · credits used {{ credits.current_month_credits_used }} this month
-      · {{ storage.current_total_storage_gb|floatformat:2 }} GB stored
+      · {{ storage_summary.used_label }} stored
       {% endif %}
     </p>
     {% if budget %}
@@ -24,7 +24,6 @@
       {% if budget.org_admin_used %} · Org Admins used {{ budget.org_admin_used }}{% endif %})
       {% if storage_budget %}
       · Storage left: <strong>{{ storage_budget.storage_remaining|floatformat:1 }}</strong> GB
-      · Vector left: <strong>{{ storage_budget.vector_remaining|floatformat:1 }}</strong> GB
       {% endif %}
     </p>
     {% endif %}
@@ -33,16 +32,62 @@
 
 <form method="post" class="form-section">
   {% csrf_token %}
+
+  {% if form.monthly_credit_limit %}
+  <h2 class="form-section__title">Monthly allocation</h2>
   <div class="form-grid">
-    {% for field in form %}
     <label class="form-field">
-      <span class="field-label">{{ field.label }}</span>
-      {{ field }}
-      {% if field.errors %}<span class="muted">{{ field.errors }}</span>{% endif %}
+      <span class="field-label">{{ form.monthly_credit_limit.label }}</span>
+      {{ form.monthly_credit_limit }}
+      {% if form.monthly_credit_limit.errors %}<span class="muted">{{ form.monthly_credit_limit.errors }}</span>{% endif %}
+      {% if form.monthly_credit_limit.help_text %}<span class="field-hint">{{ form.monthly_credit_limit.help_text }}</span>{% endif %}
     </label>
-    {% endfor %}
+    <label class="form-field">
+      <span class="field-label">{{ form.max_total_storage_gb.label }}</span>
+      {{ form.max_total_storage_gb }}
+      {% if form.max_total_storage_gb.errors %}<span class="muted">{{ form.max_total_storage_gb.errors }}</span>{% endif %}
+      {% if form.max_total_storage_gb.help_text %}<span class="field-hint">{{ form.max_total_storage_gb.help_text }}</span>{% endif %}
+    </label>
+    <label class="form-field--toggle">
+      <span class="field-label">{{ form.is_hard_limited.label }}</span>
+      <span class="run-switch" title="{{ form.is_hard_limited.label }}">
+        {{ form.is_hard_limited }}
+        <span class="run-switch__pill" aria-hidden="true"></span>
+      </span>
+    </label>
   </div>
-  <button type="submit" class="btn btn-primary">{% if target.role == 'orguser' %}Save{% else %}Save quotas{% endif %}</button>
-  <a class="btn" href="{% url 'core:control_users' %}">Cancel</a>
+  {% endif %}
+
+  <h2 class="form-section__title">Upload and run limits</h2>
+  <div class="form-grid">
+    <label class="form-field">
+      <span class="field-label">{{ form.max_saved_pdf_zips.label }}</span>
+      {{ form.max_saved_pdf_zips }}
+    </label>
+    <label class="form-field">
+      <span class="field-label">{{ form.max_saved_pyq_zips.label }}</span>
+      {{ form.max_saved_pyq_zips }}
+    </label>
+    <label class="form-field">
+      <span class="field-label">{{ form.max_generation_runs_per_day.label }}</span>
+      {{ form.max_generation_runs_per_day }}
+    </label>
+    <label class="form-field">
+      <span class="field-label">{{ form.max_concurrent_runs.label }}</span>
+      {{ form.max_concurrent_runs }}
+    </label>
+    <label class="form-field--toggle">
+      <span class="field-label">{{ form.is_active_member.label }}</span>
+      <span class="run-switch" title="{{ form.is_active_member.label }}">
+        {{ form.is_active_member }}
+        <span class="run-switch__pill" aria-hidden="true"></span>
+      </span>
+    </label>
+  </div>
+
+  <div class="btn-row">
+    <button type="submit" class="btn btn-primary">{% if target.role == 'orguser' %}Save{% else %}Save quotas{% endif %}</button>
+    <a class="btn" href="{% url 'core:control_users' %}">Cancel</a>
+  </div>
 </form>
 {% endblock %}

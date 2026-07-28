@@ -7,12 +7,20 @@ from django.utils.text import slugify
 from django.views.generic import TemplateView
 
 from .forms import (
+    GenerationSettingsForm,
     OrganizationCreateForm,
     OrganizationPolicyForm,
     OrgUserCreateForm,
+    PDFIndexingSettingsForm,
     UserQuotaForm,
 )
-from .models import Organization, OrganizationProvisioningPolicy, User
+from .models import (
+    GenerationSettings,
+    Organization,
+    OrganizationProvisioningPolicy,
+    PDFIndexingSettings,
+    User,
+)
 from .permissions import OrgUserRequiredMixin, role_required
 from .provisioning import (
     CreditPoolError,
@@ -26,6 +34,7 @@ from .storage import (
     assert_storage_fits_pool,
     get_storage_quota,
     org_storage_budget,
+    storage_usage_summary,
 )
 
 
@@ -46,6 +55,62 @@ class ControlHubView(OrgUserRequiredMixin, TemplateView):
             ).count()
             ctx["budget"] = org_credit_budget(user.organization)
         return ctx
+
+
+@role_required(User.Role.SUPERUSER)
+def technical_settings(request):
+    from .models import ModelConfig
+
+    pdf_settings = PDFIndexingSettings.load()
+    gen_settings = GenerationSettings.load()
+    llm_models = ModelConfig.objects.exclude(llm_model_id="").order_by("name")
+
+    if request.method == "POST":
+        pdf_form = PDFIndexingSettingsForm(
+            request.POST, instance=pdf_settings, prefix="pdf"
+        )
+        gen_form = GenerationSettingsForm(
+            request.POST, instance=gen_settings, prefix="gen"
+        )
+        pdf_ok = pdf_form.is_valid()
+        gen_ok = gen_form.is_valid()
+        if pdf_ok:
+            pdf_form.save()
+        if gen_ok:
+            gen_form.save()
+            selected = {
+                int(pk) for pk in request.POST.getlist("council_models") if pk.isdigit()
+            }
+            for model in llm_models:
+                want = model.pk in selected
+                if model.is_council_member != want:
+                    model.is_council_member = want
+                    model.save(update_fields=["is_council_member"])
+        if pdf_ok and gen_ok:
+            messages.success(request, "Technical settings saved.")
+            return redirect("core:control_technical")
+        if pdf_ok and not gen_ok:
+            messages.warning(
+                request, "PDF indexing saved. Fix generation settings and save again."
+            )
+        elif gen_ok and not pdf_ok:
+            messages.warning(
+                request, "Generation settings saved. Fix PDF indexing and save again."
+            )
+    else:
+        pdf_form = PDFIndexingSettingsForm(instance=pdf_settings, prefix="pdf")
+        gen_form = GenerationSettingsForm(instance=gen_settings, prefix="gen")
+    return render(
+        request,
+        "core/control_technical.html",
+        {
+            "form": pdf_form,
+            "generation_form": gen_form,
+            "settings": pdf_settings,
+            "generation_settings": gen_settings,
+            "llm_models": llm_models,
+        },
+    )
 
 
 @role_required(User.Role.SUPERUSER)
@@ -167,6 +232,7 @@ def user_list(request):
                 "user": member,
                 "credits": credits,
                 "storage": storage,
+                "storage_summary": storage_usage_summary(member),
                 "execution": execution,
             }
         )
@@ -204,19 +270,15 @@ def _budget_for_create(request, create_org_admin):
         if org
         else {
             "storage_pool": 0,
-            "vector_pool": 0,
             "storage_assigned": 0,
-            "vector_assigned": 0,
             "storage_remaining": 0,
-            "vector_remaining": 0,
             "policy": None,
         }
     )
     policy = credit_budget.get("policy") or storage_budget.get("policy")
     suggested_credits = int(getattr(policy, "default_monthly_credits", 0) or 0)
     suggested_storage = float(getattr(policy, "default_storage_limit_gb", 0) or 0)
-    suggested_vector = float(getattr(policy, "default_vector_storage_gb", 0) or 0)
-    return org, credit_budget, storage_budget, suggested_credits, suggested_storage, suggested_vector
+    return org, credit_budget, storage_budget, suggested_credits, suggested_storage
 
 
 @role_required(User.Role.SUPERUSER, User.Role.ORGUSER)
@@ -228,7 +290,6 @@ def user_create(request):
         storage_budget,
         suggested_credits,
         suggested_storage,
-        suggested_vector,
     ) = _budget_for_create(request, create_org_admin)
 
     form_kwargs = dict(
@@ -236,9 +297,7 @@ def user_create(request):
         max_credits=credit_budget["remaining"],
         suggested_credits=suggested_credits,
         max_storage=storage_budget["storage_remaining"],
-        max_vector=storage_budget["vector_remaining"],
         suggested_storage=suggested_storage,
-        suggested_vector=suggested_vector,
     )
 
     if request.method == "POST":
@@ -250,22 +309,18 @@ def user_create(request):
                 max_credits=0,
                 suggested_credits=0,
                 max_storage=0,
-                max_vector=0,
                 suggested_storage=0,
-                suggested_vector=0,
             )
         else:
             form_kwargs.update(
                 max_credits=credit_budget["remaining"],
                 max_storage=storage_budget["storage_remaining"],
-                max_vector=storage_budget["vector_remaining"],
             )
 
         form = OrgUserCreateForm(request.POST, **form_kwargs)
         if form.is_valid():
             credits_to_assign = int(form.cleaned_data.get("credits_to_assign") or 0)
             storage_gb = float(form.cleaned_data.get("storage_gb") or 0)
-            vector_gb = float(form.cleaned_data.get("vector_gb") or 0)
             errors = False
             if not create_org_admin:
                 try:
@@ -274,9 +329,7 @@ def user_create(request):
                     form.add_error("credits_to_assign", str(exc))
                     errors = True
                 try:
-                    assert_storage_fits_pool(
-                        org, total_gb=storage_gb, vector_gb=vector_gb
-                    )
+                    assert_storage_fits_pool(org, total_gb=storage_gb)
                 except StoragePoolError as exc:
                     form.add_error("storage_gb", str(exc))
                     errors = True
@@ -292,7 +345,7 @@ def user_create(request):
                 member.save()
                 storage_quota = get_storage_quota(member)
                 storage_quota.max_total_storage_gb = 0 if create_org_admin else storage_gb
-                storage_quota.max_vector_storage_gb = 0 if create_org_admin else vector_gb
+                storage_quota.max_vector_storage_gb = 0
                 storage_quota.save(
                     update_fields=[
                         "max_total_storage_gb",
@@ -315,7 +368,7 @@ def user_create(request):
                     messages.success(
                         request,
                         f'{label} "{member.username}" created with {credits_to_assign} credits, '
-                        f"{storage_gb:g} GB storage, {vector_gb:g} GB vector.",
+                        f"{storage_gb:g} GB storage.",
                     )
                 return redirect("core:control_users")
     else:
@@ -381,6 +434,7 @@ def user_quota_edit(request, user_id):
             "target": target,
             "form": form,
             "storage": get_storage_quota(target),
+            "storage_summary": storage_usage_summary(target),
             "credits": get_credit_quota(target),
             "execution": get_execution_quota(target),
             "budget": budget,

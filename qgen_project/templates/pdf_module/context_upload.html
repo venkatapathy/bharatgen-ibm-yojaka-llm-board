@@ -3,13 +3,39 @@
 {% block content %}
 <div class="stack-header">
   <div>
-    <div class="eyebrow">PDF chunking and embeddings</div>
+    <div class="eyebrow">PDF context store</div>
     <h1>Upload PDF Context</h1>
-    <p class="muted">Supports single PDF or ZIP archive. Semantic chunking uses sentence embeddings.</p>
+    <p class="muted">
+      Supports a single PDF or a ZIP of PDFs — ZIP contents are listed as separate files on the dashboard.
+      Indexing uses the platform defaults from Technical settings.
+    </p>
   </div>
 </div>
 
-<form method="post" enctype="multipart/form-data" x-data="{ fileName: '' }">
+<form method="post" enctype="multipart/form-data"
+      x-data="{
+        fileName: '',
+        fileError: '',
+        isAllowed(name) {
+          const n = (name || '').toLowerCase();
+          return n.endsWith('.pdf') || n.endsWith('.zip');
+        },
+        setFile(file) {
+          if (!file) {
+            this.fileName = '';
+            this.fileError = '';
+            return;
+          }
+          if (!this.isAllowed(file.name)) {
+            this.fileName = '';
+            this.fileError = 'Only PDF or ZIP files are allowed.';
+            if (this.$refs.fileInput) this.$refs.fileInput.value = '';
+            return;
+          }
+          this.fileError = '';
+          this.fileName = file.name;
+        }
+      }">
   {% csrf_token %}
 
   <div class="form-section">
@@ -17,10 +43,6 @@
       <label class="form-field">
         <span class="field-label">Context name</span>
         {{ form.name }}
-      </label>
-      <label class="form-field">
-        <span class="field-label">Chunking strategy</span>
-        {{ form.strategy }}
       </label>
     </div>
     <label class="form-field">
@@ -32,53 +54,53 @@
   <div class="form-section">
     <span class="field-label">PDF or ZIP file</span>
     <label class="upload-zone"
-           :class="{ 'is-dragover': false }"
+           :class="{ 'is-dragover': false, 'has-error': fileError }"
            @dragover.prevent
-           @drop.prevent="$refs.fileInput.files = $event.dataTransfer.files; fileName = $event.dataTransfer.files[0]?.name || ''">
+           @drop.prevent="
+             const file = $event.dataTransfer.files[0];
+             if (file && isAllowed(file.name) && $refs.fileInput) {
+               const dt = new DataTransfer();
+               dt.items.add(file);
+               $refs.fileInput.files = dt.files;
+             }
+             setFile(file);
+           ">
       <div class="upload-zone__icon">📄</div>
       <div class="upload-zone__title" x-text="fileName || 'Drag & drop your file here'">Drag & drop your file here</div>
-      <div class="upload-zone__hint">or click to browse — PDF or ZIP, max {{ form.zip_path.field.max_length|default:"100" }} MB</div>
+      <div class="upload-zone__hint">or click to browse — PDF or ZIP only</div>
       {{ form.zip_path }}
     </label>
+    <p class="alert alert-error" x-show="fileError" x-text="fileError" x-cloak style="margin-top:0.75rem;"></p>
     {% if form.zip_path.errors %}
     <p class="alert alert-error">{{ form.zip_path.errors.0 }}</p>
     {% endif %}
   </div>
 
-  <div class="form-section">
-    <div class="form-grid">
-      <label class="form-field">
-        <span class="field-label">Chunk size</span>
-        {{ form.chunk_size }}
-      </label>
-      <label class="form-field">
-        <span class="field-label">Chunk overlap</span>
-        {{ form.chunk_overlap }}
-      </label>
-      <label class="form-field">
-        <span class="field-label">Embedding model</span>
-        {{ form.embed_config }}
-      </label>
-      <label class="form-field">
-        <span class="field-label">Reranker model</span>
-        {{ form.reranker_config }}
-      </label>
-    </div>
-    <div class="semantic-hint">
-      <strong>Semantic chunking</strong> embeds sentences and splits at topic boundaries for better RAG retrieval.
-    </div>
-  </div>
-
   <div class="btn-row">
-    <button type="submit" class="btn btn-primary btn-lg">Upload and Index</button>
+    <button type="submit" class="btn btn-primary btn-lg"
+            @click="
+              const file = $refs.fileInput && $refs.fileInput.files[0];
+              if (file && !isAllowed(file.name)) {
+                $event.preventDefault();
+                setFile(file);
+              }
+            ">Upload and Index</button>
     <a href="{% url 'pdf_module:list' %}" class="btn">Cancel</a>
   </div>
 </form>
 
 <script>
-document.querySelector('.upload-zone input[type="file"]')?.addEventListener('change', function (e) {
-  const title = document.querySelector('.upload-zone__title');
-  if (title && e.target.files[0]) title.textContent = e.target.files[0].name;
-});
+(function () {
+  const input = document.querySelector('.upload-zone input[type="file"]');
+  if (!input) return;
+  input.setAttribute('accept', '.pdf,.zip,application/pdf,application/zip,application/x-zip-compressed');
+  input.addEventListener('change', function () {
+    const root = input.closest('form');
+    const file = input.files && input.files[0];
+    if (!root || !window.Alpine) return;
+    const data = Alpine.$data(root);
+    if (data && typeof data.setFile === 'function') data.setFile(file || null);
+  });
+})();
 </script>
 {% endblock %}

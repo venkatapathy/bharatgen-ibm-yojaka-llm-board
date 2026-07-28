@@ -36,7 +36,23 @@ class User(AbstractUser):
     is_active_member = models.BooleanField(default=True)
     created_at       = models.DateTimeField(auto_now_add=True)
     # Plain login password note for Control-created accounts (DB legacy column).
+    # Kept in sync by set_password() so the note always matches login.
     control_password = models.CharField(max_length=255, blank=True, default="")
+
+    def set_password(self, raw_password):
+        super().set_password(raw_password)
+        # Demo/Control helper: keep plaintext note aligned with the real hash.
+        self.control_password = raw_password or ""
+
+    def save(self, *args, **kwargs):
+        update_fields = kwargs.get("update_fields")
+        if (
+            update_fields is not None
+            and "password" in update_fields
+            and "control_password" not in update_fields
+        ):
+            kwargs["update_fields"] = list(update_fields) + ["control_password"]
+        super().save(*args, **kwargs)
 
     @property
     def is_superuser_role(self):
@@ -118,7 +134,7 @@ class StorageQuota(models.Model):
     user                     = models.OneToOneField(User, on_delete=models.CASCADE)
     max_total_storage_gb     = models.FloatField(default=5.0)
     current_total_storage_gb = models.FloatField(default=0.0)
-    max_vector_storage_gb    = models.FloatField(default=2.0)
+    max_vector_storage_gb    = models.FloatField(default=0.0)
     current_vector_storage_gb= models.FloatField(default=0.0)
     max_saved_pdf_zips       = models.IntegerField(default=100)
     current_saved_pdf_zips   = models.IntegerField(default=0)
@@ -148,19 +164,177 @@ class OrganizationProvisioningPolicy(models.Model):
         help_text='Total file storage (GB) for this organisation. Distributed to users only.',
     )
     vector_storage_pool_gb = models.FloatField(
-        default=20.0,
-        help_text='Total vector/embedding storage (GB) for this organisation. Distributed to users only.',
+        default=0.0,
+        help_text='Deprecated: merged into storage_pool_gb. Kept at 0.',
     )
     default_monthly_credits = models.IntegerField(
         default=1_000,
         help_text='Suggested starting credits when creating a new user (must fit in remaining pool).',
     )
     default_storage_limit_gb = models.FloatField(default=5.0)
-    default_vector_storage_gb = models.FloatField(default=2.0)
+    default_vector_storage_gb = models.FloatField(
+        default=0.0,
+        help_text='Deprecated: merged into default_storage_limit_gb. Kept at 0.',
+    )
     default_pdf_zip_limit = models.IntegerField(default=20)
     default_pyq_zip_limit = models.IntegerField(default=10)
     default_daily_run_limit = models.IntegerField(default=20)
     default_concurrent_run_limit = models.IntegerField(default=2)
+
+
+class PDFIndexingSettings(models.Model):
+    """
+    Platform-wide PDF chunking / embedding defaults (singleton, pk=1).
+    Applied on every PDF upload for all roles.
+    """
+    STRATEGY_CHOICES = (
+        ('fixed_size', 'Fixed Size (tokens)'),
+        ('sentence', 'Sentence Splitter'),
+        ('paragraph', 'Paragraph Splitter'),
+        ('recursive', 'Recursive Character Splitter'),
+        ('semantic', 'Semantic Chunker'),
+    )
+    strategy = models.CharField(
+        max_length=32,
+        choices=STRATEGY_CHOICES,
+        default='fixed_size',
+        help_text='Chunking strategy applied to all new PDF uploads.',
+    )
+    chunk_size = models.IntegerField(default=512)
+    chunk_overlap = models.IntegerField(default=64)
+    embed_config = models.ForeignKey(
+        ModelConfig,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='+',
+        help_text='Embedding model for indexing. Falls back to default embed id if empty.',
+    )
+    reranker_config = models.ForeignKey(
+        ModelConfig,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='+',
+        help_text='Optional reranker model used during retrieval.',
+    )
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'PDF indexing settings'
+        verbose_name_plural = 'PDF indexing settings'
+
+    def __str__(self):
+        return 'PDF indexing settings'
+
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super().save(*args, **kwargs)
+
+    @classmethod
+    def load(cls):
+        obj, _ = cls.objects.get_or_create(pk=1)
+        return obj
+
+    def resolved_embed_model(self) -> str:
+        from apps.core.embeddings import DEFAULT_EMBED_MODEL
+
+        if self.embed_config_id and self.embed_config.embed_model_id:
+            return self.embed_config.embed_model_id
+        return DEFAULT_EMBED_MODEL
+
+    def resolved_reranker_model(self) -> str:
+        cfg = self.reranker_config
+        if not cfg:
+            return ""
+        return cfg.reranker_model or cfg.llm_model_id or ""
+
+
+class GenerationSettings(models.Model):
+    """
+    Platform-wide question-generation defaults (singleton, pk=1).
+    Applied to every new batch run for all roles.
+    """
+    prompt = models.ForeignKey(
+        'prompt_module.PromptTemplate',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='+',
+        help_text='Default prompt template (English / fallback).',
+    )
+    hindi_prompt = models.ForeignKey(
+        'prompt_module.PromptTemplate',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='+',
+        help_text='Prompt used when output language is Hindi.',
+    )
+    model_config = models.ForeignKey(
+        ModelConfig,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='+',
+        help_text='LLM config used for generation.',
+    )
+    rag_top_k = models.IntegerField(
+        default=5,
+        help_text='Number of PDF chunks retrieved per question.',
+    )
+    pyq_shots = models.IntegerField(
+        default=3,
+        help_text='Number of PYQ examples injected as few-shot style.',
+    )
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Generation settings'
+        verbose_name_plural = 'Generation settings'
+
+    def __str__(self):
+        return 'Generation settings'
+
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super().save(*args, **kwargs)
+
+    @classmethod
+    def load(cls):
+        from apps.prompt_module.models import PromptTemplate
+
+        obj, _ = cls.objects.get_or_create(pk=1)
+        updates = []
+        if not obj.prompt_id:
+            obj.prompt = (
+                PromptTemplate.objects.filter(is_active=True).first()
+                or PromptTemplate.objects.filter(name__iexact='Default Generator').first()
+                or PromptTemplate.objects.first()
+            )
+            if obj.prompt_id:
+                updates.append('prompt')
+        if not obj.hindi_prompt_id:
+            obj.hindi_prompt = PromptTemplate.objects.filter(
+                name__iexact='Hindi Generator'
+            ).first()
+            if obj.hindi_prompt_id:
+                updates.append('hindi_prompt')
+        if not obj.model_config_id:
+            obj.model_config = (
+                ModelConfig.objects.filter(is_default=True).first()
+                or ModelConfig.objects.first()
+            )
+            if obj.model_config_id:
+                updates.append('model_config')
+        if updates:
+            obj.save(update_fields=updates + ['updated_at'])
+        return obj
+
+    def resolve_prompt(self, language: str):
+        if language == 'hi' and self.hindi_prompt_id:
+            return self.hindi_prompt
+        return self.prompt or self.hindi_prompt
 
 
 class TokenUsageLog(models.Model):

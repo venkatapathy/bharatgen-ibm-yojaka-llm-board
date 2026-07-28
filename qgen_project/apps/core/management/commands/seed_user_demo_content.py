@@ -178,11 +178,12 @@ class Command(BaseCommand):
     def _ensure_quota(self, user):
         quota = get_storage_quota(user)
         changed = False
-        if float(quota.max_total_storage_gb) < 25:
-            quota.max_total_storage_gb = 25.0
+        if float(quota.max_total_storage_gb) < 40:
+            quota.max_total_storage_gb = 40.0
             changed = True
-        if float(quota.max_vector_storage_gb) < 15:
-            quota.max_vector_storage_gb = 15.0
+        if float(quota.max_vector_storage_gb) > 0:
+            quota.max_total_storage_gb += float(quota.max_vector_storage_gb)
+            quota.max_vector_storage_gb = 0
             changed = True
         if quota.max_saved_pdf_zips < 50:
             quota.max_saved_pdf_zips = 50
@@ -221,11 +222,9 @@ class Command(BaseCommand):
 
         budget = org_storage_budget(org)
         storage_need = max(budget["storage_assigned"] + 20.0, 120.0)
-        vector_need = max(budget["vector_assigned"] + 20.0, 80.0)
-        if float(policy.storage_pool_gb) < storage_need:
+        if float(policy.storage_pool_gb) + float(policy.vector_storage_pool_gb or 0) < storage_need:
             policy.storage_pool_gb = storage_need
-        if float(policy.vector_storage_pool_gb) < vector_need:
-            policy.vector_storage_pool_gb = vector_need
+            policy.vector_storage_pool_gb = 0
         policy.save(update_fields=["storage_pool_gb", "vector_storage_pool_gb"])
         self.stdout.write(
             f"  Org pools: credits={DEMO_ORG_CREDIT_POOL:,} "

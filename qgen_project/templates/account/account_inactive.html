@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Account deactivated{% endblock %}
+{% block content %}
+<div class="auth-shell">
+  <div class="auth-card">
+    <div class="eyebrow">EduQGen access</div>
+    <h1>Account deactivated</h1>
+    <p class="muted">Your account is deactivated. Contact your administrator.</p>
+    <div class="btn-row" style="margin-top:1.25rem;">
+      <a class="btn btn-primary" href="{% url 'account_login' %}">Back to login</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

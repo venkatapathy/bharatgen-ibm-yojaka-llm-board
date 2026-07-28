@@ -22,10 +22,26 @@
         {% if object.status == 'failed' %}Retry generation{% else %}Retry failed items{% endif %}
       </button>
     </form>
+    {% if remaining_questions and object.total_questions %}
+    <form method="post" action="{% url 'question_generation:regenerate' object.id %}" class="inline-form"
+          onsubmit="return confirm('Generate {{ remaining_questions }} remaining question(s)? Existing questions will be kept.');">
+      {% csrf_token %}
+      <button class="btn btn-primary" type="submit">Generate remaining ({{ remaining_questions }})</button>
+    </form>
+    {% endif %}
   </div>
   {% elif object.needs_human_review %}
   <div class="btn-row" style="margin-top:0.85rem;">
     <a class="btn btn-primary" href="{% url 'question_generation:review' object.id %}">Review questions</a>
+  </div>
+  {% elif remaining_questions and object.total_questions and object.status != 'pending' and object.status != 'running' %}
+  <div class="btn-row" style="margin-top:0.85rem;">
+    <p class="muted" style="margin:0; flex:1;">{{ remaining_questions }} of {{ object.expected_questions }} question(s) still missing.</p>
+    <form method="post" action="{% url 'question_generation:regenerate' object.id %}" class="inline-form"
+          onsubmit="return confirm('Generate {{ remaining_questions }} remaining question(s)? Existing questions will be kept.');">
+      {% csrf_token %}
+      <button class="btn btn-primary" type="submit">Generate remaining ({{ remaining_questions }})</button>
+    </form>
   </div>
   {% endif %}
 </div>

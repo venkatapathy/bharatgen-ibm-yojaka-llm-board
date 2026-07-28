@@ -1,0 +1,22 @@
+<div
+  id="pyq-status-poll"
+  class="progress-shell panel"
+  style="margin-bottom:1.25rem;"
+  hx-get="{% url 'pyq_module:status' object.id %}"
+  hx-trigger="{% if object.status == 'extracting' or object.status == 'pending' %}every 3s{% endif %}"
+  hx-swap="outerHTML">
+  <div class="question-meta">
+    <span class="badge status-{{ object.status }}">{{ object.status }}</span>
+    <span class="muted">Questions: {{ object.question_count }}</span>
+  </div>
+  {% if object.error_msg %}
+  <p class="alert alert-error">{{ object.error_msg }}</p>
+  {% endif %}
+  {% if object.status == "extracting" or object.status == "pending" %}
+  <p class="muted">Extraction is in progress. This panel refreshes automatically.</p>
+  {% elif object.status == "ready" %}
+  <p class="muted">Extraction finished. <a href="{% url 'pyq_module:detail' object.id %}">Reload questions</a></p>
+  {% elif object.status == "error" %}
+  <p class="muted">Extraction failed. Use Re-extract to try again.</p>
+  {% endif %}
+</div>

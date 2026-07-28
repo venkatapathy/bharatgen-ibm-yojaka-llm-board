@@ -5,50 +5,37 @@
   <div>
     <div class="eyebrow">Past-year question extraction</div>
     <h1>PYQ Bank</h1>
+    {% if browse_user %}
+    <p class="muted">
+      {% if browsing_own %}
+      Showing <strong>your</strong> PYQ modules
+      {% else %}
+      Showing PYQ modules for <strong>{{ browse_user.username }}</strong>{% if browse_user.organization %} · {{ browse_user.organization.name }}{% endif %}
+      {% endif %}
+    </p>
+    {% elif needs_user_filter %}
+    <p class="muted">Select {% if filter_orgs %}an organisation and {% endif %}a user to view PYQ modules — or choose <strong>My PYQs</strong> for your own uploads.</p>
+    {% else %}
     <p class="muted">Exam papers may include MCQ, short answer, long answer, and other formats.</p>
+    {% endif %}
   </div>
   <a class="btn btn-primary" href="{% url 'pyq_module:upload' %}">Upload Paper</a>
 </div>
 
-<div class="stat-grid stat-grid--rings" style="margin-bottom:1.25rem;">
-  <div class="stat-card stat-card--ring">
-    <div class="stat-ring" style="--pct: {{ quota.storage_pct }};" aria-hidden="true">
-      <svg viewBox="0 0 36 36" class="stat-ring__svg">
-        <circle class="stat-ring__track" cx="18" cy="18" r="15.9155"></circle>
-        <circle class="stat-ring__value" cx="18" cy="18" r="15.9155" pathLength="100"></circle>
-      </svg>
-      <span class="stat-ring__pct">{{ quota.storage_pct }}%</span>
-    </div>
-    <div class="stat-ring__meta">
-      <span class="muted">{% if quota.uses_unallocated_pool %}Unallocated storage{% else %}Storage{% endif %}</span>
-      <strong>{{ quota.current_total_storage_gb|floatformat:2 }} / {{ quota.max_total_storage_gb|floatformat:2 }} GB</strong>
-    </div>
-  </div>
-  <div class="stat-card stat-card--ring">
-    <div class="stat-ring" style="--pct: {{ quota.pyq_pct }};" aria-hidden="true">
-      <svg viewBox="0 0 36 36" class="stat-ring__svg">
-        <circle class="stat-ring__track" cx="18" cy="18" r="15.9155"></circle>
-        <circle class="stat-ring__value" cx="18" cy="18" r="15.9155" pathLength="100"></circle>
-      </svg>
-      <span class="stat-ring__pct">{{ quota.pyq_pct }}%</span>
-    </div>
-    <div class="stat-ring__meta">
-      <span class="muted">PYQ uploads</span>
-      <strong>{{ quota.current_saved_pyq_zips }} / {{ quota.max_saved_pyq_zips }}</strong>
-    </div>
-  </div>
-</div>
+{% include "partials/browse_user_filter.html" %}
+
+{% if browse_user or not needs_user_filter %}
+{% include "partials/quota_stat_rings.html" with quota=quota upload_label="PYQ uploads" upload_used=quota.current_saved_pyq_zips upload_max=quota.max_saved_pyq_zips upload_pct=quota.pyq_pct upload_pct_label=quota.pyq_pct_label %}
 
 <div class="table-wrap">
   <table class="table">
-    <thead><tr><th>Name</th>{% if show_owner %}<th>Owner</th>{% endif %}<th>File</th><th>Questions</th><th>Types</th><th>Status</th><th>Actions</th></tr></thead>
+    <thead><tr><th>Name</th><th>File</th><th>Questions</th><th>Types</th><th>Status</th><th>Actions</th></tr></thead>
     <tbody>
     {% for mod in modules %}
-    <tr>
+    <tr data-pyq-id="{{ mod.id }}" data-pyq-status="{{ mod.status }}">
       <td><a href="{% url 'pyq_module:detail' mod.id %}">{{ mod.name }}</a></td>
-      {% if show_owner %}<td>{{ mod.created_by.username|default:"—" }}</td>{% endif %}
       <td>{{ mod.original_filename|default:"-" }}</td>
-      <td>{{ mod.question_count }}</td>
+      <td class="js-pyq-count">{{ mod.question_count }}</td>
       <td>
         {% if mod.question_type_breakdown %}
         <div class="type-breakdown">
@@ -57,10 +44,10 @@
           {% endfor %}
         </div>
         {% else %}
-        <span class="muted">—</span>
+        <span class="muted js-pyq-types">—</span>
         {% endif %}
       </td>
-      <td><span class="badge status-{{ mod.status }}">{{ mod.status }}</span></td>
+      <td><span class="badge status-{{ mod.status }} js-pyq-status">{{ mod.status }}</span></td>
       <td class="table-actions">
         <div class="table-actions__inner">
           <a class="btn btn-sm" href="{% url 'pyq_module:detail' mod.id %}">Open</a>
@@ -69,9 +56,51 @@
       </td>
     </tr>
     {% empty %}
-    <tr><td colspan="{% if show_owner %}7{% else %}6{% endif %}">No PYQ modules yet.</td></tr>
+    <tr><td colspan="6">
+      {% if browse_user %}No PYQ modules for this user yet.{% else %}No PYQ modules yet.{% endif %}
+    </td></tr>
     {% endfor %}
     </tbody>
   </table>
 </div>
+{% endif %}
+
+<script>
+(function () {
+  const rows = Array.from(document.querySelectorAll('tr[data-pyq-id]')).filter(function (row) {
+    const status = row.getAttribute('data-pyq-status');
+    return status === 'pending' || status === 'extracting';
+  });
+  if (!rows.length) return;
+
+  const timers = new Map();
+
+  function pollRow(row) {
+    const id = row.getAttribute('data-pyq-id');
+    fetch('/pyq/' + id + '/status/', { headers: { 'Accept': 'application/json' } })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        const badge = row.querySelector('.js-pyq-status');
+        const count = row.querySelector('.js-pyq-count');
+        if (badge) {
+          badge.textContent = data.status;
+          badge.className = 'badge status-' + data.status + ' js-pyq-status';
+        }
+        if (count) count.textContent = data.question_count;
+        row.setAttribute('data-pyq-status', data.status);
+        if (data.status !== 'pending' && data.status !== 'extracting') {
+          clearInterval(timers.get(id));
+          timers.delete(id);
+        }
+      })
+      .catch(function () {});
+  }
+
+  rows.forEach(function (row) {
+    const id = row.getAttribute('data-pyq-id');
+    timers.set(id, setInterval(function () { pollRow(row); }, 3000));
+    pollRow(row);
+  });
+})();
+</script>
 {% endblock %}

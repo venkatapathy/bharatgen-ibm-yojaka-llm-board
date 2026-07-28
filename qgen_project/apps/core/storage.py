@@ -38,17 +38,9 @@ def _policy_defaults(user):
     defaults["max_saved_pyq_zips"] = policy.default_pyq_zip_limit
     if user.role == User.Role.USER:
         budget = org_storage_budget(user.organization)
-        defaults.update(
-            {
-                "max_total_storage_gb": min(
-                    float(policy.default_storage_limit_gb),
-                    budget["storage_remaining"],
-                ),
-                "max_vector_storage_gb": min(
-                    float(policy.default_vector_storage_gb),
-                    budget["vector_remaining"],
-                ),
-            }
+        defaults["max_total_storage_gb"] = min(
+            float(policy.default_storage_limit_gb),
+            budget["storage_remaining"],
         )
     return defaults
 
@@ -82,78 +74,62 @@ def _sum_org_admin_usage(organization, field: str) -> float:
     )
 
 
+def _user_storage_assigned(organization, *, exclude_user=None) -> float:
+    """Combined file + embedding quota assigned to users."""
+    total = _sum_user_storage(
+        organization, "max_total_storage_gb", exclude_user=exclude_user
+    )
+    vector = _sum_user_storage(
+        organization, "max_vector_storage_gb", exclude_user=exclude_user
+    )
+    return total + vector
+
+
 def org_admin_storage_used(organization) -> float:
-    """Total file storage currently used by Org Admins (from unallocated pool)."""
-    return _sum_org_admin_usage(organization, "current_total_storage_gb")
-
-
-def org_admin_vector_used(organization) -> float:
-    """Vector storage currently used by Org Admins (from unallocated pool)."""
-    return _sum_org_admin_usage(organization, "current_vector_storage_gb")
+    """File + embedding storage used by Org Admins (from unallocated pool)."""
+    files = _sum_org_admin_usage(organization, "current_total_storage_gb")
+    vectors = _sum_org_admin_usage(organization, "current_vector_storage_gb")
+    return files + vectors
 
 
 def org_storage_budget(organization):
-    """Organisation storage pools and how much is assigned to users."""
+    """Organisation storage pool and how much is assigned to users."""
     from .provisioning import get_org_policy
 
     policy = get_org_policy(organization) if organization else None
     storage_pool = float(policy.storage_pool_gb) if policy else 0.0
-    vector_pool = float(policy.vector_storage_pool_gb) if policy else 0.0
-    storage_assigned = _sum_user_storage(organization, "max_total_storage_gb")
-    vector_assigned = _sum_user_storage(organization, "max_vector_storage_gb")
+    if policy:
+        storage_pool += float(policy.vector_storage_pool_gb or 0)
+    storage_assigned = _user_storage_assigned(organization)
     storage_remaining = max(storage_pool - storage_assigned, 0.0)
-    vector_remaining = max(vector_pool - vector_assigned, 0.0)
-    admin_storage = org_admin_storage_used(organization)
-    admin_vector = org_admin_vector_used(organization)
+    admin_used = org_admin_storage_used(organization)
     return {
         "storage_pool": storage_pool,
-        "vector_pool": vector_pool,
         "storage_assigned": storage_assigned,
-        "vector_assigned": vector_assigned,
         "storage_remaining": storage_remaining,
-        "vector_remaining": vector_remaining,
-        "org_admin_storage_used": admin_storage,
-        "org_admin_vector_used": admin_vector,
-        "org_admin_storage_available": max(storage_remaining - admin_storage, 0.0),
-        "org_admin_vector_available": max(vector_remaining - admin_vector, 0.0),
+        "org_admin_storage_used": admin_used,
+        "org_admin_storage_available": max(storage_remaining - admin_used, 0.0),
         "policy": policy,
     }
 
 
-def assert_storage_fits_pool(organization, *, total_gb, vector_gb, exclude_user=None):
+def assert_storage_fits_pool(organization, *, total_gb, exclude_user=None):
     if organization is None:
         return
     if exclude_user is not None and exclude_user.role != User.Role.USER:
         return
     budget_base = org_storage_budget(organization)
-    storage_others = _sum_user_storage(
-        organization, "max_total_storage_gb", exclude_user=exclude_user
-    )
-    vector_others = _sum_user_storage(
-        organization, "max_vector_storage_gb", exclude_user=exclude_user
-    )
-    if storage_others + float(total_gb) > budget_base["storage_pool"] + 1e-9:
-        remaining = max(budget_base["storage_pool"] - storage_others, 0.0)
+    assigned_others = _user_storage_assigned(organization, exclude_user=exclude_user)
+    if assigned_others + float(total_gb) > budget_base["storage_pool"] + 1e-9:
+        remaining = max(budget_base["storage_pool"] - assigned_others, 0.0)
         raise StoragePoolError(
-            f"Only {remaining:.2f} GB total storage left in the organisation pool."
+            f"Only {remaining:.2f} GB storage left in the organisation pool."
         )
-    if vector_others + float(vector_gb) > budget_base["vector_pool"] + 1e-9:
-        remaining = max(budget_base["vector_pool"] - vector_others, 0.0)
-        raise StoragePoolError(
-            f"Only {remaining:.2f} GB vector storage left in the organisation pool."
-        )
-    # Keep unallocated headroom for Org Admin usage already on disk.
-    after_storage = budget_base["storage_pool"] - (storage_others + float(total_gb))
-    after_vector = budget_base["vector_pool"] - (vector_others + float(vector_gb))
-    if after_storage + 1e-9 < budget_base["org_admin_storage_used"]:
+    after_assign = budget_base["storage_pool"] - (assigned_others + float(total_gb))
+    if after_assign + 1e-9 < budget_base["org_admin_storage_used"]:
         raise StoragePoolError(
             "Cannot allocate that much storage: Org Admins are already using "
             f"{budget_base['org_admin_storage_used']:.2f} GB from the unallocated pool."
-        )
-    if after_vector + 1e-9 < budget_base["org_admin_vector_used"]:
-        raise StoragePoolError(
-            "Cannot allocate that much vector storage: Org Admins are already using "
-            f"{budget_base['org_admin_vector_used']:.2f} GB from the unallocated pool."
         )
 
 
@@ -165,7 +141,8 @@ def effective_storage_limit_gb(user) -> float:
         return 10**6
     if user.role == User.Role.ORGUSER and user.organization_id:
         return float(org_storage_budget(user.organization)["storage_remaining"])
-    return float(get_storage_quota(user).max_total_storage_gb)
+    quota = get_storage_quota(user)
+    return float(quota.max_total_storage_gb) + float(quota.max_vector_storage_gb)
 
 
 def effective_storage_used_gb(user) -> float:
@@ -173,25 +150,51 @@ def effective_storage_used_gb(user) -> float:
         return 0.0
     if user.role == User.Role.ORGUSER and user.organization_id:
         return org_admin_storage_used(user.organization)
-    return float(get_storage_quota(user).current_total_storage_gb)
+    quota = get_storage_quota(user)
+    return float(quota.current_total_storage_gb) + float(quota.current_vector_storage_gb)
 
 
-def effective_vector_limit_gb(user) -> float:
-    if user is None:
-        return 0.0
-    if is_unlimited_user(user):
-        return 10**6
-    if user.role == User.Role.ORGUSER and user.organization_id:
-        return float(org_storage_budget(user.organization)["vector_remaining"])
-    return float(get_storage_quota(user).max_vector_storage_gb)
+def _format_storage_amount(gb: float) -> str:
+    """Human-readable size for quota cards (avoid 0.00 GB for small PDFs)."""
+    gb = float(gb or 0)
+    if gb <= 0:
+        return "0 MB"
+    mb = gb * 1024
+    if mb < 1024:
+        if mb < 0.01:
+            return f"{mb * 1024:.0f} KB"
+        return f"{mb:.2f} MB"
+    return f"{gb:.2f} GB"
 
 
-def effective_vector_used_gb(user) -> float:
-    if user is None:
-        return 0.0
-    if user.role == User.Role.ORGUSER and user.organization_id:
-        return org_admin_vector_used(user.organization)
-    return float(get_storage_quota(user).current_vector_storage_gb)
+def _usage_pct(used, limit):
+    """Ring fill (0–100) and center label; keep a visible arc when usage is non-zero."""
+    if not limit or float(limit) <= 0:
+        return 0, "0%"
+    used_f = float(used or 0)
+    limit_f = float(limit)
+    if used_f <= 0:
+        return 0, "0%"
+    pct_exact = (used_f / limit_f) * 100
+    if pct_exact < 1:
+        return 1, "<1%"
+    rounded = int(min(100, round(pct_exact)))
+    return rounded, f"{rounded}%"
+
+
+def storage_usage_summary(user):
+    """Combined file + embedding usage for Control tables and quota headers."""
+    used_gb = effective_storage_used_gb(user)
+    max_gb = effective_storage_limit_gb(user)
+    pct, pct_label = _usage_pct(used_gb, max_gb)
+    return {
+        "used_gb": used_gb,
+        "max_gb": max_gb,
+        "used_label": _format_storage_amount(used_gb),
+        "max_label": _format_storage_amount(max_gb),
+        "pct": pct,
+        "pct_label": pct_label,
+    }
 
 
 def storage_quota_display(user):
@@ -204,23 +207,25 @@ def storage_quota_display(user):
     pyq_used = int(quota.current_saved_pyq_zips)
     pyq_max = int(quota.max_saved_pyq_zips) or 0
 
-    def _pct(used, limit):
-        if not limit or limit <= 0:
-            return 0
-        return int(min(100, max(0, round((float(used) / float(limit)) * 100))))
+    storage_pct, storage_pct_label = _usage_pct(used_gb, max_gb)
+    pdf_pct, pdf_pct_label = _usage_pct(pdf_used, pdf_max)
+    pyq_pct, pyq_pct_label = _usage_pct(pyq_used, pyq_max)
 
     return {
         "current_total_storage_gb": used_gb,
         "max_total_storage_gb": max_gb,
-        "storage_pct": _pct(used_gb, max_gb),
-        "current_vector_storage_gb": effective_vector_used_gb(user),
-        "max_vector_storage_gb": effective_vector_limit_gb(user),
+        "storage_used_label": _format_storage_amount(used_gb),
+        "storage_max_label": _format_storage_amount(max_gb),
+        "storage_pct": storage_pct,
+        "storage_pct_label": storage_pct_label,
         "current_saved_pdf_zips": pdf_used,
         "max_saved_pdf_zips": pdf_max,
-        "pdf_pct": _pct(pdf_used, pdf_max),
+        "pdf_pct": pdf_pct,
+        "pdf_pct_label": pdf_pct_label,
         "current_saved_pyq_zips": pyq_used,
         "max_saved_pyq_zips": pyq_max,
-        "pyq_pct": _pct(pyq_used, pyq_max),
+        "pyq_pct": pyq_pct,
+        "pyq_pct_label": pyq_pct_label,
         "uses_unallocated_pool": bool(
             user and user.role == User.Role.ORGUSER and user.organization_id
         ),
@@ -261,12 +266,16 @@ def recompute_vector_storage(user) -> float:
     return used_gb
 
 
-def _check_upload(quota, *, file_size_bytes, current_count, max_count, user=None):
+def _check_upload(quota, *, file_size_bytes, current_count, max_count, user=None, count_delta=1):
     if user and is_unlimited_user(user):
         return
     size_gb = _bytes_to_gb(file_size_bytes)
-    if current_count >= max_count:
-        raise StorageQuotaExceeded("Upload limit reached for this user.")
+    count_delta = max(int(count_delta), 1)
+    if current_count + count_delta > max_count:
+        raise StorageQuotaExceeded(
+            f"Upload limit reached for this user "
+            f"(need {count_delta} slot(s), {max_count - current_count} remaining)."
+        )
     if user and user.role == User.Role.ORGUSER and user.organization_id:
         budget = org_storage_budget(user.organization)
         unallocated = float(budget["storage_remaining"])
@@ -277,8 +286,10 @@ def _check_upload(quota, *, file_size_bytes, current_count, max_count, user=None
                 f"({admin_used:.2f} used of {unallocated:.2f} GB unallocated)."
             )
         return
-    if quota.current_total_storage_gb + size_gb > quota.max_total_storage_gb:
-        raise StorageQuotaExceeded("Total storage quota exceeded.")
+    used_gb = float(quota.current_total_storage_gb) + float(quota.current_vector_storage_gb)
+    limit_gb = float(quota.max_total_storage_gb) + float(quota.max_vector_storage_gb)
+    if used_gb + size_gb > limit_gb:
+        raise StorageQuotaExceeded("Storage quota exceeded.")
 
 
 def get_max_pdf_upload_mb(user):
@@ -294,7 +305,7 @@ def get_max_pyq_upload_mb(user):
     return get_max_pdf_upload_mb(user)
 
 
-def check_pdf_upload_allowed(user, file_size_bytes):
+def check_pdf_upload_allowed(user, file_size_bytes, *, count_delta=1):
     quota = get_storage_quota(user)
     # Org admins keep zip-count caps from policy defaults even with 0 personal GB share.
     if user.role == User.Role.ORGUSER and user.organization_id and quota.max_saved_pdf_zips <= 0:
@@ -310,6 +321,7 @@ def check_pdf_upload_allowed(user, file_size_bytes):
         current_count=quota.current_saved_pdf_zips,
         max_count=max_count,
         user=user,
+        count_delta=count_delta,
     )
     return True, None
 
@@ -334,7 +346,7 @@ def check_pyq_upload_allowed(user, file_size_bytes):
 
 
 @transaction.atomic
-def reserve_pdf_storage(user, file_size_bytes):
+def reserve_pdf_storage(user, file_size_bytes, *, count_delta=1):
     if user.role == User.Role.ORGUSER and user.organization_id:
         list(
             StorageQuota.objects.select_for_update().filter(
@@ -342,10 +354,11 @@ def reserve_pdf_storage(user, file_size_bytes):
                 user__role=User.Role.ORGUSER,
             )
         )
-    check_pdf_upload_allowed(user, file_size_bytes)
+    count_delta = max(int(count_delta), 1)
+    check_pdf_upload_allowed(user, file_size_bytes, count_delta=count_delta)
     StorageQuota.objects.select_for_update().filter(user=user).update(
         current_total_storage_gb=F("current_total_storage_gb") + _bytes_to_gb(file_size_bytes),
-        current_saved_pdf_zips=F("current_saved_pdf_zips") + 1,
+        current_saved_pdf_zips=F("current_saved_pdf_zips") + count_delta,
     )
 
 

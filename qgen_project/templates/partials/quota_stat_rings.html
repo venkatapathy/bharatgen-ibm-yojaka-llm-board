@@ -1,0 +1,31 @@
+{# Expects `quota` from storage_quota_display(user). #}
+{# Optional: upload_label (default PDF uploads), upload_used, upload_max, upload_pct, upload_pct_label #}
+<div class="stat-grid stat-grid--rings quota-stats">
+  <div class="stat-card stat-card--ring">
+    <div class="stat-ring" style="--pct: {{ quota.storage_pct }};" aria-hidden="true">
+      <svg viewBox="0 0 36 36" class="stat-ring__svg">
+        <circle class="stat-ring__track" cx="18" cy="18" r="15.9155"></circle>
+        <circle class="stat-ring__value" cx="18" cy="18" r="15.9155" pathLength="100"></circle>
+      </svg>
+      <span class="stat-ring__pct">{{ quota.storage_pct_label }}</span>
+    </div>
+    <div class="stat-ring__meta">
+      <span class="muted">{% if quota.uses_unallocated_pool %}Unallocated storage{% else %}Storage{% endif %}</span>
+      <strong>{{ quota.storage_used_label }} / {{ quota.storage_max_label }}</strong>
+      <span class="field-hint">PDF files and embeddings</span>
+    </div>
+  </div>
+  <div class="stat-card stat-card--ring">
+    <div class="stat-ring" style="--pct: {{ upload_pct }};" aria-hidden="true">
+      <svg viewBox="0 0 36 36" class="stat-ring__svg">
+        <circle class="stat-ring__track" cx="18" cy="18" r="15.9155"></circle>
+        <circle class="stat-ring__value" cx="18" cy="18" r="15.9155" pathLength="100"></circle>
+      </svg>
+      <span class="stat-ring__pct">{{ upload_pct_label }}</span>
+    </div>
+    <div class="stat-ring__meta">
+      <span class="muted">{{ upload_label|default:"Uploads" }}</span>
+      <strong>{{ upload_used }} / {{ upload_max }}</strong>
+    </div>
+  </div>
+</div>

@@ -2,8 +2,131 @@
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.db.models import Q
+from allauth.account.forms import LoginForm as AllauthLoginForm
 
-from .models import Organization, OrganizationProvisioningPolicy, User
+from .membership import DEACTIVATED_MESSAGE, user_may_access_app
+from .models import (
+    ModelConfig,
+    Organization,
+    OrganizationProvisioningPolicy,
+    PDFIndexingSettings,
+    GenerationSettings,
+    User,
+)
+
+
+class QGenLoginForm(AllauthLoginForm):
+    """Show a clear message when a deactivated Org Admin / User tries to sign in."""
+
+    def clean(self):
+        login = (self.data.get("login") or "").strip()
+        if login:
+            candidate = (
+                User.objects.filter(Q(username__iexact=login) | Q(email__iexact=login))
+                .only("id", "role", "is_active_member", "is_superuser")
+                .first()
+            )
+            if candidate is not None and not user_may_access_app(candidate):
+                raise forms.ValidationError(DEACTIVATED_MESSAGE)
+        return super().clean()
+
+
+
+class PDFIndexingSettingsForm(forms.ModelForm):
+    class Meta:
+        model = PDFIndexingSettings
+        fields = [
+            "strategy",
+            "chunk_size",
+            "chunk_overlap",
+            "embed_config",
+            "reranker_config",
+        ]
+        labels = {
+            "strategy": "Chunking strategy",
+            "chunk_size": "Chunk size",
+            "chunk_overlap": "Chunk overlap",
+            "embed_config": "Embedding model",
+            "reranker_config": "Reranker model",
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["embed_config"].queryset = ModelConfig.objects.exclude(
+            embed_model_id=""
+        )
+        self.fields["embed_config"].required = False
+        self.fields["embed_config"].empty_label = "Platform default"
+        self.fields["reranker_config"].queryset = ModelConfig.objects.exclude(
+            reranker_model=""
+        )
+        self.fields["reranker_config"].required = False
+        self.fields["reranker_config"].empty_label = "None"
+        self.fields["chunk_size"].widget.attrs.setdefault("min", 64)
+        self.fields["chunk_overlap"].widget.attrs.setdefault("min", 0)
+        for field in self.fields.values():
+            field.help_text = ""
+            field.widget.attrs.setdefault("class", "tech-input")
+
+
+class GenerationSettingsForm(forms.ModelForm):
+    class Meta:
+        model = GenerationSettings
+        fields = [
+            "prompt",
+            "hindi_prompt",
+            "model_config",
+            "rag_top_k",
+            "pyq_shots",
+        ]
+        labels = {
+            "prompt": "Prompt (English)",
+            "hindi_prompt": "Prompt (Hindi)",
+            "model_config": "Generation model",
+            "rag_top_k": "RAG Top-K",
+            "pyq_shots": "PYQ n-shot",
+        }
+        help_texts = {
+            "prompt": "",
+            "hindi_prompt": "",
+            "model_config": "",
+            "rag_top_k": "",
+            "pyq_shots": "",
+        }
+        widgets = {
+            "model_config": forms.RadioSelect,
+        }
+
+    def __init__(self, *args, **kwargs):
+        from apps.prompt_module.models import PromptTemplate
+
+        super().__init__(*args, **kwargs)
+        prompts = PromptTemplate.objects.order_by("name")
+        self.fields["prompt"].queryset = prompts
+        self.fields["prompt"].required = False
+        self.fields["prompt"].empty_label = "— select —"
+        self.fields["hindi_prompt"].queryset = prompts
+        self.fields["hindi_prompt"].required = False
+        self.fields["hindi_prompt"].empty_label = "— select —"
+        llm_qs = ModelConfig.objects.exclude(llm_model_id="").order_by("name")
+        self.fields["model_config"].queryset = llm_qs
+        self.fields["model_config"].required = True
+        self.fields["model_config"].empty_label = None
+        self.fields["rag_top_k"].widget.attrs.update({"min": 1, "max": 20})
+        self.fields["pyq_shots"].widget.attrs.update({"min": 0, "max": 10})
+        for name, field in self.fields.items():
+            field.help_text = ""
+            if name != "model_config":
+                field.widget.attrs["class"] = "tech-input"
+
+    def clean_rag_top_k(self):
+        value = int(self.cleaned_data.get("rag_top_k") or 5)
+        return max(1, min(value, 20))
+
+    def clean_pyq_shots(self):
+        value = int(self.cleaned_data.get("pyq_shots") or 0)
+        return max(0, min(value, 10))
 
 
 class OrganizationPolicyForm(forms.ModelForm):
@@ -12,10 +135,8 @@ class OrganizationPolicyForm(forms.ModelForm):
         fields = [
             "credit_pool",
             "storage_pool_gb",
-            "vector_storage_pool_gb",
             "default_monthly_credits",
             "default_storage_limit_gb",
-            "default_vector_storage_gb",
             "default_pdf_zip_limit",
             "default_pyq_zip_limit",
             "default_daily_run_limit",
@@ -23,11 +144,9 @@ class OrganizationPolicyForm(forms.ModelForm):
         ]
         labels = {
             "credit_pool": "Organisation credit pool",
-            "storage_pool_gb": "Organisation total storage pool (GB)",
-            "vector_storage_pool_gb": "Organisation vector storage pool (GB)",
+            "storage_pool_gb": "Organisation storage pool (GB)",
             "default_monthly_credits": "Suggested credits per new user",
-            "default_storage_limit_gb": "Suggested total storage per new user (GB)",
-            "default_vector_storage_gb": "Suggested vector storage per new user (GB)",
+            "default_storage_limit_gb": "Suggested storage per new user (GB)",
             "default_pdf_zip_limit": "Default PDF context limit",
             "default_pyq_zip_limit": "Default PYQ module limit",
             "default_daily_run_limit": "Default daily generation runs",
@@ -35,8 +154,7 @@ class OrganizationPolicyForm(forms.ModelForm):
         }
         help_texts = {
             "credit_pool": "Organisation-owned credits. Org Admin distributes to users only.",
-            "storage_pool_gb": "Organisation-owned file storage. Distributed to users only.",
-            "vector_storage_pool_gb": "Organisation-owned vector storage. Distributed to users only.",
+            "storage_pool_gb": "Organisation-owned storage (files + embeddings). Distributed to users only.",
             "default_monthly_credits": "Starting suggestion when creating a user (must fit remaining pool).",
         }
         widgets = {
@@ -44,10 +162,8 @@ class OrganizationPolicyForm(forms.ModelForm):
             for field in [
                 "credit_pool",
                 "storage_pool_gb",
-                "vector_storage_pool_gb",
                 "default_monthly_credits",
                 "default_storage_limit_gb",
-                "default_vector_storage_gb",
                 "default_pdf_zip_limit",
                 "default_pyq_zip_limit",
                 "default_daily_run_limit",
@@ -57,6 +173,14 @@ class OrganizationPolicyForm(forms.ModelForm):
 
 
 class OrganizationCreateForm(forms.ModelForm):
+    is_active = forms.TypedChoiceField(
+        label="Status",
+        coerce=lambda v: v == "True",
+        choices=((True, "Active"), (False, "Inactive")),
+        widget=forms.RadioSelect,
+        initial=True,
+    )
+
     class Meta:
         model = Organization
         fields = ["name", "slug", "is_active"]
@@ -92,13 +216,7 @@ class OrgUserCreateForm(UserCreationForm):
     storage_gb = forms.FloatField(
         min_value=0,
         required=False,
-        label="Total storage (GB)",
-        widget=forms.NumberInput(attrs={"class": "form-control", "step": "0.1"}),
-    )
-    vector_gb = forms.FloatField(
-        min_value=0,
-        required=False,
-        label="Vector storage (GB)",
+        label="Storage (GB)",
         widget=forms.NumberInput(attrs={"class": "form-control", "step": "0.1"}),
     )
 
@@ -118,16 +236,13 @@ class OrgUserCreateForm(UserCreationForm):
         max_credits=0,
         suggested_credits=0,
         max_storage=0,
-        max_vector=0,
         suggested_storage=0,
-        suggested_vector=0,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
         self.create_org_admin = create_org_admin
         self.max_credits = max(int(max_credits), 0)
         self.max_storage = max(float(max_storage), 0.0)
-        self.max_vector = max(float(max_vector), 0.0)
         self.fields["password1"].widget.attrs["class"] = "form-control"
         self.fields["password2"].widget.attrs["class"] = "form-control"
         self.fields["username"].help_text = (
@@ -138,31 +253,25 @@ class OrgUserCreateForm(UserCreationForm):
         if create_org_admin:
             # Org Admins manage the org; they do not consume org pools.
             self.fields["email"].widget = forms.HiddenInput()
-            for name in ("credits_to_assign", "storage_gb", "vector_gb"):
+            for name in ("credits_to_assign", "storage_gb"):
                 self.fields[name].widget = forms.HiddenInput()
                 self.fields[name].required = False
                 self.fields[name].initial = 0
         else:
             self.fields["credits_to_assign"].required = True
             self.fields["storage_gb"].required = True
-            self.fields["vector_gb"].required = True
             self.fields["credits_to_assign"].initial = min(
                 int(suggested_credits or 0), self.max_credits
             )
             self.fields["storage_gb"].initial = min(
                 float(suggested_storage or 0), self.max_storage
             )
-            self.fields["vector_gb"].initial = min(
-                float(suggested_vector or 0), self.max_vector
-            )
             self.fields["credits_to_assign"].help_text = (
                 f"Organisation credit pool remaining: {self.max_credits}."
             )
             self.fields["storage_gb"].help_text = (
-                f"Organisation storage pool remaining: {self.max_storage:.2f} GB."
-            )
-            self.fields["vector_gb"].help_text = (
-                f"Organisation vector pool remaining: {self.max_vector:.2f} GB."
+                f"Organisation storage pool remaining: {self.max_storage:.2f} GB "
+                "(includes PDF files and embeddings)."
             )
 
     def clean_credits_to_assign(self):
@@ -185,16 +294,6 @@ class OrgUserCreateForm(UserCreationForm):
             )
         return value
 
-    def clean_vector_gb(self):
-        value = float(self.cleaned_data.get("vector_gb") or 0)
-        if self.create_org_admin:
-            return 0.0
-        if value > self.max_vector + 1e-9:
-            raise forms.ValidationError(
-                f"Only {self.max_vector:.2f} GB remain in the organisation vector pool."
-            )
-        return value
-
 
 class UserQuotaForm(forms.Form):
     monthly_credit_limit = forms.IntegerField(
@@ -204,12 +303,7 @@ class UserQuotaForm(forms.Form):
     )
     max_total_storage_gb = forms.FloatField(
         min_value=0,
-        label="Total storage (GB)",
-        widget=forms.NumberInput(attrs={"class": "form-control", "step": "0.1"}),
-    )
-    max_vector_storage_gb = forms.FloatField(
-        min_value=0,
-        label="Vector storage (GB)",
+        label="Storage (GB)",
         widget=forms.NumberInput(attrs={"class": "form-control", "step": "0.1"}),
     )
     max_saved_pdf_zips = forms.IntegerField(
@@ -236,27 +330,24 @@ class UserQuotaForm(forms.Form):
         required=False,
         label="Hard-limit credits (block when exceeded)",
     )
-    is_active_member = forms.BooleanField(required=False, label="Active member")
+    is_active_member = forms.BooleanField(required=False, label="Account active")
 
     def __init__(
         self,
         *args,
         max_credits=None,
         max_storage=None,
-        max_vector=None,
         for_org_admin=False,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
         self.max_credits = max_credits
         self.max_storage = max_storage
-        self.max_vector = max_vector
         self.for_org_admin = for_org_admin
         if for_org_admin:
             for name in (
                 "monthly_credit_limit",
                 "max_total_storage_gb",
-                "max_vector_storage_gb",
                 "is_hard_limited",
             ):
                 self.fields.pop(name, None)
@@ -268,11 +359,8 @@ class UserQuotaForm(forms.Form):
                 )
             if max_storage is not None:
                 self.fields["max_total_storage_gb"].help_text = (
-                    f"Max from org storage pool (incl. current share): {max_storage:.2f} GB."
-                )
-            if max_vector is not None:
-                self.fields["max_vector_storage_gb"].help_text = (
-                    f"Max from org vector pool (incl. current share): {max_vector:.2f} GB."
+                    f"Max from org storage pool (incl. current share): {max_storage:.2f} GB "
+                    "(files + embeddings)."
                 )
 
     def clean_monthly_credit_limit(self):
@@ -288,14 +376,6 @@ class UserQuotaForm(forms.Form):
         if self.max_storage is not None and value > self.max_storage + 1e-9:
             raise forms.ValidationError(
                 f"Only {self.max_storage:.2f} GB remain in the organisation storage pool."
-            )
-        return value
-
-    def clean_max_vector_storage_gb(self):
-        value = float(self.cleaned_data.get("max_vector_storage_gb") or 0)
-        if self.max_vector is not None and value > self.max_vector + 1e-9:
-            raise forms.ValidationError(
-                f"Only {self.max_vector:.2f} GB remain in the organisation vector pool."
             )
         return value
 
@@ -315,13 +395,10 @@ class UserQuotaForm(forms.Form):
             max_credits = credit_budget["remaining"] + int(credits.monthly_credit_limit)
             max_storage = storage_budget["storage_remaining"] + float(
                 storage.max_total_storage_gb
-            )
-            max_vector = storage_budget["vector_remaining"] + float(
-                storage.max_vector_storage_gb
-            )
+            ) + float(storage.max_vector_storage_gb)
         else:
             # Org Admins are outside org pools.
-            max_credits = max_storage = max_vector = None
+            max_credits = max_storage = None
 
         initial = {
             "max_saved_pdf_zips": storage.max_saved_pdf_zips,
@@ -334,8 +411,8 @@ class UserQuotaForm(forms.Form):
             initial.update(
                 {
                     "monthly_credit_limit": credits.monthly_credit_limit,
-                    "max_total_storage_gb": storage.max_total_storage_gb,
-                    "max_vector_storage_gb": storage.max_vector_storage_gb,
+                    "max_total_storage_gb": float(storage.max_total_storage_gb)
+                    + float(storage.max_vector_storage_gb),
                     "is_hard_limited": credits.is_hard_limited,
                 }
             )
@@ -343,7 +420,6 @@ class UserQuotaForm(forms.Form):
             "initial": initial,
             "max_credits": max_credits,
             "max_storage": max_storage,
-            "max_vector": max_vector,
             "for_org_admin": for_org_admin,
         }
         return cls(data, **kwargs) if data is not None else cls(**kwargs)
@@ -370,7 +446,6 @@ class UserQuotaForm(forms.Form):
             assert_storage_fits_pool(
                 user.organization,
                 total_gb=cleaned["max_total_storage_gb"],
-                vector_gb=cleaned["max_vector_storage_gb"],
                 exclude_user=user,
             )
 
@@ -389,9 +464,7 @@ class UserQuotaForm(forms.Form):
         storage.max_total_storage_gb = (
             0 if is_org_admin else cleaned["max_total_storage_gb"]
         )
-        storage.max_vector_storage_gb = (
-            0 if is_org_admin else cleaned["max_vector_storage_gb"]
-        )
+        storage.max_vector_storage_gb = 0
         storage.max_saved_pdf_zips = cleaned["max_saved_pdf_zips"]
         storage.max_saved_pyq_zips = cleaned["max_saved_pyq_zips"]
         storage.save(

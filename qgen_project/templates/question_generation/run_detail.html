@@ -12,21 +12,32 @@
       {% if show_council_models %}
       · Council:{% for m in object.council_models.all %} <span class="badge badge-muted">{{ m.name }}</span>{% empty %} <span class="muted">none</span>{% endfor %}
       {% endif %}
-      {% if object.council_rejected_count %}
+      {% if show_council_models and object.council_rejected_count %}
       · <span class="muted">{{ object.council_rejected_count }} rejected by Think</span>
       {% endif %}
       {% endif %}
     </p>
   </div>
   <div class="btn-row">
-    <a class="btn" href="{% url 'question_generation:export' object.id %}?format=dataset">Dataset JSON</a>
-    <a class="btn" href="{% url 'question_generation:export' object.id %}?format=docx">Export DOCX</a>
-    <a class="btn" href="{% url 'question_generation:export' object.id %}?format=csv">CSV</a>
-    <a class="btn" href="{% url 'question_generation:export' object.id %}?format=json">JSON</a>
+    {% if questions %}
+      {% if show_admin_exports %}
+      <a class="btn" href="{% url 'question_generation:export' object.id %}?format=dataset">Dataset JSON</a>
+      <a class="btn" href="{% url 'question_generation:export' object.id %}?format=json">JSON</a>
+      {% endif %}
+      <a class="btn" href="{% url 'question_generation:export' object.id %}?format=docx">Export DOCX</a>
+      <a class="btn" href="{% url 'question_generation:export' object.id %}?format=csv">CSV</a>
+      {% if object.status != 'pending' and object.status != 'running' and remaining_questions %}
+      <form method="post" action="{% url 'question_generation:regenerate' object.id %}" class="inline-form"
+            onsubmit="return confirm('Generate {{ remaining_questions }} remaining question(s)? Existing questions will be kept.');">
+        {% csrf_token %}
+        <button class="btn btn-primary" type="submit">Generate remaining ({{ remaining_questions }})</button>
+      </form>
+      {% endif %}
+    {% endif %}
     {% if object.status == 'failed' or object.status == 'partial' %}
     <form method="post" action="{% url 'question_generation:rerun' object.id %}" class="inline-form">
       {% csrf_token %}
-      <button class="btn btn-primary" type="submit">Retry</button>
+      <button class="btn" type="submit">Retry failed</button>
     </form>
     {% endif %}
   </div>
@@ -43,7 +54,7 @@
 <h2>Generated Questions ({{ questions.count }})</h2>
 <div class="question-list">
 {% for q in questions %}
-  {% include "partials/question_card.html" with question=q show_council_models=show_council_models show_dataset_meta=True %}
+  {% include "partials/question_card.html" with question=q show_council_models=show_council_models show_dataset_meta=show_dataset_meta %}
 {% empty %}
   <div class="form-section">No questions generated yet.</div>
 {% endfor %}

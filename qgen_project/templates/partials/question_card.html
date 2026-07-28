@@ -1,11 +1,14 @@
-<article class="question-card card">
+<article class="question-card card{% if question.user_decision == 'rejected' %} question-card--rejected{% endif %}">
   <div class="question-meta">
     <span class="badge">{{ question.question_type }}</span>
     <span class="badge badge-muted">{{ question.bloom }}</span>
     <span class="badge badge-muted">{{ question.marks }} marks</span>
     {% if question.topic %}<span class="badge badge-muted">{{ question.topic }}</span>{% endif %}
+    {% if question.user_decision == 'rejected' %}
+    <span class="badge status-error">Rejected</span>
+    {% endif %}
     {% with council=question.rubrics.council %}
-    {% if council.enabled %}
+    {% if show_council_models and council.enabled %}
     <span class="badge {% if council.majority_passed and not council.forced_keep %}badge-success{% else %}badge-muted{% endif %}" title="Think verification">
       {% if council.forced_keep %}Think kept{% elif council.degraded %}Think soft{% else %}Think {{ council.approvals }}/{{ council.voted_models|default:council.total_models }}{% endif %}
     </span>
@@ -49,13 +52,13 @@
   {% endif %}
 
   {% with council=question.rubrics.council %}
-  {% if council.enabled and council.votes %}
+  {% if show_council_models and council.enabled and council.votes %}
   <details class="council-votes">
     <summary>Think verification ({{ council.approvals }}/{{ council.voted_models|default:council.total_models }} approved · need {{ council.threshold }}{% if council.abstentions %} · {{ council.abstentions }} abstain{% endif %})</summary>
     <ul class="council-vote-list">
       {% for vote in council.votes %}
       <li class="council-vote {% if vote.abstain %}is-abstain{% elif vote.approved %}is-approved{% else %}is-rejected{% endif %}">
-        <strong>{% if show_council_models %}{{ vote.model }}{% else %}Verifier {{ forloop.counter }}{% endif %}</strong>
+        <strong>{{ vote.model }}</strong>
         {% if vote.abstain %}
         <span class="badge badge-muted">abstain</span>
         {% elif vote.approved %}
@@ -70,14 +73,14 @@
           type:{% if vote.question_type %}✓{% else %}✗{% endif %}
           apt:{% if vote.appropriate %}✓{% else %}✗{% endif %}
         </span>
-        {% elif show_council_models and vote.error %}
+        {% elif vote.error %}
         <span class="muted">{{ vote.error|truncatechars:80 }}</span>
         {% endif %}
       </li>
       {% endfor %}
     </ul>
   </details>
-  {% elif council.enabled and council.forced_keep %}
+  {% elif show_council_models and council.enabled and council.forced_keep %}
   <p class="muted">Think could not majority-approve; question kept for delivery.</p>
   {% endif %}
   {% endwith %}

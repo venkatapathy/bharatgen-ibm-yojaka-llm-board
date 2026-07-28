@@ -57,9 +57,12 @@
 
   <div class="form-section context-section">
     <div class="context-section__head">
-      <span class="field-label">PDF contexts</span>
-      <span class="field-hint">RAG sources — click to add</span>
+      <span class="field-label">PDF contexts <span class="muted">(required)</span></span>
+      <span class="field-hint">RAG sources — at least one required</span>
     </div>
+    {% if form.pdf_contexts.errors %}
+    <p class="alert alert-error">{{ form.pdf_contexts.errors.0 }}</p>
+    {% endif %}
     {% if pdf_contexts %}
     <div class="context-chips" role="group" aria-label="PDF contexts">
       {% for ctx in pdf_contexts %}
@@ -71,7 +74,7 @@
       {% endfor %}
     </div>
     {% else %}
-    <p class="muted">No ready PDF contexts. <a href="{% url 'pdf_module:upload' %}">Upload one</a>.</p>
+    <p class="muted">No ready PDF contexts. <a href="{% url 'pdf_module:upload' %}">Upload one</a> before generating.</p>
     {% endif %}
   </div>
 
@@ -95,42 +98,33 @@
     {% endif %}
   </div>
 
-  <div class="form-section context-section">
-    <div class="context-section__head">
-      <span class="field-label">Output language</span>
-      <span class="field-hint">Questions and answers will be written in this language</span>
+  <div class="form-section run-toggles">
+    <div class="run-toggle">
+      <span class="run-toggle__label">Output language</span>
+      <div class="run-segment" role="radiogroup" aria-label="Output language"
+           x-data="{ lang: 'en' }">
+        <label class="run-segment__opt" :class="{ 'is-on': lang === 'en' }">
+          <input type="radio" name="language" value="en" x-model="lang">
+          English
+        </label>
+        <label class="run-segment__opt" :class="{ 'is-on': lang === 'hi' }">
+          <input type="radio" name="language" value="hi" x-model="lang">
+          हिंदी
+        </label>
+      </div>
     </div>
-    <div class="lang-toggle" role="radiogroup" aria-label="Output language"
-         x-data="{ lang: 'en', hindiId: '{{ hindi_prompt_id|default:'' }}', englishId: '{{ english_prompt_id|default:'' }}' }"
-         x-init="$watch('lang', v => { const sel = document.querySelector('select[name=prompt]'); if (!sel) return; if (v === 'hi' && hindiId) sel.value = hindiId; if (v === 'en' && englishId) sel.value = englishId; })">
-      <label class="lang-toggle__option" :class="{ 'is-active': lang === 'en' }">
-        <input type="radio" name="language" value="en" x-model="lang">
-        <span>English</span>
-      </label>
-      <label class="lang-toggle__option" :class="{ 'is-active': lang === 'hi' }">
-        <input type="radio" name="language" value="hi" x-model="lang">
-        <span>हिंदी</span>
-      </label>
-    </div>
-  </div>
 
-  <div class="form-section context-section">
-    <div class="context-section__head">
-      <span class="field-label">Think mode</span>
-      <span class="field-hint">Extra multi-model verification before questions are kept</span>
+    <div class="run-toggle">
+      <span class="run-toggle__label">Think mode</span>
+      {% if think_available %}
+      <label class="run-switch" title="Enable Think mode">
+        <input type="checkbox" name="think" value="on">
+        <span class="run-switch__pill" aria-hidden="true"></span>
+      </label>
+      {% else %}
+      <span class="run-toggle__off">Unavailable</span>
+      {% endif %}
     </div>
-    {% if think_available %}
-    <label class="think-toggle" title="Enable Think mode">
-      <input type="checkbox" name="think" value="on">
-      <span class="think-toggle__track" aria-hidden="true"><span class="think-toggle__thumb"></span></span>
-      <span class="think-toggle__copy">
-        <strong>Think</strong>
-        <span class="muted">Verify bloom, correctness, question type, and appropriateness before showing results</span>
-      </span>
-    </label>
-    {% else %}
-    <p class="muted">Think mode is not available yet. Ask an admin to enable council models in Admin → Model configs.</p>
-    {% endif %}
   </div>
 
   <div class="form-section">
@@ -167,24 +161,6 @@
     </table>
     <button type="button" @click="items.push({type:'SHORT',bloom:'remember',marks:1,count:5})" class="btn">+ Add Row</button>
   </div>
-
-  {% if show_advanced_settings %}
-  <details class="form-section">
-    <summary><strong>Advanced Settings</strong></summary>
-    <label>Prompt Template
-      <select name="prompt" class="form-control">
-        {% for p in prompts %}<option value="{{ p.id }}" {% if p.is_active %}selected{% endif %}>{{ p.name }}</option>{% endfor %}
-      </select>
-    </label>
-    <label>Model Config
-      <select name="model_config" class="form-control">
-        {% for mc in model_configs %}<option value="{{ mc.id }}" {% if mc.is_default %}selected{% endif %}>{{ mc.name }}</option>{% endfor %}
-      </select>
-    </label>
-    <label>RAG Top-K <input type="number" name="rag_top_k" value="5" min="1" max="20" class="form-control" style="width:100px"></label>
-    <label>PYQ n-shot <input type="number" name="pyq_shots" value="3" min="0" max="10" class="form-control" style="width:100px"></label>
-  </details>
-  {% endif %}
 
   <div class="usage-line-wrap" style="margin:1rem 0 1.25rem;">
     {% include "partials/credit_ring.html" with credits=credits %}

@@ -5,18 +5,20 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
-from apps.core.models import ModelConfig, User
+from apps.core.models import GenerationSettings, ModelConfig, User
 from apps.core.ownership import (
+    browse_list_context,
     owned_batch_runs,
     owned_generated_questions,
     owned_pdf_contexts,
     owned_pyq_modules,
 )
+from apps.core.soft404 import SoftMissingMixin
 from apps.core.provisioning import (
     CREDITS_PER_QUESTION,
     CREDITS_PYQ_PER_QUESTION,
@@ -28,7 +30,6 @@ from apps.core.provisioning import (
     ensure_credit_headroom,
     estimate_batch_run_credits,
 )
-from apps.prompt_module.models import PromptTemplate
 from apps.pyq_module.models import Question, QuestionType, BloomLevel
 
 from .export import build_docx
@@ -42,8 +43,21 @@ def _is_platform_admin(user) -> bool:
     )
 
 
-def _batch_run_queryset(user):
-    return owned_batch_runs(user)
+def _order_generated_questions(qs):
+    """Approved/pending first; user-rejected questions last."""
+    from django.db.models import Case, IntegerField, Value, When
+
+    return qs.annotate(
+        _review_sort=Case(
+            When(user_decision=Question.UserDecision.REJECTED, then=Value(1)),
+            default=Value(0),
+            output_field=IntegerField(),
+        )
+    ).order_by("_review_sort", "created_at", "id")
+
+
+def _batch_run_queryset(user, *, owner=None):
+    return owned_batch_runs(user, owner=owner)
 
 
 def _generated_question_queryset(user):
@@ -55,25 +69,42 @@ class BatchRunListView(LoginRequiredMixin, ListView):
     template_name = 'question_generation/run_list.html'
     context_object_name = 'runs'
 
+    def _browse_params(self):
+        org_id = (self.request.GET.get("org") or "").strip() or None
+        user_id = (self.request.GET.get("user") or "").strip() or None
+        return org_id, user_id
+
     def get_queryset(self):
-        return _batch_run_queryset(self.request.user)
+        viewer = self.request.user
+        org_id, user_id = self._browse_params()
+        browse = browse_list_context(
+            viewer, organization_id=org_id, user_id=user_id
+        )
+        if browse["needs_filter"] and browse["target"] is None:
+            return BatchRun.objects.none()
+        if browse["needs_filter"]:
+            return _batch_run_queryset(viewer, owner=browse["target"])
+        return _batch_run_queryset(viewer)
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        user = self.request.user
-        ctx["credits"] = credit_quota_display(user)
-        ctx["show_owner"] = bool(
-            getattr(user, "is_superuser", False)
-            or getattr(user, "is_orguser", False)
+        viewer = self.request.user
+        org_id, user_id = self._browse_params()
+        browse = browse_list_context(
+            viewer, organization_id=org_id, user_id=user_id
         )
+        ctx.update(browse)
+        quota_user = browse["target"] or viewer
+        ctx["credits"] = credit_quota_display(quota_user)
+        ctx["mine_label"] = "My runs"
+        ctx["show_admin_exports"] = _is_platform_admin(viewer)
         return ctx
 
 
 class BatchRunNewView(LoginRequiredMixin, CreateView):
     model = BatchRun
     template_name = 'question_generation/run_new.html'
-    fields = ['name', 'topic', 'pdf_contexts', 'pyq_modules',
-              'prompt', 'model_config', 'rag_top_k', 'pyq_shots']
+    fields = ['name', 'topic', 'pdf_contexts', 'pyq_modules']
     success_url = reverse_lazy('question_generation:list')
 
     def get_context_data(self, **kwargs):
@@ -89,25 +120,9 @@ class BatchRunNewView(LoginRequiredMixin, CreateView):
         }
         ctx['pdf_contexts']  = owned_pdf_contexts(self.request.user, ready_only=True)
         ctx['pyq_modules']   = owned_pyq_modules(self.request.user, ready_only=True)
-        ctx['prompts']       = PromptTemplate.objects.all()
-        ctx['model_configs'] = ModelConfig.objects.all()
         ctx['think_available'] = bool(get_active_council_models())
-        ctx['hindi_prompt_id'] = (
-            PromptTemplate.objects.filter(name__iexact='Hindi Generator')
-            .values_list('id', flat=True)
-            .first()
-        )
-        ctx['english_prompt_id'] = (
-            PromptTemplate.objects.filter(is_active=True)
-            .values_list('id', flat=True)
-            .first()
-            or PromptTemplate.objects.filter(name__iexact='Default Generator')
-            .values_list('id', flat=True)
-            .first()
-        )
         ctx['question_types'] = QuestionType.choices
         ctx['bloom_levels']   = BloomLevel.choices
-        ctx['show_advanced_settings'] = _is_platform_admin(self.request.user)
         return ctx
 
     def get_form(self, form_class=None):
@@ -115,18 +130,25 @@ class BatchRunNewView(LoginRequiredMixin, CreateView):
         form.fields['pdf_contexts'].queryset = owned_pdf_contexts(
             self.request.user, ready_only=True
         )
+        form.fields['pdf_contexts'].required = True
+        form.fields['pdf_contexts'].error_messages = {
+            "required": "Select at least one PDF context so questions are grounded in course material.",
+        }
         form.fields['pyq_modules'].queryset = owned_pyq_modules(
             self.request.user, ready_only=True
         )
-        # Users/Org Admins never submit these; Admin sets platform defaults.
-        if not _is_platform_admin(self.request.user):
-            for name in ("prompt", "model_config", "rag_top_k", "pyq_shots"):
-                form.fields[name].required = False
         return form
 
     def form_valid(self, form):
         from .tasks import run_batch
         from .council import get_active_council_models
+
+        if not form.cleaned_data.get("pdf_contexts"):
+            form.add_error(
+                "pdf_contexts",
+                "Select at least one PDF context so questions are grounded in course material.",
+            )
+            return self.form_invalid(form)
 
         form.instance.created_by = self.request.user
         data = self.request.POST
@@ -135,37 +157,30 @@ class BatchRunNewView(LoginRequiredMixin, CreateView):
             language = BatchRun.Language.ENGLISH
         form.instance.language = language
 
-        hindi_prompt = PromptTemplate.objects.filter(name__iexact='Hindi Generator').first()
-        english_prompt = (
-            PromptTemplate.objects.filter(is_active=True).first()
-            or PromptTemplate.objects.filter(name__iexact='Default Generator').first()
+        # Platform defaults from Control → Technical settings (all roles).
+        gen = GenerationSettings.load()
+        prompt = gen.resolve_prompt(language)
+        model_config = (
+            gen.model_config
+            or ModelConfig.objects.filter(is_default=True).first()
+            or ModelConfig.objects.exclude(llm_model_id="").first()
         )
-        can_edit_advanced = _is_platform_admin(self.request.user)
-
-        if can_edit_advanced:
-            posted_prompt = data.get('prompt')
-            # If user left Advanced at the default that matches language, keep auto; if they picked another id, keep it.
-            if language == BatchRun.Language.HINDI and hindi_prompt:
-                if not posted_prompt or str(posted_prompt) in {
-                    str(english_prompt.id) if english_prompt else '',
-                    str(hindi_prompt.id),
-                }:
-                    form.instance.prompt = hindi_prompt
-            elif language == BatchRun.Language.ENGLISH and english_prompt:
-                if not posted_prompt or (hindi_prompt and str(posted_prompt) == str(hindi_prompt.id)):
-                    form.instance.prompt = english_prompt
-        else:
-            # Locked platform defaults for Users / Org Admins.
-            if language == BatchRun.Language.HINDI and hindi_prompt:
-                form.instance.prompt = hindi_prompt
-            elif english_prompt:
-                form.instance.prompt = english_prompt
-            form.instance.model_config = (
-                ModelConfig.objects.filter(is_default=True).first()
-                or ModelConfig.objects.first()
+        if prompt is None:
+            messages.error(
+                self.request,
+                "No prompt template is configured. Ask a platform admin to set one in Control → Technical settings.",
             )
-            form.instance.rag_top_k = 5
-            form.instance.pyq_shots = 3
+            return self.form_invalid(form)
+        if model_config is None:
+            messages.error(
+                self.request,
+                "No generation model is configured. Ask a platform admin to set one in Control → Technical settings.",
+            )
+            return self.form_invalid(form)
+        form.instance.prompt = prompt
+        form.instance.model_config = model_config
+        form.instance.rag_top_k = int(gen.rag_top_k or 5)
+        form.instance.pyq_shots = int(gen.pyq_shots or 0)
 
         think_enabled = data.get('think') in ('on', 'true', '1', 'yes')
         council_models = get_active_council_models() if think_enabled else []
@@ -236,19 +251,31 @@ class BatchRunNewView(LoginRequiredMixin, CreateView):
         return redirect('question_generation:detail', pk=self.object.pk)
 
 
-class BatchRunDetailView(LoginRequiredMixin, DetailView):
+def _get_owned_run_or_redirect(request, pk):
+    run = _batch_run_queryset(request.user).filter(pk=pk).first()
+    if run is None:
+        messages.info(request, "That generation run is no longer available.")
+        return None
+    return run
+
+
+class BatchRunDetailView(SoftMissingMixin, LoginRequiredMixin, DetailView):
     model = BatchRun
     template_name = 'question_generation/run_detail.html'
+    missing_message = "That generation run is no longer available."
+    missing_redirect = "question_generation:list"
 
     def get_queryset(self):
         return _batch_run_queryset(self.request.user)
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
+        if self.object is None:
+            return redirect(self.get_missing_redirect())
         # After generation finishes, force one-by-one human review first.
         if self.object.needs_human_review:
             return redirect("question_generation:review", pk=self.object.pk)
-        return super().get(request, *args, **kwargs)
+        return super(DetailView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
@@ -258,15 +285,23 @@ class BatchRunDetailView(LoginRequiredMixin, DetailView):
             getattr(user, 'is_superuser', False)
             or getattr(user, 'role', '') == User.Role.SUPERUSER
         )
-        ctx['questions'] = self.object.questions.filter(is_generated=True).order_by('created_at', 'id')
+        ctx['show_dataset_meta'] = ctx['show_council_models']
+        ctx['show_admin_exports'] = ctx['show_council_models']
+        ctx['questions'] = _order_generated_questions(
+            self.object.questions.filter(is_generated=True)
+        )
         ctx['run_credits'] = batch_run_credits_used(self.object)
+        from .tasks import remaining_question_count
+        ctx['remaining_questions'] = remaining_question_count(self.object)
         return ctx
 
 
 @login_required
 def batch_run_review(request, pk):
     """Mandatory sequential approve/reject of each generated question."""
-    run = get_object_or_404(_batch_run_queryset(request.user), pk=pk)
+    run = _get_owned_run_or_redirect(request, pk)
+    if run is None:
+        return redirect("question_generation:list")
 
     if run.status in {BatchRun.Status.PENDING, BatchRun.Status.RUNNING}:
         return redirect("question_generation:detail", pk=run.pk)
@@ -328,23 +363,28 @@ def batch_run_review(request, pk):
             "total_count": total,
             "position": reviewed + 1,
             "show_council_models": show_council_models,
+            "show_dataset_meta": show_council_models,
         },
     )
 
 
-class BatchRunDeleteView(LoginRequiredMixin, DeleteView):
+class BatchRunDeleteView(SoftMissingMixin, LoginRequiredMixin, DeleteView):
     model = BatchRun
     template_name = "question_generation/batchrun_confirm_delete.html"
     success_url = reverse_lazy('question_generation:list')
+    missing_message = "That generation run is no longer available."
+    missing_redirect = "question_generation:list"
 
     def get_queryset(self):
         return _batch_run_queryset(self.request.user)
 
 
-class GeneratedQuestionUpdateView(LoginRequiredMixin, UpdateView):
+class GeneratedQuestionUpdateView(SoftMissingMixin, LoginRequiredMixin, UpdateView):
     model = Question
     fields = ['question_text', 'question_type', 'bloom', 'marks', 'topic', 'reference_answer', 'options', 'rubrics']
     template_name = 'question_generation/generated_question_form.html'
+    missing_message = "That generated question is no longer available."
+    missing_redirect = "question_generation:list"
 
     def get_queryset(self):
         return _generated_question_queryset(self.request.user)
@@ -353,9 +393,11 @@ class GeneratedQuestionUpdateView(LoginRequiredMixin, UpdateView):
         return reverse_lazy('question_generation:detail', kwargs={'pk': self.object.batch_run_id})
 
 
-class GeneratedQuestionDeleteView(LoginRequiredMixin, DeleteView):
+class GeneratedQuestionDeleteView(SoftMissingMixin, LoginRequiredMixin, DeleteView):
     model = Question
     template_name = 'question_generation/question_confirm_delete.html'
+    missing_message = "That generated question is no longer available."
+    missing_redirect = "question_generation:list"
 
     def get_queryset(self):
         return _generated_question_queryset(self.request.user)
@@ -367,14 +409,18 @@ class GeneratedQuestionDeleteView(LoginRequiredMixin, DeleteView):
 @login_required
 def batch_run_status(request, pk):
     from django.urls import reverse
+    from .tasks import remaining_question_count
 
-    run = get_object_or_404(_batch_run_queryset(request.user), pk=pk)
+    run = _get_owned_run_or_redirect(request, pk)
+    if run is None:
+        return redirect("question_generation:list")
     response = render(
         request,
         'question_generation/partials/progress_panel.html',
         {
             'object': run,
             'run_credits': batch_run_credits_used(run),
+            'remaining_questions': remaining_question_count(run),
         },
     )
     if run.needs_human_review:
@@ -384,9 +430,18 @@ def batch_run_status(request, pk):
 
 @login_required
 def batch_run_export(request, pk):
-    run       = get_object_or_404(_batch_run_queryset(request.user), pk=pk)
+    run = _get_owned_run_or_redirect(request, pk)
+    if run is None:
+        return redirect("question_generation:list")
     fmt       = request.GET.get('format', 'csv')
-    questions = run.questions.filter(is_generated=True).order_by('created_at', 'id')
+    questions = _order_generated_questions(
+        run.questions.filter(is_generated=True)
+    )
+
+    # Users / org admins: DOCX + CSV only. Dataset JSON / JSON are platform admin.
+    if fmt in ('dataset', 'json') and not _is_platform_admin(request.user):
+        messages.error(request, "That export format is available to platform admins only.")
+        return redirect("question_generation:detail", pk=pk)
 
     if fmt == 'docx':
         stream = build_docx(run)
@@ -470,7 +525,9 @@ def batch_run_rerun(request, pk):
     """Re-queue failed / incomplete items for another attempt."""
     if request.method == 'POST':
         from .tasks import run_batch
-        run = get_object_or_404(_batch_run_queryset(request.user), pk=pk)
+        run = _get_owned_run_or_redirect(request, pk)
+        if run is None:
+            return redirect("question_generation:list")
         # Retry anything that did not finish successfully.
         to_retry = run.items.exclude(status='done')
         if not to_retry.exists():
@@ -484,4 +541,73 @@ def batch_run_rerun(request, pk):
         run.save(update_fields=['status', 'review_status', 'error_summary', 'active_item'])
         run_batch.delay(run.pk)
         messages.info(request, 'Generation re-queued. Retrying failed items…')
+        return redirect('question_generation:detail', pk=pk)
+    run = _get_owned_run_or_redirect(request, pk)
+    if run is None:
+        return redirect("question_generation:list")
     return redirect('question_generation:detail', pk=pk)
+
+
+@login_required
+def batch_run_regenerate(request, pk):
+    """Generate only the remaining (missing) questions for this run."""
+    if request.method != "POST":
+        return redirect("question_generation:detail", pk=pk)
+
+    from .tasks import remaining_question_count, remaining_slots_for_run, run_batch
+
+    run = _get_owned_run_or_redirect(request, pk)
+    if run is None:
+        return redirect("question_generation:list")
+    if run.status in {BatchRun.Status.PENDING, BatchRun.Status.RUNNING}:
+        messages.warning(request, "This run is already generating.")
+        return redirect("question_generation:detail", pk=pk)
+    if not run.pdf_contexts.exists():
+        messages.error(request, "Add at least one PDF context before regenerating.")
+        return redirect("question_generation:detail", pk=pk)
+
+    remaining = remaining_question_count(run)
+    if remaining <= 0:
+        messages.info(
+            request,
+            "All expected questions are already generated for this run.",
+        )
+        return redirect("question_generation:detail", pk=pk)
+
+    estimated = estimate_batch_run_credits(run, question_count=remaining)
+    try:
+        ensure_credit_headroom(request.user, estimated)
+    except ProvisioningError:
+        messages.error(
+            request,
+            f"You don't have enough credits to generate the remaining {remaining} question(s).",
+        )
+        return redirect("question_generation:detail", pk=pk)
+
+    for item, need in remaining_slots_for_run(run):
+        if need > 0:
+            item.status = "pending"
+            item.error_detail = ""
+        else:
+            item.status = "done"
+            item.error_detail = ""
+        item.save(update_fields=["status", "error_detail"])
+
+    run.status = BatchRun.Status.PENDING
+    run.error_summary = ""
+    run.active_item = None
+    run.completed_at = None
+    run.save(
+        update_fields=[
+            "status",
+            "error_summary",
+            "active_item",
+            "completed_at",
+        ]
+    )
+    run_batch.delay(run.pk, fill_remaining=True)
+    messages.info(
+        request,
+        f"Generating {remaining} remaining question(s). Existing questions are kept.",
+    )
+    return redirect("question_generation:detail", pk=pk)

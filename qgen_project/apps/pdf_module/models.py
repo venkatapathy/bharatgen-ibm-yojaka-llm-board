@@ -48,6 +48,12 @@ class PDFContext(models.Model):
     def chunk_count(self):
         return self.chunks.count()
 
+    @property
+    def file_size_label(self):
+        from apps.core.storage import _bytes_to_gb, _format_storage_amount
+
+        return _format_storage_amount(_bytes_to_gb(self.file_size_bytes))
+
 
 class PDFChunk(models.Model):
     id          = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

@@ -6,6 +6,11 @@ def validate_pyq_upload(uploaded_file, *, max_size_bytes=None):
         raise ValidationError("PYQ PDF upload is required.")
     if max_size_bytes and uploaded_file.size > max_size_bytes:
         raise ValidationError("Uploaded PYQ file exceeds the configured size limit.")
+
+    name = (uploaded_file.name or "").lower()
+    if not name.endswith(".pdf"):
+        raise ValidationError("Only PDF uploads are supported for PYQ extraction.")
+
     header = uploaded_file.read(4)
     uploaded_file.seek(0)
     if not header.startswith(b"%PDF"):

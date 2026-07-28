@@ -23,6 +23,7 @@ sentence-transformers==3.*
 PyMuPDF==1.24.*
 pdfplumber==0.11.*
 lipi-aparsoft==1.0.*   # KrutiDev/Chanakya → Unicode Devanagari for Hindi PDFs
+pytesseract==0.3.*     # OCR fallback for scanned / image-only PDFs
 
 # Text splitting
 langchain==0.2.*

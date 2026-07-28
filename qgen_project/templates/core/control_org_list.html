@@ -5,25 +5,43 @@
   <div>
     <div class="eyebrow"><a href="{% url 'core:control_hub' %}">Control</a> · Organisations</div>
     <h1>Organisation quotas</h1>
-    <p class="muted">Organisation-owned pools. Org Admins distribute them to users (not to themselves).</p>
   </div>
 </div>
 
 <section class="form-section">
-  <h3>Create organisation</h3>
-  <form method="post" action="{% url 'core:control_org_create' %}" class="form-grid">
+  <h2 class="form-section__title">Create organisation</h2>
+  <form method="post" action="{% url 'core:control_org_create' %}" class="org-create-form">
     {% csrf_token %}
-    <label class="form-field">
-      <span class="field-label">{{ create_form.name.label }}</span>
-      {{ create_form.name }}
-    </label>
-    <label class="form-field">
-      <span class="field-label">{{ create_form.slug.label }}</span>
-      {{ create_form.slug }}
-      {% if create_form.slug.help_text %}<span class="field-hint">{{ create_form.slug.help_text }}</span>{% endif %}
-    </label>
-    <label>{{ create_form.is_active }} Active</label>
-    <button type="submit" class="btn btn-primary">Create</button>
+    <div class="org-create-form__fields">
+      <label class="form-field">
+        <span class="field-label">{{ create_form.name.label }}</span>
+        {{ create_form.name }}
+        {% if create_form.name.errors %}<span class="muted">{{ create_form.name.errors }}</span>{% endif %}
+      </label>
+      <label class="form-field">
+        <span class="field-label">{{ create_form.slug.label }}</span>
+        {{ create_form.slug }}
+        {% if create_form.slug.errors %}<span class="muted">{{ create_form.slug.errors }}</span>{% endif %}
+        {% if create_form.slug.help_text %}<span class="field-hint">{{ create_form.slug.help_text }}</span>{% endif %}
+      </label>
+    </div>
+    <div class="org-create-form__actions">
+      <div class="form-field org-create-form__status">
+        <span class="field-label">Status</span>
+        <div class="run-segment" role="radiogroup" aria-label="Organisation status">
+          <label class="run-segment__opt">
+            <input type="radio" name="is_active" value="True" checked>
+            Active
+          </label>
+          <label class="run-segment__opt">
+            <input type="radio" name="is_active" value="False">
+            Inactive
+          </label>
+        </div>
+        {% if create_form.is_active.errors %}<span class="muted">{{ create_form.is_active.errors }}</span>{% endif %}
+      </div>
+      <button type="submit" class="btn btn-primary org-create-form__submit">Create</button>
+    </div>
   </form>
 </section>
 
@@ -35,7 +53,6 @@
       <th>Org admins</th>
       <th>Credits (used/pool)</th>
       <th>Storage GB</th>
-      <th>Vector GB</th>
       <th></th>
     </tr>
   </thead>
@@ -50,11 +67,10 @@
       <td>{{ row.admins }}</td>
       <td>{% if row.budget %}{{ row.budget.allocated }} / {{ row.budget.pool }}{% else %}—{% endif %}</td>
       <td>{% if row.storage_budget %}{{ row.storage_budget.storage_assigned|floatformat:1 }} / {{ row.storage_budget.storage_pool|floatformat:1 }}{% else %}—{% endif %}</td>
-      <td>{% if row.storage_budget %}{{ row.storage_budget.vector_assigned|floatformat:1 }} / {{ row.storage_budget.vector_pool|floatformat:1 }}{% else %}—{% endif %}</td>
       <td><a class="btn btn-sm" href="{% url 'core:control_org_policy' row.org.id %}">Edit pools</a></td>
     </tr>
     {% empty %}
-    <tr><td colspan="7" class="muted">No organisations yet.</td></tr>
+    <tr><td colspan="6" class="muted">No organisations yet.</td></tr>
     {% endfor %}
   </tbody>
 </table>

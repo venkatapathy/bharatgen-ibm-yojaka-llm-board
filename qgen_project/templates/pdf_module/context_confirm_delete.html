@@ -11,7 +11,9 @@
     {% if object.original_filename %}
     <li><strong>File:</strong> {{ object.original_filename }}</li>
     {% endif %}
+    {% if user.is_superuser_role %}
     <li><strong>Chunks:</strong> {{ object.chunk_count }}</li>
+    {% endif %}
     <li><strong>Status:</strong> {{ object.status }}</li>
   </ul>
   <form method="post">

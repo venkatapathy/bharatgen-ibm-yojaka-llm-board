@@ -6,13 +6,32 @@
     <div class="eyebrow">New account</div>
     <h1>Create account</h1>
     <p>Register to access the EduQGen demo workspace.</p>
-    <form method="post">
+    <form method="post" class="auth-form" id="signup-form">
       {% csrf_token %}
+      {% if form.non_field_errors %}
+      <div class="alert alert-error" role="alert" style="margin-bottom:1rem;">
+        {% for err in form.non_field_errors %}{{ err }}{% endfor %}
+      </div>
+      {% endif %}
       {% for field in form %}
       <label class="form-field">
         <span class="field-label">{{ field.label }}</span>
         {{ field }}
-        {% if field.help_text %}<span class="field-hint">{{ field.help_text }}</span>{% endif %}
+        {% if field.name == "password1" %}
+        <ul class="pw-rules" id="pw-rules" aria-live="polite">
+          <li data-rule="similar" class="pw-rule">Your password can’t be too similar to your other personal information.</li>
+          <li data-rule="length" class="pw-rule">Your password must contain at least 8 characters.</li>
+          <li data-rule="common" class="pw-rule">Your password can’t be a commonly used password.</li>
+          <li data-rule="numeric" class="pw-rule">Your password can’t be entirely numeric.</li>
+        </ul>
+        {% elif field.help_text %}
+        <span class="field-hint">{{ field.help_text }}</span>
+        {% endif %}
+        {% if field.name == "password2" %}
+        <ul class="pw-rules" id="pw-match-rules" aria-live="polite">
+          <li data-rule="match" class="pw-rule">Both password fields must match.</li>
+        </ul>
+        {% endif %}
         {% if field.errors %}<span class="alert alert-error" style="display:block;margin-top:0.35rem;">{{ field.errors.0 }}</span>{% endif %}
       </label>
       {% endfor %}
@@ -23,4 +42,93 @@
     </form>
   </div>
 </div>
+<script>
+(function () {
+  const form = document.getElementById("signup-form");
+  if (!form) return;
+
+  const pw1 = form.querySelector("#id_password1");
+  const pw2 = form.querySelector("#id_password2");
+  const username = form.querySelector("#id_username");
+  const email = form.querySelector("#id_email");
+  const rules = form.querySelector("#pw-rules");
+  const matchRules = form.querySelector("#pw-match-rules");
+
+  // Small client-side subset mirroring Django's CommonPasswordValidator intent
+  const COMMON = new Set([
+    "password","password1","password123","12345678","123456789","1234567890",
+    "qwerty123","qwertyui","iloveyou","admin123","welcome1","abc12345",
+    "letmein1","monkey12","dragon12","master12","login123","passw0rd",
+    "football","baseball","starwars","shadow12","sunshine","princess",
+    "654321","11111111","00000000","abcdefg1","changeme","trustno1"
+  ]);
+
+  function normalize(s) {
+    return (s || "").trim().toLowerCase();
+  }
+
+  function personalBits() {
+    const bits = [];
+    const u = normalize(username && username.value);
+    const e = normalize(email && email.value);
+    if (u) bits.push(u);
+    if (e) {
+      bits.push(e);
+      const local = e.split("@")[0];
+      if (local) bits.push(local);
+    }
+    return bits.filter((b) => b.length >= 3);
+  }
+
+  function tooSimilar(password) {
+    const p = normalize(password);
+    if (!p) return false; // empty → don't mark failed yet for similar
+    return personalBits().some((bit) => p.includes(bit) || bit.includes(p));
+  }
+
+  function setRule(listEl, name, ok, active) {
+    if (!listEl) return;
+    const li = listEl.querySelector('[data-rule="' + name + '"]');
+    if (!li) return;
+    li.classList.remove("is-ok", "is-bad", "is-idle");
+    if (!active) {
+      li.classList.add("is-idle");
+      return;
+    }
+    li.classList.add(ok ? "is-ok" : "is-bad");
+  }
+
+  function evaluate() {
+    const password = pw1 ? pw1.value : "";
+    const active = password.length > 0;
+
+    const lengthOk = password.length >= 8;
+    const numericOk = password.length === 0 ? false : !/^\d+$/.test(password);
+    const commonOk = password.length === 0 ? false : !COMMON.has(normalize(password));
+    // similar: when empty idle; when typing, pass if not similar
+    const similarOk = password.length === 0 ? false : !tooSimilar(password);
+
+    setRule(rules, "length", lengthOk, active);
+    setRule(rules, "numeric", numericOk, active);
+    setRule(rules, "common", commonOk, active);
+    setRule(rules, "similar", similarOk, active);
+
+    const confirm = pw2 ? pw2.value : "";
+    const matchActive = confirm.length > 0 || password.length > 0;
+    const matchOk = confirm.length > 0 && confirm === password;
+    setRule(matchRules, "match", matchOk, matchActive && (confirm.length > 0));
+  }
+
+  ["input", "change", "keyup"].forEach((evt) => {
+    if (pw1) pw1.addEventListener(evt, evaluate);
+    if (pw2) pw2.addEventListener(evt, evaluate);
+    if (username) username.addEventListener(evt, evaluate);
+    if (email) email.addEventListener(evt, evaluate);
+  });
+
+  // start idle (neutral)
+  if (rules) rules.querySelectorAll(".pw-rule").forEach((li) => li.classList.add("is-idle"));
+  if (matchRules) matchRules.querySelectorAll(".pw-rule").forEach((li) => li.classList.add("is-idle"));
+})();
+</script>
 {% endblock %}

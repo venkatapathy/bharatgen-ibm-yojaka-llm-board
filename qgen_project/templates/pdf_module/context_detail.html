@@ -3,7 +3,7 @@
 {% block content %}
 <div class="page-header">
   <div>
-    <div class="eyebrow">Chunk explorer</div>
+    <div class="eyebrow">{% if show_chunks %}Chunk explorer{% else %}PDF context{% endif %}</div>
     <h1>{{ object.name }}</h1>
     {% if object.original_filename %}
     <p class="muted">{{ object.original_filename }}{% if object.file_size_bytes %} ({{ object.file_size_bytes|filesizeformat }}){% endif %}</p>
@@ -26,6 +26,7 @@
   {% include "pdf_module/partials/context_status.html" with object=object %}
 </div>
 
+{% if show_chunks %}
 <div
   id="chunk-table"
   hx-get="{% url 'pdf_module:chunks' object.id %}"
@@ -33,4 +34,5 @@
   hx-swap="innerHTML">
   {% include "pdf_module/partials/chunk_table.html" with object=object chunks=chunks %}
 </div>
+{% endif %}
 {% endblock %}

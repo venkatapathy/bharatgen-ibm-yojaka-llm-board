@@ -8,6 +8,11 @@ urlpatterns = [
     path("", views.dashboard, name="dashboard"),
     # Control panel
     path("control/", control.ControlHubView.as_view(), name="control_hub"),
+    path(
+        "control/technical/",
+        control.technical_settings,
+        name="control_technical",
+    ),
     path("control/orgs/", control.org_list, name="control_orgs"),
     path("control/orgs/new/", control.org_create, name="control_org_create"),
     path(

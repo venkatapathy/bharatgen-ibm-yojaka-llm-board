@@ -9,7 +9,38 @@
 </div>
 <form method="post">
   {% csrf_token %}
-  <div class="form-section">{{ form.as_p }}</div>
+  <div class="form-section">
+    <label class="form-field">
+      <span class="field-label">Question text</span>
+      {{ form.question_text }}
+      {% if form.question_text.errors %}<span class="alert alert-error">{{ form.question_text.errors.0 }}</span>{% endif %}
+    </label>
+    <div class="form-grid">
+      <label class="form-field">
+        <span class="field-label">Question type</span>
+        {{ form.question_type }}
+      </label>
+      <label class="form-field">
+        <span class="field-label">Bloom</span>
+        {{ form.bloom }}
+      </label>
+      <label class="form-field">
+        <span class="field-label">Marks</span>
+        {{ form.marks }}
+      </label>
+    </div>
+    <label class="form-field">
+      <span class="field-label">Reference answer</span>
+      {{ form.reference_answer }}
+      {% if form.reference_answer.errors %}<span class="alert alert-error">{{ form.reference_answer.errors.0 }}</span>{% endif %}
+    </label>
+    <label class="form-field">
+      <span class="field-label">{{ form.options_text.label }}</span>
+      {{ form.options_text }}
+      {% if form.options_text.help_text %}<span class="muted">{{ form.options_text.help_text }}</span>{% endif %}
+      {% if form.options_text.errors %}<span class="alert alert-error">{{ form.options_text.errors.0 }}</span>{% endif %}
+    </label>
+  </div>
   <div class="btn-row">
     <button class="btn btn-primary" type="submit">Save</button>
     <a class="btn" href="{% url 'pyq_module:detail' object.pyq_module_id %}">Cancel</a>

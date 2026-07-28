@@ -8,7 +8,7 @@ from apps.core.ownership import (
     owned_pyq_modules,
     owned_pyq_questions,
 )
-from apps.core.permissions import IsSuperUser, IsOrgUser
+from apps.core.permissions import IsActiveMember, IsSuperUser, IsOrgUser
 from apps.pdf_module.models import PDFContext
 from apps.pyq_module.models import PYQModule, Question
 from apps.prompt_module.models import PromptTemplate
@@ -36,14 +36,14 @@ class UserViewSet(viewsets.ModelViewSet):
             return User.objects.all()
         return User.objects.filter(organization=user.organization)
 
-    @action(detail=False, methods=['get'], permission_classes=[permissions.IsAuthenticated])
+    @action(detail=False, methods=['get'], permission_classes=[IsActiveMember])
     def me(self, request):
         return Response(UserSerializer(request.user).data)
 
 
 class PDFContextViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class   = PDFContextSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsActiveMember]
 
     def get_queryset(self):
         return owned_pdf_contexts(self.request.user, ready_only=True)
@@ -51,7 +51,7 @@ class PDFContextViewSet(viewsets.ReadOnlyModelViewSet):
 
 class PYQModuleViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class   = PYQModuleSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsActiveMember]
 
     def get_queryset(self):
         return owned_pyq_modules(self.request.user, ready_only=True)
@@ -59,7 +59,7 @@ class PYQModuleViewSet(viewsets.ReadOnlyModelViewSet):
 
 class QuestionViewSet(viewsets.ModelViewSet):
     serializer_class   = QuestionSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsActiveMember]
 
     def get_queryset(self):
         user = self.request.user
@@ -82,7 +82,7 @@ class PromptTemplateViewSet(viewsets.ReadOnlyModelViewSet):
 
 class BatchRunViewSet(viewsets.ModelViewSet):
     serializer_class   = BatchRunSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsActiveMember]
 
     def get_queryset(self):
         return owned_batch_runs(self.request.user)

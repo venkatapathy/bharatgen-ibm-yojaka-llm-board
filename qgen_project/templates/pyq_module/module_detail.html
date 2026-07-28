@@ -6,14 +6,38 @@
     <div class="eyebrow">Question bank detail</div>
     <h1>{{ object.name }}</h1>
     <p class="muted">
-      <span class="badge status-{{ object.status }}">{{ object.status }}</span>
-      {% if object.original_filename %}&nbsp;{{ object.original_filename }}{% endif %}
-      &nbsp;·&nbsp;{{ object.question_count }} questions
+      {% if object.original_filename %}{{ object.original_filename }} · {% endif %}
+      {{ object.question_count }} questions
     </p>
   </div>
   <div class="page-header__actions">
+    {% if object.status != "extracting" and object.status != "pending" %}
+    <form method="post" action="{% url 'pyq_module:reextract' object.id %}" style="display:inline;">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary">Re-extract</button>
+    </form>
+    {% endif %}
     <a class="btn btn-danger" href="{% url 'pyq_module:delete' object.id %}">Delete Module</a>
   </div>
+</div>
+
+<div
+  id="pyq-status-poll"
+  class="progress-shell panel"
+  style="margin-bottom:1.25rem;"
+  hx-get="{% url 'pyq_module:status' object.id %}"
+  hx-trigger="{% if object.status == 'extracting' or object.status == 'pending' %}load, every 3s{% endif %}"
+  hx-swap="outerHTML">
+  <div class="question-meta">
+    <span class="badge status-{{ object.status }}">{{ object.status }}</span>
+    <span class="muted">Questions: {{ object.question_count }}</span>
+  </div>
+  {% if object.error_msg %}
+  <p class="alert alert-error">{{ object.error_msg }}</p>
+  {% endif %}
+  {% if object.status == "extracting" or object.status == "pending" %}
+  <p class="muted">Extraction is in progress. This panel refreshes automatically.</p>
+  {% endif %}
 </div>
 
 <div class="detail-stats">
@@ -34,14 +58,13 @@
 
 <div class="table-wrap">
   <table class="table">
-    <thead><tr><th>Type</th><th>Bloom</th><th>Marks</th><th>Topic</th><th>Question</th><th>Actions</th></tr></thead>
+    <thead><tr><th>Type</th><th>Bloom</th><th>Marks</th><th>Question</th><th>Actions</th></tr></thead>
     <tbody>
     {% for q in questions %}
     <tr>
       <td><span class="badge badge-muted">{{ q.question_type }}</span></td>
       <td>{{ q.bloom }}</td>
       <td>{{ q.marks }}</td>
-      <td>{{ q.topic|default:"-" }}</td>
       <td class="table-mcq-cell">
         <div class="question-text">{{ q.question_text }}</div>
         {% if q.question_type == 'MCQ' and q.get_mcq_options %}
@@ -72,7 +95,7 @@
       </td>
     </tr>
     {% empty %}
-    <tr><td colspan="6">No questions extracted yet.</td></tr>
+    <tr><td colspan="5">No questions extracted yet.</td></tr>
     {% endfor %}
     </tbody>
   </table>

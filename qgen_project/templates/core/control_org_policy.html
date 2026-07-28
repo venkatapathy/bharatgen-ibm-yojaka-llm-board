@@ -8,25 +8,64 @@
     <p class="muted">
       Credits: <strong>{{ budget.allocated }}</strong> / {{ budget.pool }}
       ({{ budget.remaining }} unallocated{% if budget.org_admin_used %} · Org Admins used {{ budget.org_admin_used }}{% endif %})
-      · Storage: <strong>{{ storage_budget.storage_assigned|floatformat:1 }}</strong> / {{ storage_budget.storage_pool|floatformat:1 }} GB
-      · Vector: <strong>{{ storage_budget.vector_assigned|floatformat:1 }}</strong> / {{ storage_budget.vector_pool|floatformat:1 }} GB
+      · Storage: <strong>{{ storage_budget.storage_assigned|floatformat:1 }}</strong> / {{ storage_budget.storage_pool|floatformat:1 }} GB assigned
     </p>
   </div>
 </div>
 
 <form method="post" class="form-section">
   {% csrf_token %}
+
+  <h2 class="form-section__title">Organisation pools</h2>
+  <p class="muted">Shared buckets that Org Admins distribute to users (not to themselves).</p>
   <div class="form-grid">
-    {% for field in form %}
     <label class="form-field">
-      <span class="field-label">{{ field.label }}</span>
-      {{ field }}
-      {% if field.errors %}<span class="muted">{{ field.errors }}</span>{% endif %}
+      <span class="field-label">{{ form.credit_pool.label }}</span>
+      {{ form.credit_pool }}
+      {% if form.credit_pool.errors %}<span class="muted">{{ form.credit_pool.errors }}</span>{% endif %}
+      {% if form.credit_pool.help_text %}<span class="field-hint">{{ form.credit_pool.help_text }}</span>{% endif %}
     </label>
-    {% endfor %}
+    <label class="form-field">
+      <span class="field-label">{{ form.storage_pool_gb.label }}</span>
+      {{ form.storage_pool_gb }}
+      {% if form.storage_pool_gb.errors %}<span class="muted">{{ form.storage_pool_gb.errors }}</span>{% endif %}
+      {% if form.storage_pool_gb.help_text %}<span class="field-hint">{{ form.storage_pool_gb.help_text }}</span>{% endif %}
+    </label>
   </div>
-  <button type="submit" class="btn btn-primary">Save defaults</button>
-  <a class="btn" href="{% url 'core:control_orgs' %}">Cancel</a>
+
+  <h2 class="form-section__title">Defaults for new users</h2>
+  <p class="muted">Starting suggestions when an Org Admin creates a user. Must fit whatever remains in the pools above.</p>
+  <div class="form-grid">
+    <label class="form-field">
+      <span class="field-label">{{ form.default_monthly_credits.label }}</span>
+      {{ form.default_monthly_credits }}
+    </label>
+    <label class="form-field">
+      <span class="field-label">{{ form.default_storage_limit_gb.label }}</span>
+      {{ form.default_storage_limit_gb }}
+    </label>
+    <label class="form-field">
+      <span class="field-label">{{ form.default_pdf_zip_limit.label }}</span>
+      {{ form.default_pdf_zip_limit }}
+    </label>
+    <label class="form-field">
+      <span class="field-label">{{ form.default_pyq_zip_limit.label }}</span>
+      {{ form.default_pyq_zip_limit }}
+    </label>
+    <label class="form-field">
+      <span class="field-label">{{ form.default_daily_run_limit.label }}</span>
+      {{ form.default_daily_run_limit }}
+    </label>
+    <label class="form-field">
+      <span class="field-label">{{ form.default_concurrent_run_limit.label }}</span>
+      {{ form.default_concurrent_run_limit }}
+    </label>
+  </div>
+
+  <div class="btn-row">
+    <button type="submit" class="btn btn-primary">Save defaults</button>
+    <a class="btn" href="{% url 'core:control_orgs' %}">Cancel</a>
+  </div>
 </form>
 
 {% if org_admins %}

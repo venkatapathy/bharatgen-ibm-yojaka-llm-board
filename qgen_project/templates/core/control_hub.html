@@ -5,7 +5,7 @@
   <div>
     <div class="eyebrow">Access & quotas</div>
     <h1>Control panel</h1>
-    <p class="muted">Manage organisations, users, and usage limits for your role.</p>
+    <p class="muted">Manage orgs, users, and limits.</p>
   </div>
 </div>
 
@@ -13,19 +13,19 @@
   {% if is_admin %}
   <a class="card" href="{% url 'core:control_orgs' %}">
     <h2>Organisations &amp; quotas</h2>
-    <p>Set organisation credit and storage pools ({{ org_count }} orgs · {{ org_admin_count }} org admins). Users get allocated shares; Org Admins draw from what remains unallocated.</p>
+    <p>Credit and storage pools · {{ org_count }} orgs · {{ org_admin_count }} org admins</p>
   </a>
   <a class="card" href="{% url 'core:control_users' %}">
     <h2>Org Admins</h2>
-    <p>Create Org Admins by username. They manage distribution — they do not hold personal pool shares.</p>
+    <p>Create and manage org admins</p>
   </a>
-  <a class="card" href="/admin/">
+  <a class="card" href="{% url 'core:control_technical' %}">
     <h2>Technical settings</h2>
-    <p>Model configs, council members, prompts DB, and system settings (Django Admin).</p>
+    <p>PDF indexing and generation defaults</p>
   </a>
   <a class="card" href="{% url 'prompt_module:list' %}">
     <h2>Prompt templates</h2>
-    <p>Create and activate generation prompts used across the platform.</p>
+    <p>Edit generation prompts</p>
   </a>
   {% endif %}
 
@@ -33,7 +33,7 @@
   {% if is_org_admin %}
   <a class="card" href="{% url 'core:control_users' %}">
     <h2>User management</h2>
-    <p>Add users by username and distribute credits/storage from your organisation pools{% if budget %} ({{ budget.remaining }} credits left of {{ budget.pool }}){% endif %}{% if member_count %} · {{ member_count }} members{% endif %}.</p>
+    <p>Add users and assign credits{% if budget %} · {{ budget.remaining }}/{{ budget.pool }} credits left{% endif %}</p>
   </a>
   {% endif %}
   {% endif %}

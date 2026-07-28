@@ -5,20 +5,15 @@
   <div>
     <div class="eyebrow"><a href="{% url 'core:control_hub' %}">Control</a> · {{ list_title }}</div>
     <h1>{{ list_title }}</h1>
-    <p class="muted">
-      {% if is_admin %}
-      Create Org Admins by username. Organisation pools are shared by users — Org Admins manage distribution.
-      {% else %}
-      Create users and assign credits/storage from your organisation pools.
-      {% endif %}
-    </p>
+    {% if not is_admin %}
+    <p class="muted">Create users and assign credits/storage from your organisation pools.</p>
+    {% endif %}
     {% if budget %}
     <p class="muted">
       Credits: <strong>{{ budget.allocated }}</strong> / {{ budget.pool }}
       ({{ budget.remaining }} left)
       {% if storage_budget %}
       · Storage: <strong>{{ storage_budget.storage_assigned|floatformat:1 }}</strong> / {{ storage_budget.storage_pool|floatformat:1 }} GB
-      · Vector: <strong>{{ storage_budget.vector_assigned|floatformat:1 }}</strong> / {{ storage_budget.vector_pool|floatformat:1 }} GB
       {% endif %}
     </p>
     {% endif %}
@@ -45,8 +40,8 @@
     <tr>
       <th>Username</th>
       <th>Organisation</th>
-      <th>Credits</th>
       {% if not is_admin %}
+      <th>Credits</th>
       <th>Storage</th>
       <th>Daily runs</th>
       {% endif %}
@@ -59,22 +54,16 @@
     <tr>
       <td><strong>{{ row.user.username }}</strong></td>
       <td>{{ row.user.organization|default:"—" }}</td>
-      <td>
-        {% if is_admin %}
-        <span class="muted">pool manager</span>
-        {% else %}
-        {{ row.credits.current_month_credits_used }} / {{ row.credits.monthly_credit_limit }}
-        {% endif %}
-      </td>
       {% if not is_admin %}
-      <td>{{ row.storage.current_total_storage_gb|floatformat:2 }} / {{ row.storage.max_total_storage_gb|floatformat:2 }} GB</td>
+      <td>{{ row.credits.current_month_credits_used }} / {{ row.credits.monthly_credit_limit }}</td>
+      <td>{{ row.storage_summary.used_label }} / {{ row.storage_summary.max_label }}</td>
       <td>{{ row.execution.today_generation_runs }} / {{ row.execution.max_generation_runs_per_day }}</td>
       {% endif %}
       <td>{% if row.user.is_active_member %}<span class="badge badge-success">active</span>{% else %}<span class="badge badge-muted">inactive</span>{% endif %}</td>
       <td><a class="btn btn-sm" href="{% url 'core:control_user_quota' row.user.id %}">{% if is_admin %}Manage{% else %}Edit quota{% endif %}</a></td>
     </tr>
     {% empty %}
-    <tr><td colspan="{% if is_admin %}5{% else %}7{% endif %}" class="muted">No {% if is_admin %}Org Admins{% else %}users{% endif %} found.</td></tr>
+    <tr><td colspan="{% if is_admin %}4{% else %}7{% endif %}" class="muted">No {% if is_admin %}Org Admins{% else %}users{% endif %} found.</td></tr>
     {% endfor %}
   </tbody>
 </table>

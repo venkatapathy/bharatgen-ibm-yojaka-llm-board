@@ -9,7 +9,29 @@
   </div>
 </div>
 
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data"
+      x-data="{
+        fileName: '',
+        fileError: '',
+        isAllowed(name) {
+          return (name || '').toLowerCase().endsWith('.pdf');
+        },
+        setFile(file) {
+          if (!file) {
+            this.fileName = '';
+            this.fileError = '';
+            return;
+          }
+          if (!this.isAllowed(file.name)) {
+            this.fileName = '';
+            this.fileError = 'Only PDF files are allowed.';
+            if (this.$refs.fileInput) this.$refs.fileInput.value = '';
+            return;
+          }
+          this.fileError = '';
+          this.fileName = file.name;
+        }
+      }">
   {% csrf_token %}
   <div class="form-section">
     <div class="form-grid">
@@ -23,26 +45,53 @@
       </label>
     </div>
     <span class="field-label">Exam paper (PDF)</span>
-    <label class="upload-zone">
+    <label class="upload-zone"
+           :class="{ 'has-error': fileError }"
+           @dragover.prevent
+           @drop.prevent="
+             const file = $event.dataTransfer.files[0];
+             if (file && isAllowed(file.name) && $refs.fileInput) {
+               const dt = new DataTransfer();
+               dt.items.add(file);
+               $refs.fileInput.files = dt.files;
+             }
+             setFile(file);
+           ">
       <div class="upload-zone__icon">📝</div>
-      <div class="upload-zone__title" id="pyq-file-label">Drag & drop exam PDF here</div>
-      <div class="upload-zone__hint">or click to browse</div>
+      <div class="upload-zone__title" x-text="fileName || 'Drag & drop exam PDF here'">Drag & drop exam PDF here</div>
+      <div class="upload-zone__hint">or click to browse — PDF only</div>
       {{ form.source_file }}
     </label>
+    <p class="alert alert-error" x-show="fileError" x-text="fileError" x-cloak style="margin-top:0.75rem;"></p>
     {% if form.source_file.errors %}
     <p class="alert alert-error">{{ form.source_file.errors.0 }}</p>
     {% endif %}
   </div>
   <div class="btn-row">
-    <button class="btn btn-primary btn-lg" type="submit">Upload and Extract</button>
+    <button class="btn btn-primary btn-lg" type="submit"
+            @click="
+              const file = $refs.fileInput && $refs.fileInput.files[0];
+              if (file && !isAllowed(file.name)) {
+                $event.preventDefault();
+                setFile(file);
+              }
+            ">Upload and Extract</button>
     <a class="btn" href="{% url 'pyq_module:list' %}">Cancel</a>
   </div>
 </form>
 
 <script>
-document.querySelector('.upload-zone input[type="file"]')?.addEventListener('change', function (e) {
-  const label = document.getElementById('pyq-file-label');
-  if (label && e.target.files[0]) label.textContent = e.target.files[0].name;
-});
+(function () {
+  const input = document.querySelector('.upload-zone input[type="file"]');
+  if (!input) return;
+  input.setAttribute('accept', '.pdf,application/pdf');
+  input.addEventListener('change', function () {
+    const root = input.closest('form');
+    const file = input.files && input.files[0];
+    if (!root || !window.Alpine) return;
+    const data = Alpine.$data(root);
+    if (data && typeof data.setFile === 'function') data.setFile(file || null);
+  });
+})();
 </script>
 {% endblock %}

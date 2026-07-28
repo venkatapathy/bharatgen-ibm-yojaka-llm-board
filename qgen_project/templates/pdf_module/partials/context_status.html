@@ -1,9 +1,11 @@
 <div class="progress-shell panel" id="status-poll">
   <div class="question-meta">
     <span class="badge status-{{ object.status }}">{{ object.status }}</span>
+    {% if user.is_superuser_role %}
     <span class="muted">Strategy: {{ object.get_strategy_display }}</span>
     <span class="muted">Chunks: {{ object.chunk_count }}</span>
     <span class="muted">Embedded: {{ object.embedded_chunk_count }}</span>
+    {% endif %}
   </div>
   {% if object.error_message %}
   <p class="alert alert-error">{{ object.error_message }}</p>

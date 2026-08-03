@@ -77,7 +77,14 @@ def technical_settings(request):
         if pdf_ok:
             pdf_form.save()
         if gen_ok:
-            gen_form.save()
+            gen_settings = gen_form.save()
+            # Keep generation ModelConfig.reranker_model in sync for legacy paths.
+            mc = gen_settings.model_config
+            if mc is not None:
+                want = (gen_settings.rag_reranker_model or "").strip()
+                if (mc.reranker_model or "") != want:
+                    mc.reranker_model = want
+                    mc.save(update_fields=["reranker_model"])
             selected = {
                 int(pk) for pk in request.POST.getlist("council_models") if pk.isdigit()
             }

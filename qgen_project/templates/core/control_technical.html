@@ -57,7 +57,7 @@
       <h2 class="tech-card__title">Generation</h2>
       <div class="tech-grid">
         {% for field in generation_form %}
-        {% if field.name != "model_config" %}
+        {% if field.name != "model_config" and field.name != "user_feedback_enabled" %}
         <label class="tech-field{% if field.name == 'rag_top_k' or field.name == 'pyq_shots' %} tech-field--narrow{% endif %}">
           <span class="tech-field__label">{{ field.label }}</span>
           {{ field }}
@@ -65,6 +65,16 @@
         </label>
         {% endif %}
         {% endfor %}
+      </div>
+      <div class="tech-feedback-toggle">
+        <span class="tech-field__label">{{ generation_form.user_feedback_enabled.label }}</span>
+        <label class="form-field--toggle">
+          <span class="run-switch" title="{{ generation_form.user_feedback_enabled.label }}">
+            {{ generation_form.user_feedback_enabled }}
+            <span class="run-switch__pill" aria-hidden="true"></span>
+          </span>
+          <span class="muted">Require approve/reject after each run</span>
+        </label>
       </div>
     </section>
 

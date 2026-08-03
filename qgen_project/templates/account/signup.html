@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Sign up{% endblock %}
 {% block content %}
 <div class="auth-shell">
@@ -6,7 +7,7 @@
     <div class="eyebrow">New account</div>
     <h1>Create account</h1>
     <p>Register to access the EduQGen demo workspace.</p>
-    <form method="post" class="auth-form" id="signup-form">
+    <form method="post" class="auth-form" id="signup-form" data-pw-rules>
       {% csrf_token %}
       {% if form.non_field_errors %}
       <div class="alert alert-error" role="alert" style="margin-bottom:1rem;">
@@ -42,93 +43,5 @@
     </form>
   </div>
 </div>
-<script>
-(function () {
-  const form = document.getElementById("signup-form");
-  if (!form) return;
-
-  const pw1 = form.querySelector("#id_password1");
-  const pw2 = form.querySelector("#id_password2");
-  const username = form.querySelector("#id_username");
-  const email = form.querySelector("#id_email");
-  const rules = form.querySelector("#pw-rules");
-  const matchRules = form.querySelector("#pw-match-rules");
-
-  // Small client-side subset mirroring Django's CommonPasswordValidator intent
-  const COMMON = new Set([
-    "password","password1","password123","12345678","123456789","1234567890",
-    "qwerty123","qwertyui","iloveyou","admin123","welcome1","abc12345",
-    "letmein1","monkey12","dragon12","master12","login123","passw0rd",
-    "football","baseball","starwars","shadow12","sunshine","princess",
-    "654321","11111111","00000000","abcdefg1","changeme","trustno1"
-  ]);
-
-  function normalize(s) {
-    return (s || "").trim().toLowerCase();
-  }
-
-  function personalBits() {
-    const bits = [];
-    const u = normalize(username && username.value);
-    const e = normalize(email && email.value);
-    if (u) bits.push(u);
-    if (e) {
-      bits.push(e);
-      const local = e.split("@")[0];
-      if (local) bits.push(local);
-    }
-    return bits.filter((b) => b.length >= 3);
-  }
-
-  function tooSimilar(password) {
-    const p = normalize(password);
-    if (!p) return false; // empty → don't mark failed yet for similar
-    return personalBits().some((bit) => p.includes(bit) || bit.includes(p));
-  }
-
-  function setRule(listEl, name, ok, active) {
-    if (!listEl) return;
-    const li = listEl.querySelector('[data-rule="' + name + '"]');
-    if (!li) return;
-    li.classList.remove("is-ok", "is-bad", "is-idle");
-    if (!active) {
-      li.classList.add("is-idle");
-      return;
-    }
-    li.classList.add(ok ? "is-ok" : "is-bad");
-  }
-
-  function evaluate() {
-    const password = pw1 ? pw1.value : "";
-    const active = password.length > 0;
-
-    const lengthOk = password.length >= 8;
-    const numericOk = password.length === 0 ? false : !/^\d+$/.test(password);
-    const commonOk = password.length === 0 ? false : !COMMON.has(normalize(password));
-    // similar: when empty idle; when typing, pass if not similar
-    const similarOk = password.length === 0 ? false : !tooSimilar(password);
-
-    setRule(rules, "length", lengthOk, active);
-    setRule(rules, "numeric", numericOk, active);
-    setRule(rules, "common", commonOk, active);
-    setRule(rules, "similar", similarOk, active);
-
-    const confirm = pw2 ? pw2.value : "";
-    const matchActive = confirm.length > 0 || password.length > 0;
-    const matchOk = confirm.length > 0 && confirm === password;
-    setRule(matchRules, "match", matchOk, matchActive && (confirm.length > 0));
-  }
-
-  ["input", "change", "keyup"].forEach((evt) => {
-    if (pw1) pw1.addEventListener(evt, evaluate);
-    if (pw2) pw2.addEventListener(evt, evaluate);
-    if (username) username.addEventListener(evt, evaluate);
-    if (email) email.addEventListener(evt, evaluate);
-  });
-
-  // start idle (neutral)
-  if (rules) rules.querySelectorAll(".pw-rule").forEach((li) => li.classList.add("is-idle"));
-  if (matchRules) matchRules.querySelectorAll(".pw-rule").forEach((li) => li.classList.add("is-idle"));
-})();
-</script>
+<script src="{% static 'js/password_rules.js' %}?v=1"></script>
 {% endblock %}

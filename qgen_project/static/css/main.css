@@ -819,6 +819,24 @@ form p { margin-bottom: 0.75rem; }
   box-shadow: 0 0 0 2px rgba(0, 137, 123, 0.15);
 }
 
+.tech-feedback-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-top: 1.15rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.tech-feedback-toggle .form-field--toggle {
+  gap: 0.85rem;
+}
+
+.tech-feedback-toggle .muted {
+  font-weight: 500;
+  font-size: 0.88rem;
+}
+
 @media (max-width: 720px) {
   .tech-grid {
     grid-template-columns: 1fr;

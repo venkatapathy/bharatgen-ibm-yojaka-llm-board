@@ -41,14 +41,12 @@ class PDFIndexingSettingsForm(forms.ModelForm):
             "chunk_size",
             "chunk_overlap",
             "embed_config",
-            "reranker_config",
         ]
         labels = {
             "strategy": "Chunking strategy",
             "chunk_size": "Chunk size",
             "chunk_overlap": "Chunk overlap",
             "embed_config": "Embedding model",
-            "reranker_config": "Reranker model",
         }
 
     def __init__(self, *args, **kwargs):
@@ -58,11 +56,6 @@ class PDFIndexingSettingsForm(forms.ModelForm):
         )
         self.fields["embed_config"].required = False
         self.fields["embed_config"].empty_label = "Platform default"
-        self.fields["reranker_config"].queryset = ModelConfig.objects.exclude(
-            reranker_model=""
-        )
-        self.fields["reranker_config"].required = False
-        self.fields["reranker_config"].empty_label = "None"
         self.fields["chunk_size"].widget.attrs.setdefault("min", 64)
         self.fields["chunk_overlap"].widget.attrs.setdefault("min", 0)
         for field in self.fields.values():
@@ -78,21 +71,27 @@ class GenerationSettingsForm(forms.ModelForm):
             "hindi_prompt",
             "model_config",
             "rag_top_k",
+            "rag_reranker_model",
             "pyq_shots",
+            "user_feedback_enabled",
         ]
         labels = {
             "prompt": "Prompt (English)",
             "hindi_prompt": "Prompt (Hindi)",
             "model_config": "Generation model",
             "rag_top_k": "RAG Top-K",
+            "rag_reranker_model": "RAG reranker",
             "pyq_shots": "PYQ n-shot",
+            "user_feedback_enabled": "User feedback on questions",
         }
         help_texts = {
             "prompt": "",
             "hindi_prompt": "",
             "model_config": "",
             "rag_top_k": "",
+            "rag_reranker_model": "",
             "pyq_shots": "",
+            "user_feedback_enabled": "",
         }
         widgets = {
             "model_config": forms.RadioSelect,
@@ -100,6 +99,7 @@ class GenerationSettingsForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         from apps.prompt_module.models import PromptTemplate
+        from apps.core.rerankers import RERANKER_CHOICES
 
         super().__init__(*args, **kwargs)
         prompts = PromptTemplate.objects.order_by("name")
@@ -114,10 +114,13 @@ class GenerationSettingsForm(forms.ModelForm):
         self.fields["model_config"].required = True
         self.fields["model_config"].empty_label = None
         self.fields["rag_top_k"].widget.attrs.update({"min": 1, "max": 20})
+        self.fields["rag_reranker_model"].choices = RERANKER_CHOICES
+        self.fields["rag_reranker_model"].required = False
         self.fields["pyq_shots"].widget.attrs.update({"min": 0, "max": 10})
+        self.fields["user_feedback_enabled"].required = False
         for name, field in self.fields.items():
             field.help_text = ""
-            if name != "model_config":
+            if name not in {"model_config", "user_feedback_enabled"}:
                 field.widget.attrs["class"] = "tech-input"
 
     def clean_rag_top_k(self):
@@ -245,6 +248,9 @@ class OrgUserCreateForm(UserCreationForm):
         self.max_storage = max(float(max_storage), 0.0)
         self.fields["password1"].widget.attrs["class"] = "form-control"
         self.fields["password2"].widget.attrs["class"] = "form-control"
+        # Interactive checks live in the template (pw-rules); drop Django's static help.
+        self.fields["password1"].help_text = ""
+        self.fields["password2"].help_text = ""
         self.fields["username"].help_text = (
             "Login username for this Org Admin."
             if create_org_admin

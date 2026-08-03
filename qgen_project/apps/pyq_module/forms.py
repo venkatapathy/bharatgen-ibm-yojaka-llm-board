@@ -9,7 +9,7 @@ from .validators import validate_pyq_upload
 class PYQModuleUploadForm(forms.ModelForm):
     class Meta:
         model = PYQModule
-        fields = ["name", "description", "source_file"]
+        fields = ["name", "source_file"]
 
     def __init__(self, *args, user=None, **kwargs):
         self.user = user

@@ -98,15 +98,39 @@ def retrieve_rag_chunks(run, q_type: str, bloom: str, top_k: int) -> tuple[str, 
             .select_related("context")
             .order_by(CosineDistance("embedding", q_emb))[: top_k * 3]
         )
-        if run.model_config.reranker_model and chunks:
-            ranked = rerank_passages(
-                query,
-                [chunk.text for chunk in chunks],
-                run.model_config.reranker_model,
-                top_k=top_k,
-            )
-            text_lookup = {chunk.text: chunk for chunk in chunks}
-            chunks = [text_lookup[item["text"]] for item in ranked if item["text"] in text_lookup]
+        from apps.core.models import GenerationSettings
+
+        reranker_name = (
+            (GenerationSettings.load().rag_reranker_model or "").strip()
+            or (getattr(run.model_config, "reranker_model", None) or "").strip()
+        )
+        if reranker_name and chunks:
+            try:
+                ranked = rerank_passages(
+                    query,
+                    [chunk.text for chunk in chunks],
+                    reranker_name,
+                    top_k=top_k,
+                )
+                text_lookup = {chunk.text: chunk for chunk in chunks}
+                chunks = [
+                    text_lookup[item["text"]]
+                    for item in ranked
+                    if item["text"] in text_lookup
+                ]
+                logger.info(
+                    "RAG reranked with %s → %s chunk(s)",
+                    reranker_name,
+                    len(chunks),
+                )
+            except Exception as rerank_exc:
+                # Keep cosine top-k; do not degrade to random on reranker miss.
+                logger.warning(
+                    "RAG reranker failed (%s); using embedding top-%s",
+                    rerank_exc,
+                    top_k,
+                )
+                chunks = chunks[:top_k]
         else:
             chunks = chunks[:top_k]
     except Exception as exc:
@@ -494,15 +518,6 @@ def run_batch(self, batch_run_id: int, fill_remaining: bool = False):
                                 "models). Kept for human review."
                             ),
                         )
-                        run.error_summary = (
-                            (run.error_summary or "")
-                            + (
-                                f"\nThink soft-keep after {council_rounds} regenerations "
-                                f"({len(candidates)} question(s))."
-                            )
-                        ).strip()
-                        run.save(update_fields=["error_summary"])
-
                     if not candidates:
                         raise ValueError(
                             last_error
@@ -584,7 +599,12 @@ def run_batch(self, batch_run_id: int, fill_remaining: bool = False):
     run.error_summary = '\n'.join(errors)
     run.completed_at = timezone.now()
     if run.questions.filter(is_generated=True).exists():
-        run.review_status = BatchRun.ReviewStatus.PENDING
+        from apps.core.models import GenerationSettings
+
+        if GenerationSettings.load().user_feedback_enabled:
+            run.review_status = BatchRun.ReviewStatus.PENDING
+        else:
+            run.review_status = BatchRun.ReviewStatus.COMPLETE
     else:
         run.review_status = BatchRun.ReviewStatus.COMPLETE
     run.save(

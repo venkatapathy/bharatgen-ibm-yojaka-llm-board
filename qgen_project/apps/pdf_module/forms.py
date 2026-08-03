@@ -14,7 +14,6 @@ class PDFContextUploadForm(forms.ModelForm):
         model = PDFContext
         fields = [
             "name",
-            "description",
             "zip_path",
         ]
 
@@ -40,7 +39,8 @@ class PDFContextUploadForm(forms.ModelForm):
         instance.chunk_size = settings.chunk_size
         instance.chunk_overlap = settings.chunk_overlap
         instance.embed_model = settings.resolved_embed_model()
-        instance.reranker_model = settings.resolved_reranker_model()
+        # Reranker is a Generation setting (query-time); not applied at index.
+        instance.reranker_model = ""
         return instance
 
     def save(self, commit=True):

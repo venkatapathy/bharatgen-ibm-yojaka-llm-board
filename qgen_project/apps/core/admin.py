@@ -49,9 +49,45 @@ class ModelConfigAdmin(admin.ModelAdmin):
     )
 
 
+@admin.register(GenerationSettings)
+class GenerationSettingsAdmin(admin.ModelAdmin):
+    list_display = (
+        "prompt",
+        "hindi_prompt",
+        "model_config",
+        "rag_top_k",
+        "pyq_shots",
+        "user_feedback_enabled",
+        "updated_at",
+    )
+    list_editable = ("user_feedback_enabled",)
+    fieldsets = (
+        (
+            "Prompts & model",
+            {"fields": ("prompt", "hindi_prompt", "model_config", "rag_top_k", "pyq_shots")},
+        ),
+        (
+            "User feedback",
+            {
+                "description": (
+                    "When enabled, users must approve or reject each generated "
+                    "question before the full results open."
+                ),
+                "fields": ("user_feedback_enabled",),
+            },
+        ),
+    )
+
+
 admin.site.register(OrganizationSettings)
-admin.site.register(PDFIndexingSettings)
-admin.site.register(GenerationSettings)
+
+
+@admin.register(PDFIndexingSettings)
+class PDFIndexingSettingsAdmin(admin.ModelAdmin):
+    # Reranker is query-time (Generation settings); hide leftover DB field.
+    fields = ("strategy", "chunk_size", "chunk_overlap", "embed_config")
+
+
 admin.site.register(UserProvisioningQuota)
 admin.site.register(StorageQuota)
 admin.site.register(ExecutionQuota)

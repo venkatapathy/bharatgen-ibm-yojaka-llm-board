@@ -86,7 +86,6 @@ class PDFContextUploadView(LoginRequiredMixin, CreateView):
 
         draft = form.save(commit=False)
         base_name = (form.cleaned_data.get("name") or "").strip() or "PDF Context"
-        description = form.cleaned_data.get("description") or ""
         total_bytes = sum(len(payload) for _, payload in members)
         created_ids = []
 
@@ -105,7 +104,7 @@ class PDFContextUploadView(LoginRequiredMixin, CreateView):
                         ctx_name = f"{base_name} — {stem}"[:256]
                     ctx = PDFContext(
                         name=ctx_name,
-                        description=description,
+                        description="",
                         strategy=draft.strategy,
                         chunk_size=draft.chunk_size,
                         chunk_overlap=draft.chunk_overlap,

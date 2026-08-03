@@ -99,6 +99,10 @@ class BatchRun(models.Model):
             return False
         if self.review_status == self.ReviewStatus.COMPLETE:
             return False
+        from apps.core.models import GenerationSettings
+
+        if not GenerationSettings.load().user_feedback_enabled:
+            return False
         return self.pending_review_count > 0
 
     @property

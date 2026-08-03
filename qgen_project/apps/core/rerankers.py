@@ -4,6 +4,19 @@ from functools import lru_cache
 
 DEFAULT_RERANKER_MODEL = "cross-encoder/ms-marco-MiniLM-L-6-v2"
 
+# Shown in Control → Technical dropdowns (actual HF model ids).
+RERANKER_CHOICES = (
+    ("", "None"),
+    (
+        "cross-encoder/ms-marco-MiniLM-L-6-v2",
+        "MiniLM-L-6-v2 (recommended — light)",
+    ),
+    (
+        "cross-encoder/ms-marco-TinyBERT-L-2-v2",
+        "TinyBERT-L-2 (lighter, slightly weaker)",
+    ),
+)
+
 
 @lru_cache(maxsize=4)
 def _get_model(model_name: str):

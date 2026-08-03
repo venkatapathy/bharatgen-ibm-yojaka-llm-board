@@ -303,6 +303,14 @@ def batch_run_review(request, pk):
     if run is None:
         return redirect("question_generation:list")
 
+    from apps.core.models import GenerationSettings
+
+    if not GenerationSettings.load().user_feedback_enabled:
+        if run.review_status != BatchRun.ReviewStatus.COMPLETE:
+            run.review_status = BatchRun.ReviewStatus.COMPLETE
+            run.save(update_fields=["review_status"])
+        return redirect("question_generation:detail", pk=run.pk)
+
     if run.status in {BatchRun.Status.PENDING, BatchRun.Status.RUNNING}:
         return redirect("question_generation:detail", pk=run.pk)
 

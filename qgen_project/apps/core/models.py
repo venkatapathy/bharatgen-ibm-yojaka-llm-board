@@ -216,7 +216,24 @@ class PDFIndexingSettings(models.Model):
         null=True,
         blank=True,
         related_name='+',
-        help_text='Optional reranker model used during retrieval.',
+        help_text='Deprecated: use reranker_model. Kept for migration compatibility.',
+    )
+    reranker_model = models.CharField(
+        max_length=128,
+        blank=True,
+        default='',
+        choices=(
+            ('', 'None'),
+            (
+                'cross-encoder/ms-marco-MiniLM-L-6-v2',
+                'MiniLM-L-6-v2 (recommended — light)',
+            ),
+            (
+                'cross-encoder/ms-marco-TinyBERT-L-2-v2',
+                'TinyBERT-L-2 (lighter, slightly weaker)',
+            ),
+        ),
+        help_text='Cross-encoder used to rerank retrieved PDF chunks.',
     )
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -244,10 +261,12 @@ class PDFIndexingSettings(models.Model):
         return DEFAULT_EMBED_MODEL
 
     def resolved_reranker_model(self) -> str:
+        if (self.reranker_model or "").strip():
+            return self.reranker_model.strip()
         cfg = self.reranker_config
         if not cfg:
             return ""
-        return cfg.reranker_model or cfg.llm_model_id or ""
+        return (cfg.reranker_model or cfg.llm_model_id or "").strip()
 
 
 class GenerationSettings(models.Model):
@@ -283,9 +302,30 @@ class GenerationSettings(models.Model):
         default=5,
         help_text='Number of PDF chunks retrieved per question.',
     )
+    rag_reranker_model = models.CharField(
+        max_length=128,
+        blank=True,
+        default='cross-encoder/ms-marco-MiniLM-L-6-v2',
+        choices=(
+            ('', 'None'),
+            (
+                'cross-encoder/ms-marco-MiniLM-L-6-v2',
+                'MiniLM-L-6-v2 (recommended — light)',
+            ),
+            (
+                'cross-encoder/ms-marco-TinyBERT-L-2-v2',
+                'TinyBERT-L-2 (lighter, slightly weaker)',
+            ),
+        ),
+        help_text='Cross-encoder used to rerank RAG chunks during question generation.',
+    )
     pyq_shots = models.IntegerField(
         default=3,
         help_text='Number of PYQ examples injected as few-shot style.',
+    )
+    user_feedback_enabled = models.BooleanField(
+        default=True,
+        help_text='When on, users must approve or reject each generated question before results open.',
     )
     updated_at = models.DateTimeField(auto_now=True)
 

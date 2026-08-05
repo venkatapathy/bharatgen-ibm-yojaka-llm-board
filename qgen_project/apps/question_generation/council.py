@@ -32,21 +32,24 @@ COUNCIL_DIMENSIONS = ("bloom", "correctness", "question_type", "appropriate")
 _MODEL_SIZE_HINT = (
     "1.5b",
     "2b",
+    "e2b",
     "3.8b",
     "3b",
     "4b",
     "7b",
-    "8b",
-    "e4b",
 )
 
+# Think / council: only models under 8B (parameter size < 8B).
 COUNCIL_MODEL_SPECS = [
-    {"name": "Gemma-E4B", "llm_model_id": "ollama/gemma4:e4b", "provider": "ollama"},
-    {"name": "Qwen3.5-4B", "llm_model_id": "ollama/qwen3.5:4b", "provider": "ollama"},
-    {"name": "Phi4-mini-3.8B", "llm_model_id": "ollama/phi4-mini:3.8b", "provider": "ollama"},
     {"name": "DeepSeek-R1-1.5B", "llm_model_id": "ollama/deepseek-r1:1.5b", "provider": "ollama"},
+    {"name": "Qwen3.5-2B", "llm_model_id": "ollama/qwen3.5:2b", "provider": "ollama"},
+    {"name": "Llama3.2-3B", "llm_model_id": "ollama/llama3.2:3b", "provider": "ollama"},
+    {"name": "Granite4.1-3B", "llm_model_id": "ollama/granite4.1:3b", "provider": "ollama"},
+    {"name": "Phi4-mini-3.8B", "llm_model_id": "ollama/phi4-mini:3.8b", "provider": "ollama"},
+    {"name": "Qwen3.5-4B", "llm_model_id": "ollama/qwen3.5:4b", "provider": "ollama"},
+    {"name": "Gemma4-E2B", "llm_model_id": "ollama/gemma4:e2b", "provider": "ollama"},
+    {"name": "OLMo-3-7B", "llm_model_id": "ollama/olmo-3:7b", "provider": "ollama"},
     {"name": "DeepSeek-R1-7B", "llm_model_id": "ollama/deepseek-r1:7b", "provider": "ollama"},
-    {"name": "Granite4.1-8B", "llm_model_id": "ollama/granite4.1:8b", "provider": "ollama"},
 ]
 
 VERIFY_SYSTEM = """You verify one exam question. Reply with ONLY this JSON object:
@@ -56,7 +59,7 @@ Approve (true) unless clearly wrong. Use JSON booleans only. No markdown."""
 
 
 def _ollama_base_url() -> str:
-    return (os.environ.get("OLLAMA_BASE_URL") or "http://10.129.6.47:11435").rstrip("/")
+    return (os.environ.get("OLLAMA_BASE_URL") or "http://10.129.7.47:11434").rstrip("/")
 
 
 def _ollama_model_tag(model_config: ModelConfig) -> str:
@@ -125,7 +128,7 @@ def unload_ollama_model(tag: str) -> bool:
 
 
 def ensure_council_models():
-    """Upsert the fixed council roster (available in Admin to opt-in)."""
+    """Upsert Think roster (<8B). Does not auto-enable; admins tick them in Technical settings."""
     configs = []
     for spec in COUNCIL_MODEL_SPECS:
         obj, _created = ModelConfig.objects.get_or_create(
@@ -140,6 +143,12 @@ def ensure_council_models():
             },
         )
         updates = []
+        if obj.provider != spec["provider"]:
+            obj.provider = spec["provider"]
+            updates.append("provider")
+        if obj.llm_model_id != spec["llm_model_id"]:
+            obj.llm_model_id = spec["llm_model_id"]
+            updates.append("llm_model_id")
         if obj.max_tokens > 256:
             obj.max_tokens = 256
             updates.append("max_tokens")
@@ -154,8 +163,8 @@ def ensure_council_models():
 
 def get_active_council_models():
     """
-    Models admins marked as council members.
-    Seeds roster rows if missing, but only returns is_council_member=True.
+    Think models admins enabled (is_council_member=True).
+    Seeds the <8B roster rows if missing.
     """
     ensure_council_models()
     return list(

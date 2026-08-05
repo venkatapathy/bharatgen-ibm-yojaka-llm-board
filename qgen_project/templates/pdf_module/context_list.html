@@ -27,30 +27,69 @@
 {% if browse_user or not needs_user_filter %}
 {% include "partials/quota_stat_rings.html" with quota=quota upload_label="PDF uploads" upload_used=quota.current_saved_pdf_zips upload_max=quota.max_saved_pdf_zips upload_pct=quota.pdf_pct upload_pct_label=quota.pdf_pct_label %}
 
+<form method="get" class="form-section" style="margin-bottom:1rem;">
+  {% if selected_org %}<input type="hidden" name="org" value="{{ selected_org }}">{% endif %}
+  {% if selected_user %}<input type="hidden" name="user" value="{{ selected_user }}">{% endif %}
+  <div class="btn-row" style="flex-wrap:wrap; gap:1rem; align-items:flex-end;">
+    <label class="form-field" style="flex:1 1 220px; min-width:200px; margin:0;">
+      <span class="field-label">Search</span>
+      <input type="search" name="q" value="{{ filter_q }}" class="form-control" placeholder="Name, file, unit… e.g. Unit17 or BHDC">
+    </label>
+    <label class="form-field" style="min-width:160px; margin:0;">
+      <span class="field-label">Course</span>
+      <select name="course" class="form-control" onchange="this.form.submit()">
+        <option value="">All courses</option>
+        {% for code in filter_courses %}
+        <option value="{{ code }}" {% if filter_course == code %}selected{% endif %}>{{ code }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label class="form-field" style="min-width:140px; margin:0;">
+      <span class="field-label">Status</span>
+      <select name="status" class="form-control" onchange="this.form.submit()">
+        <option value="">All statuses</option>
+        {% for s in filter_statuses %}
+        <option value="{{ s }}" {% if filter_status == s %}selected{% endif %}>{{ s }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <div class="btn-row" style="margin:0; gap:0.5rem;">
+      <button type="submit" class="btn btn-primary">Filter</button>
+      {% if filter_active %}
+      <a class="btn" href="?{% if selected_org %}org={{ selected_org }}&amp;{% endif %}{% if selected_user %}user={{ selected_user }}{% endif %}">Clear</a>
+      {% endif %}
+    </div>
+  </div>
+  <p class="muted" style="margin:0.75rem 0 0;">
+    Showing <strong>{{ result_count }}</strong> PDF{% if result_count != 1 %}s{% endif %}
+    {% if filter_active %}(filtered){% endif %}
+  </p>
+</form>
+
 <div class="table-wrap">
   <table class="table">
-    <thead><tr><th>Name</th>{% if show_chunks %}<th>Strategy</th>{% endif %}<th>File</th><th>Size</th>{% if show_chunks %}<th>Chunks</th>{% endif %}<th>Status</th><th>Actions</th></tr></thead>
+    <thead><tr><th>Name</th><th>File</th><th>Size</th><th>Status</th><th>Actions</th></tr></thead>
     <tbody>
     {% for ctx in contexts %}
     <tr>
-      <td>{% if show_chunks %}<a href="{% url 'pdf_module:detail' ctx.id %}">{{ ctx.name }}</a>{% else %}{{ ctx.name }}{% endif %}</td>
-      {% if show_chunks %}<td>{{ ctx.get_strategy_display }}</td>{% endif %}
+      <td><a href="{% url 'pdf_module:detail' ctx.id %}">{{ ctx.name }}</a></td>
       <td>{{ ctx.original_filename|default:"-" }}</td>
       <td>{{ ctx.file_size_label }}</td>
-      {% if show_chunks %}<td>{{ ctx.chunk_count }}</td>{% endif %}
       <td><span class="badge status-{{ ctx.status }}">{{ ctx.status }}</span></td>
       <td class="table-actions">
         <div class="table-actions__inner">
-          {% if show_chunks %}
           <a class="btn btn-sm" href="{% url 'pdf_module:detail' ctx.id %}">View</a>
-          {% endif %}
           <a class="btn btn-sm btn-danger" href="{% url 'pdf_module:delete' ctx.id %}">Delete</a>
         </div>
       </td>
     </tr>
     {% empty %}
-    <tr><td colspan="{% if show_chunks %}7{% else %}5{% endif %}">
-      {% if browse_user %}No PDF contexts for this user yet.{% else %}No PDF contexts yet. <a href="{% url 'pdf_module:upload' %}">Upload one</a>.{% endif %}
+    <tr><td colspan="5">
+      {% if filter_active %}
+      No PDFs match this filter. <a href="?{% if selected_org %}org={{ selected_org }}&amp;{% endif %}{% if selected_user %}user={{ selected_user }}{% endif %}">Clear filters</a>
+      {% elif browse_user %}No PDF contexts for this user yet.
+      {% else %}No PDF contexts yet. <a href="{% url 'pdf_module:upload' %}">Upload one</a>.
+      {% endif %}
     </td></tr>
     {% endfor %}
     </tbody>

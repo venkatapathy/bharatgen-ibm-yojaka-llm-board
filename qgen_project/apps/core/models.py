@@ -188,6 +188,7 @@ class PDFIndexingSettings(models.Model):
     Applied on every PDF upload for all roles.
     """
     STRATEGY_CHOICES = (
+        ('hierarchical', 'Hierarchical (unit/section)'),
         ('fixed_size', 'Fixed Size (tokens)'),
         ('sentence', 'Sentence Splitter'),
         ('paragraph', 'Paragraph Splitter'),
@@ -197,7 +198,7 @@ class PDFIndexingSettings(models.Model):
     strategy = models.CharField(
         max_length=32,
         choices=STRATEGY_CHOICES,
-        default='fixed_size',
+        default='hierarchical',
         help_text='Chunking strategy applied to all new PDF uploads.',
     )
     chunk_size = models.IntegerField(default=512)

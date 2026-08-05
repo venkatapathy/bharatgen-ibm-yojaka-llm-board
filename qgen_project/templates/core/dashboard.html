@@ -15,6 +15,7 @@
 </div>
 
 <div class="card-grid">
+  {% if user.is_superuser_role %}
   <a class="card" href="{% url 'pdf_module:list' %}">
     <h2>PDF Contexts</h2>
     <p>Upload and index PDF documents for semantic RAG retrieval.</p>
@@ -23,6 +24,7 @@
     <h2>PYQ Bank</h2>
     <p>Upload previous-year exam papers and extract structured questions.</p>
   </a>
+  {% endif %}
   {% if user.can_manage_prompts %}
   <a class="card" href="{% url 'prompt_module:list' %}">
     <h2>Prompt Manager</h2>

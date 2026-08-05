@@ -91,10 +91,10 @@ def selectable_content_users(viewer, *, organization_id=None):
 
 def resolve_browse_target_user(viewer, *, organization_id=None, user_id=None):
     """
-    For Admin / Org Admin list pages: require an explicit selection.
+    For Admin / Org Admin list pages: scope content to a selected user.
 
-    Supports `user=me` (or the viewer's own pk) so Admin / Org Admin can
-    browse content they created themselves.
+    Default (no ``user`` query param): viewer's own content ("My …").
+    Supports ``user=me`` (or the viewer's own pk) explicitly.
 
     Returns (target_user_or_None, needs_user_filter).
     Regular users always browse as themselves (needs_user_filter=False).
@@ -102,8 +102,9 @@ def resolve_browse_target_user(viewer, *, organization_id=None, user_id=None):
     if not (_is_platform_admin(viewer) or _is_org_admin(viewer)):
         return viewer, False
 
+    # Default landing: My PDFs / My PYQs / My runs.
     if not user_id:
-        return None, True
+        return viewer, True
 
     # "My …" — Admin / Org Admin viewing their own content.
     if str(user_id) in {SELF_BROWSE_VALUE, str(viewer.pk)}:
@@ -120,7 +121,9 @@ def browse_list_context(viewer, *, organization_id=None, user_id=None):
         viewer, organization_id=organization_id, user_id=user_id
     )
     if target and target.pk == viewer.pk and (
-        user_id == SELF_BROWSE_VALUE or str(user_id) == str(viewer.pk)
+        not user_id
+        or user_id == SELF_BROWSE_VALUE
+        or str(user_id) == str(viewer.pk)
     ):
         selected_user = SELF_BROWSE_VALUE
     else:

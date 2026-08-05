@@ -2,7 +2,7 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-    """Sync ORM with existing core_user.control_password column."""
+    """Add core_user.control_password (works for fresh DB and existing column)."""
 
     dependencies = [
         ("core", "0008_alter_organization_slug"),
@@ -18,6 +18,14 @@ class Migration(migrations.Migration):
                 ),
             ],
             database_operations=[
+                migrations.RunSQL(
+                    sql=(
+                        "ALTER TABLE core_user "
+                        "ADD COLUMN IF NOT EXISTS control_password "
+                        "varchar(255) DEFAULT '' NOT NULL;"
+                    ),
+                    reverse_sql=migrations.RunSQL.noop,
+                ),
                 migrations.RunSQL(
                     sql=(
                         "ALTER TABLE core_user "

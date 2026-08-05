@@ -1,38 +1,123 @@
 {% extends "base.html" %}
-{% block title %}{{ object.name }}{% endblock %}
+{% block title %}{{ object.name }} — OCR{% endblock %}
 {% block content %}
 <div class="page-header">
   <div>
-    <div class="eyebrow">{% if show_chunks %}Chunk explorer{% else %}PDF context{% endif %}</div>
+    <div class="eyebrow">PDF · OCR editor</div>
     <h1>{{ object.name }}</h1>
     {% if object.original_filename %}
-    <p class="muted">{{ object.original_filename }}{% if object.file_size_bytes %} ({{ object.file_size_bytes|filesizeformat }}){% endif %}</p>
+    <p class="muted">{{ object.original_filename }} · <span class="badge status-{{ object.status }}">{{ object.status }}</span></p>
     {% endif %}
   </div>
   <div class="btn-row">
+    <a class="btn" href="{% url 'pdf_module:list' %}">← Back to list</a>
     <form method="post" action="{% url 'pdf_module:reindex' object.id %}">
       {% csrf_token %}
-      <button type="submit" class="btn">Reindex</button>
+      <button type="submit" class="btn">Re-OCR</button>
     </form>
     <a class="btn btn-danger" href="{% url 'pdf_module:delete' object.id %}">Delete</a>
   </div>
 </div>
 
+{% if object.status == 'processing' or object.status == 'pending' %}
 <div
   id="status-poll"
   hx-get="{% url 'pdf_module:status' object.id %}"
-  hx-trigger="{% if object.status == 'processing' or object.status == 'pending' %}load, every 3s{% endif %}"
-  hx-swap="outerHTML">
+  hx-trigger="load, every 3s"
+  hx-swap="outerHTML"
+  style="margin-bottom:1rem;">
   {% include "pdf_module/partials/context_status.html" with object=object %}
 </div>
-
-{% if show_chunks %}
-<div
-  id="chunk-table"
-  hx-get="{% url 'pdf_module:chunks' object.id %}"
-  hx-trigger="load"
-  hx-swap="innerHTML">
-  {% include "pdf_module/partials/chunk_table.html" with object=object chunks=chunks %}
-</div>
 {% endif %}
+
+<div
+  class="pdf-ocr-split"
+  x-data="pdfOcrViewer({ pdfUrl: '{{ pdf_url|escapejs }}' })"
+  x-init="loadPdf()">
+  <section class="pdf-ocr-pane pdf-ocr-pane--pdf">
+    <header class="pdf-ocr-pane__head">
+      <strong>PDF</strong>
+      <span class="muted" x-text="pdfStatus" x-show="pdfStatus"></span>
+      {% if pdf_url %}
+      <a class="btn btn-sm" :href="openUrl || '{{ pdf_url }}'" target="_blank" rel="noopener">Open PDF</a>
+      {% endif %}
+    </header>
+    <div class="pdf-ocr-pane__body">
+      {% if pdf_url %}
+      <iframe
+        class="pdf-ocr-frame"
+        x-ref="pdfFrame"
+        title="PDF preview"
+        x-show="!pdfError"></iframe>
+      <p class="muted" style="padding:1.5rem;" x-show="pdfError" x-cloak x-text="pdfError"></p>
+      {% else %}
+      <p class="muted" style="padding:1.5rem;">PDF file not available.</p>
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="pdf-ocr-pane pdf-ocr-pane--ocr">
+    <header class="pdf-ocr-pane__head">
+      <strong>OCR text</strong>
+      <span class="muted" x-show="dirty" x-cloak>Unsaved changes</span>
+      <button type="submit" form="ocr-save-form" class="btn btn-sm btn-primary" :disabled="saving">
+        Save OCR
+      </button>
+    </header>
+    <div class="pdf-ocr-pane__body">
+      <form
+        id="ocr-save-form"
+        method="post"
+        action="{% url 'pdf_module:save_ocr' object.id %}"
+        class="pdf-ocr-form"
+        @input="dirty = true"
+        @submit="saving = true">
+        {% csrf_token %}
+        <textarea
+          name="ocr_text"
+          class="form-control pdf-ocr-editor"
+          spellcheck="false"
+          placeholder="OCR text will appear here after indexing…">{{ ocr_text }}</textarea>
+      </form>
+    </div>
+  </section>
+</div>
+
+<script>
+function pdfOcrViewer(opts) {
+  const pdfUrl = (opts && opts.pdfUrl) ? String(opts.pdfUrl) : '';
+  return {
+    dirty: false,
+    saving: false,
+    pdfStatus: pdfUrl ? 'Loading PDF…' : '',
+    pdfError: '',
+    openUrl: '',
+    async loadPdf() {
+      if (!pdfUrl || !this.$refs.pdfFrame) return;
+      try {
+        // Fetch as blob so ngrok interstitial / X-Frame blocks do not break the iframe.
+        const res = await fetch(pdfUrl, {
+          credentials: 'same-origin',
+          headers: { 'ngrok-skip-browser-warning': 'true' },
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const blob = await res.blob();
+        const type = blob.type || 'application/pdf';
+        const pdfBlob = type.includes('pdf') ? blob : new Blob([blob], { type: 'application/pdf' });
+        const url = URL.createObjectURL(pdfBlob);
+        this.openUrl = url;
+        this.$refs.pdfFrame.src = url + '#toolbar=1';
+        this.pdfStatus = '';
+        this.pdfError = '';
+      } catch (err) {
+        console.error(err);
+        this.pdfStatus = '';
+        this.pdfError = 'Could not load PDF preview. Try “Open PDF”.';
+        // Fallback: direct URL (works on localhost)
+        this.$refs.pdfFrame.src = pdfUrl + '#toolbar=1';
+      }
+    },
+  };
+}
+</script>
 {% endblock %}

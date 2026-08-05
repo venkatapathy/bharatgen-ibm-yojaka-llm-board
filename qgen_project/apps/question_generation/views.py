@@ -109,6 +109,7 @@ class BatchRunNewView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         from .council import get_active_council_models
+        from apps.pdf_module.hierarchy import build_pdf_hierarchy_rows
 
         ctx = super().get_context_data(**kwargs)
         ctx['credits'] = credit_quota_display(self.request.user)
@@ -118,7 +119,10 @@ class BatchRunNewView(LoginRequiredMixin, CreateView):
             "pyq": CREDITS_PYQ_PER_QUESTION,
             "think": CREDITS_THINK_PER_QUESTION,
         }
-        ctx['pdf_contexts']  = owned_pdf_contexts(self.request.user, ready_only=True)
+        pdf_qs = owned_pdf_contexts(self.request.user, ready_only=True)
+        ctx['pdf_contexts'] = pdf_qs
+        ctx['pdf_hierarchy'] = build_pdf_hierarchy_rows(pdf_qs)
+        ctx['pdf_hierarchy_json'] = json.dumps(ctx['pdf_hierarchy'], ensure_ascii=False)
         ctx['pyq_modules']   = owned_pyq_modules(self.request.user, ready_only=True)
         ctx['think_available'] = bool(get_active_council_models())
         ctx['question_types'] = QuestionType.choices

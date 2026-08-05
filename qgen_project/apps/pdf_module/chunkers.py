@@ -61,6 +61,112 @@ def is_indexable_chunk(text: str, min_tokens: int = 30) -> bool:
 
 _OCR_LANGS_CACHE: Optional[str] = None
 
+# Unlimited-OCR (Ollama vision) — strip layout tags / model chatter before indexing.
+_UOCR_FOOTER = re.compile(r"^\s*footer\b", re.IGNORECASE)
+_UOCR_NOISE = re.compile(
+    r"^\s*(Do not use|Special formatting rules|The content provided|"
+    r"If no valid OCR|If there is no actual text|Therefore,?\s+the corrected OCR|"
+    r"The OCR should output|No text detected)\b",
+    re.IGNORECASE,
+)
+_UOCR_BOX = re.compile(
+    r"^\s*(?:title|text|header|image|table|caption)\s+\[[^\]]+\]\s*(.*)$",
+    re.IGNORECASE,
+)
+_UOCR_META_INLINE = re.compile(
+    r"(?is)(?:```(?:text)?\s*)?\[?\s*No text detected\s*\]?\s*"
+    r"|If no valid OCR output is provided for any content\.?\s*"
+    r"|If there is no actual text content in the source image[^.]*\.\s*"
+    r"|Therefore,?\s+the corrected OCR text is:\s*"
+    r"|The OCR should output nothing\.?\s*",
+)
+_UOCR_FENCE = re.compile(r"```(?:text)?|```")
+
+
+def clean_unlimited_ocr_text(text: str) -> str:
+    """Strip Unlimited-OCR bbox / footer / instruction noise → plain text."""
+    if not text:
+        return ""
+    text = _UOCR_META_INLINE.sub(" ", text)
+    text = _UOCR_FENCE.sub("", text)
+    out: list[str] = []
+    for line in text.splitlines():
+        if _UOCR_FOOTER.match(line) or _UOCR_NOISE.match(line):
+            continue
+        if re.search(r"\[?\s*No text detected\s*\]?", line, re.I) and len(line.split()) < 12:
+            continue
+        m = _UOCR_BOX.match(line)
+        if m:
+            content = m.group(1).strip()
+            if content and content != "[Non-Text]" and not re.fullmatch(
+                r"\[?\s*No text detected\s*\]?", content, re.I
+            ):
+                out.append(content)
+            continue
+        out.append(line.rstrip())
+    cleaned = "\n".join(out)
+    # Unlimited-OCR sometimes emits HTML table markup for ToC blocks.
+    cleaned = re.sub(r"</?(?:table|tr|td|th|tbody|thead)[^>]*>", " ", cleaned, flags=re.I)
+    cleaned = re.sub(r"[ \t]+", " ", cleaned)
+    cleaned = re.sub(r"\n{3,}", "\n\n", cleaned).strip()
+    return cleaned
+
+
+def _unlimited_ocr_config() -> tuple[str, str]:
+    import os
+
+    base = (
+        os.environ.get("UNLIMITED_OCR_URL")
+        or os.environ.get("OCR_OLLAMA_URL")
+        or "http://10.129.6.47:11441"
+    ).rstrip("/")
+    if base.endswith("/api/generate"):
+        url = base
+    else:
+        url = f"{base}/api/generate"
+    model = os.environ.get("UNLIMITED_OCR_MODEL") or "frob/unlimited-ocr:q8_0"
+    return url, model
+
+
+def ocr_page_unlimited(page, *, dpi: float = 144, retries: int = 2) -> str:
+    """OCR a page via Unlimited-OCR on GPU Ollama (preferred path)."""
+    import base64
+    import time
+
+    import fitz
+    import requests
+
+    url, model = _unlimited_ocr_config()
+    zoom = max(dpi / 72.0, 1.0)
+    pix = page.get_pixmap(matrix=fitz.Matrix(zoom, zoom), alpha=False)
+    png_b64 = base64.b64encode(pix.tobytes("png")).decode("ascii")
+    prompt = "Extract all text from this document accurately, maintaining the structure."
+    last = ""
+    for attempt in range(retries + 1):
+        try:
+            r = requests.post(
+                url,
+                json={
+                    "model": model,
+                    "prompt": prompt,
+                    "stream": False,
+                    "keep_alive": "60m",
+                    "images": [png_b64],
+                },
+                timeout=300,
+            )
+            r.raise_for_status()
+            last = (r.json().get("response") or "").strip()
+            if len(last) >= 40:
+                return clean_unlimited_ocr_text(last)
+            if attempt < retries:
+                time.sleep(0.8 * (attempt + 1))
+        except Exception as exc:
+            logger.warning("Unlimited-OCR failed (attempt %s): %s", attempt + 1, exc)
+            if attempt < retries:
+                time.sleep(0.8 * (attempt + 1))
+    return clean_unlimited_ocr_text(last)
+
 
 def _tesseract_langs() -> str:
     global _OCR_LANGS_CACHE
@@ -81,8 +187,8 @@ def _tesseract_langs() -> str:
     return _OCR_LANGS_CACHE
 
 
-def ocr_page_text(page, *, dpi: float = 150) -> str:
-    """OCR a PyMuPDF page when it has no usable text layer (scanned PDFs)."""
+def ocr_page_tesseract(page, *, dpi: float = 150) -> str:
+    """Local tesseract fallback when Unlimited-OCR is unavailable."""
     try:
         import io
 
@@ -96,8 +202,22 @@ def ocr_page_text(page, *, dpi: float = 150) -> str:
         text = pytesseract.image_to_string(image, lang=_tesseract_langs())
         return (text or "").strip()
     except Exception as exc:
-        logger.warning("OCR failed on page: %s", exc)
+        logger.warning("Tesseract OCR failed on page: %s", exc)
         return ""
+
+
+def ocr_page_text(page, *, dpi: float = 144) -> str:
+    """OCR a PyMuPDF page: Unlimited-OCR (GPU) first, then tesseract."""
+    text = ocr_page_unlimited(page, dpi=dpi)
+    if text and len(text.split()) >= 5:
+        return text
+    return ocr_page_tesseract(page, dpi=max(dpi, 150))
+
+
+def _force_unlimited_ocr() -> bool:
+    """Prefer Unlimited-OCR on every page for quality text (default on)."""
+    raw = (os.environ.get("PDF_FORCE_UNLIMITED_OCR") or "1").strip().lower()
+    return raw not in {"0", "false", "no", "off"}
 
 
 def extract_pages_from_pdf(path: str):
@@ -105,14 +225,29 @@ def extract_pages_from_pdf(path: str):
 
     doc = fitz.open(path)
     pages = []
+    force_ocr = _force_unlimited_ocr()
     for page_number, page in enumerate(doc, start=1):
-        force_legacy = page_uses_legacy_hindi_font(page)
-        text = clean_page_text(page.get_text(), force_legacy=force_legacy)
-        # Scanned / image-only pages: OCR fallback (silent).
-        if not text or not is_indexable_chunk(text, min_tokens=10):
+        text = ""
+        if force_ocr:
+            # Always Unlimited-OCR (GPU) → tesseract fallback for quality text.
             ocr_text = ocr_page_text(page)
             if ocr_text:
                 text = clean_page_text(ocr_text, force_legacy=False)
+        if not text:
+            force_legacy = page_uses_legacy_hindi_font(page)
+            text = clean_page_text(page.get_text(), force_legacy=force_legacy)
+            # Native extract can still be KrutiDev even when font names are odd.
+            from .legacy_hindi import looks_like_legacy_hindi, normalize_legacy_hindi
+
+            is_leg, ft = looks_like_legacy_hindi(text)
+            if is_leg:
+                text = normalize_legacy_hindi(text, force=True, font_type=ft or "krutidev")
+            if not force_ocr and (
+                not text or not is_indexable_chunk(text, min_tokens=10)
+            ):
+                ocr_text = ocr_page_text(page)
+                if ocr_text:
+                    text = clean_page_text(ocr_text, force_legacy=False)
         if text and is_indexable_chunk(text, min_tokens=10):
             pages.append(
                 {
@@ -389,6 +524,7 @@ def semantic_chunker(
 
 
 STRATEGY_MAP = {
+    "hierarchical": None,  # document-level; see hierarchical_chunk_texts / tasks
     "fixed_size": fixed_size_chunker,
     "sentence": sentence_chunker,
     "paragraph": paragraph_chunker,
@@ -409,12 +545,15 @@ def chunk_page_text(
     if not page_text:
         return []
 
-    strategy = (strategy or "fixed_size").strip()
+    strategy = (strategy or "hierarchical").strip()
+    # Hierarchical needs full-document text — page path falls back to fixed_size.
+    if strategy == "hierarchical":
+        strategy = "fixed_size"
     chunk_size = max(int(chunk_size or 512), 1)
     chunk_overlap = max(int(chunk_overlap or 0), 0)
 
     def _run(name: str) -> List[str]:
-        chunker = STRATEGY_MAP.get(name, fixed_size_chunker)
+        chunker = STRATEGY_MAP.get(name) or fixed_size_chunker
         raw = chunker(
             page_text,
             chunk_size=chunk_size,

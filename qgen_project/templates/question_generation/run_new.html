@@ -55,26 +55,73 @@
     </div>
   </div>
 
-  <div class="form-section context-section">
+  <div class="form-section context-section"
+       x-data="pdfHierarchyPicker()"
+       x-init="initFromJson($refs.hierarchyJson.textContent)">
+    <script type="application/json" x-ref="hierarchyJson">{{ pdf_hierarchy_json|safe }}</script>
     <div class="context-section__head">
-      <span class="field-label">PDF contexts <span class="muted">(required)</span></span>
-      <span class="field-hint">RAG sources — at least one required</span>
+      <span class="field-label">PDF context <span class="muted">(required)</span></span>
+      <span class="field-hint">Degree → Course → Block → Unit</span>
     </div>
     {% if form.pdf_contexts.errors %}
     <p class="alert alert-error">{{ form.pdf_contexts.errors.0 }}</p>
     {% endif %}
-    {% if pdf_contexts %}
-    <div class="context-chips" role="group" aria-label="PDF contexts">
-      {% for ctx in pdf_contexts %}
-      <label class="context-chip context-chip--pdf" title="{{ ctx.name }} · {{ ctx.chunk_count }} chunks">
-        <input type="checkbox" name="pdf_contexts" value="{{ ctx.id }}">
-        <span class="context-chip__icon" aria-hidden="true">PDF</span>
-        <span class="context-chip__label">{{ ctx.name }}</span>
+    {% if pdf_hierarchy %}
+    <div class="form-grid hierarchy-grid">
+      <label class="form-field">
+        <span class="field-label">Degree</span>
+        <select class="form-control" x-model="degree" @change="course=''; block=''; unitId=''">
+          <option value="">Select degree</option>
+          <template x-for="d in degrees" :key="d">
+            <option :value="d" x-text="d"></option>
+          </template>
+        </select>
       </label>
-      {% endfor %}
+      <label class="form-field">
+        <span class="field-label">Course</span>
+        <select class="form-control" x-model="course" :disabled="!degree" @change="block=''; unitId=''">
+          <option value="">Select course</option>
+          <template x-for="c in courses" :key="c">
+            <option :value="c" x-text="c"></option>
+          </template>
+        </select>
+      </label>
+      <label class="form-field">
+        <span class="field-label">Block</span>
+        <select class="form-control" x-model="block" :disabled="!course" @change="unitId=''">
+          <option value="">Select block</option>
+          <template x-for="b in blocks" :key="b">
+            <option :value="b" x-text="b"></option>
+          </template>
+        </select>
+      </label>
+      <label class="form-field">
+        <span class="field-label">Unit</span>
+        <select class="form-control" x-model="unitId" :disabled="!block">
+          <option value="">Select unit</option>
+          <template x-for="u in units" :key="u.id">
+            <option :value="u.id" x-text="u.unit_label"></option>
+          </template>
+        </select>
+      </label>
     </div>
+    <div class="hierarchy-actions">
+      <button type="button" class="btn btn-sm" @click="addUnit()" :disabled="!unitId">Add unit</button>
+      <span class="muted" x-show="selected.length" x-text="selected.length + ' selected'"></span>
+    </div>
+    <div class="context-chips" role="group" aria-label="Selected PDF contexts" x-show="selected.length">
+      <template x-for="(s, idx) in selected" :key="s.id">
+        <label class="context-chip context-chip--pdf is-selected">
+          <input type="checkbox" name="pdf_contexts" :value="s.id" checked>
+          <span class="context-chip__icon" aria-hidden="true">PDF</span>
+          <span class="context-chip__label" x-text="s.course + ' · ' + s.block + ' · ' + s.unit_label"></span>
+          <button type="button" class="context-chip__remove" @click.prevent="removeAt(idx)" title="Remove">✕</button>
+        </label>
+      </template>
+    </div>
+    <p class="muted" x-show="!selected.length" style="margin-top:0.75rem;">Pick Degree → Course → Block → Unit, then Add unit.</p>
     {% else %}
-    <p class="muted">No ready PDF contexts. <a href="{% url 'pdf_module:upload' %}">Upload one</a> before generating.</p>
+    <p class="muted">No ready unitwise PDF contexts yet (indexing may still be running).</p>
     {% endif %}
   </div>
 
@@ -171,4 +218,62 @@
 
   <button type="submit" class="btn btn-primary btn-lg" :disabled="overLimit">Generate Questions</button>
 </form>
+<script>
+function pdfHierarchyPicker(rows) {
+  rows = Array.isArray(rows) ? rows : [];
+  return {
+    rows,
+    degree: '',
+    course: '',
+    block: '',
+    unitId: '',
+    selected: [],
+    initFromJson(raw) {
+      try {
+        const parsed = JSON.parse(raw || '[]');
+        this.rows = Array.isArray(parsed) ? parsed : [];
+      } catch (e) {
+        console.error('pdf hierarchy JSON parse failed', e);
+        this.rows = [];
+      }
+    },
+    get degrees() {
+      return [...new Set(this.rows.map(r => r.degree).filter(Boolean))];
+    },
+    get courses() {
+      return [...new Set(this.rows.filter(r => r.degree === this.degree).map(r => r.course))];
+    },
+    get blocks() {
+      return [...new Set(
+        this.rows
+          .filter(r => r.degree === this.degree && r.course === this.course)
+          .map(r => r.block)
+      )];
+    },
+    get units() {
+      return this.rows.filter(
+        r => r.degree === this.degree && r.course === this.course && r.block === this.block
+      );
+    },
+    addUnit() {
+      const row = this.rows.find(r => r.id === this.unitId);
+      if (!row) return;
+      if (this.selected.some(s => s.id === row.id)) return;
+      this.selected.push(row);
+      this.unitId = '';
+      this.$nextTick(() => {
+        const form = this.$el.closest('form');
+        if (form) form.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+    },
+    removeAt(idx) {
+      this.selected.splice(idx, 1);
+      this.$nextTick(() => {
+        const form = this.$el.closest('form');
+        if (form) form.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+    },
+  };
+}
+</script>
 {% endblock %}

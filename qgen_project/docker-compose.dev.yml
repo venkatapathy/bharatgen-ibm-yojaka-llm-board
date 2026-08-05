@@ -48,7 +48,10 @@ services:
     environment:
       DB_HOST: db
       REDIS_URL: redis://redis:6379/0
-      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://10.129.6.47:11435}
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://10.129.7.47:11434}
+      UNLIMITED_OCR_URL: ${UNLIMITED_OCR_URL:-http://10.129.6.47:11441}
+      UNLIMITED_OCR_MODEL: ${UNLIMITED_OCR_MODEL:-frob/unlimited-ocr:q8_0}
+      PDF_FORCE_UNLIMITED_OCR: ${PDF_FORCE_UNLIMITED_OCR:-1}
       GROQ_API_KEY: ${GROQ_API_KEY:-}
       TESSDATA_PREFIX: /usr/share/tesseract-ocr/5/tessdata
       DJANGO_SETTINGS_MODULE: qgen.settings.development
@@ -62,7 +65,7 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile
-    command: celery -A qgen worker -l info --concurrency=2
+    command: celery -A qgen worker -l info --concurrency=3
     volumes:
       - .:/app
       - media_data:/app/media
@@ -72,7 +75,10 @@ services:
     environment:
       DB_HOST: db
       REDIS_URL: redis://redis:6379/0
-      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://10.129.6.47:11435}
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://10.129.7.47:11434}
+      UNLIMITED_OCR_URL: ${UNLIMITED_OCR_URL:-http://10.129.6.47:11441}
+      UNLIMITED_OCR_MODEL: ${UNLIMITED_OCR_MODEL:-frob/unlimited-ocr:q8_0}
+      PDF_FORCE_UNLIMITED_OCR: ${PDF_FORCE_UNLIMITED_OCR:-1}
       GROQ_API_KEY: ${GROQ_API_KEY:-}
       TESSDATA_PREFIX: /usr/share/tesseract-ocr/5/tessdata
       DJANGO_SETTINGS_MODULE: qgen.settings.development
@@ -97,7 +103,10 @@ services:
     environment:
       DB_HOST: db
       REDIS_URL: redis://redis:6379/0
-      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://10.129.6.47:11435}
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://10.129.7.47:11434}
+      UNLIMITED_OCR_URL: ${UNLIMITED_OCR_URL:-http://10.129.6.47:11441}
+      UNLIMITED_OCR_MODEL: ${UNLIMITED_OCR_MODEL:-frob/unlimited-ocr:q8_0}
+      PDF_FORCE_UNLIMITED_OCR: ${PDF_FORCE_UNLIMITED_OCR:-1}
       GROQ_API_KEY: ${GROQ_API_KEY:-}
       TESSDATA_PREFIX: /usr/share/tesseract-ocr/5/tessdata
       DJANGO_SETTINGS_MODULE: qgen.settings.development

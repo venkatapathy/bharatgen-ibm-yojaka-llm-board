@@ -7,6 +7,7 @@ DEFAULT_EMBED_DIMENSIONS = 768
 
 
 class ChunkingStrategy(models.TextChoices):
+    HIERARCHICAL = 'hierarchical', 'Hierarchical (unit/section)'
     FIXED_SIZE = 'fixed_size', 'Fixed Size (tokens)'
     SENTENCE   = 'sentence',   'Sentence Splitter'
     PARAGRAPH  = 'paragraph',  'Paragraph Splitter'
@@ -21,7 +22,7 @@ class PDFContext(models.Model):
     description   = models.TextField(blank=True)
     zip_path      = models.FileField(upload_to='pdf_uploads/%Y/%m/')
     strategy      = models.CharField(max_length=32, choices=ChunkingStrategy.choices,
-                                     default=ChunkingStrategy.FIXED_SIZE)
+                                     default=ChunkingStrategy.HIERARCHICAL)
     chunk_size    = models.IntegerField(default=512)
     chunk_overlap = models.IntegerField(default=64)
     embed_model   = models.CharField(max_length=128)
@@ -33,6 +34,8 @@ class PDFContext(models.Model):
     has_embedding = models.BooleanField(default=True)
     needs_reindex = models.BooleanField(default=False)
     embedded_chunk_count = models.IntegerField(default=0)
+    # Full-document OCR / extracted text (editable in the PDF viewer UI).
+    ocr_text = models.TextField(blank=True, default="")
     created_by    = models.ForeignKey(User, on_delete=models.SET_NULL, null=True,
                                       related_name='pdf_contexts')
     created_at    = models.DateTimeField(auto_now_add=True)

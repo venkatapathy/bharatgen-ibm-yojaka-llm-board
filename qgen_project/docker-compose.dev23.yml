@@ -1,0 +1,64 @@
+# Slim stack for dev2.3 WIP — shares Postgres/Redis/media with qgen_project (dev2.1).
+# Port 8002 = local/work URL. Ngrok stays on 8001 → dev2.1.
+services:
+  web:
+    image: qgen_project-web
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+      - media_data:/app/media
+    ports:
+      - "8002:8000"
+    env_file:
+      - .env
+    environment:
+      DB_HOST: db
+      REDIS_URL: redis://redis:6379/1
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://10.129.7.47:11434}
+      UNLIMITED_OCR_URL: ${UNLIMITED_OCR_URL:-http://10.129.6.47:11441}
+      UNLIMITED_OCR_MODEL: ${UNLIMITED_OCR_MODEL:-frob/unlimited-ocr:q8_0}
+      PDF_FORCE_UNLIMITED_OCR: ${PDF_FORCE_UNLIMITED_OCR:-1}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      TESSDATA_PREFIX: /usr/share/tesseract-ocr/5/tessdata
+      DJANGO_SETTINGS_MODULE: qgen.settings.development
+    networks:
+      - default
+      - shared
+    restart: unless-stopped
+
+  celery_worker:
+    image: qgen_project-celery_worker
+    command: celery -A qgen worker -l info --concurrency=2 -n worker23@%h
+    volumes:
+      - .:/app
+      - media_data:/app/media
+      - /home/pankaj/.cache/huggingface:/root/.cache/huggingface:ro
+    env_file:
+      - .env
+    environment:
+      DB_HOST: db
+      REDIS_URL: redis://redis:6379/1
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://10.129.7.47:11434}
+      UNLIMITED_OCR_URL: ${UNLIMITED_OCR_URL:-http://10.129.6.47:11441}
+      UNLIMITED_OCR_MODEL: ${UNLIMITED_OCR_MODEL:-frob/unlimited-ocr:q8_0}
+      PDF_FORCE_UNLIMITED_OCR: ${PDF_FORCE_UNLIMITED_OCR:-1}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      TESSDATA_PREFIX: /usr/share/tesseract-ocr/5/tessdata
+      DJANGO_SETTINGS_MODULE: qgen.settings.development
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      HF_HOME: /root/.cache/huggingface
+    networks:
+      - default
+      - shared
+    restart: unless-stopped
+
+networks:
+  shared:
+    external: true
+    name: qgen_project_default
+
+volumes:
+  media_data:
+    external: true
+    name: qgen_project_media_data

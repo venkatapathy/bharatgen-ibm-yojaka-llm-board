@@ -1,5 +1,12 @@
-"""PDF text extraction helpers for PYQ ingestion."""
+"""PDF text extraction helpers for PYQ ingestion.
 
+Prefers native text when usable; otherwise Unlimited-OCR (GPU) via
+``apps.pdf_module.chunkers``, then cleans for LLM question extraction.
+"""
+
+from __future__ import annotations
+
+import logging
 import re
 
 from apps.pdf_module.legacy_hindi import (
@@ -7,30 +14,59 @@ from apps.pdf_module.legacy_hindi import (
     page_uses_legacy_hindi_font,
 )
 
+logger = logging.getLogger(__name__)
+
+_DEVANAGARI = re.compile(r"[\u0900-\u097F]")
+_EN_WORD = re.compile(r"[A-Za-z]{3,}")
+
+
+def _is_usable_pyq_text(text: str) -> bool:
+    """True when native/legacy-decoded text is good enough without vision OCR."""
+    t = (text or "").strip()
+    if len(t) < 80:
+        return False
+    if _DEVANAGARI.search(t):
+        return len(t.split()) >= 20
+    # English / bilingual Latin: need real words (rejects KrutiDev garbage).
+    return len(_EN_WORD.findall(t)) >= 25
+
 
 def extract_text(path: str):
     import fitz
+
+    from apps.pdf_module.chunkers import clean_page_text, ocr_page_text
 
     doc = fitz.open(path)
     pages = []
     for page_number, page in enumerate(doc, start=1):
         force_legacy = page_uses_legacy_hindi_font(page)
-        text = page.get_text().strip()
-        if text:
-            text = normalize_legacy_hindi(text, force=force_legacy)
-        if not text:
-            try:
-                import pytesseract
-                from PIL import Image
-                import io
+        native = (page.get_text() or "").strip()
+        if native:
+            native = normalize_legacy_hindi(native, force=force_legacy)
+            native = clean_page_text(native, force_legacy=False)
 
-                pix = page.get_pixmap()
-                image = Image.open(io.BytesIO(pix.tobytes("png")))
-                text = pytesseract.image_to_string(image, lang="hin+eng").strip()
-            except Exception:
-                text = ""
-        if text:
-            pages.append({"page_number": page_number, "text": text})
+        if _is_usable_pyq_text(native):
+            text = native
+            source = "native"
+        else:
+            ocr_raw = ocr_page_text(page)
+            text = clean_page_text(ocr_raw, force_legacy=False) if ocr_raw else native
+            source = "unlimited-ocr" if ocr_raw else "native-weak"
+            if source == "unlimited-ocr":
+                logger.info(
+                    "PYQ page %s OCR via Unlimited-OCR (%s chars)",
+                    page_number,
+                    len(text),
+                )
+
+        if text and len(text.strip()) >= 20:
+            pages.append(
+                {
+                    "page_number": page_number,
+                    "text": text.strip(),
+                    "source": source,
+                }
+            )
     return pages
 
 

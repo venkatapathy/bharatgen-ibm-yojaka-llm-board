@@ -16,7 +16,7 @@
       <p class="tech-field__error">{{ generation_form.model_config.errors.0 }}</p>
       {% endif %}
       <div class="tech-model-grid" role="radiogroup" aria-label="Generation model">
-        {% for model in llm_models %}
+        {% for model in generation_models %}
         <label class="tech-model-card">
           <input type="radio"
                  name="{{ generation_form.model_config.html_name }}"
@@ -24,19 +24,20 @@
                  {% if generation_form.model_config.value|stringformat:"s" == model.id|stringformat:"s" %}checked{% endif %}>
           <span class="tech-model-card__body">
             <span class="tech-model-card__name">{{ model.name }}</span>
-            <span class="tech-model-card__meta">{{ model.provider }}</span>
+            <span class="tech-model-card__meta">{{ model.provider }} · {{ model.llm_model_id }}</span>
           </span>
         </label>
         {% empty %}
-        <p class="muted">No models configured.</p>
+        <p class="muted">No generation models configured.</p>
         {% endfor %}
       </div>
     </section>
 
     <section class="tech-card">
       <h2 class="tech-card__title">Think models</h2>
+      <p class="muted" style="margin:0 0 0.75rem;">Models under 8B used when Think mode is on.</p>
       <div class="tech-model-grid tech-model-grid--check">
-        {% for model in llm_models %}
+        {% for model in think_models %}
         <label class="tech-model-card tech-model-card--check">
           <input type="checkbox"
                  name="council_models"
@@ -44,11 +45,11 @@
                  {% if model.is_council_member %}checked{% endif %}>
           <span class="tech-model-card__body">
             <span class="tech-model-card__name">{{ model.name }}</span>
-            <span class="tech-model-card__meta">{{ model.provider }}</span>
+            <span class="tech-model-card__meta">{{ model.provider }} · {{ model.llm_model_id }}</span>
           </span>
         </label>
         {% empty %}
-        <p class="muted">No models configured.</p>
+        <p class="muted">No Think models configured.</p>
         {% endfor %}
       </div>
     </section>

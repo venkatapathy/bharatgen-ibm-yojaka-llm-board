@@ -63,6 +63,18 @@ def technical_settings(request):
 
     pdf_settings = PDFIndexingSettings.load()
     gen_settings = GenerationSettings.load()
+    from apps.question_generation.council import ensure_council_models, COUNCIL_MODEL_SPECS
+    from apps.core.model_lists import generation_model_queryset
+
+    ensure_council_models()
+    generation_models = generation_model_queryset()
+    think_names = [spec["name"] for spec in COUNCIL_MODEL_SPECS]
+    think_models = (
+        ModelConfig.objects.filter(name__in=think_names)
+        .exclude(llm_model_id="")
+        .order_by("name")
+    )
+    # Legacy template var: full list (unused by split sections).
     llm_models = ModelConfig.objects.exclude(llm_model_id="").order_by("name")
 
     if request.method == "POST":
@@ -88,7 +100,8 @@ def technical_settings(request):
             selected = {
                 int(pk) for pk in request.POST.getlist("council_models") if pk.isdigit()
             }
-            for model in llm_models:
+            # Toggle Think roster only (snapshot before save); never touch generation models.
+            for model in think_models:
                 want = model.pk in selected
                 if model.is_council_member != want:
                     model.is_council_member = want
@@ -104,6 +117,12 @@ def technical_settings(request):
             messages.warning(
                 request, "Generation settings saved. Fix PDF indexing and save again."
             )
+        generation_models = generation_model_queryset()
+        think_models = (
+            ModelConfig.objects.filter(name__in=think_names)
+            .exclude(llm_model_id="")
+            .order_by("name")
+        )
     else:
         pdf_form = PDFIndexingSettingsForm(instance=pdf_settings, prefix="pdf")
         gen_form = GenerationSettingsForm(instance=gen_settings, prefix="gen")
@@ -116,6 +135,8 @@ def technical_settings(request):
             "settings": pdf_settings,
             "generation_settings": gen_settings,
             "llm_models": llm_models,
+            "generation_models": generation_models,
+            "think_models": think_models,
         },
     )
 

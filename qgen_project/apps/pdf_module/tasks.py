@@ -1,5 +1,6 @@
 import logging
 import os
+import re
 import tempfile
 import zipfile
 
@@ -7,8 +8,9 @@ from celery import shared_task
 
 from apps.core.embeddings import DEFAULT_EMBED_MODEL, embed_texts
 
-from .models import PDFContext, PDFChunk
-from .chunkers import chunk_page_text, extract_pages_from_pdf
+from .chunkers import chunk_page_text, extract_pages_from_pdf, is_indexable_chunk
+from .hierarchical_chunker import hierarchical_chunk_texts
+from .models import PDFChunk, PDFContext
 
 logger = logging.getLogger(__name__)
 
@@ -44,12 +46,20 @@ def _iter_pdf_files(context, tmpdir):
 EMBED_BATCH_SIZE = 64
 
 
+def _doc_id_from_path(pdf_path: str) -> str:
+    stem = os.path.splitext(os.path.basename(pdf_path))[0]
+    safe = re.sub(r"[^\w\-]+", "_", stem).strip("_")
+    return (safe or "doc")[:80]
+
+
 def _build_chunks(context):
     embed_fn = get_embed_fn(context.embed_model)
     chunks_to_create = []
     pending_texts = []
     pending_meta = []
     embedded_count = 0
+    strategy = (context.strategy or "hierarchical").strip()
+    max_words = max(int(context.chunk_size or 512), 200)
 
     def flush_batch():
         nonlocal embedded_count
@@ -67,12 +77,12 @@ def _build_chunks(context):
                 PDFChunk(
                     context=context,
                     source_file=meta["source_file"],
-                    page_number=meta["page_number"],
+                    page_number=meta.get("page_number"),
                     chunk_index=meta["chunk_index"],
                     text=text,
                     embedding=embedding,
                     token_count=len(text.split()),
-                    metadata={"strategy": context.strategy},
+                    metadata=meta.get("metadata") or {"strategy": strategy},
                 )
             )
         pending_texts.clear()
@@ -80,29 +90,91 @@ def _build_chunks(context):
         context.embedded_chunk_count = embedded_count
         context.save(update_fields=["embedded_chunk_count"])
 
+    def enqueue(text, *, source_file, page_number, chunk_index, metadata):
+        if not text or not is_indexable_chunk(text, min_tokens=20):
+            return
+        pending_texts.append(text)
+        pending_meta.append(
+            {
+                "source_file": source_file,
+                "page_number": page_number,
+                "chunk_index": chunk_index,
+                "metadata": metadata,
+            }
+        )
+        if len(pending_texts) >= EMBED_BATCH_SIZE:
+            flush_batch()
+
     with tempfile.TemporaryDirectory() as tmpdir:
+        ocr_parts: list[str] = []
         for pdf_path in _iter_pdf_files(context, tmpdir):
-            for page in extract_pages_from_pdf(pdf_path):
+            pages = extract_pages_from_pdf(pdf_path)
+            source_file = os.path.basename(pdf_path)
+            chunk_index = 0
+
+            page_texts = []
+            for page in pages:
+                text = (page.get("text") or "").strip()
+                if not text:
+                    continue
+                pn = page.get("page_number")
+                if pn:
+                    page_texts.append(f"===== PAGE {pn} =====\n{text}")
+                else:
+                    page_texts.append(text)
+            if page_texts:
+                ocr_parts.append("\n\n".join(page_texts))
+
+            if strategy == "hierarchical" and pages:
+                full_text = "\n\n".join(p["text"] for p in pages if p.get("text"))
+                hier = hierarchical_chunk_texts(
+                    full_text,
+                    document_id=_doc_id_from_path(pdf_path),
+                    max_chunk_words=max_words,
+                    min_words=25,
+                )
+                if hier:
+                    for item in hier:
+                        enqueue(
+                            item["text"],
+                            source_file=source_file,
+                            page_number=None,
+                            chunk_index=chunk_index,
+                            metadata={
+                                "strategy": "hierarchical",
+                                "title": item.get("title") or "",
+                                "level": item.get("level"),
+                                "chunk_id": item.get("chunk_id"),
+                                "parent_id": item.get("parent_id"),
+                            },
+                        )
+                        chunk_index += 1
+                    continue
+                logger.warning(
+                    "Hierarchical chunking empty for %s; falling back to page chunkers",
+                    source_file,
+                )
+
+            for page in pages:
                 page_chunks = chunk_page_text(
                     page["text"],
-                    context.strategy,
+                    "fixed_size" if strategy == "hierarchical" else strategy,
                     chunk_size=context.chunk_size,
                     chunk_overlap=context.chunk_overlap,
                     embed_fn=embed_fn,
                 )
-                for index, text in enumerate(page_chunks):
-                    pending_texts.append(text)
-                    pending_meta.append(
-                        {
-                            "source_file": page["source_file"],
-                            "page_number": page["page_number"],
-                            "chunk_index": index,
-                        }
+                for text in page_chunks:
+                    enqueue(
+                        text,
+                        source_file=page["source_file"],
+                        page_number=page["page_number"],
+                        chunk_index=chunk_index,
+                        metadata={"strategy": strategy},
                     )
-                    if len(pending_texts) >= EMBED_BATCH_SIZE:
-                        flush_batch()
+                    chunk_index += 1
         flush_batch()
-    return chunks_to_create, embedded_count
+    ocr_text = "\n\n".join(ocr_parts).strip()
+    return chunks_to_create, embedded_count, ocr_text
 
 
 @shared_task(bind=True, max_retries=3)
@@ -113,22 +185,59 @@ def index_pdf_context(self, context_id: str):
     context.save(update_fields=["status", "error_message"])
 
     try:
-        chunks_to_create, embedded_count = _build_chunks(context)
+        chunks_to_create, embedded_count, ocr_text = _build_chunks(context)
         PDFChunk.objects.filter(context=context).delete()
         PDFChunk.objects.bulk_create(chunks_to_create, batch_size=200)
+        from apps.pdf_module.legacy_hindi import looks_like_legacy_hindi, normalize_legacy_hindi
+
+        ocr_text = ocr_text or ""
+        is_leg, ft = looks_like_legacy_hindi(ocr_text)
+        if is_leg:
+            ocr_text = normalize_legacy_hindi(
+                ocr_text, force=True, font_type=ft or "krutidev"
+            )
+        context.ocr_text = ocr_text
+        if not chunks_to_create and not ocr_text:
+            context.status = "error"
+            context.error_message = (
+                "No indexable text extracted (OCR/text layer empty). "
+                "Re-index after fixing OCR."
+            )
+            context.needs_reindex = True
+            context.embedded_chunk_count = 0
+            context.save(
+                update_fields=[
+                    "status",
+                    "error_message",
+                    "needs_reindex",
+                    "embedded_chunk_count",
+                    "ocr_text",
+                ]
+            )
+            logger.error("Empty index for PDFContext %s", context_id)
+            return
         context.status = "ready"
         context.needs_reindex = False
+        context.error_message = ""
         context.embedded_chunk_count = embedded_count
-        context.save(update_fields=["status", "needs_reindex", "embedded_chunk_count", "error_message"])
+        context.save(
+            update_fields=[
+                "status",
+                "needs_reindex",
+                "embedded_chunk_count",
+                "error_message",
+                "ocr_text",
+            ]
+        )
         if context.created_by_id:
             from apps.core.storage import recompute_vector_storage
 
             recompute_vector_storage(context.created_by)
 
     except Exception as exc:
-        context.status = 'error'
+        context.status = "error"
         context.error_message = str(exc)
-        context.save(update_fields=['status', 'error_message'])
+        context.save(update_fields=["status", "error_message"])
         raise self.retry(exc=exc, countdown=30)
 
 

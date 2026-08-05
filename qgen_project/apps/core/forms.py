@@ -109,7 +109,10 @@ class GenerationSettingsForm(forms.ModelForm):
         self.fields["hindi_prompt"].queryset = prompts
         self.fields["hindi_prompt"].required = False
         self.fields["hindi_prompt"].empty_label = "— select —"
-        llm_qs = ModelConfig.objects.exclude(llm_model_id="").order_by("name")
+        # Generation picker: large models only (not Think <8B roster).
+        from apps.core.model_lists import generation_model_queryset
+
+        llm_qs = generation_model_queryset()
         self.fields["model_config"].queryset = llm_qs
         self.fields["model_config"].required = True
         self.fields["model_config"].empty_label = None

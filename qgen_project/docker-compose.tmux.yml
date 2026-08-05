@@ -1,0 +1,4 @@
+# Override: keep web container alive; Django runserver is started from tmux.
+services:
+  web:
+    command: sleep infinity

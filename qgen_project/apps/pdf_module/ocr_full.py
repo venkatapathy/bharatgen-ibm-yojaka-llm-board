@@ -33,8 +33,13 @@ def _normalize_full(text: str) -> str:
     return text
 
 
-def extract_full_ocr_text(pdf_path: str, *, force_vision: bool = False) -> str:
-    """Full document text: prefer rich native (+ legacy remap), else Unlimited-OCR."""
+def extract_full_ocr_text(
+    pdf_path: str, *, force_vision: bool = False, native_only: bool = False
+) -> str:
+    """Full document text: prefer rich native (+ legacy remap), else Unlimited-OCR.
+
+    native_only=True: never call vision OCR (fast path for upload HTTP requests).
+    """
     import fitz
 
     doc = fitz.open(pdf_path)
@@ -51,9 +56,12 @@ def extract_full_ocr_text(pdf_path: str, *, force_vision: bool = False) -> str:
         use_native = (
             not force_vision
             and native
-            and is_indexable_chunk(native, min_tokens=12)
+            and (native_only or is_indexable_chunk(native, min_tokens=12))
         )
         if use_native:
+            text = native
+        elif native_only:
+            # Keep whatever native text exists; skip vision.
             text = native
         else:
             try:
@@ -73,7 +81,9 @@ def extract_full_ocr_text(pdf_path: str, *, force_vision: bool = False) -> str:
     return "\n\n".join(blocks).strip()
 
 
-def rebuild_context_ocr(ctx: PDFContext, *, force_vision: bool = False) -> int:
+def rebuild_context_ocr(
+    ctx: PDFContext, *, force_vision: bool = False, native_only: bool = False
+) -> int:
     """Overwrite ctx.ocr_text with full-document extract. Returns char count."""
     path = ctx.zip_path.path if ctx.zip_path else ""
     if not path:
@@ -89,11 +99,17 @@ def rebuild_context_ocr(ctx: PDFContext, *, force_vision: bool = False) -> int:
                     if name.lower().endswith(".pdf"):
                         parts.append(
                             extract_full_ocr_text(
-                                os.path.join(root, name), force_vision=force_vision
+                                os.path.join(root, name),
+                                force_vision=force_vision,
+                                native_only=native_only,
                             )
                         )
     elif path.lower().endswith(".pdf"):
-        parts.append(extract_full_ocr_text(path, force_vision=force_vision))
+        parts.append(
+            extract_full_ocr_text(
+                path, force_vision=force_vision, native_only=native_only
+            )
+        )
     else:
         return 0
 

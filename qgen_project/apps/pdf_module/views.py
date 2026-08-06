@@ -33,12 +33,18 @@ from .uploads import iter_upload_pdf_members
 
 
 def _ocr_and_ready(ctx: PDFContext, *, force_vision: bool = False) -> bool:
-    """Fill full-document OCR and mark ready. No chunk/embed indexing."""
+    """Fill full-document OCR and mark ready. No chunk/embed indexing.
+
+    Upload path uses native text layer only (fast). Vision OCR is Celery-only.
+    """
     from apps.pdf_module.legacy_hindi import looks_like_legacy_hindi, normalize_legacy_hindi
     from apps.pdf_module.ocr_full import rebuild_context_ocr
 
+    native_only = not force_vision
     try:
-        rebuild_context_ocr(ctx, force_vision=force_vision)
+        rebuild_context_ocr(
+            ctx, force_vision=force_vision, native_only=native_only
+        )
         ctx.refresh_from_db(fields=["ocr_text"])
     except Exception as exc:
         ctx.status = "error"

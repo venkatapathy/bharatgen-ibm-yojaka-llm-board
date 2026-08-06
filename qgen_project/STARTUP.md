@@ -71,6 +71,13 @@ Do **not** commit or share your `.env`. If you change keys, only update your loc
 
 Self-contained stack: **Postgres + Redis + web + Celery worker + Celery beat**.
 
+> **Why no `23` / `qgen23` in these commands?**  
+> On a **personal laptop**, use `docker-compose.dev.yml` and project name `-p eduqgen`.  
+> That file starts **its own** Postgres + Redis — nothing shared with the lab server.  
+>  
+> `docker-compose.dev23.yml` / `-p qgen23` is **only** for the lab host (port 8002, shared DB/Redis).  
+> Your PhD should **not** use those commands on a local clone.
+
 ```bash
 cd bharatgen-ibm-yojaka-llm-board/qgen_project
 
@@ -182,6 +189,14 @@ qgen_project/
 
 ---
 
-## Note for the lab server (ignore on your laptop)
+## Note for the lab server (ignore on a laptop)
 
-On the shared lab host there is also a **8002 / `docker-compose.dev23.yml`** stack that reuses that server’s Postgres/Redis. **Do not use that compose for a personal laptop clone** — use `docker-compose.dev.yml` as above.
+On the shared lab host there is a second stack:
+
+```bash
+# LAB ONLY — do not use on a personal clone
+docker compose -f docker-compose.dev23.yml -p qgen23 up -d
+# → http://…:8002
+```
+
+That reuses the lab Postgres/Redis. **Local setup = `docker-compose.dev.yml` + `-p eduqgen` only** (commands above — no `23`).

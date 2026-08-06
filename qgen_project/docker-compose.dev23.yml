@@ -1,8 +1,15 @@
 # Slim stack for dev2.3 WIP — shares Postgres/Redis/media with qgen_project (dev2.1).
-# Port 8002 = local/work URL. Ngrok stays on 8001 → dev2.1.
+# Port 8002. Own images: qgen23-web / qgen23-worker (do not rebuild 2.1).
+#
+# Build + start (2.3 only):
+#   docker compose -f docker-compose.dev23.yml -p qgen23 build
+#   docker compose -f docker-compose.dev23.yml -p qgen23 up -d
 services:
   web:
-    image: qgen_project-web
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    image: qgen23-web
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
@@ -27,7 +34,10 @@ services:
     restart: unless-stopped
 
   celery_worker:
-    image: qgen_project-celery_worker
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    image: qgen23-worker
     command: celery -A qgen worker -l info --concurrency=2 -n worker23@%h
     volumes:
       - .:/app
@@ -54,7 +64,7 @@ services:
     restart: unless-stopped
 
   celery_beat:
-    image: qgen_project-celery_worker
+    image: qgen23-worker
     command: celery -A qgen beat -l info
     volumes:
       - .:/app
@@ -68,6 +78,8 @@ services:
       - default
       - shared
     restart: unless-stopped
+    depends_on:
+      - celery_worker
 
 networks:
   shared:

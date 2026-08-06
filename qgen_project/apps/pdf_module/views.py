@@ -54,6 +54,15 @@ def _pdf_file_url(ctx: PDFContext) -> str:
     return reverse("pdf_module:file", kwargs={"pk": ctx.pk})
 
 
+def _mark_ready_if_ocr(ctx: PDFContext) -> None:
+    """If OCR is present but Celery never flipped status, mark ready."""
+    if ctx.status in ("pending", "processing") and (ctx.ocr_text or "").strip():
+        ctx.status = "ready"
+        ctx.needs_reindex = False
+        ctx.error_message = ""
+        ctx.save(update_fields=["status", "needs_reindex", "error_message"])
+
+
 def _ensure_ocr_text(ctx: PDFContext) -> str:
     """Return full OCR text; rebuild from PDF if stored text looks truncated."""
     from apps.pdf_module.legacy_hindi import looks_like_legacy_hindi, normalize_legacy_hindi
@@ -75,18 +84,22 @@ def _ensure_ocr_text(ctx: PDFContext) -> str:
         if fixed != ctx.ocr_text:
             ctx.ocr_text = fixed
             ctx.save(update_fields=["ocr_text"])
+        _mark_ready_if_ocr(ctx)
         return fixed
 
     try:
         rebuild_context_ocr(ctx, force_vision=False)
         ctx.refresh_from_db()
         if (ctx.ocr_text or "").strip():
+            _mark_ready_if_ocr(ctx)
             return ctx.ocr_text
     except Exception:
         pass
 
     if stored:
-        return _normalize(stored)
+        fixed = _normalize(stored)
+        _mark_ready_if_ocr(ctx)
+        return fixed
     return ""
 
 

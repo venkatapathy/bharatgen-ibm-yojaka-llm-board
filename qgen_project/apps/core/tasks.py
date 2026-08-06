@@ -98,7 +98,9 @@ def reconcile_stuck_pdf_contexts(*, grace_seconds: int = _PDF_GRACE_SECONDS) -> 
 
     fixed = 0
     cutoff = timezone.now() - timedelta(seconds=grace_seconds)
-    qs = PDFContext.objects.filter(status="processing").filter(
+    # pending: OCR filled on page view while Celery index is stuck behind run_batch
+    # processing: worker started OCR then stalled without flipping to ready
+    qs = PDFContext.objects.filter(status__in=["pending", "processing"]).filter(
         updated_at__lte=cutoff,
     ).exclude(ocr_text="")
     for ctx in qs.iterator():

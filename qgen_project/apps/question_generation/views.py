@@ -560,6 +560,7 @@ class BatchRunDetailView(SoftMissingMixin, LoginRequiredMixin, DetailView):
         pdf_ctx = self.object.pdf_contexts.order_by("id").first()
         ctx['review_split_layout'] = bool(is_platform_admin or is_org_admin)
         ctx['run_pdf'] = pdf_ctx
+        ctx['run_pdf_search_text'] = pdf_ctx.ocr_text if pdf_ctx else ""
         ctx['run_pdf_url'] = (
             reverse("pdf_module:file", kwargs={"pk": pdf_ctx.pk}) if pdf_ctx else ""
         )
@@ -643,6 +644,7 @@ def batch_run_review(request, pk):
             "show_dataset_meta": show_council_models,
             "review_split_layout": bool(show_council_models or is_org_admin),
             "run_pdf": pdf_ctx,
+            "run_pdf_search_text": pdf_ctx.ocr_text if pdf_ctx else "",
             "run_pdf_url": (
                 reverse("pdf_module:file", kwargs={"pk": pdf_ctx.pk}) if pdf_ctx else ""
             ),

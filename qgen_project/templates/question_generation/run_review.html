@@ -20,38 +20,41 @@
 </div>
 
 {% if review_split_layout %}
-<div class="run-review-split"
+<div style="display:grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap:1rem; align-items:start;"
      x-data="runPdfViewer({ pdfUrl: '{{ run_pdf_url|escapejs }}' })"
      x-init="loadPdf()">
-  <section class="run-review-split__pdf pdf-ocr-pane">
-    <header class="pdf-ocr-pane__head">
+  <section class="form-section">
+    <header class="pdf-ocr-pane__head" style="margin-bottom:0.75rem;">
       <strong>Unit PDF</strong>
       {% if run_pdf %}
-      <a class="muted" style="font-size:0.82rem; text-decoration:underline;"
-         href="{% url 'pdf_module:detail' run_pdf.pk %}"
-         title="Open PDF context with OCR text">{{ run_pdf.name|truncatechars:48 }}</a>
+      <span class="muted" style="font-size:0.82rem; text-decoration:underline;"
+         title="PDF content is shown below">{{ run_pdf.name|truncatechars:48 }}</span>
       {% endif %}
       <span class="muted" x-text="pdfStatus" x-show="pdfStatus"></span>
       <span class="pdf-ocr-pane__actions">
-        {% if run_pdf %}
-        <a class="btn btn-sm" href="{% url 'pdf_module:detail' run_pdf.pk %}">OCR / Context</a>
-        {% endif %}
         {% if run_pdf_url %}
         <a class="btn btn-sm" :href="openUrl || '{{ run_pdf_url }}'" target="_blank" rel="noopener">Open PDF</a>
         {% endif %}
       </span>
     </header>
-    <div class="pdf-ocr-pane__body">
+    <div>
       {% if run_pdf_url %}
       <iframe class="pdf-ocr-frame" x-ref="pdfFrame" title="Unit PDF" x-show="!pdfError"></iframe>
       <p class="muted" style="padding:1.5rem;" x-show="pdfError" x-cloak x-text="pdfError"></p>
       {% else %}
       <p class="muted" style="padding:1.5rem;">No PDF unit linked to this run.</p>
       {% endif %}
+
+      {% if run_pdf_search_text %}
+      <div style="margin-top:1rem;">
+        <strong style="display:block; margin-bottom:0.75rem;">OCR text</strong>
+        <pre style="padding:1rem 1.25rem; margin:0; max-height:40vh; overflow:auto; white-space:pre-wrap; word-break:break-word; font-family:'Noto Sans Devanagari', 'Noto Sans', sans-serif; font-size:0.95rem; line-height:1.7; border:1px solid var(--border); border-radius:0.75rem; background:var(--bg-secondary);">{{ run_pdf_search_text }}</pre>
+      </div>
+      {% endif %}
     </div>
   </section>
 
-  <section class="run-review-split__questions">
+  <section class="form-section">
     {% include "partials/question_card.html" with question=question show_council_models=show_council_models hide_actions=True show_dataset_meta=show_dataset_meta %}
 
     <form method="post" class="form-section review-form" style="margin-top:1rem;">

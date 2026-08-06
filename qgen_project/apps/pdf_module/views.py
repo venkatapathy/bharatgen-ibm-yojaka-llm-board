@@ -250,8 +250,10 @@ class PDFContextDetailView(SoftMissingMixin, LoginRequiredMixin, DetailView):
         ctx["pdf_url"] = _pdf_file_url(self.object)
         ctx["can_manage_pdfs"] = is_admin
         ctx["can_view_ocr"] = is_admin
+        searchable_ocr_text = _ensure_ocr_text(self.object)
+        ctx["searchable_ocr_text"] = searchable_ocr_text
         # Never load / rebuild OCR for org admins or users.
-        ctx["ocr_text"] = _ensure_ocr_text(self.object) if is_admin else ""
+        ctx["ocr_text"] = searchable_ocr_text if is_admin else ""
         return ctx
 
 

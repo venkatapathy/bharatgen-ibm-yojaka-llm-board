@@ -404,7 +404,7 @@ def _unlimited_ocr_config() -> tuple[str, str]:
     base = (
         os.environ.get("UNLIMITED_OCR_URL")
         or os.environ.get("OCR_OLLAMA_URL")
-        or "http://10.129.6.47:11441"
+        or "http://10.129.7.47:11441"
     ).rstrip("/")
     if base.endswith("/api/generate"):
         url = base

@@ -29,6 +29,10 @@ draft_RAG/
 testing/
 scripts/
 books/
+
+# Local-only (do not commit) — WhatsApp share sheet for PYQ-from-OCR
+qgen_project/PYQ_OCR_EXTRACT_README.md
+
 *.log
 *.db
 *.csv

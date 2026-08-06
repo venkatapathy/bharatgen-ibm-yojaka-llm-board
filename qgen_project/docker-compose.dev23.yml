@@ -1,5 +1,9 @@
 # Slim stack for dev2.3 WIP — shares Postgres/Redis/media with qgen_project (dev2.1).
-# Port 8002. Own images: qgen23-web / qgen23-worker (do not rebuild 2.1).
+# Port 8002. Own images: qgen23-web / qgen23-worker (do not rebuild or restart 2.1).
+#
+# Media mounts at /var/qgen_media (NOT /app/media): code lives on NFS (/home1/...),
+# and Docker cannot overlay a volume on an NFS /app path. 2.1 is on local disk and
+# keeps using /app/media unchanged.
 #
 # Build + start (2.3 only):
 #   docker compose -f docker-compose.dev23.yml -p qgen23 build
@@ -13,7 +17,7 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
-      - media_data:/app/media
+      - media_data:/var/qgen_media
     ports:
       - "8002:8000"
     env_file:
@@ -21,6 +25,7 @@ services:
     environment:
       DB_HOST: db
       REDIS_URL: redis://redis:6379/1
+      MEDIA_ROOT: /var/qgen_media
       OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://10.129.7.47:11434}
       UNLIMITED_OCR_URL: ${UNLIMITED_OCR_URL:-http://10.129.7.47:11441}
       UNLIMITED_OCR_MODEL: ${UNLIMITED_OCR_MODEL:-frob/unlimited-ocr:q8_0}
@@ -41,13 +46,14 @@ services:
     command: celery -A qgen worker -l info --concurrency=2 -n worker23@%h
     volumes:
       - .:/app
-      - media_data:/app/media
+      - media_data:/var/qgen_media
       - /home/pankaj/.cache/huggingface:/root/.cache/huggingface:ro
     env_file:
       - .env
     environment:
       DB_HOST: db
       REDIS_URL: redis://redis:6379/1
+      MEDIA_ROOT: /var/qgen_media
       OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://10.129.7.47:11434}
       UNLIMITED_OCR_URL: ${UNLIMITED_OCR_URL:-http://10.129.7.47:11441}
       UNLIMITED_OCR_MODEL: ${UNLIMITED_OCR_MODEL:-frob/unlimited-ocr:q8_0}
@@ -73,6 +79,7 @@ services:
     environment:
       DB_HOST: db
       REDIS_URL: redis://redis:6379/1
+      MEDIA_ROOT: /var/qgen_media
       DJANGO_SETTINGS_MODULE: qgen.settings.development
     networks:
       - default

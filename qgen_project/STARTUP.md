@@ -30,19 +30,40 @@ git checkout dev2.3-IGNOV
 
 ---
 
-## 2. Create `.env`
+## 2. Create `.env` (required)
+
+The real **`.env` file is gitignored** — it is **never** pushed to the repo (secrets stay on each machine).
+
+What *is* in git:
+
+| File | Purpose |
+|------|---------|
+| **`.env.example`** | Template with the same keys as production/dev — **safe to commit** (no real API keys) |
+| **`.env`** | Your private copy — create locally, fill secrets |
 
 ```bash
 cp .env.example .env
 ```
 
-Edit `.env` if you want. Defaults are fine for a first local run:
+Then edit `.env`:
 
-- `SECRET_KEY` — change it
-- `DEBUG=True`
-- `DB_*` — used inside Docker; compose overrides `DB_HOST` to `db`
-- `OLLAMA_BASE_URL` — your machine’s Ollama, e.g. `http://host.docker.internal:11434` (Mac/Windows) or your LAN IP on Linux
-- Leave `REDIS_URL` alone; compose sets it
+| Variable | What to set |
+|----------|-------------|
+| `SECRET_KEY` | Change from the default |
+| `DEBUG` | `True` for local |
+| `ALLOWED_HOSTS` | Keep defaults unless you use a tunnel |
+| `DB_NAME` / `DB_USER` / `DB_PASSWORD` | Defaults work with Docker Compose |
+| `DB_HOST` / `REDIS_URL` | Compose overrides these to `db` / `redis` — leave as in the example |
+| `GROQ_API_KEY` | Optional — paste your key if using Groq |
+| `OLLAMA_BASE_URL` | Your Ollama URL (see below) |
+| `UNLIMITED_OCR_*` | Optional OCR model settings |
+
+**Ollama from Docker:**
+
+- Mac / Windows: `http://host.docker.internal:11434`
+- Linux: use your machine’s LAN IP, e.g. `http://192.168.x.x:11434` (not `localhost` inside the container)
+
+Do **not** commit or share your `.env`. If you change keys, only update your local file (or ask the team for a private key out-of-band).
 
 ---
 

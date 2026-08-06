@@ -2,7 +2,8 @@
 
 A Django monolith for AI-powered exam question generation with RAG retrieval, PYQ n-shot prompting, and role-based access control.
 
-> **New clone / local laptop?** Start here → **[STARTUP.md](./STARTUP.md)**
+> **New clone / local laptop?** Start here → **[STARTUP.md](./STARTUP.md)**  
+> **Config:** copy **`.env.example` → `.env`**. Real `.env` is gitignored and never pushed.
 
 ## Table of Contents
 
@@ -11,7 +12,7 @@ A Django monolith for AI-powered exam question generation with RAG retrieval, PY
 - [Project Structure](#project-structure)
 - [Setup — Docker (recommended)](#setup--docker-recommended)
 - [Setup — Local](#setup--local)
-- [Environment Variables](#environment-variables)
+- [Environment Variables (`.env`)](#environment-variables-env)
 - [Roles](#roles)
 - [API Reference](#api-reference)
 - [Key Models](#key-models)
@@ -68,25 +69,26 @@ qgen_project/
 ```bash
 git clone <repo-url>
 cd qgen_project
+git checkout dev2.3-IGNOV   # or the branch your team uses
 cp .env.example .env
 ```
 
-Edit `.env` — at minimum set these:
+**About `.env`:**
 
-```env
-SECRET_KEY=your-secret-key-here
-DEBUG=True
-ALLOWED_HOSTS=*
+| File | In git? | Purpose |
+|------|---------|---------|
+| `.env.example` | Yes | Template — same keys as the team uses; **no real secrets** |
+| `.env` | **No** (gitignored) | Your private config — create with `cp .env.example .env` |
 
-DB_NAME=qgen_db
-DB_USER=postgres
-DB_PASSWORD=postgres
+Edit `.env` and set at least:
 
-OPENAI_API_KEY=sk-...
-ANTHROPIC_API_KEY=sk-ant-...
-```
+- `SECRET_KEY` — change the default
+- `GROQ_API_KEY` — if you use Groq (optional)
+- `OLLAMA_BASE_URL` — your Ollama host (required for local LLM generation)
 
-> **Note:** `DB_HOST` and `REDIS_URL` are overridden by docker-compose — leave them as-is in `.env`.
+Docker Compose overrides `DB_HOST` → `db` and `REDIS_URL` → the compose Redis service. Keep the other `DB_*` values unless you know you need different ones.
+
+See **[STARTUP.md](./STARTUP.md)** for the full local checklist.
 
 ### 2. Development
 
@@ -181,24 +183,30 @@ celery -A qgen beat -l info
 
 ---
 
-## Environment Variables
+## Environment Variables (`.env`)
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `SECRET_KEY` | Django secret key | — |
-| `DEBUG` | `True` / `False` | `True` |
-| `ALLOWED_HOSTS` | Comma-separated hostnames/IPs | `localhost,127.0.0.1` |
-| `DB_NAME` | PostgreSQL database name | `qgen_db` |
-| `DB_USER` | PostgreSQL user | `postgres` |
-| `DB_PASSWORD` | PostgreSQL password | `postgres` |
-| `DB_HOST` | PostgreSQL host | `localhost` |
-| `DB_PORT` | PostgreSQL port | `5432` |
-| `REDIS_URL` | Celery broker URL | `redis://localhost:6379/0` |
-| `OPENAI_API_KEY` | OpenAI key (used by LiteLLM) | — |
-| `ANTHROPIC_API_KEY` | Anthropic key (used by LiteLLM) | — |
-| `AWS_ACCESS_KEY_ID` | S3 access key (optional) | — |
-| `AWS_SECRET_ACCESS_KEY` | S3 secret key (optional) | — |
-| `AWS_STORAGE_BUCKET_NAME` | S3 bucket name (optional) | — |
+Secrets and runtime config live in **`.env`**, which is **not committed**.
+
+1. Copy the template: `cp .env.example .env`
+2. Fill in your values (API keys, Ollama URL, etc.)
+3. Never commit `.env` — only update `.env.example` when you add a **new key name** (with an empty/placeholder value)
+
+| Variable | Description | Notes |
+|----------|-------------|--------|
+| `SECRET_KEY` | Django secret key | Change for any shared/deployed host |
+| `DEBUG` | `True` / `False` | `True` for local |
+| `ALLOWED_HOSTS` | Comma-separated hosts | Add tunnel domains if needed |
+| `DB_NAME` | PostgreSQL database | e.g. `qgen_db` or `qgen_db_dev23` |
+| `DB_USER` / `DB_PASSWORD` | Postgres credentials | Defaults match compose |
+| `DB_HOST` / `DB_PORT` | Postgres host/port | Compose sets `DB_HOST=db` |
+| `REDIS_URL` | Celery broker | Compose overrides this |
+| `GROQ_API_KEY` | Groq API key | Optional; leave blank if unused |
+| `OLLAMA_BASE_URL` | Ollama HTTP base | Must be reachable **from inside Docker** |
+| `UNLIMITED_OCR_URL` | OCR service URL | Optional |
+| `UNLIMITED_OCR_MODEL` | OCR model id | Optional |
+| `PDF_FORCE_UNLIMITED_OCR` | `0` / `1` | Force vision OCR path |
+
+Full field-by-field notes: **[STARTUP.md § Create `.env`](./STARTUP.md#2-create-env-required)**.
 
 ---
 

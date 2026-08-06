@@ -2,8 +2,11 @@
 
 A Django monolith for AI-powered exam question generation with RAG retrieval, PYQ n-shot prompting, and role-based access control.
 
+> **New clone / local laptop?** Start here → **[STARTUP.md](./STARTUP.md)**
+
 ## Table of Contents
 
+- [STARTUP.md — clone & run locally](./STARTUP.md)
 - [Prerequisites](#prerequisites)
 - [Project Structure](#project-structure)
 - [Setup — Docker (recommended)](#setup--docker-recommended)

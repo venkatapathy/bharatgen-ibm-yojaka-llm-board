@@ -11,25 +11,108 @@
     {% csrf_token %}
 
     <section class="tech-card">
-      <h2 class="tech-card__title">Generation model</h2>
+      <div class="tech-card__title-row">
+        <h2 class="tech-card__title">Generation model</h2>
+        <button type="button"
+                class="tech-refresh-btn"
+                data-status-refresh
+                data-status-url="{% url 'core:control_model_status' %}"
+                title="Recheck model availability">
+          <span class="tech-refresh-btn__icon" aria-hidden="true">↻</span>
+          <span data-status-refresh-label>Refresh status</span>
+        </button>
+      </div>
+      <p class="muted" style="margin:0 0 1rem;">
+        Pick one available model. Red models cannot be selected. Blue ring + Active = selected.
+      </p>
       {% if generation_form.model_config.errors %}
-      <p class="tech-field__error">{{ generation_form.model_config.errors.0 }}</p>
+      <p class="tech-field__error" data-model-error>{{ generation_form.model_config.errors.0 }}</p>
+      {% else %}
+      <p class="tech-field__error" data-model-error hidden></p>
       {% endif %}
-      <div class="tech-model-grid" role="radiogroup" aria-label="Generation model">
-        {% for model in generation_models %}
-        <label class="tech-model-card">
-          <input type="radio"
-                 name="{{ generation_form.model_config.html_name }}"
-                 value="{{ model.id }}"
-                 {% if generation_form.model_config.value|stringformat:"s" == model.id|stringformat:"s" %}checked{% endif %}>
-          <span class="tech-model-card__body">
-            <span class="tech-model-card__name">{{ model.name }}</span>
-            <span class="tech-model-card__meta">{{ model.provider }} · {{ model.llm_model_id }}</span>
-          </span>
-        </label>
-        {% empty %}
-        <p class="muted">No generation models configured.</p>
-        {% endfor %}
+
+      <div class="tech-gen-models" data-gen-models>
+        <div class="tech-gen-group">
+          <h3 class="tech-gen-group__title">Local — Ollama</h3>
+          <div class="tech-model-grid" role="radiogroup" aria-label="Ollama models">
+            {% for model in ollama_models %}
+            <label class="tech-model-card {% if model.is_available %}is-available{% else %}is-unavailable{% endif %}{% if not model.is_available and generation_form.model_config.value|stringformat:'s' != model.id|stringformat:'s' %} is-locked{% endif %}"
+                   data-model-card
+                   data-model-id="{{ model.id }}"
+                   {% if not model.is_available %}title="Unavailable — cannot select"{% endif %}>
+              <input type="radio"
+                     name="{{ generation_form.model_config.html_name }}"
+                     value="{{ model.id }}"
+                     data-provider="ollama"
+                     {% if generation_form.model_config.value|stringformat:"s" == model.id|stringformat:"s" %}checked{% endif %}
+                     {% if not model.is_available and generation_form.model_config.value|stringformat:"s" != model.id|stringformat:"s" %}disabled{% endif %}>
+              <span class="tech-model-card__body">
+                <span class="tech-model-card__badge" aria-hidden="true">Active</span>
+                <span class="tech-model-card__name">{{ model.name }}</span>
+                <span class="tech-model-card__meta" data-status-label>{{ model.availability_label|default:"Local" }}</span>
+              </span>
+            </label>
+            {% empty %}
+            <p class="muted">No Ollama generation models configured.</p>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="tech-gen-group">
+          <h3 class="tech-gen-group__title">Cloud — GPT / Gemini</h3>
+          <div class="tech-model-grid" role="radiogroup" aria-label="API models">
+            {% for model in api_models %}
+            <label class="tech-model-card {% if model.is_available %}is-available{% else %}is-unavailable{% endif %}{% if not model.is_available and generation_form.model_config.value|stringformat:'s' != model.id|stringformat:'s' %} is-locked{% endif %}"
+                   data-model-card
+                   data-model-id="{{ model.id }}"
+                   {% if not model.is_available %}title="Unavailable — cannot select"{% endif %}>
+              <input type="radio"
+                     name="{{ generation_form.model_config.html_name }}"
+                     value="{{ model.id }}"
+                     data-provider="{{ model.provider|lower }}"
+                     {% if generation_form.model_config.value|stringformat:"s" == model.id|stringformat:"s" %}checked{% endif %}
+                     {% if not model.is_available and generation_form.model_config.value|stringformat:"s" != model.id|stringformat:"s" %}disabled{% endif %}>
+              <span class="tech-model-card__body">
+                <span class="tech-model-card__badge" aria-hidden="true">Active</span>
+                <span class="tech-model-card__name">{{ model.name }}</span>
+                <span class="tech-model-card__meta" data-status-label>{{ model.availability_label|default:model.provider }}</span>
+              </span>
+            </label>
+            {% empty %}
+            <p class="muted">No cloud generation models configured.</p>
+            {% endfor %}
+          </div>
+
+          <div class="tech-api-key-box" data-key-panel="openai" hidden>
+            <div class="tech-api-key-box__head">
+              <strong>OpenAI API key</strong>
+              <span class="muted">{% if openai_key_set %}Saved — leave blank to keep{% else %}Required for GPT{% endif %}</span>
+            </div>
+            {{ generation_form.openai_api_key_input }}
+            {% if generation_form.openai_api_key_input.errors %}
+            <span class="tech-field__error">{{ generation_form.openai_api_key_input.errors.0 }}</span>
+            {% endif %}
+            <label class="tech-key-clear">
+              {{ generation_form.clear_openai_api_key }}
+              Clear saved key
+            </label>
+          </div>
+
+          <div class="tech-api-key-box" data-key-panel="gemini" hidden>
+            <div class="tech-api-key-box__head">
+              <strong>Gemini API key</strong>
+              <span class="muted">{% if gemini_key_set %}Saved — leave blank to keep{% else %}Required for Gemini{% endif %}</span>
+            </div>
+            {{ generation_form.gemini_api_key_input }}
+            {% if generation_form.gemini_api_key_input.errors %}
+            <span class="tech-field__error">{{ generation_form.gemini_api_key_input.errors.0 }}</span>
+            {% endif %}
+            <label class="tech-key-clear">
+              {{ generation_form.clear_gemini_api_key }}
+              Clear saved key
+            </label>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -38,14 +121,18 @@
       <p class="muted" style="margin:0 0 0.75rem;">Models under 8B used when Think mode is on.</p>
       <div class="tech-model-grid tech-model-grid--check">
         {% for model in think_models %}
-        <label class="tech-model-card tech-model-card--check">
+        <label class="tech-model-card tech-model-card--check {% if model.is_available %}is-available{% else %}is-unavailable{% endif %}{% if not model.is_available and not model.is_council_member %} is-locked{% endif %}"
+               data-model-card
+               data-model-id="{{ model.id }}"
+               {% if not model.is_available %}title="Unavailable — cannot select"{% endif %}>
           <input type="checkbox"
                  name="council_models"
                  value="{{ model.id }}"
-                 {% if model.is_council_member %}checked{% endif %}>
+                 {% if model.is_council_member %}checked{% endif %}
+                 {% if not model.is_available and not model.is_council_member %}disabled{% endif %}>
           <span class="tech-model-card__body">
             <span class="tech-model-card__name">{{ model.name }}</span>
-            <span class="tech-model-card__meta">{{ model.provider }} · {{ model.llm_model_id }}</span>
+            <span class="tech-model-card__meta" data-status-label>{{ model.availability_label|default:model.provider }}</span>
           </span>
         </label>
         {% empty %}
@@ -58,7 +145,7 @@
       <h2 class="tech-card__title">Generation</h2>
       <div class="tech-grid">
         {% for field in generation_form %}
-        {% if field.name != "model_config" and field.name != "user_feedback_enabled" %}
+        {% if field.name != "model_config" and field.name != "user_feedback_enabled" and field.name != "openai_api_key_input" and field.name != "gemini_api_key_input" and field.name != "clear_openai_api_key" and field.name != "clear_gemini_api_key" %}
         <label class="tech-field{% if field.name == 'rag_top_k' or field.name == 'pyq_shots' %} tech-field--narrow{% endif %}">
           <span class="tech-field__label">{{ field.label }}</span>
           {{ field }}
@@ -102,4 +189,158 @@
     </div>
   </form>
 </div>
+<script>
+(function () {
+  function showModelError(msg) {
+    var el = document.querySelector("[data-model-error]");
+    if (!el) return;
+    if (msg) {
+      el.textContent = msg;
+      el.hidden = false;
+    } else {
+      el.textContent = "";
+      el.hidden = true;
+    }
+  }
+
+  function syncCardLock(card) {
+    var input = card.querySelector("input");
+    if (!input) return;
+    var unavailable = card.classList.contains("is-unavailable");
+    var locked = unavailable && !input.checked;
+    input.disabled = locked;
+    card.classList.toggle("is-locked", locked);
+    if (unavailable) {
+      card.setAttribute("title", "Unavailable — cannot select");
+    } else {
+      card.removeAttribute("title");
+    }
+  }
+
+  function syncAllLocks() {
+    document.querySelectorAll("[data-model-card]").forEach(syncCardLock);
+  }
+
+  function bindKeyPanels(root) {
+    if (!root || root.dataset.keyBound === "1") return;
+    root.dataset.keyBound = "1";
+    function sync() {
+      var checked = root.querySelector('input[type="radio"][data-provider]:checked');
+      var provider = checked ? (checked.getAttribute("data-provider") || "").toLowerCase() : "";
+      root.querySelectorAll("[data-key-panel]").forEach(function (panel) {
+        var kind = panel.getAttribute("data-key-panel");
+        var show = (kind === "openai" && provider === "openai") ||
+                   (kind === "gemini" && (provider === "gemini" || provider === "google"));
+        panel.hidden = !show;
+      });
+    }
+    root.querySelectorAll('input[type="radio"][data-provider]').forEach(function (r) {
+      r.addEventListener("change", function () {
+        sync();
+        syncAllLocks();
+        showModelError("");
+      });
+    });
+    sync();
+  }
+
+  function applyStatus(payload) {
+    var models = (payload && payload.models) || {};
+    document.querySelectorAll("[data-model-card][data-model-id]").forEach(function (card) {
+      var id = card.getAttribute("data-model-id");
+      var info = models[id];
+      if (!info) return;
+      card.classList.toggle("is-available", !!info.available);
+      card.classList.toggle("is-unavailable", !info.available);
+      var label = card.querySelector("[data-status-label]");
+      if (label && info.label) label.textContent = info.label;
+      syncCardLock(card);
+    });
+  }
+
+  function runStatusCheck(btn) {
+    if (!btn) return;
+    var url = btn.getAttribute("data-status-url");
+    if (!url) return;
+    var label = btn.querySelector("[data-status-refresh-label]");
+    btn.disabled = true;
+    btn.classList.add("is-spinning");
+    if (label) label.textContent = "Checking…";
+    fetch(url, { headers: { "Accept": "application/json" }, credentials: "same-origin" })
+      .then(function (r) {
+        if (!r.ok) throw new Error("status " + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        applyStatus(data);
+        if (label) label.textContent = "Refresh status";
+      })
+      .catch(function () {
+        if (label) label.textContent = "Retry refresh";
+      })
+      .finally(function () {
+        btn.disabled = false;
+        btn.classList.remove("is-spinning");
+      });
+  }
+
+  function bindRefresh(btn) {
+    if (!btn || btn.dataset.bound === "1") return;
+    btn.dataset.bound = "1";
+    btn.addEventListener("click", function () { runStatusCheck(btn); });
+  }
+
+  function bindUnavailableGuard() {
+    document.addEventListener("click", function (ev) {
+      var card = ev.target.closest("[data-model-card]");
+      if (!card || !card.classList.contains("is-unavailable")) return;
+      var input = card.querySelector("input");
+      if (input && input.checked && input.type === "checkbox") {
+        // Allow unchecking a previously selected unavailable Think model.
+        return;
+      }
+      if (input && input.checked && input.type === "radio") {
+        return;
+      }
+      ev.preventDefault();
+      ev.stopPropagation();
+      showModelError("Cannot select an unavailable (red) model. Choose a green model.");
+    }, true);
+
+    document.querySelectorAll("[data-model-card] input[type='checkbox']").forEach(function (cb) {
+      cb.addEventListener("change", function () {
+        var card = cb.closest("[data-model-card]");
+        if (!card) return;
+        if (cb.checked && card.classList.contains("is-unavailable")) {
+          cb.checked = false;
+          showModelError("Cannot select an unavailable (red) model. Choose a green model.");
+        }
+        syncCardLock(card);
+      });
+    });
+  }
+
+  function bindFormGuard(form) {
+    if (!form) return;
+    form.addEventListener("submit", function (ev) {
+      var checked = form.querySelector('[data-gen-models] input[type="radio"]:checked');
+      var card = checked && checked.closest("[data-model-card]");
+      if (card && card.classList.contains("is-unavailable")) {
+        ev.preventDefault();
+        showModelError("Cannot save an unavailable (red) model. Choose a green model.");
+        card.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    });
+  }
+
+  document.querySelectorAll("[data-gen-models]").forEach(bindKeyPanels);
+  bindUnavailableGuard();
+  bindFormGuard(document.querySelector(".tech-page__form"));
+  syncAllLocks();
+  var refreshBtns = document.querySelectorAll("[data-status-refresh]");
+  refreshBtns.forEach(bindRefresh);
+  // Recheck as soon as Technical settings opens.
+  if (refreshBtns.length) runStatusCheck(refreshBtns[0]);
+})();
+</script>
 {% endblock %}

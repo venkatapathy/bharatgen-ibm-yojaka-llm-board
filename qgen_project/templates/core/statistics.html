@@ -1,0 +1,356 @@
+{% extends "base.html" %}
+{% block title %}Statistics — QGen{% endblock %}
+{% block content %}
+<div class="stats-page">
+  <header class="stats-hero">
+    <div class="stats-hero__copy">
+      <div class="eyebrow">
+        {% if is_admin %}Platform overview{% else %}{{ org_name }}{% endif %}
+      </div>
+      <h1>Statistics</h1>
+      <p class="stats-hero__lede">
+        Track how questions move from generation to review —
+        approved, rejected, or still waiting.
+      </p>
+    </div>
+    <div class="stats-hero__meta">
+      <div class="stats-chip">{{ user_count }} user{{ user_count|pluralize }}</div>
+      <div class="stats-chip stats-chip--accent">{{ active_users }} active</div>
+      <div class="stats-chip">{{ totals.pct_pending }}% yet to verify</div>
+    </div>
+  </header>
+
+  <section class="stats-summary" aria-label="Totals">
+    <article class="stats-metric stats-metric--generated">
+      <div class="stats-metric__top">
+        <span class="stats-metric__icon" aria-hidden="true">◎</span>
+        <span class="stats-metric__label">Generated</span>
+      </div>
+      <strong class="stats-metric__value">{{ totals.generated }}</strong>
+      <span class="stats-metric__hint">All AI questions created</span>
+    </article>
+    <article class="stats-metric stats-metric--approved">
+      <div class="stats-metric__top">
+        <span class="stats-metric__icon" aria-hidden="true">✓</span>
+        <span class="stats-metric__label">Approved</span>
+      </div>
+      <strong class="stats-metric__value">{{ totals.approved }}</strong>
+      <span class="stats-metric__hint">{{ totals.approval_rate }}% of generated</span>
+    </article>
+    <article class="stats-metric stats-metric--rejected">
+      <div class="stats-metric__top">
+        <span class="stats-metric__icon" aria-hidden="true">✕</span>
+        <span class="stats-metric__label">Rejected</span>
+      </div>
+      <strong class="stats-metric__value">{{ totals.rejected }}</strong>
+      <span class="stats-metric__hint">Needs redo or discard</span>
+    </article>
+    <article class="stats-metric stats-metric--pending">
+      <div class="stats-metric__top">
+        <span class="stats-metric__icon" aria-hidden="true">◌</span>
+        <span class="stats-metric__label">Yet to verify</span>
+      </div>
+      <strong class="stats-metric__value">{{ totals.pending }}</strong>
+      <span class="stats-metric__hint">Awaiting human review</span>
+    </article>
+  </section>
+
+  {% if totals.generated %}
+  <section class="stats-mix" aria-label="Review mix">
+    <div class="stats-mix__label">
+      <span>Overall review mix</span>
+      <span>{{ totals.approved }} approved · {{ totals.rejected }} rejected · {{ totals.pending }} pending</span>
+    </div>
+    <div class="stats-bar" title="Approved / Rejected / Pending">
+      {% if totals.approved %}<span class="stats-bar__seg stats-bar__seg--approved" style="width: {% widthratio totals.approved totals.generated 100 %}%"></span>{% endif %}
+      {% if totals.rejected %}<span class="stats-bar__seg stats-bar__seg--rejected" style="width: {% widthratio totals.rejected totals.generated 100 %}%"></span>{% endif %}
+      {% if totals.pending %}<span class="stats-bar__seg stats-bar__seg--pending" style="width: {% widthratio totals.pending totals.generated 100 %}%"></span>{% endif %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if totals.generated %}
+  <section class="stats-list-card stats-content-mix" aria-label="Content mix">
+    <div class="stats-list-card__head">
+      <div>
+        <h2>Content mix</h2>
+        <p class="muted">How generated questions spread across type, Bloom level, marks, and language.</p>
+      </div>
+    </div>
+    <div class="stats-mix-grid">
+      <div class="stats-mix-panel">
+        <h3>Question type</h3>
+        {% for item in content_mix.by_type %}
+        <div class="stats-dist-row">
+          <div class="stats-dist-row__meta">
+            <span>{{ item.label }}</span>
+            <span>{{ item.count }} · {{ item.pct }}%</span>
+          </div>
+          <div class="stats-dist-track"><span style="width: {{ item.pct }}%"></span></div>
+        </div>
+        {% empty %}
+        <p class="muted">No type data yet.</p>
+        {% endfor %}
+      </div>
+      <div class="stats-mix-panel">
+        <h3>Bloom level</h3>
+        {% for item in content_mix.by_bloom %}
+        <div class="stats-dist-row">
+          <div class="stats-dist-row__meta">
+            <span>{{ item.label }}</span>
+            <span>{{ item.count }} · {{ item.pct }}%</span>
+          </div>
+          <div class="stats-dist-track"><span style="width: {{ item.pct }}%"></span></div>
+        </div>
+        {% empty %}
+        <p class="muted">No Bloom data yet.</p>
+        {% endfor %}
+      </div>
+      <div class="stats-mix-panel">
+        <h3>Marks</h3>
+        {% for item in content_mix.by_marks %}
+        <div class="stats-dist-row">
+          <div class="stats-dist-row__meta">
+            <span>{{ item.label }}</span>
+            <span>{{ item.count }} · {{ item.pct }}%</span>
+          </div>
+          <div class="stats-dist-track"><span style="width: {{ item.pct }}%"></span></div>
+        </div>
+        {% empty %}
+        <p class="muted">No marks data yet.</p>
+        {% endfor %}
+      </div>
+      <div class="stats-mix-panel">
+        <h3>Language</h3>
+        {% for item in content_mix.by_language %}
+        <div class="stats-dist-row">
+          <div class="stats-dist-row__meta">
+            <span>{{ item.label }}</span>
+            <span>{{ item.count }} · {{ item.pct }}%</span>
+          </div>
+          <div class="stats-dist-track"><span style="width: {{ item.pct }}%"></span></div>
+        </div>
+        {% empty %}
+        <p class="muted">No language data yet.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="stats-list-card stats-coverage" aria-label="PDF coverage">
+    <div class="stats-list-card__head">
+      <div>
+        <h2>PDF / unit coverage</h2>
+        <p class="muted">OCR-ready units vs units that already produced questions, by course.</p>
+      </div>
+      <div class="stats-chip">{{ coverage.coverage_pct }}% of OCR-ready units have generation</div>
+    </div>
+
+    <div class="stats-coverage-summary">
+      <article class="stats-cov-metric">
+        <span class="stats-mini__label">Total units</span>
+        <strong>{{ coverage.total_units }}</strong>
+      </article>
+      <article class="stats-cov-metric stats-cov-metric--ready">
+        <span class="stats-mini__label">OCR ready</span>
+        <strong>{{ coverage.ocr_ready }}</strong>
+      </article>
+      <article class="stats-cov-metric stats-cov-metric--done">
+        <span class="stats-mini__label">With generation</span>
+        <strong>{{ coverage.with_generation }}</strong>
+      </article>
+      <article class="stats-cov-metric stats-cov-metric--gap">
+        <span class="stats-mini__label">Never generated</span>
+        <strong>{{ coverage.never_generated }}</strong>
+      </article>
+      {% if coverage.indexing %}
+      <article class="stats-cov-metric">
+        <span class="stats-mini__label">Still indexing</span>
+        <strong>{{ coverage.indexing }}</strong>
+      </article>
+      {% endif %}
+    </div>
+
+    {% if coverage.courses %}
+    <div class="stats-course-split">
+      <div class="stats-course-panel">
+        <h3>Most approved questions</h3>
+        <div class="table-wrap">
+          <table class="table table--compact">
+            <thead>
+              <tr>
+                <th>Course</th>
+                <th>Approved</th>
+                <th>Generated</th>
+                <th>Units w/ gen</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for c in coverage.top_courses %}
+              <tr>
+                <td><strong>{{ c.course }}</strong></td>
+                <td>{{ c.approved }}</td>
+                <td>{{ c.generated }}</td>
+                <td>{{ c.with_generation }}/{{ c.ocr_ready }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="stats-course-panel">
+        <h3>Least approved / thinnest</h3>
+        <div class="table-wrap">
+          <table class="table table--compact">
+            <thead>
+              <tr>
+                <th>Course</th>
+                <th>Approved</th>
+                <th>Never gen</th>
+                <th>Coverage</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for c in coverage.thin_courses %}
+              <tr>
+                <td><strong>{{ c.course }}</strong></td>
+                <td>{{ c.approved }}</td>
+                <td>{{ c.never_generated }}</td>
+                <td>{{ c.coverage_pct }}%</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-course-all">
+      <h3>All courses</h3>
+      <div class="table-wrap">
+        <table class="table table--compact">
+          <thead>
+            <tr>
+              <th>Course</th>
+              <th>Units</th>
+              <th>OCR ready</th>
+              <th>With generation</th>
+              <th>Never generated</th>
+              <th>Generated Q</th>
+              <th>Approved Q</th>
+              <th>Unit coverage</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for c in coverage.courses %}
+            <tr{% if c.never_generated %} class="stats-course-row--gap"{% endif %}>
+              <td><strong>{{ c.course }}</strong></td>
+              <td>{{ c.units }}</td>
+              <td>{{ c.ocr_ready }}</td>
+              <td>{{ c.with_generation }}</td>
+              <td>{{ c.never_generated }}</td>
+              <td>{{ c.generated }}</td>
+              <td>{{ c.approved }}</td>
+              <td>
+                <div class="stats-dist-row__meta" style="margin-bottom:0.25rem;">
+                  <span class="muted">{{ c.coverage_pct }}%</span>
+                </div>
+                <div class="stats-dist-track stats-dist-track--sm"><span style="width: {{ c.coverage_pct }}%"></span></div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% else %}
+    <div class="stats-empty">
+      <strong>No PDF units yet</strong>
+      <p class="muted">Upload and index units to see coverage here.</p>
+    </div>
+    {% endif %}
+  </section>
+
+  <section class="stats-list-card">
+    <div class="stats-list-card__head">
+      <div>
+        <h2>Per-user breakdown</h2>
+        <p class="muted">AI-generated questions from each user’s runs, with review status.</p>
+      </div>
+      <div class="stats-legend" aria-hidden="true">
+        <span><i class="stats-dot stats-dot--approved"></i> Approved</span>
+        <span><i class="stats-dot stats-dot--rejected"></i> Rejected</span>
+        <span><i class="stats-dot stats-dot--pending"></i> Pending</span>
+      </div>
+    </div>
+
+    {% if rows %}
+    <div class="stats-user-list">
+      {% for row in rows %}
+      <article class="stats-user-row{% if row.generated == 0 %} is-idle{% endif %}">
+        <div class="stats-user-row__identity">
+          <div class="stats-avatar stats-avatar--{{ row.user.role }}">{{ row.initials }}</div>
+          <div class="stats-user">
+            <div class="stats-user__line">
+              <span class="stats-user__name">{{ row.user.username }}</span>
+              <span class="stats-role stats-role--{{ row.user.role }}">{{ row.user.get_role_display }}</span>
+            </div>
+            {% if row.user.get_full_name %}
+            <span class="stats-user__meta">{{ row.user.get_full_name }}</span>
+            {% endif %}
+            {% if is_admin %}
+            <span class="stats-user__meta">{{ row.user.organization.name|default:"No organisation" }}</span>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="stats-user-row__counts">
+          <div class="stats-mini">
+            <span class="stats-mini__label">Generated</span>
+            <strong>{{ row.generated }}</strong>
+          </div>
+          <div class="stats-mini stats-mini--approved">
+            <span class="stats-mini__label">Approved</span>
+            <strong>{{ row.approved }}</strong>
+          </div>
+          <div class="stats-mini stats-mini--rejected">
+            <span class="stats-mini__label">Rejected</span>
+            <strong>{{ row.rejected }}</strong>
+          </div>
+          <div class="stats-mini stats-mini--pending">
+            <span class="stats-mini__label">Yet to verify</span>
+            <strong>{{ row.pending }}</strong>
+          </div>
+        </div>
+
+        <div class="stats-user-row__progress">
+          {% if row.generated %}
+          <div class="stats-bar stats-bar--sm">
+            <span class="stats-bar__seg stats-bar__seg--approved" style="width: {{ row.pct_approved }}%"></span>
+            <span class="stats-bar__seg stats-bar__seg--rejected" style="width: {{ row.pct_rejected }}%"></span>
+            <span class="stats-bar__seg stats-bar__seg--pending" style="width: {{ row.pct_pending }}%"></span>
+          </div>
+          <div class="stats-user-row__rate">
+            <span class="stats-user-row__rate-ok">{{ row.pct_approved }}% approved</span>
+            {% if row.pct_rejected %}
+            <span class="stats-user-row__rate-bad">{{ row.pct_rejected }}% rejected</span>
+            {% endif %}
+            <span class="stats-user-row__rate-wait">{{ row.pct_pending }}% pending</span>
+          </div>
+          {% else %}
+          <div class="stats-user-row__empty">No questions generated yet</div>
+          {% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="stats-empty">
+      <strong>No users to show</strong>
+      <p class="muted">When people generate questions, their review stats will appear here.</p>
+    </div>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

@@ -2,10 +2,11 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
-from django.core.paginator import Paginator
-from django.http import JsonResponse
+from django.http import FileResponse, Http404, JsonResponse
 from django.shortcuts import redirect, render
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
+from django.views.decorators.clickjacking import xframe_options_exempt
+from django.views.decorators.http import require_POST
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
 from apps.core.models import ModelConfig
@@ -19,7 +20,7 @@ from apps.core.storage import (
 )
 
 from .forms import PYQModuleUploadForm, QuestionEditForm
-from .models import PYQModule, Question
+from .models import PYQModule, Question, QuestionType, normalize_question_type
 
 
 class PYQModuleListView(LoginRequiredMixin, ListView):
@@ -38,6 +39,14 @@ class PYQModuleListView(LoginRequiredMixin, ListView):
         browse = browse_list_context(
             viewer, organization_id=org_id, user_id=user_id
         )
+        if browse.get("browse_all"):
+            if getattr(viewer, "organization_id", None):
+                return owned_pyq_modules(viewer)
+            from apps.core.models import User
+            return PYQModule.objects.filter(
+                created_by__role=User.Role.USER,
+                created_by__organization_id=org_id,
+            ).select_related("created_by", "organization")
         if browse["needs_filter"] and browse["target"] is None:
             return PYQModule.objects.none()
         if browse["needs_filter"]:
@@ -99,8 +108,13 @@ class PYQModuleDetailView(SoftMissingMixin, LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        paginator = Paginator(self.object.questions.all(), 25)
-        ctx['questions'] = paginator.get_page(self.request.GET.get("page"))
+        ctx['questions'] = self.object.questions.all().order_by('id')
+        ctx['pdf_url'] = (
+            reverse('pyq_module:file', kwargs={'pk': self.object.pk})
+            if self.object.source_file
+            else ''
+        )
+        ctx['question_type_choices'] = QuestionType.choices
         return ctx
 
 
@@ -173,6 +187,67 @@ def _get_owned_pyq_or_redirect(request, pk):
         messages.info(request, "That PYQ paper is no longer available.")
         return None
     return mod
+
+
+@login_required
+@xframe_options_exempt
+def pyq_module_file(request, pk):
+    """Stream the source PDF inline for the split viewer."""
+    mod = owned_pyq_modules(request.user).filter(pk=pk).first()
+    if mod is None or not mod.source_file:
+        raise Http404("PDF not found")
+    try:
+        fh = mod.source_file.open("rb")
+    except FileNotFoundError as exc:
+        raise Http404("PDF file missing on disk") from exc
+    filename = mod.original_filename or mod.source_file.name.split("/")[-1] or "document.pdf"
+    safe_name = filename.replace('"', "").replace("\n", " ")[:180]
+    response = FileResponse(fh, content_type="application/pdf")
+    response["Content-Disposition"] = f'inline; filename="{safe_name}"'
+    response["Accept-Ranges"] = "bytes"
+    response["Cache-Control"] = "private, max-age=120"
+    return response
+
+
+@login_required
+@require_POST
+def question_inline_save(request, pk):
+    """Save question_type + question_text from the split detail pane."""
+    q = owned_pyq_questions(request.user).filter(pk=pk).first()
+    if q is None:
+        if request.headers.get("X-Requested-With") == "XMLHttpRequest":
+            return JsonResponse({"ok": False, "error": "Question not found"}, status=404)
+        messages.info(request, "That question is no longer available.")
+        return redirect("pyq_module:list")
+
+    text = (request.POST.get("question_text") or "").strip()
+    qtype = normalize_question_type(
+        request.POST.get("question_type") or "",
+        question_text=text,
+    )
+    errors = []
+    if not text:
+        errors.append("Question text is required.")
+
+    if errors:
+        if request.headers.get("X-Requested-With") == "XMLHttpRequest":
+            return JsonResponse({"ok": False, "error": " ".join(errors)}, status=400)
+        messages.error(request, " ".join(errors))
+        return redirect("pyq_module:detail", pk=q.pyq_module_id)
+
+    q.question_type = qtype
+    q.question_text = text
+    q.save(update_fields=["question_type", "question_text"])
+
+    if request.headers.get("X-Requested-With") == "XMLHttpRequest":
+        return JsonResponse({
+            "ok": True,
+            "id": q.id,
+            "question_type": q.question_type,
+            "question_text": q.question_text,
+        })
+    messages.success(request, "Question saved.")
+    return redirect("pyq_module:detail", pk=q.pyq_module_id)
 
 
 @login_required

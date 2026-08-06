@@ -30,6 +30,10 @@
   {% endif %}
 
   {% if is_org_admin or is_admin %}
+  <a class="card" href="{% url 'core:control_statistics' %}">
+    <h2>Statistics</h2>
+    <p>Questions generated, approved, rejected, and yet to verify — by user</p>
+  </a>
   {% if is_org_admin %}
   <a class="card" href="{% url 'core:control_users' %}">
     <h2>User management</h2>

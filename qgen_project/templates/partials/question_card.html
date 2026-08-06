@@ -1,4 +1,4 @@
-<article class="question-card card{% if question.user_decision == 'rejected' %} question-card--rejected{% endif %}">
+<article id="q-{{ question.id }}" class="question-card card{% if question.user_decision == 'rejected' %} question-card--rejected{% elif question.user_decision == 'approved' %} question-card--approved{% endif %}">
   <div class="question-meta">
     <span class="badge">{{ question.question_type }}</span>
     <span class="badge badge-muted">{{ question.bloom }}</span>
@@ -6,6 +6,10 @@
     {% if question.topic %}<span class="badge badge-muted">{{ question.topic }}</span>{% endif %}
     {% if question.user_decision == 'rejected' %}
     <span class="badge status-error">Rejected</span>
+    {% elif question.user_decision == 'approved' %}
+    <span class="badge badge-success">Approved</span>
+    {% elif question.user_decision == 'pending' %}
+    <span class="badge badge-muted">Pending review</span>
     {% endif %}
     {% with council=question.rubrics.council %}
     {% if show_council_models and council.enabled %}
@@ -117,7 +121,38 @@
   </details>
   {% endif %}
 
-  {% if question.is_generated and question.user_decision and question.user_decision != 'pending' %}
+  {% if allow_decision_edit and question.is_generated %}
+  <form method="post"
+        action="{% url 'question_generation:question_decision' question.id %}"
+        class="question-decision"
+        x-data="{ open: false }">
+    {% csrf_token %}
+    <div class="question-decision__summary">
+      <span class="muted">
+        Your decision:
+        <strong>{{ question.get_user_decision_display|default:"—" }}</strong>
+        {% if question.user_feedback %} — {{ question.user_feedback }}{% endif %}
+      </span>
+      <button type="button" class="btn btn-sm" @click="open = !open"
+              x-text="open ? 'Cancel' : 'Change decision'"></button>
+    </div>
+    <div class="question-decision__editor" x-show="open" x-cloak>
+      <label class="form-field" style="margin:0.6rem 0 0.4rem;">
+        <span class="field-label">Comment (required to reject)</span>
+        <textarea name="feedback" class="form-control" rows="2"
+                  placeholder="Optional for approve; required if rejecting.">{{ question.user_feedback }}</textarea>
+      </label>
+      <div class="btn-row" style="margin-top:0.5rem;">
+        <button type="submit" name="decision" value="approved" class="btn btn-sm btn-primary">
+          {% if question.user_decision == 'approved' %}Keep approved{% else %}Approve{% endif %}
+        </button>
+        <button type="submit" name="decision" value="rejected" class="btn btn-sm btn-danger">
+          {% if question.user_decision == 'rejected' %}Keep rejected{% else %}Reject{% endif %}
+        </button>
+      </div>
+    </div>
+  </form>
+  {% elif question.is_generated and question.user_decision and question.user_decision != 'pending' %}
   <p class="muted" style="margin-top:0.65rem;">
     Your decision:
     <strong>{{ question.get_user_decision_display }}</strong>

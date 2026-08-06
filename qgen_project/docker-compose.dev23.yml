@@ -53,6 +53,22 @@ services:
       - shared
     restart: unless-stopped
 
+  celery_beat:
+    image: qgen_project-celery_worker
+    command: celery -A qgen beat -l info
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    environment:
+      DB_HOST: db
+      REDIS_URL: redis://redis:6379/1
+      DJANGO_SETTINGS_MODULE: qgen.settings.development
+    networks:
+      - default
+      - shared
+    restart: unless-stopped
+
 networks:
   shared:
     external: true

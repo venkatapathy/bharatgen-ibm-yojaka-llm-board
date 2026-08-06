@@ -15,4 +15,5 @@ urlpatterns = [
     path('<int:pk>/regenerate/', views.batch_run_regenerate,         name='regenerate'),
     path('question/<int:pk>/edit/', views.GeneratedQuestionUpdateView.as_view(), name='question_edit'),
     path('question/<int:pk>/delete/', views.GeneratedQuestionDeleteView.as_view(), name='question_delete'),
+    path('question/<int:pk>/decision/', views.generated_question_decision, name='question_decision'),
 ]

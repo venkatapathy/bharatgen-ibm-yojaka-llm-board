@@ -67,6 +67,16 @@ class GenerationSettingsAdmin(admin.ModelAdmin):
             {"fields": ("prompt", "hindi_prompt", "model_config", "rag_top_k", "pyq_shots")},
         ),
         (
+            "Cloud API keys",
+            {
+                "description": (
+                    "Prefer Control → Technical settings. Keys are used when the "
+                    "selected generation model is OpenAI (GPT) or Gemini."
+                ),
+                "fields": ("openai_api_key", "gemini_api_key"),
+            },
+        ),
+        (
             "User feedback",
             {
                 "description": (

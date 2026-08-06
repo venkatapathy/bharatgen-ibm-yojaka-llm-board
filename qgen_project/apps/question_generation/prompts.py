@@ -44,50 +44,35 @@ HARD RULES (no PDF reference material):
 3. Never write questions of the form "What is characteristic of '<label>'?" for opaque labels.
 """
 
-HINDI_SYSTEM_PROMPT = """\
-You are an expert IGNOU BA Hindi exam question setter following Bloom's Taxonomy.
-Generate exactly {{ count }} questions of type {{ question_type }} at
-Bloom's level {{ bloom }}. Each question must be worth {{ marks }} marks.
-Write ALL question text, options, and answers in Hindi (Devanagari script).
-{% if context_chunks %}
-IMPORTANT: Base every question ONLY on the reference material below.
-Questions must be answerable from that material alone.
-Do NOT mention or invent facts about any batch/run label.
+# App codes → wording expected by the IGNOU unit prompt (prompt.txt).
+IGNOU_TYPE_LABELS = {
+    "RTC": "reference-to-context",
+    "SHORT": "short note",
+    "LONG": "long answer",
+}
+IGNOU_BLOOM_LABELS = {
+    "remember": "Remember",
+    "understand": "Understand",
+    "apply": "Apply",
+    "analyse": "Analyze",
+    "analyze": "Analyze",
+    "evaluate": "Evaluate",
+    "create": "Create",
+}
+IGNOU_LANGUAGE_LABELS = {
+    "en": "English",
+    "hi": "Hindi",
+}
 
-Reference material:
-{{ context_chunks }}
-{% else %}
-Generate questions for the subject area: {{ topic }}.
-If the topic is not a clear real academic subject, return [].
-{% endif %}
-{% if pyq_examples %}
-Match the difficulty, style, and format of these example questions (use new content, not copies):
-{{ pyq_examples }}
-{% endif %}
-Return a JSON array with EXACTLY {{ count }} elements. Each element has:
-  question_text, reference_answer, rubrics.
-For MCQ questions you MUST also include:
-  options: an array of exactly 4 objects, each with "label" (A/B/C/D) and "text".
-  reference_answer: the correct option label (e.g. "B") or full option text.
-Do not prefix question_text with "[MCQ]".
-The array length must equal {{ count }} — no more, no less.
-JSON keys and enum values (question_type, bloom) must remain in English.
-"""
+DEFAULT_ANSWER_LENGTHS = {
+    "RTC": "100-150 words",
+    "SHORT": "100-250 words",
+    "LONG": "250-600 words",
+}
 
-HINDI_USER_PROMPT = """\
-{% if context_chunks %}
-संदर्भ सामग्री से {{ count }} {{ question_type }} प्रश्न बनाएँ।
-Bloom स्तर: {{ bloom }}, प्रत्येक प्रश्न {{ marks }} अंक।
-बैच नाम का उल्लेख न करें।
-{% else %}
-"{{ topic }}" पर {{ count }} {{ question_type }} प्रश्न बनाएँ।
-Bloom स्तर: {{ bloom }}, प्रत्येक प्रश्न {{ marks }} अंक।
-{% endif %}
-सभी प्रश्न और उत्तर हिंदी (देवनागरी) में लिखें।
-{% if question_type == 'MCQ' %}
-प्रत्येक MCQ में ठीक 4 विकल्प (A, B, C, D) और स्पष्ट सही उत्तर हो।
-{% endif %}
-"""
+
+def default_answer_length(question_type: str) -> str:
+    return DEFAULT_ANSWER_LENGTHS.get(str(question_type or "").upper(), "100-250 words")
 
 
 def question_mentions_topic(question: dict, topic: str) -> bool:
@@ -110,21 +95,44 @@ def question_mentions_topic(question: dict, topic: str) -> bool:
     return needle in blob
 
 
+def _is_ignou_prompt(prompt) -> bool:
+    user = getattr(prompt, "user_prompt", "") or ""
+    system = getattr(prompt, "system_prompt", "") or ""
+    return (
+        "complete_unit_content" in user
+        or ('"question"' in system and "citation" in system)
+    )
+
+
 def render_prompt_context(*, run, item, context_chunks, pyq_examples, council_feedback=""):
     prompt = run.prompt
     language = getattr(run, "language", "en") or "en"
     has_rag = bool((context_chunks or "").strip())
-    # When RAG is present, do not feed the batch topic into the template — models
-    # otherwise invent "subject area '<topic>'" questions about nonsense labels.
-    topic_for_prompt = "" if has_rag else (run.topic or "")
+    unit_content = context_chunks or ""
+    ignou_style = _is_ignou_prompt(prompt)
+
+    qtype = item.question_type
+    bloom = item.bloom
+    lang_for_prompt = language
+    answer_length = (getattr(item, "answer_length", None) or "").strip()
+    if not answer_length:
+        answer_length = default_answer_length(item.question_type)
+    if ignou_style:
+        qtype = IGNOU_TYPE_LABELS.get(str(qtype).upper(), qtype)
+        bloom = IGNOU_BLOOM_LABELS.get(str(bloom).lower(), bloom)
+        lang_for_prompt = IGNOU_LANGUAGE_LABELS.get(language, language)
+
     values = {
         "count": item.count,
-        "question_type": item.question_type,
-        "bloom": item.bloom,
+        "question_type": qtype,
+        "bloom": bloom,
         "marks": item.marks,
-        "topic": topic_for_prompt,
-        "language": language,
-        "context_chunks": context_chunks,
+        "topic": "",  # Not used by the IGNOU unit prompt.
+        "language": lang_for_prompt,
+        "answer_length": answer_length,
+        "context_chunks": unit_content,
+        # Alias used by the IGNOU unit-content prompt (prompt.txt).
+        "complete_unit_content": unit_content,
         "pyq_examples": pyq_examples,
         "topic_grounding": getattr(prompt, "topic_grounding", ""),
     }
@@ -132,31 +140,34 @@ def render_prompt_context(*, run, item, context_chunks, pyq_examples, council_fe
     user_prompt = JinjaTemplate(prompt.user_prompt).render(**values)
 
     if has_rag:
-        system_prompt = system_prompt.rstrip() + "\n" + RAG_GROUNDING_RULES.strip()
-        user_prompt += (
-            "\nGenerate from the reference material only. "
-            "Do not mention any batch/run name in the questions."
-        )
+        if not ignou_style:
+            system_prompt = system_prompt.rstrip() + "\n" + RAG_GROUNDING_RULES.strip()
+            user_prompt += (
+                "\nGenerate from the reference material only. "
+                "Do not mention any batch/run name in the questions."
+            )
     else:
         system_prompt = system_prompt.rstrip() + "\n" + NO_CONTEXT_RULES.strip()
 
-    if language == "hi":
+    if language == "hi" and not ignou_style:
         system_prompt = system_prompt.rstrip() + "\n" + HINDI_LANGUAGE_HINT.strip()
         user_prompt += (
             "\nसभी प्रश्न और उत्तर हिंदी (देवनागरी) में लिखें। "
             "JSON keys अंग्रेज़ी में रखें।"
         )
 
-    if item.question_type == "MCQ":
-        user_prompt += (
-            "\nEach MCQ must have exactly 4 labelled options (A, B, C, D) "
-            "and set reference_answer to the correct option letter (A/B/C/D)."
-        )
-    else:
-        user_prompt += (
-            "\nFor every question, include a complete correct answer in reference_answer "
-            "(model answer / key points / exact value)."
-        )
+    if not ignou_style:
+        if item.question_type == "MCQ":
+            user_prompt += (
+                "\nEach MCQ must have exactly 4 labelled options (A, B, C, D) "
+                "and set reference_answer to the correct option letter (A/B/C/D)."
+            )
+        else:
+            user_prompt += (
+                "\nFor every question, include a complete correct answer in reference_answer "
+                "(model answer / key points / exact value)."
+            )
+        user_prompt += "\n" + ANSWER_JSON_HINT.strip()
 
     if council_feedback:
         user_prompt += (
@@ -165,5 +176,4 @@ def render_prompt_context(*, run, item, context_chunks, pyq_examples, council_fe
             f"{council_feedback.strip()}"
         )
 
-    user_prompt += "\n" + ANSWER_JSON_HINT.strip()
     return system_prompt, user_prompt

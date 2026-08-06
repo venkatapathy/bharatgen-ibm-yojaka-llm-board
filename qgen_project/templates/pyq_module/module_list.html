@@ -16,7 +16,7 @@
     {% elif needs_user_filter %}
     <p class="muted">Select {% if filter_orgs %}an organisation and {% endif %}a user to view PYQ modules — or choose <strong>My PYQs</strong> for your own uploads.</p>
     {% else %}
-    <p class="muted">Exam papers may include MCQ, short answer, long answer, and other formats.</p>
+    <p class="muted">IGNOU-style papers: Reference to Context, Short Answer, and Long Answer.</p>
     {% endif %}
   </div>
   <a class="btn btn-primary" href="{% url 'pyq_module:upload' %}">Upload Paper</a>

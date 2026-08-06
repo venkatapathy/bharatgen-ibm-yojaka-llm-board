@@ -111,6 +111,13 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TIMEZONE = TIME_ZONE
+CELERY_BEAT_SCHEDULE = {
+    # Workers can die after writing results but before flipping status.
+    'reconcile-stuck-jobs': {
+        'task': 'apps.core.tasks.reconcile_stuck_jobs',
+        'schedule': 120.0,  # every 2 minutes
+    },
+}
 
 # Django REST Framework
 REST_FRAMEWORK = {

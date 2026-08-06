@@ -19,6 +19,89 @@
   </div>
 </div>
 
+{% if review_split_layout %}
+<div class="run-review-split"
+     x-data="runPdfViewer({ pdfUrl: '{{ run_pdf_url|escapejs }}' })"
+     x-init="loadPdf()">
+  <section class="run-review-split__pdf pdf-ocr-pane">
+    <header class="pdf-ocr-pane__head">
+      <strong>Unit PDF</strong>
+      {% if run_pdf %}
+      <a class="muted" style="font-size:0.82rem; text-decoration:underline;"
+         href="{% url 'pdf_module:detail' run_pdf.pk %}"
+         title="Open PDF context with OCR text">{{ run_pdf.name|truncatechars:48 }}</a>
+      {% endif %}
+      <span class="muted" x-text="pdfStatus" x-show="pdfStatus"></span>
+      <span class="pdf-ocr-pane__actions">
+        {% if run_pdf %}
+        <a class="btn btn-sm" href="{% url 'pdf_module:detail' run_pdf.pk %}">OCR / Context</a>
+        {% endif %}
+        {% if run_pdf_url %}
+        <a class="btn btn-sm" :href="openUrl || '{{ run_pdf_url }}'" target="_blank" rel="noopener">Open PDF</a>
+        {% endif %}
+      </span>
+    </header>
+    <div class="pdf-ocr-pane__body">
+      {% if run_pdf_url %}
+      <iframe class="pdf-ocr-frame" x-ref="pdfFrame" title="Unit PDF" x-show="!pdfError"></iframe>
+      <p class="muted" style="padding:1.5rem;" x-show="pdfError" x-cloak x-text="pdfError"></p>
+      {% else %}
+      <p class="muted" style="padding:1.5rem;">No PDF unit linked to this run.</p>
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="run-review-split__questions">
+    {% include "partials/question_card.html" with question=question show_council_models=show_council_models hide_actions=True show_dataset_meta=show_dataset_meta %}
+
+    <form method="post" class="form-section review-form" style="margin-top:1rem;">
+      {% csrf_token %}
+      <label class="form-field">
+        <span class="field-label">Feedback comment (required if you reject)</span>
+        <textarea name="feedback" class="form-control" rows="3" placeholder="Why approve or reject? Notes are saved for the research dataset."></textarea>
+      </label>
+      <div class="btn-row" style="margin-top:1rem;">
+        <button type="submit" name="decision" value="approved" class="btn btn-primary btn-lg">Approve</button>
+        <button type="submit" name="decision" value="rejected" class="btn btn-danger btn-lg">Reject</button>
+      </div>
+    </form>
+  </section>
+</div>
+
+<script>
+function runPdfViewer(opts) {
+  const pdfUrl = (opts && opts.pdfUrl) ? String(opts.pdfUrl) : '';
+  return {
+    pdfStatus: pdfUrl ? 'Loading PDF…' : '',
+    pdfError: '',
+    openUrl: '',
+    async loadPdf() {
+      if (!pdfUrl || !this.$refs.pdfFrame) return;
+      try {
+        const res = await fetch(pdfUrl, {
+          credentials: 'same-origin',
+          headers: { 'ngrok-skip-browser-warning': 'true' },
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const blob = await res.blob();
+        const type = blob.type || 'application/pdf';
+        const pdfBlob = type.includes('pdf') ? blob : new Blob([blob], { type: 'application/pdf' });
+        const url = URL.createObjectURL(pdfBlob);
+        this.openUrl = url;
+        this.$refs.pdfFrame.src = url + '#toolbar=1';
+        this.pdfStatus = '';
+        this.pdfError = '';
+      } catch (err) {
+        console.error(err);
+        this.pdfStatus = '';
+        this.pdfError = 'Could not load PDF preview. Try “Open PDF”.';
+        this.$refs.pdfFrame.src = pdfUrl + '#toolbar=1';
+      }
+    },
+  };
+}
+</script>
+{% else %}
 {% include "partials/question_card.html" with question=question show_council_models=show_council_models hide_actions=True show_dataset_meta=show_dataset_meta %}
 
 <form method="post" class="form-section review-form">
@@ -32,4 +115,5 @@
     <button type="submit" name="decision" value="rejected" class="btn btn-danger btn-lg">Reject</button>
   </div>
 </form>
+{% endif %}
 {% endblock %}

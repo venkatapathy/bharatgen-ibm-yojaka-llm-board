@@ -10,7 +10,7 @@ import zipfile
 
 from apps.pdf_module.chunkers import (
     clean_page_text,
-    clean_unlimited_ocr_text,
+    collapse_ocr_repetition,
     is_indexable_chunk,
     ocr_page_text,
 )
@@ -67,6 +67,7 @@ def extract_full_ocr_text(pdf_path: str, *, force_vision: bool = False) -> str:
             if not text.strip():
                 text = native
 
+        text = collapse_ocr_repetition(text or "")
         if text and text.strip():
             blocks.append(f"===== PAGE {page_number} =====\n{text.strip()}")
     return "\n\n".join(blocks).strip()
@@ -97,6 +98,35 @@ def rebuild_context_ocr(ctx: PDFContext, *, force_vision: bool = False) -> int:
         return 0
 
     text = "\n\n".join(p for p in parts if p).strip()
+    ctx.ocr_text = text
+    ctx.save(update_fields=["ocr_text"])
+    return len(text)
+
+
+def clean_stored_ocr_text(ctx: PDFContext) -> int:
+    """Re-clean existing ocr_text (collapse loops / strip noise) without re-OCR."""
+    from apps.pdf_module.chunkers import sanitize_ocr_text
+
+    raw = (ctx.ocr_text or "").strip()
+    if not raw:
+        return 0
+    # Preserve page separators; clean each page body independently.
+    parts: list[str] = []
+    for block in re.split(r"(?m)(?=^===== PAGE \d+ =====\s*$)", raw):
+        block = block.strip()
+        if not block:
+            continue
+        m = re.match(r"(===== PAGE \d+ =====)\s*(.*)", block, re.DOTALL)
+        if m:
+            header, body = m.group(1), m.group(2)
+            cleaned = sanitize_ocr_text(body)
+            if cleaned.strip():
+                parts.append(f"{header}\n{cleaned.strip()}")
+        else:
+            cleaned = sanitize_ocr_text(block)
+            if cleaned.strip():
+                parts.append(cleaned.strip())
+    text = "\n\n".join(parts).strip()
     ctx.ocr_text = text
     ctx.save(update_fields=["ocr_text"])
     return len(text)

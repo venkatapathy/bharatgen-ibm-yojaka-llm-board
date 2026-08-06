@@ -28,7 +28,104 @@ _HEADER_LINE = re.compile(
     r"bafnjk\s+xka/kh|ekufodh\s+fo\|kihB|"
     r"मानविकी\s+विद्यापीठ|इग्नू|इन्दिरा\s+गाँधी).*$"
 )
+# IGNOU page watermark (often OCR'd as one line or split across two).
+_WATERMARK_LINE = re.compile(
+    r"(?im)^\s*(?:"
+    r"ignou|"
+    r"the\s+people'?s(?:\s+university)?|"
+    r"people'?s\s+university|"
+    r"opple'?s|"
+    r"opule'?s|"
+    r"prasty|"
+    r"rsnity"
+    r")\s*$"
+)
+_WATERMARK_INLINE = re.compile(
+    r"(?is)\b(?:ignou\s+)?the\s+people'?s\s+university\b"
+)
+_WATERMARK_MULTILINE = re.compile(
+    r"(?im)^\s*the\s+people'?s\s*\n+\s*university\s*$"
+)
+_WATERMARK_PAIR_PEOPLE = re.compile(r"(?i)^\s*the\s+people'?s\s*$")
+_WATERMARK_PAIR_UNIV = re.compile(r"(?i)^\s*university\s*$")
+# Unlimited-OCR sometimes invents Chinese/Japanese financial boilerplate.
+_CJK_HALLUCINATION = re.compile(r"[\u4e00-\u9fff]{6,}")
+_OCR_INSTR_LEAK = re.compile(
+    r"(?im)^\s*(?:maintain original headings.*|"
+    r"Extract all text from this document.*|"
+    r"Do not repeat any sentence.*|"
+    r"If a region has no text.*)\s*$"
+)
 _SENTENCE_SPLIT = re.compile(r"(?<=[.!?।])\s+")
+
+
+def strip_ignou_watermark(text: str) -> str:
+    """Remove IGNOU 'THE PEOPLE'S UNIVERSITY' watermark lines/phrases."""
+    if not text:
+        return ""
+    text = _WATERMARK_MULTILINE.sub("", text)
+    text = _WATERMARK_INLINE.sub("", text)
+    lines = text.splitlines()
+    out: list[str] = []
+    i = 0
+    while i < len(lines):
+        # Split watermark: "THE PEOPLE'S" (+ blank lines) + "UNIVERSITY"
+        if _WATERMARK_PAIR_PEOPLE.match(lines[i]):
+            j = i + 1
+            while j < len(lines) and not lines[j].strip():
+                j += 1
+            if j < len(lines) and _WATERMARK_PAIR_UNIV.match(lines[j]):
+                i = j + 1
+                continue
+            # lone THE PEOPLE'S watermark line
+            i += 1
+            continue
+        if _WATERMARK_LINE.match(lines[i]):
+            i += 1
+            continue
+        out.append(lines[i])
+        i += 1
+    return "\n".join(out)
+
+
+def strip_ocr_hallucinations(text: str) -> str:
+    """Drop CJK hallucination lines and OCR instruction leaks."""
+    if not text:
+        return ""
+    out: list[str] = []
+    for line in text.splitlines():
+        if _OCR_INSTR_LEAK.match(line):
+            continue
+        if _CJK_HALLUCINATION.search(line):
+            # Keep line only if it also has substantial Devanagari/Latin content.
+            latin_dev = re.sub(r"[\u4e00-\u9fff]+", "", line)
+            if len(re.findall(r"[\w\u0900-\u097F]", latin_dev, re.UNICODE)) < 20:
+                continue
+        out.append(line)
+    return "\n".join(out)
+
+
+def sanitize_ocr_text(text: str) -> str:
+    """Full light cleanup for stored or freshly extracted OCR."""
+    if not text:
+        return ""
+    text = _UOCR_PAGE_NUMBER_TAG.sub("", text)
+    text = strip_ignou_watermark(text)
+    text = strip_ocr_hallucinations(text)
+    # Drop leftover meta chatter lines.
+    kept: list[str] = []
+    for line in text.splitlines():
+        if _UOCR_NOISE.match(line):
+            continue
+        if re.search(r"(?i)empty string|\(no text\)|Ground Truth image|semantically intended", line):
+            if len(line.split()) < 25:
+                continue
+        kept.append(line)
+    text = "\n".join(kept)
+    text = collapse_ocr_repetition(text)
+    text = strip_ignou_watermark(text)
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    return text.strip()
 
 
 def clean_page_text(text: str, *, force_legacy: bool = False) -> str:
@@ -38,9 +135,11 @@ def clean_page_text(text: str, *, force_legacy: bool = False) -> str:
     text = repair_shifted_latin_text(text)
     text = _DOTS.sub(" ", text)
     text = _HEADER_LINE.sub("", text)
+    text = strip_ignou_watermark(text)
     text = _PAGE_NUM_PREFIX.sub("", text, count=1)
     text = normalize_legacy_hindi(text, force=force_legacy)
     text = _HEADER_LINE.sub("", text)
+    text = sanitize_ocr_text(text)
     text = re.sub(r"[ \t]+", " ", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text.strip()
@@ -66,7 +165,17 @@ _UOCR_FOOTER = re.compile(r"^\s*footer\b", re.IGNORECASE)
 _UOCR_NOISE = re.compile(
     r"^\s*(Do not use|Special formatting rules|The content provided|"
     r"If no valid OCR|If there is no actual text|Therefore,?\s+the corrected OCR|"
-    r"The OCR should output|No text detected)\b",
+    r"The OCR should output|No text detected|"
+    r"The correct OCR output is an empty string|"
+    r"The OCR result is an empty string|"
+    r"No OCR output is generated|"
+    r"For no OCR processing|"
+    r"Convert visual bullets|"
+    r"\(no text\)|"
+    r"\(No text\)|"
+    r"The quick brown fox jumps over the lazy dog|"
+    r"The Ground Truth image displays|"
+    r"none are semantically intended)\b",
     re.IGNORECASE,
 )
 _UOCR_BOX = re.compile(
@@ -78,9 +187,178 @@ _UOCR_META_INLINE = re.compile(
     r"|If no valid OCR output is provided for any content\.?\s*"
     r"|If there is no actual text content in the source image[^.]*\.\s*"
     r"|Therefore,?\s+the corrected OCR text is:\s*"
-    r"|The OCR should output nothing\.?\s*",
+    r"|The OCR should output nothing\.?\s*"
+    r"|The correct OCR output is an empty string\.?\s*"
+    r"|The OCR result is an empty string\.?\s*"
+    r"|No OCR output is generated\.?\s*"
+    r"|For no OCR processing\.?\s*"
+    r"|Convert visual bullets[^\n]*\n?"
+    r"|The quick brown fox jumps over the lazy dog\.?\s*"
+    r"|consistent with the Ground Truth\.?\s*"
+    r"|The Ground Truth image displays[^\n]*\n?"
+    r"|\[Empty String\]\s*"
+    r"|hallucinates text where none exists[^\n]*\n?"
+    r"|The OCR should have[^\n]*\n?"
 )
 _UOCR_FENCE = re.compile(r"```(?:text)?|```")
+_UOCR_PAGE_NUMBER_TAG = re.compile(
+    r"(?i)Home\s*page_number\s*\[[^\]]*\]\s*\d*"
+    r"|page_number\s*\[[^\]]*\]\s*\d*"
+)
+# Running headers / side-panel repeats common in IGNOU scans.
+_UOCR_RUNNING_HEADER = re.compile(
+    r"(?im)^\s*(?:Abhijnana\s+Shakuntala|Kalidada|Kalidasa)\s*[:.]?\s*"
+    r"(?:Character Analysis(?:\s+and|\s*&\s*)Critical Perspectives)?\s*$"
+    r"|^\s*Character Analysis and\s*$"
+    r"|^\s*Critical Perspectives\s*$"
+    r"|^\s*(?:OPPLE'?S|PEOPLE'?S|PRASTY|OPULE'?S|RSNITY)\s*$"
+)
+
+
+def collapse_ocr_repetition(text: str, *, max_line_repeats: int = 1) -> str:
+    """Collapse Unlimited-OCR generation loops (same line / phrase repeated)."""
+    if not text:
+        return ""
+
+    def _norm(line: str) -> str:
+        return re.sub(r"\s+", " ", line).strip().lower()
+
+    def _is_garbage_line(line: str) -> bool:
+        s = line.strip()
+        if not s:
+            return False
+        if re.search(
+            r"\\mathrm|\\\(|\\tilde|\\frac|^\s*Dut[:\.]|^\s*D:\s|"
+            r"^\s*text\s*\([nl0-9]\)|^\s*u\s*$|"
+            r"Honsan's hand|Dutheu|Duc:\s*|OPPLE|PRASTY",
+            s,
+            re.I,
+        ):
+            return True
+        letters = sum(1 for c in s if c.isalpha())
+        if len(s) >= 24 and letters / max(len(s), 1) < 0.42:
+            return True
+        return False
+
+    # 0) Drop obvious OCR garbage / LaTeX hallucination lines.
+    lines = [ln for ln in text.splitlines() if not _is_garbage_line(ln)]
+    text = "\n".join(lines)
+
+    # 1) Consecutive identical / near-identical lines → keep at most max_line_repeats.
+    lines = text.splitlines()
+    out_lines: list[str] = []
+    prev_norm = None
+    run = 0
+    for line in lines:
+        norm = _norm(line)
+        # Near-identical: same first 36 chars counts as a run.
+        key = norm[:36] if len(norm) >= 36 else norm
+        if key and key == prev_norm:
+            run += 1
+            if run > max_line_repeats:
+                continue
+        else:
+            prev_norm = key or None
+            run = 1
+        out_lines.append(line.rstrip())
+    text = "\n".join(out_lines)
+
+    # 2) Alternating A/B loops: A B A B A B → keep one A B.
+    lines = text.splitlines()
+    out_lines = []
+    i = 0
+    while i < len(lines):
+        if i + 3 < len(lines):
+            a, b = _norm(lines[i])[:36], _norm(lines[i + 1])[:36]
+            if (
+                a
+                and b
+                and a != b
+                and len(a) >= 20
+                and len(b) >= 20
+                and _norm(lines[i + 2])[:36] == a
+                and _norm(lines[i + 3])[:36] == b
+            ):
+                out_lines.append(lines[i].rstrip())
+                out_lines.append(lines[i + 1].rstrip())
+                i += 2
+                while (
+                    i + 1 < len(lines)
+                    and _norm(lines[i])[:36] == a
+                    and _norm(lines[i + 1])[:36] == b
+                ):
+                    i += 2
+                continue
+        out_lines.append(lines[i].rstrip())
+        i += 1
+    text = "\n".join(out_lines)
+
+    # 3) Phrase loops inside a page: (chunk)(chunk)(chunk)... → one copy.
+    for min_len, max_len in ((80, 500), (40, 120), (20, 60)):
+        pattern = re.compile(
+            rf"(.{{{min_len},{max_len}}}?)(?:\s*\1){{2,}}",
+            re.DOTALL | re.IGNORECASE,
+        )
+        for _ in range(8):
+            nxt = pattern.sub(r"\1", text)
+            if nxt == text:
+                break
+            text = nxt
+
+    # 4) Multi-line block loops: same 2–6 line block repeated.
+    for n_lines in (6, 4, 3, 2):
+        pattern = re.compile(
+            rf"((?:[^\n]+\n){{{n_lines - 1}}}[^\n]+\n?)(?:\s*\1){{2,}}",
+            re.MULTILINE | re.IGNORECASE,
+        )
+        for _ in range(6):
+            nxt = pattern.sub(r"\1", text)
+            if nxt == text:
+                break
+            text = nxt
+
+    # 5) Global per-page cap by short prefix so OCR glitch variants collapse.
+    lines = text.splitlines()
+    seen: dict[str, int] = {}
+    out_lines = []
+    for line in lines:
+        norm = _norm(line)
+        if norm and len(norm) >= 28:
+            key = norm[:32]
+            count = seen.get(key, 0)
+            if count >= 2:
+                continue
+            seen[key] = count + 1
+        out_lines.append(line.rstrip())
+    text = "\n".join(out_lines)
+
+    # 6) If a short stem already appeared twice and shows up again (or garbage),
+    # drop until the next section heading — stops runaway OCR hallucination tails.
+    lines = text.splitlines()
+    stem_counts: dict[str, int] = {}
+    out_lines = []
+    dropping = False
+    for line in lines:
+        stripped = line.strip()
+        # Section / page markers recover reading.
+        if re.match(r"^(?:\d+\.\d+|===== PAGE\b|[A-Z][A-Z0-9 .,'-]{8,80}$)", stripped):
+            dropping = False
+            out_lines.append(line.rstrip())
+            continue
+        if dropping:
+            continue
+        if _is_garbage_line(line):
+            dropping = True
+            continue
+        norm = _norm(line)
+        if len(norm) >= 22:
+            stem = norm[:22]
+            stem_counts[stem] = stem_counts.get(stem, 0) + 1
+            if stem_counts[stem] > 2:
+                dropping = True
+                continue
+        out_lines.append(line.rstrip())
+    return "\n".join(out_lines)
 
 
 def clean_unlimited_ocr_text(text: str) -> str:
@@ -89,11 +367,18 @@ def clean_unlimited_ocr_text(text: str) -> str:
         return ""
     text = _UOCR_META_INLINE.sub(" ", text)
     text = _UOCR_FENCE.sub("", text)
+    text = _UOCR_PAGE_NUMBER_TAG.sub("", text)
     out: list[str] = []
     for line in text.splitlines():
         if _UOCR_FOOTER.match(line) or _UOCR_NOISE.match(line):
             continue
+        if _UOCR_RUNNING_HEADER.match(line):
+            continue
         if re.search(r"\[?\s*No text detected\s*\]?", line, re.I) and len(line.split()) < 12:
+            continue
+        # Drop lines that are almost only OCR instruction leftovers.
+        stripped = line.strip()
+        if stripped.lower() in {"(no text)", "text (n", "text (l)", "text 1."}:
             continue
         m = _UOCR_BOX.match(line)
         if m:
@@ -107,6 +392,7 @@ def clean_unlimited_ocr_text(text: str) -> str:
     cleaned = "\n".join(out)
     # Unlimited-OCR sometimes emits HTML table markup for ToC blocks.
     cleaned = re.sub(r"</?(?:table|tr|td|th|tbody|thead)[^>]*>", " ", cleaned, flags=re.I)
+    cleaned = sanitize_ocr_text(cleaned)
     cleaned = re.sub(r"[ \t]+", " ", cleaned)
     cleaned = re.sub(r"\n{3,}", "\n\n", cleaned).strip()
     return cleaned
@@ -140,7 +426,14 @@ def ocr_page_unlimited(page, *, dpi: float = 144, retries: int = 2) -> str:
     zoom = max(dpi / 72.0, 1.0)
     pix = page.get_pixmap(matrix=fitz.Matrix(zoom, zoom), alpha=False)
     png_b64 = base64.b64encode(pix.tobytes("png")).decode("ascii")
-    prompt = "Extract all text from this document accurately, maintaining the structure."
+    prompt = (
+        "Extract all text from this document page accurately. "
+        "Maintain reading order and structure. "
+        "Do not repeat any sentence or paragraph. "
+        "If a region has no text, leave it blank — do not invent text."
+    )
+    # Cap tokens so a generation-loop cannot explode into multi-MB pages.
+    num_predict = int(os.environ.get("UNLIMITED_OCR_NUM_PREDICT") or "3072")
     last = ""
     for attempt in range(retries + 1):
         try:
@@ -152,6 +445,10 @@ def ocr_page_unlimited(page, *, dpi: float = 144, retries: int = 2) -> str:
                     "stream": False,
                     "keep_alive": "60m",
                     "images": [png_b64],
+                    "options": {
+                        "temperature": 0.0,
+                        "num_predict": max(512, num_predict),
+                    },
                 },
                 timeout=300,
             )

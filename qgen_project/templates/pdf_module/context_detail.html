@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-{% block title %}{{ object.name }} — OCR{% endblock %}
+{% block title %}{{ object.name }} — PDF{% endblock %}
 {% block content %}
 <div class="page-header">
   <div>
-    <div class="eyebrow">PDF · OCR editor</div>
+    <div class="eyebrow">{% if can_view_ocr %}PDF · OCR editor{% else %}PDF preview{% endif %}</div>
     <h1>{{ object.name }}</h1>
     {% if object.original_filename %}
     <p class="muted">{{ object.original_filename }} · <span class="badge status-{{ object.status }}">{{ object.status }}</span></p>
@@ -11,11 +11,13 @@
   </div>
   <div class="btn-row">
     <a class="btn" href="{% url 'pdf_module:list' %}">← Back to list</a>
+    {% if can_manage_pdfs %}
     <form method="post" action="{% url 'pdf_module:reindex' object.id %}">
       {% csrf_token %}
       <button type="submit" class="btn">Re-OCR</button>
     </form>
     <a class="btn btn-danger" href="{% url 'pdf_module:delete' object.id %}">Delete</a>
+    {% endif %}
   </div>
 </div>
 
@@ -31,7 +33,7 @@
 {% endif %}
 
 <div
-  class="pdf-ocr-split"
+  class="pdf-ocr-split{% if not can_view_ocr %} pdf-ocr-split--pdf-only{% endif %}"
   x-data="pdfOcrViewer({ pdfUrl: '{{ pdf_url|escapejs }}' })"
   x-init="loadPdf()">
   <section class="pdf-ocr-pane pdf-ocr-pane--pdf">
@@ -56,6 +58,7 @@
     </div>
   </section>
 
+  {% if can_view_ocr %}
   <section class="pdf-ocr-pane pdf-ocr-pane--ocr">
     <header class="pdf-ocr-pane__head">
       <strong>OCR text</strong>
@@ -81,6 +84,7 @@
       </form>
     </div>
   </section>
+  {% endif %}
 </div>
 
 <script>
@@ -95,7 +99,6 @@ function pdfOcrViewer(opts) {
     async loadPdf() {
       if (!pdfUrl || !this.$refs.pdfFrame) return;
       try {
-        // Fetch as blob so ngrok interstitial / X-Frame blocks do not break the iframe.
         const res = await fetch(pdfUrl, {
           credentials: 'same-origin',
           headers: { 'ngrok-skip-browser-warning': 'true' },
@@ -113,7 +116,6 @@ function pdfOcrViewer(opts) {
         console.error(err);
         this.pdfStatus = '';
         this.pdfError = 'Could not load PDF preview. Try “Open PDF”.';
-        // Fallback: direct URL (works on localhost)
         this.$refs.pdfFrame.src = pdfUrl + '#toolbar=1';
       }
     },

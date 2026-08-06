@@ -13,13 +13,69 @@ def _norm_answer_text(value: str) -> str:
 
 
 class QuestionType(models.TextChoices):
-    MCQ          = 'MCQ',   'Multiple Choice'
+    """IGNOU demo buckets — keep in sync with the active generation prompt."""
+    REFERENCE_TO_CONTEXT = 'RTC', 'Reference to Context'
     SHORT_ANSWER = 'SHORT', 'Short Answer'
-    LONG_ANSWER  = 'LONG',  'Long Answer'
-    FILL_BLANK   = 'FILL',  'Fill in the Blank'
-    TRUE_FALSE   = 'TF',    'True / False'
-    CASE_STUDY   = 'CASE',  'Case Study'
-    NUMERICAL    = 'NUM',   'Numerical'
+    LONG_ANSWER = 'LONG', 'Long Answer'
+
+
+# Map legacy / free-text labels → the three demo types.
+QUESTION_TYPE_ALIASES = {
+    'RTC': QuestionType.REFERENCE_TO_CONTEXT,
+    'REF': QuestionType.REFERENCE_TO_CONTEXT,
+    'REFERENCE': QuestionType.REFERENCE_TO_CONTEXT,
+    'REFERENCE-TO-CONTEXT': QuestionType.REFERENCE_TO_CONTEXT,
+    'REFERENCE_TO_CONTEXT': QuestionType.REFERENCE_TO_CONTEXT,
+    'SHORT': QuestionType.SHORT_ANSWER,
+    'SHORT_ANSWER': QuestionType.SHORT_ANSWER,
+    'SHORT NOTE': QuestionType.SHORT_ANSWER,
+    'DEFINITION': QuestionType.SHORT_ANSWER,
+    'IDENTIFICATION': QuestionType.SHORT_ANSWER,
+    'LONG': QuestionType.LONG_ANSWER,
+    'LONG_ANSWER': QuestionType.LONG_ANSWER,
+    'THEMATIC': QuestionType.LONG_ANSWER,
+    'ANALYTICAL': QuestionType.LONG_ANSWER,
+    'COMPARATIVE': QuestionType.LONG_ANSWER,
+    'CRITICAL': QuestionType.LONG_ANSWER,
+    'ESSAY': QuestionType.LONG_ANSWER,
+    # Legacy app types → nearest bucket
+    'MCQ': QuestionType.SHORT_ANSWER,
+    'FILL': QuestionType.SHORT_ANSWER,
+    'TF': QuestionType.SHORT_ANSWER,
+    'NUM': QuestionType.SHORT_ANSWER,
+    'CASE': QuestionType.LONG_ANSWER,
+}
+
+
+def normalize_question_type(value, *, marks=None, question_text='') -> str:
+    """Resolve any label to RTC / SHORT / LONG."""
+    raw = str(value or '').strip()
+    key = re.sub(r'\s+', ' ', raw).upper().replace('_', '-')
+    key_compact = key.replace(' ', '-').replace('/', '-')
+    if key_compact in QUESTION_TYPE_ALIASES:
+        return QUESTION_TYPE_ALIASES[key_compact]
+    if key in QUESTION_TYPE_ALIASES:
+        return QUESTION_TYPE_ALIASES[key]
+    text = (question_text or '').lower()
+    if any(
+        phrase in text
+        for phrase in (
+            'reference to context',
+            'reference to the context',
+            'with reference to context',
+            'सप्रसंग',
+            'सप्रसंग व्याख्या',
+        )
+    ):
+        return QuestionType.REFERENCE_TO_CONTEXT
+    try:
+        m = float(marks) if marks is not None else None
+    except (TypeError, ValueError):
+        m = None
+    if m is not None and m > 10:
+        return QuestionType.LONG_ANSWER
+    return QuestionType.SHORT_ANSWER
+
 
 
 class BloomLevel(models.TextChoices):
@@ -52,7 +108,8 @@ class PYQModule(models.Model):
 
     @property
     def mcq_count(self):
-        return self.questions.filter(question_type=QuestionType.MCQ).count()
+        # Legacy helper — MCQ is no longer a demo type.
+        return 0
 
     @property
     def question_type_breakdown(self):
@@ -169,7 +226,8 @@ class Question(models.Model):
 
     @property
     def is_mcq(self):
-        return self.question_type == QuestionType.MCQ
+        # Kept for old rows / templates; demo types are RTC/SHORT/LONG only.
+        return self.question_type == 'MCQ'
 
     @property
     def council_opinion(self):

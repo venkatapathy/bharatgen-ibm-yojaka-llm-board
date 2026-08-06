@@ -15,11 +15,11 @@
 </div>
 
 <div class="card-grid">
-  {% if user.is_superuser_role %}
   <a class="card" href="{% url 'pdf_module:list' %}">
     <h2>PDF Contexts</h2>
-    <p>Upload and index PDF documents for semantic RAG retrieval.</p>
+    <p>{% if user.is_superuser_role %}Upload and index PDF documents for generation.{% else %}Browse shared PDF units (PDF preview only).{% endif %}</p>
   </a>
+  {% if user.is_superuser_role %}
   <a class="card" href="{% url 'pyq_module:list' %}">
     <h2>PYQ Bank</h2>
     <p>Upload previous-year exam papers and extract structured questions.</p>
@@ -36,6 +36,10 @@
     <p>Launch AI-powered batch question generation with RAG and PYQ examples.</p>
   </a>
   {% if user.can_access_control %}
+  <a class="card" href="{% url 'core:control_statistics' %}">
+    <h2>Statistics</h2>
+    <p>Generated, approved, rejected, and pending questions per user.</p>
+  </a>
   <a class="card" href="{% url 'core:control_hub' %}">
     <h2>Control</h2>
     <p>{% if user.is_superuser_role %}Set organisation quotas and PDF indexing / technical settings.{% else %}Manage users and quotas in your organisation.{% endif %}</p>

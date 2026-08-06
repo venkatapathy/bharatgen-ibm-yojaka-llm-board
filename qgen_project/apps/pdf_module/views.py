@@ -14,10 +14,8 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.decorators.http import require_POST
 from django.views.generic import CreateView, DeleteView, DetailView, ListView
 
-from apps.core.ownership import (
-    browse_list_context,
-    owned_pdf_contexts,
-)
+from apps.core.ownership import owned_pdf_contexts
+from apps.core.permissions import SuperUserRequiredMixin, role_required
 from apps.core.soft404 import SoftMissingMixin
 from apps.core.storage import (
     StorageQuotaExceeded,
@@ -26,6 +24,7 @@ from apps.core.storage import (
     reserve_pdf_storage,
     storage_quota_display,
 )
+from apps.core.models import User
 
 from .forms import PDFContextUploadForm
 from .models import PDFChunk, PDFContext
@@ -40,6 +39,14 @@ def _course_code_from_name(name: str) -> str:
     if not m:
         return ""
     return re.sub(r"\s+", "-", m.group(1).upper().replace(" ", "-"))
+
+
+def _is_platform_admin(user) -> bool:
+    return bool(
+        getattr(user, "is_superuser", False)
+        or getattr(user, "role", "") == User.Role.SUPERUSER
+        or getattr(user, "is_superuser_role", False)
+    )
 
 
 def _pdf_file_url(ctx: PDFContext) -> str:
@@ -88,31 +95,14 @@ class PDFContextListView(LoginRequiredMixin, ListView):
     template_name = "pdf_module/context_list.html"
     context_object_name = "contexts"
 
-    def _browse_params(self):
-        org_id = (self.request.GET.get("org") or "").strip() or None
-        user_id = (self.request.GET.get("user") or "").strip() or None
-        return org_id, user_id
-
     def _filter_params(self):
         q = (self.request.GET.get("q") or "").strip()
         status = (self.request.GET.get("status") or "").strip().lower()
         course = (self.request.GET.get("course") or "").strip().upper()
         return q, status, course
 
-    def _base_queryset(self):
-        viewer = self.request.user
-        org_id, user_id = self._browse_params()
-        browse = browse_list_context(
-            viewer, organization_id=org_id, user_id=user_id
-        )
-        if browse["needs_filter"] and browse["target"] is None:
-            return PDFContext.objects.none(), browse
-        if browse["needs_filter"]:
-            return owned_pdf_contexts(viewer, owner=browse["target"]), browse
-        return owned_pdf_contexts(viewer), browse
-
     def get_queryset(self):
-        qs, _browse = self._base_queryset()
+        qs = owned_pdf_contexts(self.request.user)
         q, status, course = self._filter_params()
         if q:
             qs = qs.filter(
@@ -123,7 +113,6 @@ class PDFContextListView(LoginRequiredMixin, ListView):
         if status:
             qs = qs.filter(status=status)
         if course:
-            # Match "BHDC-133", "BHDC 133", "bhdc-133" in name/filename.
             course_loose = course.replace("-", " ")
             qs = qs.filter(
                 Q(name__icontains=course)
@@ -136,19 +125,17 @@ class PDFContextListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         viewer = self.request.user
-        org_id, user_id = self._browse_params()
-        browse = browse_list_context(
-            viewer, organization_id=org_id, user_id=user_id
-        )
-        ctx.update(browse)
-
-        quota_user = browse["target"] or viewer
-        recompute_vector_storage(quota_user)
-        ctx["quota"] = storage_quota_display(quota_user)
-        ctx["mine_label"] = "My PDFs"
+        is_admin = _is_platform_admin(viewer)
+        ctx["is_platform_admin"] = is_admin
+        ctx["can_manage_pdfs"] = is_admin
+        if is_admin:
+            recompute_vector_storage(viewer)
+            ctx["quota"] = storage_quota_display(viewer)
+        else:
+            ctx["quota"] = None
 
         q, status, course = self._filter_params()
-        base_qs, _ = self._base_queryset()
+        base_qs = owned_pdf_contexts(viewer)
         courses = sorted(
             {
                 code
@@ -170,12 +157,15 @@ class PDFContextListView(LoginRequiredMixin, ListView):
                 "result_count": ctx["object_list"].count()
                 if hasattr(ctx["object_list"], "count")
                 else len(ctx["object_list"]),
+                # Shared library: no per-user browse gate.
+                "needs_user_filter": False,
+                "browse_user": None,
             }
         )
         return ctx
 
 
-class PDFContextUploadView(LoginRequiredMixin, CreateView):
+class PDFContextUploadView(SuperUserRequiredMixin, CreateView):
     model = PDFContext
     template_name = "pdf_module/context_upload.html"
     form_class = PDFContextUploadForm
@@ -256,12 +246,16 @@ class PDFContextDetailView(SoftMissingMixin, LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
+        is_admin = _is_platform_admin(self.request.user)
         ctx["pdf_url"] = _pdf_file_url(self.object)
-        ctx["ocr_text"] = _ensure_ocr_text(self.object)
+        ctx["can_manage_pdfs"] = is_admin
+        ctx["can_view_ocr"] = is_admin
+        # Never load / rebuild OCR for org admins or users.
+        ctx["ocr_text"] = _ensure_ocr_text(self.object) if is_admin else ""
         return ctx
 
 
-class PDFContextDeleteView(SoftMissingMixin, LoginRequiredMixin, DeleteView):
+class PDFContextDeleteView(SoftMissingMixin, SuperUserRequiredMixin, DeleteView):
     model = PDFContext
     template_name = "pdf_module/context_confirm_delete.html"
     success_url = reverse_lazy("pdf_module:list")
@@ -301,7 +295,6 @@ def pdf_context_file(request, pk):
     except FileNotFoundError as exc:
         raise Http404("PDF file missing on disk") from exc
     filename = ctx.original_filename or ctx.zip_path.name.split("/")[-1] or "document.pdf"
-    # Sanitize filename for header
     safe_name = filename.replace('"', "").replace("\n", " ")[:180]
     response = FileResponse(fh, content_type="application/pdf")
     response["Content-Disposition"] = f'inline; filename="{safe_name}"'
@@ -320,7 +313,7 @@ def pdf_context_status(request, pk):
 
 @login_required
 def pdf_context_chunks(request, pk):
-    if not getattr(request.user, "is_superuser_role", False):
+    if not _is_platform_admin(request.user):
         raise PermissionDenied
     ctx = _get_owned_pdf_or_redirect(request, pk)
     if ctx is None:
@@ -335,8 +328,8 @@ def pdf_context_chunks(request, pk):
     )
 
 
-@login_required
 @require_POST
+@role_required(User.Role.SUPERUSER)
 def pdf_context_save_ocr(request, pk):
     from apps.pdf_module.legacy_hindi import looks_like_legacy_hindi, normalize_legacy_hindi
 
@@ -353,7 +346,7 @@ def pdf_context_save_ocr(request, pk):
     return redirect("pdf_module:detail", pk=pk)
 
 
-@login_required
+@role_required(User.Role.SUPERUSER)
 def pdf_context_reindex(request, pk):
     if request.method == "POST":
         ctx = _get_owned_pdf_or_redirect(request, pk)
@@ -371,7 +364,7 @@ def pdf_context_reindex(request, pk):
     return redirect("pdf_module:detail", pk=pk)
 
 
-@login_required
+@role_required(User.Role.SUPERUSER)
 def reindex_stale_pdfs(request):
     if request.method == "POST":
         stale = owned_pdf_contexts(request.user).filter(needs_reindex=True)

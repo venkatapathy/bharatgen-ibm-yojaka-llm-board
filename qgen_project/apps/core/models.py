@@ -328,6 +328,18 @@ class GenerationSettings(models.Model):
         default=True,
         help_text='When on, users must approve or reject each generated question before results open.',
     )
+    openai_api_key = models.CharField(
+        max_length=512,
+        blank=True,
+        default="",
+        help_text="OpenAI API key for GPT models (Admin Technical settings only).",
+    )
+    gemini_api_key = models.CharField(
+        max_length=512,
+        blank=True,
+        default="",
+        help_text="Google Gemini API key (Admin Technical settings only).",
+    )
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:

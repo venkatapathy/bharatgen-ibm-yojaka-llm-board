@@ -26,6 +26,24 @@ _REASONING_MODEL_MARKERS = (
 )
 
 
+def _api_key_from_generation_settings(provider: str) -> str:
+    """Admin-entered keys on GenerationSettings (Technical settings)."""
+    provider = (provider or "").lower()
+    try:
+        from apps.core.models import GenerationSettings
+
+        gs = GenerationSettings.load()
+    except Exception:
+        return ""
+    if provider == "openai":
+        return (gs.openai_api_key or "").strip()
+    if provider in {"gemini", "google"}:
+        return (gs.gemini_api_key or "").strip()
+    if provider == "groq":
+        return ""
+    return ""
+
+
 def get_litellm_kwargs(model_config, *, temperature=None, max_tokens=None, force_json=False):
     provider = (model_config.provider or "").lower()
     model_name = model_config.llm_model_id
@@ -38,7 +56,10 @@ def get_litellm_kwargs(model_config, *, temperature=None, max_tokens=None, force
 
     if provider == "groq":
         kwargs["model"] = model_name if model_name.startswith("groq/") else f"groq/{model_name}"
-        api_key = os.environ.get(model_config.api_key_env_var or "GROQ_API_KEY")
+        api_key = (
+            _api_key_from_generation_settings("groq")
+            or os.environ.get(model_config.api_key_env_var or "GROQ_API_KEY")
+        )
         if api_key:
             kwargs["api_key"] = api_key
     elif provider == "ollama":
@@ -58,9 +79,37 @@ def get_litellm_kwargs(model_config, *, temperature=None, max_tokens=None, force
         extra_body["options"] = options
         if extra_body:
             kwargs["extra_body"] = extra_body
+    elif provider == "openai":
+        kwargs["model"] = (
+            model_name if model_name.startswith("openai/") else f"openai/{model_name}"
+        )
+        api_key = (
+            _api_key_from_generation_settings("openai")
+            or os.environ.get(model_config.api_key_env_var or "OPENAI_API_KEY")
+        )
+        if api_key:
+            kwargs["api_key"] = api_key
+        if force_json:
+            kwargs["response_format"] = {"type": "json_object"}
+    elif provider in {"gemini", "google"}:
+        # LiteLLM uses gemini/<model> with Google AI Studio keys.
+        if model_name.startswith("gemini/") or model_name.startswith("google/"):
+            kwargs["model"] = model_name
+        else:
+            kwargs["model"] = f"gemini/{model_name}"
+        api_key = (
+            _api_key_from_generation_settings("gemini")
+            or os.environ.get(model_config.api_key_env_var or "GEMINI_API_KEY")
+            or os.environ.get("GOOGLE_API_KEY")
+        )
+        if api_key:
+            kwargs["api_key"] = api_key
     else:
         kwargs["model"] = model_name
-        api_key = os.environ.get(model_config.api_key_env_var or "")
+        api_key = (
+            _api_key_from_generation_settings(provider)
+            or os.environ.get(model_config.api_key_env_var or "")
+        )
         if api_key:
             kwargs["api_key"] = api_key
 

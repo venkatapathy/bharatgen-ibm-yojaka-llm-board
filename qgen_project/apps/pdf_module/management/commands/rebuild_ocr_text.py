@@ -3,7 +3,7 @@
 from django.core.management.base import BaseCommand
 
 from apps.pdf_module.models import PDFContext
-from apps.pdf_module.ocr_full import rebuild_context_ocr
+from apps.pdf_module.ocr_full import clean_stored_ocr_text, rebuild_context_ocr
 
 
 class Command(BaseCommand):
@@ -24,6 +24,11 @@ class Command(BaseCommand):
             action="store_true",
             help="Only rebuild contexts whose ocr_text looks truncated (< 800 words)",
         )
+        parser.add_argument(
+            "--clean-only",
+            action="store_true",
+            help="Only collapse OCR loops / strip noise on stored text (no re-OCR)",
+        )
 
     def handle(self, *args, **options):
         qs = PDFContext.objects.all().order_by("name")
@@ -32,6 +37,7 @@ class Command(BaseCommand):
             qs = qs.filter(name__icontains=only)
         force_vision = bool(options.get("force_vision"))
         short_only = bool(options.get("short_only"))
+        clean_only = bool(options.get("clean_only"))
 
         done = 0
         skipped = 0
@@ -41,10 +47,15 @@ class Command(BaseCommand):
                 skipped += 1
                 continue
             try:
-                n = rebuild_context_ocr(ctx, force_vision=force_vision)
+                before = len(ctx.ocr_text or "")
+                if clean_only:
+                    n = clean_stored_ocr_text(ctx)
+                else:
+                    n = rebuild_context_ocr(ctx, force_vision=force_vision)
                 ctx.refresh_from_db()
                 self.stdout.write(
-                    f"OK {ctx.name[:70]}  chars={n} words={len((ctx.ocr_text or '').split())}"
+                    f"OK {ctx.name[:70]}  chars={n} (was {before}) "
+                    f"words={len((ctx.ocr_text or '').split())}"
                 )
                 self.stdout.flush()
                 done += 1

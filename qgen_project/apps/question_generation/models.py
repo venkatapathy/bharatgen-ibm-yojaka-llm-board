@@ -23,7 +23,12 @@ class BatchRun(models.Model):
         COMPLETE = 'review_complete', 'Review complete'
 
     name          = models.CharField(max_length=256)
-    topic         = models.CharField(max_length=512)
+    topic         = models.CharField(
+        max_length=512,
+        blank=True,
+        default="",
+        help_text="Deprecated for IGNOU unit-OCR generation; kept for older runs.",
+    )
     language      = models.CharField(
         max_length=8,
         choices=Language.choices,
@@ -95,15 +100,25 @@ class BatchRun(models.Model):
 
     @property
     def needs_human_review(self):
+        """True when feedback mode is on and generated questions still await a decision."""
         if self.status not in {self.Status.COMPLETED, self.Status.PARTIAL}:
-            return False
-        if self.review_status == self.ReviewStatus.COMPLETE:
             return False
         from apps.core.models import GenerationSettings
 
         if not GenerationSettings.load().user_feedback_enabled:
             return False
         return self.pending_review_count > 0
+
+    @property
+    def is_human_reviewed(self):
+        """True only after real approve/reject when feedback mode is enabled."""
+        from apps.core.models import GenerationSettings
+
+        if not GenerationSettings.load().user_feedback_enabled:
+            return False
+        if not self.questions.filter(is_generated=True).exists():
+            return False
+        return self.pending_review_count == 0
 
     @property
     def progress(self):
@@ -121,6 +136,12 @@ class BatchRunItem(models.Model):
     bloom         = models.CharField(max_length=16)
     marks         = models.FloatField()
     count         = models.IntegerField()
+    answer_length = models.CharField(
+        max_length=64,
+        blank=True,
+        default="",
+        help_text='Target model-answer length for the SPEC, e.g. "100-150 words".',
+    )
     status        = models.CharField(max_length=16, default='pending')
     error_detail  = models.TextField(blank=True)
 

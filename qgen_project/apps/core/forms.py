@@ -64,6 +64,42 @@ class PDFIndexingSettingsForm(forms.ModelForm):
 
 
 class GenerationSettingsForm(forms.ModelForm):
+    # Separate unbound fields so blank submit keeps the saved key.
+    openai_api_key_input = forms.CharField(
+        required=False,
+        label="OpenAI API key",
+        widget=forms.PasswordInput(
+            render_value=False,
+            attrs={
+                "class": "tech-input",
+                "autocomplete": "new-password",
+                "placeholder": "sk-…",
+            },
+        ),
+        help_text="Used for GPT models. Leave blank to keep the current key.",
+    )
+    gemini_api_key_input = forms.CharField(
+        required=False,
+        label="Gemini API key",
+        widget=forms.PasswordInput(
+            render_value=False,
+            attrs={
+                "class": "tech-input",
+                "autocomplete": "new-password",
+                "placeholder": "AIza…",
+            },
+        ),
+        help_text="Used for Gemini models. Leave blank to keep the current key.",
+    )
+    clear_openai_api_key = forms.BooleanField(
+        required=False,
+        label="Clear OpenAI key",
+    )
+    clear_gemini_api_key = forms.BooleanField(
+        required=False,
+        label="Clear Gemini key",
+    )
+
     class Meta:
         model = GenerationSettings
         fields = [
@@ -94,7 +130,7 @@ class GenerationSettingsForm(forms.ModelForm):
             "user_feedback_enabled": "",
         }
         widgets = {
-            "model_config": forms.RadioSelect,
+            "model_config": forms.Select(attrs={"class": "tech-input"}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -116,15 +152,56 @@ class GenerationSettingsForm(forms.ModelForm):
         self.fields["model_config"].queryset = llm_qs
         self.fields["model_config"].required = True
         self.fields["model_config"].empty_label = None
+        # Compact optgroups instead of a crowded radio-card grid.
+        provider_labels = {
+            "ollama": "Ollama (local)",
+            "openai": "OpenAI (GPT)",
+            "gemini": "Google Gemini",
+            "groq": "Groq",
+        }
+        grouped = {}
+        for model in llm_qs:
+            key = (model.provider or "other").lower()
+            grouped.setdefault(key, []).append(model)
+        self.fields["model_config"].choices = [
+            (
+                provider_labels.get(provider, provider.title()),
+                [(m.pk, m.name) for m in models],
+            )
+            for provider, models in grouped.items()
+        ]
         self.fields["rag_top_k"].widget.attrs.update({"min": 1, "max": 20})
         self.fields["rag_reranker_model"].choices = RERANKER_CHOICES
         self.fields["rag_reranker_model"].required = False
         self.fields["pyq_shots"].widget.attrs.update({"min": 0, "max": 10})
         self.fields["user_feedback_enabled"].required = False
         for name, field in self.fields.items():
-            field.help_text = ""
-            if name not in {"model_config", "user_feedback_enabled"}:
+            field.help_text = "" if name not in {
+                "openai_api_key_input",
+                "gemini_api_key_input",
+            } else field.help_text
+            if name not in {
+                "model_config",
+                "user_feedback_enabled",
+                "openai_api_key_input",
+                "gemini_api_key_input",
+                "clear_openai_api_key",
+                "clear_gemini_api_key",
+            }:
                 field.widget.attrs["class"] = "tech-input"
+            if name == "model_config":
+                field.widget.attrs["class"] = "tech-input tech-input--model"
+
+        inst = self.instance
+        if inst and inst.pk:
+            if (inst.openai_api_key or "").strip():
+                self.fields["openai_api_key_input"].widget.attrs["placeholder"] = (
+                    "••••••••  (saved — leave blank to keep)"
+                )
+            if (inst.gemini_api_key or "").strip():
+                self.fields["gemini_api_key_input"].widget.attrs["placeholder"] = (
+                    "••••••••  (saved — leave blank to keep)"
+                )
 
     def clean_rag_top_k(self):
         value = int(self.cleaned_data.get("rag_top_k") or 5)
@@ -133,6 +210,54 @@ class GenerationSettingsForm(forms.ModelForm):
     def clean_pyq_shots(self):
         value = int(self.cleaned_data.get("pyq_shots") or 0)
         return max(0, min(value, 10))
+
+    def clean(self):
+        cleaned = super().clean()
+        mc = cleaned.get("model_config")
+        if mc is None:
+            return cleaned
+
+        from apps.core.model_status import annotate_model_availability
+
+        inst = self.instance
+        openai_set = bool((getattr(inst, "openai_api_key", None) or "").strip())
+        gemini_set = bool((getattr(inst, "gemini_api_key", None) or "").strip())
+        if cleaned.get("clear_openai_api_key"):
+            openai_set = False
+        elif (cleaned.get("openai_api_key_input") or "").strip():
+            openai_set = True
+        if cleaned.get("clear_gemini_api_key"):
+            gemini_set = False
+        elif (cleaned.get("gemini_api_key_input") or "").strip():
+            gemini_set = True
+
+        annotate_model_availability(
+            [mc], openai_key_set=openai_set, gemini_key_set=gemini_set
+        )
+        if not getattr(mc, "is_available", False):
+            label = getattr(mc, "availability_label", "") or "unavailable"
+            self.add_error(
+                "model_config",
+                f"Cannot select an unavailable model ({label}). Choose a green model.",
+            )
+        return cleaned
+
+    def save(self, commit=True):
+        obj = super().save(commit=False)
+        openai_key = (self.cleaned_data.get("openai_api_key_input") or "").strip()
+        gemini_key = (self.cleaned_data.get("gemini_api_key_input") or "").strip()
+        if self.cleaned_data.get("clear_openai_api_key"):
+            obj.openai_api_key = ""
+        elif openai_key:
+            obj.openai_api_key = openai_key
+        if self.cleaned_data.get("clear_gemini_api_key"):
+            obj.gemini_api_key = ""
+        elif gemini_key:
+            obj.gemini_api_key = gemini_key
+        if commit:
+            obj.save()
+            self.save_m2m()
+        return obj
 
 
 class OrganizationPolicyForm(forms.ModelForm):

@@ -67,6 +67,39 @@ def snapshot_rag_chunks(chunks) -> list[dict]:
     return rows
 
 
+def load_unit_ocr_context(run) -> tuple[str, list[dict]]:
+    """
+    Load the selected unit's full OCR text for the IGNOU prompt
+    ({{ complete_unit_content }}). One PDF context only.
+    """
+    ctx = run.pdf_contexts.order_by("id").first()
+    if ctx is None:
+        return "", []
+
+    text = (ctx.ocr_text or "").strip()
+    # Rebuild if empty or clearly truncated (same threshold as PDF detail view).
+    if len(text.split()) < 800:
+        try:
+            from apps.pdf_module.ocr_full import rebuild_context_ocr
+
+            rebuild_context_ocr(ctx, force_vision=False)
+            ctx.refresh_from_db()
+            text = (ctx.ocr_text or "").strip()
+        except Exception:
+            logger.exception("Failed to rebuild OCR for PDFContext %s", ctx.pk)
+
+    snapshot = [
+        {
+            "id": str(ctx.pk),
+            "name": ctx.name,
+            "source_file": ctx.original_filename or "",
+            "mode": "full_ocr",
+            "chars": len(text),
+        }
+    ]
+    return text, snapshot
+
+
 def retrieve_rag_chunks(run, q_type: str, bloom: str, top_k: int) -> tuple[str, list[dict]]:
     from apps.pdf_module.models import PDFChunk
     from apps.core.embeddings import DEFAULT_EMBED_MODEL
@@ -179,6 +212,27 @@ def parse_llm_json(raw_text):
 
 def ensure_mcq_shape(question):
     """Normalize options and ensure a usable reference_answer for display."""
+    # Map IGNOU prompt.txt schema → app fields.
+    if not str(question.get("question_text") or "").strip():
+        question["question_text"] = question.get("question") or question.get("stem") or ""
+    if not str(question.get("reference_answer") or "").strip():
+        question["reference_answer"] = (
+            question.get("answer")
+            or question.get("correct_answer")
+            or question.get("model_answer")
+            or ""
+        )
+    if not question.get("rubrics"):
+        rubric = question.get("rubric")
+        if isinstance(rubric, dict):
+            rubrics = dict(rubric)
+            citation = question.get("citation")
+            if citation is not None and "citation" not in rubrics:
+                rubrics["citation"] = citation
+            question["rubrics"] = rubrics
+        elif question.get("citation") is not None:
+            question["rubrics"] = {"citation": question.get("citation")}
+
     q_type = (question.get("question_type") or "").upper()
     if q_type == "MCQ":
         options = question.get("options") or []
@@ -375,32 +429,19 @@ def run_batch(self, batch_run_id: int, fill_remaining: bool = False):
                 try:
                     if not run.pdf_contexts.exists():
                         raise ValueError(
-                            "At least one PDF context is required so questions "
-                            "are grounded in course material."
+                            "Select one PDF unit so questions are grounded "
+                            "in its OCR text."
                         )
-                    context_text, rag_snapshot = retrieve_rag_chunks(
-                        run, gen_item.question_type, gen_item.bloom, run.rag_top_k
-                    )
+                    context_text, rag_snapshot = load_unit_ocr_context(run)
                     if not (context_text or "").strip():
                         raise ValueError(
-                            "No PDF chunks available for the selected contexts. "
-                            "Re-index the PDFs or pick another context."
+                            "No OCR text available for the selected unit. "
+                            "Open the PDF context and save/re-OCR it first."
                         )
 
+                    # PYQ few-shot disabled for this demo.
                     pyq_text = ''
                     pyq_snapshot: list[dict] = []
-                    if run.pyq_modules.exists():
-                        examples = list(
-                            Question.objects.filter(
-                                pyq_module__in=run.pyq_modules.all(),
-                                question_type=gen_item.question_type,
-                                bloom=gen_item.bloom,
-                            )
-                            .select_related("pyq_module")
-                            .order_by('?')[:run.pyq_shots]
-                        )
-                        pyq_text = format_examples(examples)
-                        pyq_snapshot = snapshot_pyq_examples(examples)
 
                     target_count = want
                     if run.council_enabled and run.council_models.exists():
@@ -540,7 +581,7 @@ def run_batch(self, batch_run_id: int, fill_remaining: bool = False):
                                 question_type=item.question_type,
                                 bloom=item.bloom,
                                 marks=item.marks,
-                                topic=run.topic,
+                                topic="",
                                 question_text=question.get('question_text', ''),
                                 reference_answer=question.get('reference_answer', ''),
                                 rubrics=question.get('rubrics', {}) or {},
@@ -604,9 +645,10 @@ def run_batch(self, batch_run_id: int, fill_remaining: bool = False):
         if GenerationSettings.load().user_feedback_enabled:
             run.review_status = BatchRun.ReviewStatus.PENDING
         else:
-            run.review_status = BatchRun.ReviewStatus.COMPLETE
+            # Feedback off: leave unreviewed so enabling it later still requires review.
+            run.review_status = BatchRun.ReviewStatus.NOT_STARTED
     else:
-        run.review_status = BatchRun.ReviewStatus.COMPLETE
+        run.review_status = BatchRun.ReviewStatus.NOT_STARTED
     run.save(
         update_fields=[
             'status',

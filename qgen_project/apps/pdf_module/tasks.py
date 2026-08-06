@@ -179,28 +179,34 @@ def _build_chunks(context):
 
 @shared_task(bind=True, max_retries=3)
 def index_pdf_context(self, context_id: str):
+    """OCR-only for now: fill context.ocr_text, skip chunking/embeddings."""
     context = PDFContext.objects.get(id=context_id)
     context.status = "processing"
     context.error_message = ""
     context.save(update_fields=["status", "error_message"])
 
     try:
-        chunks_to_create, embedded_count, ocr_text = _build_chunks(context)
-        PDFChunk.objects.filter(context=context).delete()
-        PDFChunk.objects.bulk_create(chunks_to_create, batch_size=200)
+        from apps.pdf_module.chunkers import _force_unlimited_ocr
         from apps.pdf_module.legacy_hindi import looks_like_legacy_hindi, normalize_legacy_hindi
+        from apps.pdf_module.ocr_full import rebuild_context_ocr
 
-        ocr_text = ocr_text or ""
+        # Drop any existing chunks; generation uses full ocr_text, not RAG chunks.
+        PDFChunk.objects.filter(context=context).delete()
+
+        rebuild_context_ocr(context, force_vision=_force_unlimited_ocr())
+        context.refresh_from_db(fields=["ocr_text"])
+        ocr_text = (context.ocr_text or "").strip()
         is_leg, ft = looks_like_legacy_hindi(ocr_text)
         if is_leg:
             ocr_text = normalize_legacy_hindi(
                 ocr_text, force=True, font_type=ft or "krutidev"
             )
-        context.ocr_text = ocr_text
-        if not chunks_to_create and not ocr_text:
+            context.ocr_text = ocr_text
+
+        if not ocr_text:
             context.status = "error"
             context.error_message = (
-                "No indexable text extracted (OCR/text layer empty). "
+                "No OCR text extracted (OCR/text layer empty). "
                 "Re-index after fixing OCR."
             )
             context.needs_reindex = True
@@ -214,12 +220,13 @@ def index_pdf_context(self, context_id: str):
                     "ocr_text",
                 ]
             )
-            logger.error("Empty index for PDFContext %s", context_id)
+            logger.error("Empty OCR for PDFContext %s", context_id)
             return
+
         context.status = "ready"
         context.needs_reindex = False
         context.error_message = ""
-        context.embedded_chunk_count = embedded_count
+        context.embedded_chunk_count = 0
         context.save(
             update_fields=[
                 "status",
@@ -229,10 +236,11 @@ def index_pdf_context(self, context_id: str):
                 "ocr_text",
             ]
         )
-        if context.created_by_id:
-            from apps.core.storage import recompute_vector_storage
-
-            recompute_vector_storage(context.created_by)
+        logger.info(
+            "OCR-only ready for %s (%s chars, chunks skipped)",
+            context.name,
+            len(ocr_text),
+        )
 
     except Exception as exc:
         context.status = "error"

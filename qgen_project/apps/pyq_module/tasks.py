@@ -1,3 +1,4 @@
+import ast
 import json
 import logging
 import re
@@ -8,7 +9,7 @@ from celery import shared_task
 from apps.core.llm import completion_with_retry, get_litellm_kwargs
 
 from .ignou_parser import is_instruction_question
-from .models import BloomLevel, PYQModule, Question, QuestionType
+from .models import BloomLevel, PYQModule, Question, QuestionType, normalize_question_type
 from .pdf_text import chunk_text, extract_text
 
 logger = logging.getLogger(__name__)
@@ -43,11 +44,14 @@ Goals:
    titles with no body, mark-scheme-only lines (e.g. 2×10=20), page footers,
    "Note: This paper has three Sections…", and OCR instruction noise.
 4. Keep the original language. Do not invent content.
-5. question_type: MCQ|SHORT|LONG|FILL|TF|CASE|NUM
+5. question_type: RTC|SHORT|LONG
+   - RTC = reference-to-context (passage + explain with reference to context)
+   - SHORT = short note / definition / identification
+   - LONG = thematic / analytical / comparative / critical essay / long answer
 6. bloom: remember|understand|apply|analyze|evaluate|create
 7. marks: per-item marks when stated (from N×M=… use M); else infer, else 10.
 8. topic: short label like "2(a)" or "3" (question number).
-9. options: MCQ choices only; otherwise [].
+9. options: always [] (this demo does not use MCQ).
 10. reference_answer: "" unless an answer key is present.
 
 Return ONLY a JSON array. Each element:
@@ -81,8 +85,19 @@ def parse_llm_json(raw_text):
         raw_text = raw_text.split("\n", 1)[1].rsplit("```", 1)[0].strip()
 
     def _load(candidate: str):
+        cleaned = _strip_control_chars(candidate)
         # strict=False: tolerate literal newlines inside JSON strings from LLMs
-        return json.loads(_strip_control_chars(candidate), strict=False)
+        try:
+            return json.loads(cleaned, strict=False)
+        except json.JSONDecodeError:
+            try:
+                return ast.literal_eval(cleaned)
+            except (ValueError, SyntaxError, MemoryError) as exc:
+                raise json.JSONDecodeError(
+                    f"json.loads and ast.literal_eval failed: {exc}",
+                    cleaned,
+                    0,
+                ) from exc
 
     candidates = [
         raw_text,
@@ -101,28 +116,34 @@ def parse_llm_json(raw_text):
     match = re.search(r"\[[\s\S]*\]", raw_text)
     if match:
         snippet = re.sub(r",\s*([}\]])", r"\1", match.group(0))
-        parsed = _load(snippet)
-        return parsed if isinstance(parsed, list) else [parsed]
+        try:
+            parsed = _load(snippet)
+            return parsed if isinstance(parsed, list) else [parsed]
+        except json.JSONDecodeError:
+            pass
 
     raise json.JSONDecodeError("Could not parse LLM JSON", raw_text, 0)
 
 
 def normalize_extracted_question(item: dict) -> dict:
-    question_type = str(item.get("question_type", "SHORT")).upper()
-    if question_type not in VALID_QUESTION_TYPES:
-        question_type = QuestionType.SHORT
-
-    bloom = str(item.get("bloom", "remember")).lower()
-    if bloom not in VALID_BLOOM_LEVELS:
-        bloom = BloomLevel.REMEMBER
-
     try:
         marks = float(item.get("marks", 10) or 10)
     except (TypeError, ValueError):
         marks = 10.0
 
+    question_text = str(item.get("question_text", "")).strip()
+    question_type = normalize_question_type(
+        item.get("question_type", "SHORT"),
+        marks=marks,
+        question_text=question_text,
+    )
+
+    bloom = str(item.get("bloom", "remember")).lower()
+    if bloom not in VALID_BLOOM_LEVELS:
+        bloom = BloomLevel.REMEMBER
+
     return {
-        "question_text": str(item.get("question_text", "")).strip(),
+        "question_text": question_text,
         "question_type": question_type,
         "bloom": bloom,
         "marks": marks,

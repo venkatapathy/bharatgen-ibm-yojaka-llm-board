@@ -3,113 +3,206 @@
 {% block content %}
 <div class="page-header">
   <div>
-    <div class="eyebrow">Question bank detail</div>
+    <div class="eyebrow">Question bank · editor</div>
     <h1>{{ object.name }}</h1>
     <p class="muted">
       {% if object.original_filename %}{{ object.original_filename }} · {% endif %}
       {{ object.question_count }} questions
+      · <span class="badge status-{{ object.status }}">{{ object.status }}</span>
     </p>
   </div>
-  <div class="page-header__actions">
+  <div class="btn-row">
+    <a class="btn" href="{% url 'pyq_module:list' %}">← Back to list</a>
     {% if object.status != "extracting" and object.status != "pending" %}
-    <form method="post" action="{% url 'pyq_module:reextract' object.id %}" style="display:inline;">
+    <form method="post" action="{% url 'pyq_module:reextract' object.id %}">
       {% csrf_token %}
-      <button type="submit" class="btn btn-primary">Re-extract</button>
+      <button type="submit" class="btn">Re-extract</button>
     </form>
     {% endif %}
-    <a class="btn btn-danger" href="{% url 'pyq_module:delete' object.id %}">Delete Module</a>
+    <a class="btn btn-danger" href="{% url 'pyq_module:delete' object.id %}">Delete</a>
   </div>
 </div>
 
+{% if object.status == 'extracting' or object.status == 'pending' %}
 <div
   id="pyq-status-poll"
   class="progress-shell panel"
   style="margin-bottom:1.25rem;"
   hx-get="{% url 'pyq_module:status' object.id %}"
-  hx-trigger="{% if object.status == 'extracting' or object.status == 'pending' %}load, every 3s{% endif %}"
+  hx-trigger="load, every 3s"
   hx-swap="outerHTML">
-  <div class="question-meta">
-    <span class="badge status-{{ object.status }}">{{ object.status }}</span>
-    <span class="muted">Questions: {{ object.question_count }}</span>
-  </div>
-  {% if object.error_msg %}
-  <p class="alert alert-error">{{ object.error_msg }}</p>
-  {% endif %}
-  {% if object.status == "extracting" or object.status == "pending" %}
-  <p class="muted">Extraction is in progress. This panel refreshes automatically.</p>
-  {% endif %}
+  {% include "pyq_module/partials/module_status.html" with object=object %}
 </div>
-
-<div class="detail-stats">
-  <div class="stat-card"><span class="muted">Total questions</span><strong>{{ object.question_count }}</strong></div>
-  <div class="stat-card"><span class="muted">Status</span><strong style="font-size:1rem;">{{ object.status }}</strong></div>
-</div>
+{% elif object.error_msg %}
+<p class="alert alert-error" style="margin-bottom:1.25rem;">{{ object.error_msg }}</p>
+{% endif %}
 
 {% if object.question_type_breakdown %}
-<div class="type-breakdown-panel panel" style="padding:1rem 1.15rem; margin-bottom:1.25rem;">
-  <span class="muted" style="display:block; margin-bottom:0.5rem; font-size:0.85rem; font-weight:600; text-transform:uppercase; letter-spacing:0.04em;">Question types in this paper</span>
-  <div class="type-breakdown">
-    {% for item in object.question_type_breakdown %}
-    <span class="badge badge-muted" title="{{ item.label }}">{{ item.label }}: {{ item.count }}</span>
-    {% endfor %}
-  </div>
+<div class="type-breakdown" style="margin-bottom:1rem;">
+  {% for item in object.question_type_breakdown %}
+  <span class="badge badge-muted">{{ item.label }}: {{ item.count }}</span>
+  {% endfor %}
 </div>
 {% endif %}
 
-<div class="table-wrap">
-  <table class="table">
-    <thead><tr><th>Type</th><th>Bloom</th><th>Marks</th><th>Question</th><th>Actions</th></tr></thead>
-    <tbody>
-    {% for q in questions %}
-    <tr>
-      <td><span class="badge badge-muted">{{ q.question_type }}</span></td>
-      <td>{{ q.bloom }}</td>
-      <td>{{ q.marks }}</td>
-      <td class="table-mcq-cell">
-        <div class="question-text">{{ q.question_text }}</div>
-        {% if q.question_type == 'MCQ' and q.get_mcq_options %}
-        <ul class="table-mcq-options">
-          {% for opt in q.get_mcq_options %}
-          <li class="mcq-option{% if opt.is_correct %} is-correct{% endif %}">
-            <span class="mcq-option__label">{{ opt.label }}.</span>
-            <span>{{ opt.text }}</span>
-          </li>
-          {% endfor %}
-        </ul>
-        {% elif q.question_type == 'MCQ' and q.options %}
-        <ul class="table-mcq-options">
-          {% for option in q.options %}
-          <li class="mcq-option">{{ option }}</li>
-          {% endfor %}
-        </ul>
-        {% endif %}
-        {% if q.reference_answer and q.question_type != 'MCQ' %}
-        <p class="muted" style="margin-top:0.5rem;"><strong>Answer:</strong> {{ q.reference_answer }}</p>
-        {% endif %}
-      </td>
-      <td class="table-actions">
-        <div class="table-actions__inner">
-          <a class="btn btn-sm" href="{% url 'pyq_module:question_edit' q.id %}">Edit</a>
+<div
+  class="pdf-ocr-split"
+  x-data="pdfOcrViewer({ pdfUrl: '{{ pdf_url|escapejs }}' })"
+  x-init="loadPdf()">
+  <section class="pdf-ocr-pane pdf-ocr-pane--pdf">
+    <header class="pdf-ocr-pane__head">
+      <strong>PDF</strong>
+      <span class="muted" x-text="pdfStatus" x-show="pdfStatus"></span>
+      {% if pdf_url %}
+      <a class="btn btn-sm" :href="openUrl || '{{ pdf_url }}'" target="_blank" rel="noopener">Open PDF</a>
+      {% endif %}
+    </header>
+    <div class="pdf-ocr-pane__body">
+      {% if pdf_url %}
+      <iframe
+        class="pdf-ocr-frame"
+        x-ref="pdfFrame"
+        title="PDF preview"
+        x-show="!pdfError"></iframe>
+      <p class="muted" style="padding:1.5rem;" x-show="pdfError" x-cloak x-text="pdfError"></p>
+      {% else %}
+      <p class="muted" style="padding:1.5rem;">PDF file not available.</p>
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="pdf-ocr-pane pdf-ocr-pane--ocr">
+    <header class="pdf-ocr-pane__head">
+      <strong>Questions</strong>
+      <span class="muted">{{ questions|length }} total</span>
+    </header>
+    <div class="pdf-ocr-pane__body pyq-questions-pane">
+      {% for q in questions %}
+      <article
+        class="pyq-q-card"
+        x-data="pyqInlineEdit({
+          saveUrl: '{% url 'pyq_module:question_inline_save' q.id %}',
+          csrfToken: '{{ csrf_token }}',
+          questionType: '{{ q.question_type|escapejs }}',
+          questionText: '{{ q.question_text|escapejs }}'
+        })">
+        <div class="pyq-q-card__head">
+          <span class="muted">#{{ forloop.counter }}</span>
+          <label class="pyq-q-type">
+            <span class="sr-only">Type</span>
+            <select
+              class="form-control"
+              x-model="questionType"
+              @change="dirty = true">
+              {% for code, label in question_type_choices %}
+              <option value="{{ code }}" {% if q.question_type == code %}selected{% endif %}>{{ code }}</option>
+              {% endfor %}
+            </select>
+          </label>
+          <span class="muted" x-show="dirty && !saving && !saved" x-cloak>Unsaved</span>
+          <span class="muted" x-show="saved && !dirty" x-cloak>Saved</span>
+          <span class="alert alert-error pyq-q-err" x-show="error" x-text="error" x-cloak></span>
+          <button
+            type="button"
+            class="btn btn-sm btn-primary"
+            @click="save()"
+            :disabled="saving || !dirty">
+            <span x-text="saving ? 'Saving…' : 'Save'"></span>
+          </button>
           <a class="btn btn-sm btn-danger" href="{% url 'pyq_module:question_delete' q.id %}">Delete</a>
         </div>
-      </td>
-    </tr>
-    {% empty %}
-    <tr><td colspan="5">No questions extracted yet.</td></tr>
-    {% endfor %}
-    </tbody>
-  </table>
+        <textarea
+          class="form-control pyq-q-editor"
+          rows="4"
+          spellcheck="true"
+          x-model="questionText"
+          @input="dirty = true; saved = false"
+          placeholder="Question text…"></textarea>
+      </article>
+      {% empty %}
+      <p class="muted" style="padding:1.5rem;">No questions extracted yet.</p>
+      {% endfor %}
+    </div>
+  </section>
 </div>
 
-{% if questions.has_other_pages %}
-<nav class="pagination" aria-label="Question pages">
-  {% if questions.has_previous %}
-  <a href="?page={{ questions.previous_page_number }}">← Previous</a>
-  {% endif %}
-  <span class="current">Page {{ questions.number }} of {{ questions.paginator.num_pages }}</span>
-  {% if questions.has_next %}
-  <a href="?page={{ questions.next_page_number }}">Next →</a>
-  {% endif %}
-</nav>
-{% endif %}
+<script>
+function pdfOcrViewer(opts) {
+  const pdfUrl = (opts && opts.pdfUrl) ? String(opts.pdfUrl) : '';
+  return {
+    pdfStatus: pdfUrl ? 'Loading PDF…' : '',
+    pdfError: '',
+    openUrl: '',
+    async loadPdf() {
+      if (!pdfUrl || !this.$refs.pdfFrame) return;
+      try {
+        const res = await fetch(pdfUrl, {
+          credentials: 'same-origin',
+          headers: { 'ngrok-skip-browser-warning': 'true' },
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const blob = await res.blob();
+        const type = blob.type || 'application/pdf';
+        const pdfBlob = type.includes('pdf') ? blob : new Blob([blob], { type: 'application/pdf' });
+        const url = URL.createObjectURL(pdfBlob);
+        this.openUrl = url;
+        this.$refs.pdfFrame.src = url + '#toolbar=1';
+        this.pdfStatus = '';
+        this.pdfError = '';
+      } catch (err) {
+        console.error(err);
+        this.pdfStatus = '';
+        this.pdfError = 'Could not load PDF preview. Try “Open PDF”.';
+        this.$refs.pdfFrame.src = pdfUrl + '#toolbar=1';
+      }
+    },
+  };
+}
+
+function pyqInlineEdit(opts) {
+  return {
+    saveUrl: opts.saveUrl || '',
+    csrfToken: opts.csrfToken || '',
+    questionType: opts.questionType || 'SHORT',
+    questionText: opts.questionText || '',
+    dirty: false,
+    saving: false,
+    saved: false,
+    error: '',
+    async save() {
+      if (this.saving || !this.dirty) return;
+      this.saving = true;
+      this.error = '';
+      try {
+        const body = new URLSearchParams();
+        body.set('question_type', this.questionType);
+        body.set('question_text', this.questionText);
+        body.set('csrfmiddlewaretoken', this.csrfToken);
+        const res = await fetch(this.saveUrl, {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: body.toString(),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.ok) {
+          throw new Error(data.error || ('HTTP ' + res.status));
+        }
+        this.questionType = data.question_type;
+        this.questionText = data.question_text;
+        this.dirty = false;
+        this.saved = true;
+      } catch (err) {
+        console.error(err);
+        this.error = err.message || 'Save failed';
+      } finally {
+        this.saving = false;
+      }
+    },
+  };
+}
+</script>
 {% endblock %}

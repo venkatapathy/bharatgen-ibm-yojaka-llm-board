@@ -1,4 +1,4 @@
-{# Shared Admin / Org Admin browse filter: org (admin) + user / My … #}
+{# Shared Admin / Org Admin browse filter: org (admin) + user / My … / All org users #}
 {% if needs_user_filter %}
 <form method="get" class="form-section" style="margin-bottom:1.25rem;">
   <div class="btn-row" style="flex-wrap:wrap; gap:1rem; align-items:flex-end;">
@@ -18,6 +18,9 @@
       <select name="user" class="form-control" onchange="this.form.submit()">
         <option value="">Select user…</option>
         <option value="{{ self_browse_value }}" {% if selected_user == self_browse_value %}selected{% endif %}>{{ mine_label|default:"My items" }} ({{ user.username }})</option>
+        {% if selected_org or not filter_orgs %}
+        <option value="{{ org_all_browse_value }}" {% if selected_user == org_all_browse_value %}selected{% endif %}>All org members</option>
+        {% endif %}
         {% for u in filter_users %}
         <option value="{{ u.id }}" {% if selected_user == u.id|stringformat:'s' %}selected{% endif %}>
           {{ u.username }}{% if u.role == 'orguser' %} (Org Admin){% endif %}

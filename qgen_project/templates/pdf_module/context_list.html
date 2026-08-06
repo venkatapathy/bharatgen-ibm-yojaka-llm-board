@@ -3,33 +3,28 @@
 {% block content %}
 <div class="page-header">
   <div>
-    <div class="eyebrow">PDF context store</div>
+    <div class="eyebrow">Shared PDF library</div>
     <h1>PDF Contexts</h1>
-    {% if browse_user %}
     <p class="muted">
-      {% if browsing_own %}
-      Showing <strong>your</strong> PDF contexts
+      {% if can_manage_pdfs %}
+      Platform admin library — upload, OCR, and delete are available to you.
       {% else %}
-      Showing contexts for <strong>{{ browse_user.username }}</strong>{% if browse_user.organization %} · {{ browse_user.organization.name }}{% endif %}
+      Shared across organisations. You can view PDFs; only a platform admin can upload or edit OCR.
       {% endif %}
     </p>
-    {% elif needs_user_filter %}
-    <p class="muted">Select {% if filter_orgs %}an organisation and {% endif %}a user to view PDF contexts — or choose <strong>My PDFs</strong> for your own uploads.</p>
-    {% endif %}
   </div>
+  {% if can_manage_pdfs %}
   <div class="btn-row">
     <a class="btn btn-primary" href="{% url 'pdf_module:upload' %}">Upload Context</a>
   </div>
+  {% endif %}
 </div>
 
-{% include "partials/browse_user_filter.html" %}
-
-{% if browse_user or not needs_user_filter %}
+{% if can_manage_pdfs and quota %}
 {% include "partials/quota_stat_rings.html" with quota=quota upload_label="PDF uploads" upload_used=quota.current_saved_pdf_zips upload_max=quota.max_saved_pdf_zips upload_pct=quota.pdf_pct upload_pct_label=quota.pdf_pct_label %}
+{% endif %}
 
 <form method="get" class="form-section" style="margin-bottom:1rem;">
-  {% if selected_org %}<input type="hidden" name="org" value="{{ selected_org }}">{% endif %}
-  {% if selected_user %}<input type="hidden" name="user" value="{{ selected_user }}">{% endif %}
   <div class="btn-row" style="flex-wrap:wrap; gap:1rem; align-items:flex-end;">
     <label class="form-field" style="flex:1 1 220px; min-width:200px; margin:0;">
       <span class="field-label">Search</span>
@@ -56,7 +51,7 @@
     <div class="btn-row" style="margin:0; gap:0.5rem;">
       <button type="submit" class="btn btn-primary">Filter</button>
       {% if filter_active %}
-      <a class="btn" href="?{% if selected_org %}org={{ selected_org }}&amp;{% endif %}{% if selected_user %}user={{ selected_user }}{% endif %}">Clear</a>
+      <a class="btn" href="?">Clear</a>
       {% endif %}
     </div>
   </div>
@@ -66,34 +61,37 @@
   </p>
 </form>
 
-<div class="table-wrap">
-  <table class="table">
+<div class="table-wrap pdf-context-list">
+  <table class="table table--compact">
     <thead><tr><th>Name</th><th>File</th><th>Size</th><th>Status</th><th>Actions</th></tr></thead>
     <tbody>
     {% for ctx in contexts %}
     <tr>
-      <td><a href="{% url 'pdf_module:detail' ctx.id %}">{{ ctx.name }}</a></td>
-      <td>{{ ctx.original_filename|default:"-" }}</td>
-      <td>{{ ctx.file_size_label }}</td>
+      <td class="pdf-context-list__name"><a href="{% url 'pdf_module:detail' ctx.id %}">{{ ctx.name }}</a></td>
+      <td class="pdf-context-list__file">{{ ctx.original_filename|default:"-" }}</td>
+      <td class="pdf-context-list__size">{{ ctx.file_size_label }}</td>
       <td><span class="badge status-{{ ctx.status }}">{{ ctx.status }}</span></td>
       <td class="table-actions">
         <div class="table-actions__inner">
           <a class="btn btn-sm" href="{% url 'pdf_module:detail' ctx.id %}">View</a>
+          {% if can_manage_pdfs %}
           <a class="btn btn-sm btn-danger" href="{% url 'pdf_module:delete' ctx.id %}">Delete</a>
+          {% endif %}
         </div>
       </td>
     </tr>
     {% empty %}
     <tr><td colspan="5">
       {% if filter_active %}
-      No PDFs match this filter. <a href="?{% if selected_org %}org={{ selected_org }}&amp;{% endif %}{% if selected_user %}user={{ selected_user }}{% endif %}">Clear filters</a>
-      {% elif browse_user %}No PDF contexts for this user yet.
-      {% else %}No PDF contexts yet. <a href="{% url 'pdf_module:upload' %}">Upload one</a>.
+      No PDFs match this filter. <a href="?">Clear filters</a>
+      {% elif can_manage_pdfs %}
+      No PDF contexts yet. <a href="{% url 'pdf_module:upload' %}">Upload one</a>.
+      {% else %}
+      No PDF contexts available yet. Ask a platform admin to upload units.
       {% endif %}
     </td></tr>
     {% endfor %}
     </tbody>
   </table>
 </div>
-{% endif %}
 {% endblock %}

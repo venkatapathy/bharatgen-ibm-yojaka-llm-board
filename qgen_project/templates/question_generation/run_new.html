@@ -3,28 +3,26 @@
 {% block content %}
 <div class="stack-header">
   <div>
-    <div class="eyebrow">Prompted generation with RAG and PYQ examples</div>
+    <div class="eyebrow">Unit OCR → IGNOU-style question generation</div>
     <h1>New Batch Run</h1>
   </div>
 </div>
 
 <form method="post"
   x-data="{
-    items: [{type:'SHORT',bloom:'remember',marks:1,count:5}],
+    answerDefaults: {RTC:'100-150 words', SHORT:'100-250 words', LONG:'250-600 words'},
+    items: [{type:'SHORT',bloom:'understand',marks:5,count:2,answer_length:'100-250 words'}],
     hasRag: false,
-    hasPyq: false,
     thinkOn: false,
     unlimited: {{ credits.unlimited|yesno:'true,false' }},
     remaining: {{ credits.remaining }},
     base: {{ credit_tariff.per_question }},
     ragFee: {{ credit_tariff.rag }},
-    pyqFee: {{ credit_tariff.pyq }},
     thinkFee: {{ credit_tariff.think }},
     get qCount() { return this.items.reduce((s, i) => s + (Number(i.count) || 0), 0) },
     get perQ() {
       return this.base
         + (this.hasRag ? this.ragFee : 0)
-        + (this.hasPyq ? this.pyqFee : 0)
         + (this.thinkOn ? this.thinkFee : 0);
     },
     get overLimit() {
@@ -32,10 +30,15 @@
       return this.qCount * this.perQ > this.remaining;
     },
     syncFlags() {
-      this.hasRag = this.$el.querySelectorAll('input[name=pdf_contexts]:checked').length > 0;
-      this.hasPyq = this.$el.querySelectorAll('input[name=pyq_modules]:checked').length > 0;
+      this.hasRag = !!this.$el.querySelector('input[name=pdf_contexts]')?.value;
       const t = this.$el.querySelector('input[name=think]');
       this.thinkOn = !!(t && t.checked);
+    },
+    syncAnswerLength(item) {
+      item.answer_length = this.answerDefaults[item.type] || '100-250 words';
+    },
+    addRow() {
+      this.items.push({type:'SHORT',bloom:'understand',marks:5,count:2,answer_length:'100-250 words'});
     }
   }"
   @change="syncFlags()"
@@ -43,24 +46,19 @@
   {% csrf_token %}
 
   <div class="form-section">
-    <div class="form-grid">
-      <label class="form-field">
-        <span class="field-label">Batch name</span>
-        <input type="text" name="name" required class="form-control">
-      </label>
-      <label class="form-field">
-        <span class="field-label">Topic</span>
-        <input type="text" name="topic" required class="form-control">
-      </label>
-    </div>
+    <label class="form-field">
+      <span class="field-label">Batch name</span>
+      <input type="text" name="name" required class="form-control">
+    </label>
   </div>
 
   <div class="form-section context-section"
        x-data="pdfHierarchyPicker()"
-       x-init="initFromJson($refs.hierarchyJson.textContent)">
+       x-init="initFromJson($refs.hierarchyJson.textContent)"
+       @change="$el.closest('form')?.dispatchEvent(new Event('change', { bubbles: true }))">
     <script type="application/json" x-ref="hierarchyJson">{{ pdf_hierarchy_json|safe }}</script>
     <div class="context-section__head">
-      <span class="field-label">PDF context <span class="muted">(required)</span></span>
+      <span class="field-label">PDF unit <span class="muted">(required — one only)</span></span>
       <span class="field-hint">Degree → Course → Block → Unit</span>
     </div>
     {% if form.pdf_contexts.errors %}
@@ -105,43 +103,16 @@
         </select>
       </label>
     </div>
-    <div class="hierarchy-actions">
-      <button type="button" class="btn btn-sm" @click="addUnit()" :disabled="!unitId">Add unit</button>
-      <span class="muted" x-show="selected.length" x-text="selected.length + ' selected'"></span>
-    </div>
-    <div class="context-chips" role="group" aria-label="Selected PDF contexts" x-show="selected.length">
-      <template x-for="(s, idx) in selected" :key="s.id">
-        <label class="context-chip context-chip--pdf is-selected">
-          <input type="checkbox" name="pdf_contexts" :value="s.id" checked>
-          <span class="context-chip__icon" aria-hidden="true">PDF</span>
-          <span class="context-chip__label" x-text="s.course + ' · ' + s.block + ' · ' + s.unit_label"></span>
-          <button type="button" class="context-chip__remove" @click.prevent="removeAt(idx)" title="Remove">✕</button>
-        </label>
-      </template>
-    </div>
-    <p class="muted" x-show="!selected.length" style="margin-top:0.75rem;">Pick Degree → Course → Block → Unit, then Add unit.</p>
+    <input type="hidden" name="pdf_contexts" :value="unitId">
+    <p class="muted" style="margin-top:0.75rem;" x-show="!selectedUnit">
+      Select exactly one unit. Its full OCR text is sent as unit content to the prompt.
+    </p>
+    <p class="muted" style="margin-top:0.75rem;" x-show="selectedUnit" x-cloak>
+      Selected:
+      <strong x-text="selectedUnit.course + ' · ' + selectedUnit.block + ' · ' + selectedUnit.unit_label"></strong>
+    </p>
     {% else %}
     <p class="muted">No ready unitwise PDF contexts yet (indexing may still be running).</p>
-    {% endif %}
-  </div>
-
-  <div class="form-section context-section">
-    <div class="context-section__head">
-      <span class="field-label">PYQ modules</span>
-      <span class="field-hint">Few-shot examples — click to add</span>
-    </div>
-    {% if pyq_modules %}
-    <div class="context-chips" role="group" aria-label="PYQ modules">
-      {% for mod in pyq_modules %}
-      <label class="context-chip context-chip--pyq" title="{{ mod.name }} · {{ mod.question_count }} questions">
-        <input type="checkbox" name="pyq_modules" value="{{ mod.id }}">
-        <span class="context-chip__icon" aria-hidden="true">PYQ</span>
-        <span class="context-chip__label">{{ mod.name }}</span>
-      </label>
-      {% endfor %}
-    </div>
-    {% else %}
-    <p class="muted">No ready PYQ modules. <a href="{% url 'pyq_module:upload' %}">Upload one</a>.</p>
     {% endif %}
   </div>
 
@@ -179,21 +150,22 @@
     <table class="table" id="items-table">
       <thead>
         <tr>
-          <th>Question Type</th><th>Bloom Level</th><th>Marks</th><th>Count</th><th></th>
+          <th>Question Type</th><th>Bloom Level</th><th>Marks</th><th>Count</th><th>Answer length</th><th></th>
         </tr>
       </thead>
       <tbody>
         <template x-for="(item, idx) in items" :key="idx">
           <tr>
             <td>
-              <select :name="'items-'+idx+'-question_type'" class="form-control">
+              <select :name="'items-'+idx+'-question_type'" class="form-control"
+                      x-model="item.type" @change="syncAnswerLength(item)">
                 {% for val, label in question_types %}
                 <option value="{{ val }}">{{ label }}</option>
                 {% endfor %}
               </select>
             </td>
             <td>
-              <select :name="'items-'+idx+'-bloom'" class="form-control">
+              <select :name="'items-'+idx+'-bloom'" class="form-control" x-model="item.bloom">
                 {% for val, label in bloom_levels %}
                 <option value="{{ val }}">{{ label }}</option>
                 {% endfor %}
@@ -201,12 +173,17 @@
             </td>
             <td><input type="number" :name="'items-'+idx+'-marks'" x-model="item.marks" min="0.5" step="0.5" class="form-control" style="width:80px"></td>
             <td><input type="number" :name="'items-'+idx+'-count'" x-model="item.count" min="1" max="50" class="form-control" style="width:80px"></td>
+            <td>
+              <input type="text" :name="'items-'+idx+'-answer_length'" x-model="item.answer_length"
+                     class="form-control" style="min-width:140px" placeholder="e.g. 100-150 words"
+                     maxlength="64">
+            </td>
             <td><button type="button" @click="items.splice(idx,1)" class="btn btn-sm">✕</button></td>
           </tr>
         </template>
       </tbody>
     </table>
-    <button type="button" @click="items.push({type:'SHORT',bloom:'remember',marks:1,count:5})" class="btn">+ Add Row</button>
+    <button type="button" @click="addRow()" class="btn">+ Add Row</button>
   </div>
 
   <div class="usage-line-wrap" style="margin:1rem 0 1.25rem;">
@@ -227,7 +204,6 @@ function pdfHierarchyPicker(rows) {
     course: '',
     block: '',
     unitId: '',
-    selected: [],
     initFromJson(raw) {
       try {
         const parsed = JSON.parse(raw || '[]');
@@ -255,23 +231,9 @@ function pdfHierarchyPicker(rows) {
         r => r.degree === this.degree && r.course === this.course && r.block === this.block
       );
     },
-    addUnit() {
-      const row = this.rows.find(r => r.id === this.unitId);
-      if (!row) return;
-      if (this.selected.some(s => s.id === row.id)) return;
-      this.selected.push(row);
-      this.unitId = '';
-      this.$nextTick(() => {
-        const form = this.$el.closest('form');
-        if (form) form.dispatchEvent(new Event('change', { bubbles: true }));
-      });
-    },
-    removeAt(idx) {
-      this.selected.splice(idx, 1);
-      this.$nextTick(() => {
-        const form = this.$el.closest('form');
-        if (form) form.dispatchEvent(new Event('change', { bubbles: true }));
-      });
+    get selectedUnit() {
+      if (!this.unitId) return null;
+      return this.rows.find(r => r.id === this.unitId) || null;
     },
   };
 }

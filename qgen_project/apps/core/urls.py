@@ -13,6 +13,11 @@ urlpatterns = [
         control.technical_settings,
         name="control_technical",
     ),
+    path(
+        "control/technical/model-status/",
+        control.technical_model_status,
+        name="control_model_status",
+    ),
     path("control/orgs/", control.org_list, name="control_orgs"),
     path("control/orgs/new/", control.org_create, name="control_org_create"),
     path(
@@ -26,5 +31,10 @@ urlpatterns = [
         "control/users/<int:user_id>/quota/",
         control.user_quota_edit,
         name="control_user_quota",
+    ),
+    path(
+        "control/statistics/",
+        control.statistics_dashboard,
+        name="control_statistics",
     ),
 ]

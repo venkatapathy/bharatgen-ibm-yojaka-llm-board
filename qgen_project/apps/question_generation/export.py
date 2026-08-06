@@ -8,7 +8,9 @@ from docx import Document
 def build_docx(run):
     document = Document()
     document.add_heading(run.name, level=1)
-    document.add_paragraph(f"Topic: {run.topic}")
+    unit = run.pdf_contexts.order_by("id").first()
+    if unit:
+        document.add_paragraph(f"Unit: {unit.name}")
     for index, question in enumerate(run.questions.all(), start=1):
         document.add_paragraph(
             f"{index}. [{question.question_type}] ({question.marks} marks) {question.question_text}"

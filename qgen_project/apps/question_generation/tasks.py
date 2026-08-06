@@ -375,7 +375,7 @@ def generate_question_pool(
     return generated, last_error
 
 
-@shared_task(bind=True)
+@shared_task(bind=True, max_retries=120)
 def run_batch(self, batch_run_id: int, fill_remaining: bool = False):
     from .models import BatchRun
     from apps.pyq_module.models import Question
@@ -606,7 +606,28 @@ def run_batch(self, batch_run_id: int, fill_remaining: bool = False):
                     item.save(update_fields=['status', 'error_detail'])
                     errors.append(str(exc))
     except ProvisioningError as exc:
-        errors.append(str(exc))
+        msg = str(exc)
+        # Concurrent limit is temporary — keep the run pending and retry later.
+        # Do NOT mark it failed (user can queue many runs; they should wait their turn).
+        if "Concurrent generation limit" in msg:
+            run.status = "pending"
+            run.active_item = None
+            run.error_summary = ""
+            run.completed_at = None
+            run.save(
+                update_fields=[
+                    "status",
+                    "active_item",
+                    "error_summary",
+                    "completed_at",
+                ]
+            )
+            logger.info(
+                "BatchRun %s waiting for concurrent slot; retry in 60s",
+                batch_run_id,
+            )
+            raise self.retry(exc=exc, countdown=60)
+        errors.append(msg)
 
     produced_new = max(
         run.questions.filter(is_generated=True).count() - questions_before,

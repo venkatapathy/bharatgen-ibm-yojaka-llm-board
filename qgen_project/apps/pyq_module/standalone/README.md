@@ -1,8 +1,24 @@
 # Extract structured questions from OCR text
 
-Standalone guide for someone who **already has OCR** of a past-year question paper and wants a clean JSON list of questions (with sub-parts expanded).
+> **Sharing this file alone is enough** (no GitHub repo needed).  
+> On WhatsApp: send this file as a **Document** (not pasted chat text — too long).
 
-This is the same logic used inside EduQGen (`apps/pyq_module/tasks.py`), without Django/Celery.
+## What to do (3 steps)
+
+1. Install once: `pip install litellm`
+2. Scroll to **Full code** below → copy the entire Python block → save as `extract_pyq_from_ocr.py`
+3. Put your OCR in `paper_ocr.txt`, then run:
+
+```bash
+# Ollama (local)
+export OLLAMA_API_BASE=http://127.0.0.1:11434
+python extract_pyq_from_ocr.py paper_ocr.txt -o questions.json
+
+# Or pick another LiteLLM model
+python extract_pyq_from_ocr.py paper_ocr.txt --model ollama/gemma2:9b -o questions.json
+```
+
+You already have OCR — no PDF/OCR setup required. Output is `questions.json`.
 
 ---
 
@@ -26,35 +42,21 @@ Each question object:
 
 ---
 
-## Quick start
+## Pipeline (what the code does)
 
-```bash
-pip install litellm
-
-# Ollama example
-export OLLAMA_API_BASE=http://127.0.0.1:11434
-
-python extract_pyq_from_ocr.py paper_ocr.txt -o questions.json
-python extract_pyq_from_ocr.py paper_ocr.txt --model ollama/gemma2:9b -o out.json
-```
-
-Input: plain `.txt` with full paper OCR (page markers like `===== PAGE 1 =====` are fine).
+1. Read OCR text  
+2. Chunk if longer than ~3500 words  
+3. Call LLM with the extraction prompt (expand sub-parts, skip boilerplate)  
+4. Parse JSON  
+5. Normalize types / marks  
+6. Drop instruction lines + bare topic stubs  
+7. Dedupe → write `questions.json`
 
 ---
 
-## Repo files (same code)
+## Full code
 
-| File | Role |
-|------|------|
-| `apps/pyq_module/standalone/extract_pyq_from_ocr.py` | **Runnable script** (copy this) |
-| `apps/pyq_module/tasks.py` | In-app Celery version (`EXTRACTION_PROMPT`, `extract_pyq_questions`) |
-| `apps/pyq_module/ignou_parser.py` | Instruction / boilerplate filters |
-
----
-
-## Full code (copy-paste)
-
-Save as `extract_pyq_from_ocr.py`:
+Copy everything inside this block into `extract_pyq_from_ocr.py`:
 
 ```python
 #!/usr/bin/env python3
@@ -368,21 +370,9 @@ if __name__ == "__main__":
 
 ---
 
-## Pipeline (what the code does)
-
-1. Read OCR text  
-2. Chunk if longer than ~3500 words  
-3. Call LLM with `EXTRACTION_PROMPT` (expand sub-parts, skip boilerplate)  
-4. Parse JSON (`parse_llm_json`)  
-5. Normalize types / marks  
-6. Drop instruction lines + bare topic stubs  
-7. Dedupe → write `questions.json`
-
----
-
 ## Notes
 
-- **No PDF OCR here** — paste or save OCR as `.txt` first.
-- OpenAI-compatible APIs work via LiteLLM (`--model gpt-4o-mini`, etc.).
-- For Hindi Kruti Dev garbage in OCR, clean/normalize text before running this.
-- In EduQGen the same extraction is queued from **PYQ Bank → Upload / Re-extract**.
+- Save OCR as a `.txt` file first (page markers like `===== PAGE 1 =====` are fine).
+- Needs a running LLM: Ollama locally, or any LiteLLM-supported API.
+- OpenAI example: `python extract_pyq_from_ocr.py paper_ocr.txt --model gpt-4o-mini -o questions.json` (set `OPENAI_API_KEY`).
+- If Hindi OCR looks garbled (Kruti Dev), clean/normalize text before running.

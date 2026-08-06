@@ -179,7 +179,7 @@ def _build_chunks(context):
 
 @shared_task(bind=True, max_retries=3)
 def index_pdf_context(self, context_id: str):
-    """OCR-only for now: fill context.ocr_text, skip chunking/embeddings."""
+    """Full-document OCR only — no chunking/embeddings. Used for Re-OCR / fallback."""
     context = PDFContext.objects.get(id=context_id)
     context.status = "processing"
     context.error_message = ""
@@ -190,7 +190,7 @@ def index_pdf_context(self, context_id: str):
         from apps.pdf_module.legacy_hindi import looks_like_legacy_hindi, normalize_legacy_hindi
         from apps.pdf_module.ocr_full import rebuild_context_ocr
 
-        # Drop any existing chunks; generation uses full ocr_text, not RAG chunks.
+        # Drop any legacy RAG chunks; generation uses full ocr_text.
         PDFChunk.objects.filter(context=context).delete()
 
         rebuild_context_ocr(context, force_vision=_force_unlimited_ocr())
@@ -207,7 +207,7 @@ def index_pdf_context(self, context_id: str):
             context.status = "error"
             context.error_message = (
                 "No OCR text extracted (OCR/text layer empty). "
-                "Re-index after fixing OCR."
+                "Re-OCR after fixing the PDF, or paste OCR manually."
             )
             context.needs_reindex = True
             context.embedded_chunk_count = 0

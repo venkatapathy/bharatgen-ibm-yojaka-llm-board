@@ -7,7 +7,7 @@
     <h1>Upload PDF Context</h1>
     <p class="muted">
       Supports a single PDF or a ZIP of PDFs — ZIP contents are listed as separate files on the dashboard.
-      Indexing uses the platform defaults from Technical settings.
+      Full document text is extracted on upload (no chunk/embedding indexing).
     </p>
   </div>
 </div>
@@ -80,7 +80,7 @@
                 $event.preventDefault();
                 setFile(file);
               }
-            ">Upload and Index</button>
+            ">Upload</button>
     <a href="{% url 'pdf_module:list' %}" class="btn">Cancel</a>
   </div>
 </form>

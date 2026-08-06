@@ -31,6 +31,47 @@ from .models import PDFChunk, PDFContext
 from .tasks import index_pdf_context
 from .uploads import iter_upload_pdf_members
 
+
+def _ocr_and_ready(ctx: PDFContext, *, force_vision: bool = False) -> bool:
+    """Fill full-document OCR and mark ready. No chunk/embed indexing."""
+    from apps.pdf_module.legacy_hindi import looks_like_legacy_hindi, normalize_legacy_hindi
+    from apps.pdf_module.ocr_full import rebuild_context_ocr
+
+    try:
+        rebuild_context_ocr(ctx, force_vision=force_vision)
+        ctx.refresh_from_db(fields=["ocr_text"])
+    except Exception as exc:
+        ctx.status = "error"
+        ctx.error_message = str(exc)[:500]
+        ctx.save(update_fields=["status", "error_message"])
+        return False
+
+    ocr = (ctx.ocr_text or "").strip()
+    if ocr:
+        is_leg, ft = looks_like_legacy_hindi(ocr)
+        if is_leg:
+            ocr = normalize_legacy_hindi(ocr, force=True, font_type=ft or "krutidev")
+            ctx.ocr_text = ocr
+        ctx.status = "ready"
+        ctx.needs_reindex = False
+        ctx.error_message = ""
+        ctx.embedded_chunk_count = 0
+        ctx.save(
+            update_fields=[
+                "ocr_text",
+                "status",
+                "needs_reindex",
+                "error_message",
+                "embedded_chunk_count",
+            ]
+        )
+        return True
+
+    ctx.status = "pending"
+    ctx.error_message = "No text extracted; queued for vision OCR."
+    ctx.save(update_fields=["status", "error_message"])
+    return False
+
 _COURSE_CODE_RE = re.compile(r"\b([A-Z]{2,6}[-\s]?\d{2,4})\b", re.IGNORECASE)
 
 
@@ -235,15 +276,29 @@ class PDFContextUploadView(SuperUserRequiredMixin, CreateView):
             return self.form_invalid(form)
 
         for context_id in created_ids:
-            index_pdf_context.delay(str(context_id))
+            ctx = PDFContext.objects.get(id=context_id)
+            # Full-document OCR only (no chunk/embed indexing). Text-layer first.
+            if not _ocr_and_ready(ctx, force_vision=False):
+                # Scanned / empty text layer → vision OCR in Celery background.
+                index_pdf_context.delay(str(context_id))
 
         n = len(created_ids)
+        ready_n = PDFContext.objects.filter(
+            id__in=created_ids, status="ready"
+        ).count()
         if n == 1:
-            messages.success(self.request, "PDF context queued for OCR indexing.")
+            if ready_n:
+                messages.success(self.request, "PDF uploaded — OCR ready.")
+            else:
+                messages.info(
+                    self.request,
+                    "PDF uploaded — text layer empty; vision OCR queued.",
+                )
         else:
             messages.success(
                 self.request,
-                f"{n} PDFs from ZIP queued for OCR indexing (listed individually).",
+                f"{n} PDFs uploaded ({ready_n} OCR-ready"
+                f"{f', {n - ready_n} queued for vision OCR' if n - ready_n else ''}).",
             )
         return redirect(self.success_url)
 
@@ -354,7 +409,10 @@ def pdf_context_save_ocr(request, pk):
     if is_leg:
         text = normalize_legacy_hindi(text, force=True, font_type=ft or "krutidev")
     ctx.ocr_text = text
-    ctx.save(update_fields=["ocr_text"])
+    ctx.status = "ready"
+    ctx.needs_reindex = False
+    ctx.error_message = ""
+    ctx.save(update_fields=["ocr_text", "status", "needs_reindex", "error_message"])
     messages.success(request, "OCR text saved.")
     return redirect("pdf_module:detail", pk=pk)
 

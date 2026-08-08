@@ -1,17 +1,40 @@
-# Slim stack for dev2.3 WIP — shares Postgres/Redis/media with qgen_project (dev2.1).
-# Port 8002. Own images: qgen23-web / qgen23-worker (do not rebuild or restart 2.1).
+# Fully independent dev2.3 stack (project: qgen23). Does NOT use 2.1 db/redis/media/network.
+# Port 8002. Own Postgres :5435, Redis :6383, media volume qgen23_media_data.
 #
-# Media mounts at /var/qgen_media (NOT /app/media): code lives on NFS (/home1/...),
-# and Docker cannot overlay a volume on an NFS /app path. 2.1 is on local disk and
-# keeps using /app/media unchanged.
+# Media: Docker volume at /var/qgen_media (NFS code mount cannot host /app/media overlay).
+# Dual-write mirror: ./backups/media → /var/qgen_media_mirror
 #
-# MEDIA_MIRROR_ROOT=/var/qgen_media_mirror → dual-write PDFs to NFS (./backups/media).
-# Reads always use Docker volume (/var/qgen_media).
-#
-# Build + start (2.3 only):
-#   docker compose -f docker-compose.dev23.yml -p qgen23 build
-#   docker compose -f docker-compose.dev23.yml -p qgen23 up -d
+#   docker compose -f docker-compose.dev23.yml -p qgen23 up -d --build
 services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: ${DB_NAME:-qgen_db_dev23}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/init-db.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "5435:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6383:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
   web:
     build:
       context: .
@@ -28,7 +51,8 @@ services:
       - .env
     environment:
       DB_HOST: db
-      REDIS_URL: redis://redis:6379/1
+      DB_NAME: ${DB_NAME:-qgen_db_dev23}
+      REDIS_URL: redis://redis:6379/0
       MEDIA_ROOT: /var/qgen_media
       MEDIA_MIRROR_ROOT: /var/qgen_media_mirror
       OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://10.129.7.47:11434}
@@ -38,9 +62,11 @@ services:
       GROQ_API_KEY: ${GROQ_API_KEY:-}
       TESSDATA_PREFIX: /usr/share/tesseract-ocr/5/tessdata
       DJANGO_SETTINGS_MODULE: qgen.settings.development
-    networks:
-      - default
-      - shared
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     restart: unless-stopped
 
   celery_worker:
@@ -53,12 +79,13 @@ services:
       - .:/app
       - media_data:/var/qgen_media
       - ./backups/media:/var/qgen_media_mirror
-      - /data1/pankaj/.cache/huggingface:/root/.cache/huggingface:ro
+      - /home/pankaj/.cache/huggingface:/root/.cache/huggingface:ro
     env_file:
       - .env
     environment:
       DB_HOST: db
-      REDIS_URL: redis://redis:6379/1
+      DB_NAME: ${DB_NAME:-qgen_db_dev23}
+      REDIS_URL: redis://redis:6379/0
       MEDIA_ROOT: /var/qgen_media
       MEDIA_MIRROR_ROOT: /var/qgen_media_mirror
       OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://10.129.7.47:11434}
@@ -71,9 +98,11 @@ services:
       HF_HUB_OFFLINE: "1"
       TRANSFORMERS_OFFLINE: "1"
       HF_HOME: /root/.cache/huggingface
-    networks:
-      - default
-      - shared
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     restart: unless-stopped
 
   celery_beat:
@@ -85,23 +114,20 @@ services:
       - .env
     environment:
       DB_HOST: db
-      REDIS_URL: redis://redis:6379/1
+      DB_NAME: ${DB_NAME:-qgen_db_dev23}
+      REDIS_URL: redis://redis:6379/0
       MEDIA_ROOT: /var/qgen_media
       MEDIA_MIRROR_ROOT: /var/qgen_media_mirror
       DJANGO_SETTINGS_MODULE: qgen.settings.development
-    networks:
-      - default
-      - shared
-    restart: unless-stopped
     depends_on:
-      - celery_worker
-
-networks:
-  shared:
-    external: true
-    name: qgen_project_default
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      celery_worker:
+        condition: service_started
+    restart: unless-stopped
 
 volumes:
+  postgres_data:
   media_data:
-    external: true
-    name: qgen_project_media_data

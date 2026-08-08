@@ -15,11 +15,11 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 OUT_DIR="${BACKUP_DIR:-$ROOT/backups/db}"
 MEDIA_MIRROR="${MEDIA_MIRROR_DIR:-$ROOT/backups/media}"
 KEEP="${BACKUP_KEEP:-7}"
-DB_CONTAINER="${DB_CONTAINER:-qgen_project-db-1}"
+DB_CONTAINER="${DB_CONTAINER:-qgen23-db-1}"
 MEDIA_CONTAINER="${MEDIA_CONTAINER:-qgen23-web-1}"
 DB_USER="${DB_USER:-postgres}"
-# Both stacks share this Postgres container.
-DATABASES=(qgen_db_dev23 qgen_db)
+# Independent 2.3 Postgres (no longer shared with 2.1).
+DATABASES=(qgen_db_dev23)
 
 mkdir -p "$OUT_DIR" "$MEDIA_MIRROR"
 STAMP="$(date -u +%Y%m%dT%H%M%SZ)"

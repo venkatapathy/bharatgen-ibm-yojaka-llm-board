@@ -33,6 +33,9 @@ books/
 # Local-only (do not commit) — WhatsApp share sheet for PYQ-from-OCR
 qgen_project/PYQ_OCR_EXTRACT_README.md
 
+# NFS DB dumps (large; keep on mount, not in git)
+qgen_project/backups/
+
 *.log
 *.db
 *.csv

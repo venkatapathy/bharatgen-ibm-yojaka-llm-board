@@ -101,6 +101,22 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_ROOT = Path(config("MEDIA_ROOT", default=str(BASE_DIR / "media")))
 MEDIA_URL = '/media/'
+# Optional NFS (or other) mirror: writes go to MEDIA_ROOT + MEDIA_MIRROR_ROOT;
+# reads always use MEDIA_ROOT. Leave empty to disable mirroring.
+MEDIA_MIRROR_ROOT = config("MEDIA_MIRROR_ROOT", default="").strip()
+
+STORAGES = {
+    "default": {
+        "BACKEND": "apps.core.mirrored_storage.MirroredFileSystemStorage",
+        "OPTIONS": {
+            "location": str(MEDIA_ROOT),
+            "base_url": MEDIA_URL,
+        },
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

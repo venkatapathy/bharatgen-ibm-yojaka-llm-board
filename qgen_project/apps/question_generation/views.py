@@ -395,9 +395,22 @@ class BatchRunNewView(LoginRequiredMixin, CreateView):
         form.instance.created_by = self.request.user
         form.instance.topic = ""
         data = self.request.POST
-        language = data.get('language', BatchRun.Language.ENGLISH)
-        if language not in {BatchRun.Language.ENGLISH, BatchRun.Language.HINDI}:
-            language = BatchRun.Language.ENGLISH
+        # Language is fixed by BA ENGLISH / BA HINDI degree of the selected unit.
+        language = BatchRun.Language.ENGLISH
+        from apps.pdf_module.hierarchy import parse_pdf_hierarchy
+
+        parsed = parse_pdf_hierarchy(pdfs[0]) if pdfs else None
+        if parsed:
+            deg = (parsed.get("degree") or "").upper()
+            if "HINDI" in deg:
+                language = BatchRun.Language.HINDI
+            elif "ENGLISH" in deg:
+                language = BatchRun.Language.ENGLISH
+        else:
+            # Fallback to posted value only if hierarchy is missing.
+            posted = data.get("language", BatchRun.Language.ENGLISH)
+            if posted in {BatchRun.Language.ENGLISH, BatchRun.Language.HINDI}:
+                language = posted
         form.instance.language = language
 
         # Platform defaults from Control → Technical settings (all roles).
@@ -476,7 +489,17 @@ class BatchRunNewView(LoginRequiredMixin, CreateView):
             )
             answer_length = (data.get(f'items-{idx}-answer_length') or '').strip()
             if not answer_length:
-                answer_length = default_answer_length(qtype)
+                try:
+                    amin = int(data.get(f'items-{idx}-answer_min') or 0)
+                    amax = int(data.get(f'items-{idx}-answer_max') or 0)
+                except (TypeError, ValueError):
+                    amin, amax = 0, 0
+                if amin > 0 and amax > 0:
+                    if amin > amax:
+                        amin, amax = amax, amin
+                    answer_length = f"{amin}-{amax} words"
+                else:
+                    answer_length = default_answer_length(qtype)
             BatchRunItem.objects.create(
                 batch_run=self.object,
                 question_type=qtype,

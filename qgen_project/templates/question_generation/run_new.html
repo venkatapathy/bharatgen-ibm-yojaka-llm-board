@@ -10,8 +10,14 @@
 
 <form method="post"
   x-data="{
-    answerDefaults: {RTC:'100-150 words', SHORT:'100-250 words', LONG:'250-600 words'},
-    items: [{type:'SHORT',bloom:'understand',marks:5,count:2,answer_length:'100-250 words'}],
+    answerDefaults: {
+      RTC: {min: 100, max: 150},
+      SHORT: {min: 100, max: 250},
+      LONG: {min: 250, max: 600},
+    },
+    items: [{type:'SHORT',bloom:'understand',marks:5,count:2,min_words:100,max_words:250}],
+    lang: 'en',
+    langLocked: false,
     hasRag: false,
     thinkOn: false,
     unlimited: {{ credits.unlimited|yesno:'true,false' }},
@@ -34,15 +40,30 @@
       const t = this.$el.querySelector('input[name=think]');
       this.thinkOn = !!(t && t.checked);
     },
+    setLangFromDegree(degree) {
+      const d = String(degree || '').toUpperCase();
+      if (d.includes('HINDI')) {
+        this.lang = 'hi';
+        this.langLocked = true;
+      } else if (d.includes('ENGLISH')) {
+        this.lang = 'en';
+        this.langLocked = true;
+      } else {
+        this.langLocked = false;
+      }
+    },
     syncAnswerLength(item) {
-      item.answer_length = this.answerDefaults[item.type] || '100-250 words';
+      const d = this.answerDefaults[item.type] || {min: 100, max: 250};
+      item.min_words = d.min;
+      item.max_words = d.max;
     },
     addRow() {
-      this.items.push({type:'SHORT',bloom:'understand',marks:5,count:2,answer_length:'100-250 words'});
+      this.items.push({type:'SHORT',bloom:'understand',marks:5,count:2,min_words:100,max_words:250});
     }
   }"
   @change="syncFlags()"
-  @input="syncFlags()">
+  @input="syncFlags()"
+  @pdf-degree-changed="setLangFromDegree($event.detail.degree)">
   {% csrf_token %}
 
   <div class="form-section">
@@ -68,7 +89,8 @@
     <div class="form-grid hierarchy-grid">
       <label class="form-field">
         <span class="field-label">Degree</span>
-        <select class="form-control" x-model="degree" @change="course=''; block=''; unitId=''">
+        <select class="form-control" x-model="degree"
+                @change="course=''; block=''; unitId=''; $dispatch('pdf-degree-changed', { degree })">
           <option value="">Select degree</option>
           <template x-for="d in degrees" :key="d">
             <option :value="d" x-text="d"></option>
@@ -119,17 +141,17 @@
   <div class="form-section run-toggles">
     <div class="run-toggle">
       <span class="run-toggle__label">Output language</span>
-      <div class="run-segment" role="radiogroup" aria-label="Output language"
-           x-data="{ lang: 'en' }">
-        <label class="run-segment__opt" :class="{ 'is-on': lang === 'en' }">
-          <input type="radio" name="language" value="en" x-model="lang">
-          English
-        </label>
-        <label class="run-segment__opt" :class="{ 'is-on': lang === 'hi' }">
-          <input type="radio" name="language" value="hi" x-model="lang">
-          हिंदी
-        </label>
+      <input type="hidden" name="language" :value="lang">
+      <div class="run-segment run-segment--static" role="status" aria-live="polite">
+        <span class="run-segment__opt is-on is-static"
+              x-text="lang === 'hi' ? 'हिंदी' : 'English'"></span>
       </div>
+      <p class="muted" style="margin:0.35rem 0 0;font-size:0.85rem;" x-show="!langLocked" x-cloak>
+        Fixed by degree: choose <strong>BA ENGLISH</strong> or <strong>BA HINDI</strong> above.
+      </p>
+      <p class="muted" style="margin:0.35rem 0 0;font-size:0.85rem;" x-show="langLocked" x-cloak>
+        Locked from selected degree (not editable).
+      </p>
     </div>
 
     <div class="run-toggle">
@@ -150,7 +172,13 @@
     <table class="table" id="items-table">
       <thead>
         <tr>
-          <th>Question Type</th><th>Bloom Level</th><th>Marks</th><th>Count</th><th>Answer length</th><th></th>
+          <th>Question Type</th>
+          <th>Bloom Level</th>
+          <th>Marks</th>
+          <th>Count</th>
+          <th>Min words</th>
+          <th>Max words</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -174,9 +202,12 @@
             <td><input type="number" :name="'items-'+idx+'-marks'" x-model="item.marks" min="0.5" step="0.5" class="form-control" style="width:80px"></td>
             <td><input type="number" :name="'items-'+idx+'-count'" x-model="item.count" min="1" max="50" class="form-control" style="width:80px"></td>
             <td>
-              <input type="text" :name="'items-'+idx+'-answer_length'" x-model="item.answer_length"
-                     class="form-control" style="min-width:140px" placeholder="e.g. 100-150 words"
-                     maxlength="64">
+              <input type="number" :name="'items-'+idx+'-answer_min'" x-model.number="item.min_words"
+                     class="form-control" style="width:90px" min="1" max="5000" required>
+            </td>
+            <td>
+              <input type="number" :name="'items-'+idx+'-answer_max'" x-model.number="item.max_words"
+                     class="form-control" style="width:90px" min="1" max="5000" required>
             </td>
             <td><button type="button" @click="items.splice(idx,1)" class="btn btn-sm">✕</button></td>
           </tr>
